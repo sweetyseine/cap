@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maths-sciences CAP — Mme Talbaut</title>
+<style>
+  :root{
+    --encre:#12303f;
+    --papier:#f7f4ec;
+    --craie:#ffffff;
+    --carmin:#b8503c;
+    --lagune:#2b7a78;
+    --sable:#e4dccb;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+    background:var(--papier);
+    color:var(--encre);
+    line-height:1.6;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .carte{
+    background:var(--craie);
+    border-radius:22px;
+    max-width:620px;
+    width:100%;
+    padding:40px 38px 34px;
+    box-shadow:0 18px 50px rgba(18,48,63,.13);
+    border-top:7px solid var(--lagune);
+  }
+  .marque{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:26px;
+  }
+  .marque svg{flex:none}
+  .marque p{
+    font-size:.82rem;
+    letter-spacing:.04em;
+    color:var(--lagune);
+    font-weight:600;
+  }
+  h1{
+    font-size:1.85rem;
+    line-height:1.25;
+    font-weight:700;
+    letter-spacing:-.015em;
+    margin-bottom:14px;
+  }
+  .intro{
+    font-size:1.03rem;
+    max-width:52ch;
+    margin-bottom:28px;
+  }
+  .attente{
+    background:var(--papier);
+    border-left:4px solid var(--carmin);
+    border-radius:0 12px 12px 0;
+    padding:16px 20px;
+    margin-bottom:28px;
+  }
+  .attente strong{color:var(--carmin)}
+  .aVenir{
+    border-top:1px solid var(--sable);
+    padding-top:22px;
+  }
+  .aVenir h2{
+    font-size:.95rem;
+    font-weight:700;
+    margin-bottom:12px;
+  }
+  ul{list-style:none}
+  li{
+    padding:7px 0 7px 26px;
+    position:relative;
+    font-size:.97rem;
+    border-bottom:1px solid var(--sable);
+  }
+  li:last-child{border-bottom:none}
+  li::before{
+    content:"";
+    position:absolute;
+    left:4px;top:16px;
+    width:8px;height:8px;
+    border-radius:50%;
+    background:var(--lagune);
+  }
+  footer{
+    margin-top:26px;
+    font-size:.83rem;
+    color:#5d7481;
+  }
+  @media (max-width:520px){
+    .carte{padding:30px 24px 26px;border-radius:18px}
+    h1{font-size:1.5rem}
+  }
+</style>
+</head>
+<body>
+  <main class="carte">
+    <div class="marque">
+      <svg width="38" height="38" viewBox="0 0 38 38" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="35" height="35" rx="9" fill="none" stroke="#2b7a78" stroke-width="2.4"/>
+        <path d="M10 24.5 L15.5 13 L19 20.5 L22.5 15 L28 24.5" fill="none" stroke="#b8503c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="15.5" cy="13" r="2" fill="#2b7a78"/>
+      </svg>
+      <p>Lycée professionnel Max Joséphine</p>
+    </div>
+
+    <h1>Maths-sciences en CAP</h1>
+    <p class="intro">Vos cours, les corrigés des exercices et les documents à imprimer seront réunis ici, classés par chapitre et par séance.</p>
+
+    <div class="attente">
+      <p><strong>Le site ouvre bientôt.</strong> Gardez l'adresse : c'est celle du QR code collé sur votre fiche de règles, elle ne changera pas.</p>
+    </div>
+
+    <section class="aVenir">
+      <h2>Ce que vous trouverez sur ce site</h2>
+      <ul>
+        <li>Le cours de chaque séance</li>
+        <li>Le corrigé des exercices, publié après la correction en classe</li>
+        <li>La fiche de cours à imprimer</li>
+        <li>Les vidéos et les animations</li>
+      </ul>
+    </section>
+
+    <footer>Mme Talbaut — 1CAP EPC1 et 1CAP EPC2</footer>
+  </main>
+</body>
+</html>
