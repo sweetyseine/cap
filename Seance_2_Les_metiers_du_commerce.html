@@ -14,7 +14,7 @@ body{font-family:'Source Sans 3',system-ui,'Segoe UI',sans-serif;background:var(
   color:var(--encre);margin:0;padding:0;font-size:17px;line-height:1.6}
 .cadre{display:flex;align-items:flex-start;gap:0;min-height:100vh}
 .sommaire{width:300px;flex:0 0 300px;background:#fff;border-right:2px solid #e0d3e6;
-  padding:358px 16px 20px;position:sticky;top:0;height:100vh;overflow:auto;transition:width .18s,flex-basis .18s}
+  padding:400px 16px 20px;position:sticky;top:0;height:100vh;overflow:auto;transition:width .18s,flex-basis .18s}
 .replie .sommaire{width:0;flex-basis:0;padding:0;overflow:hidden;border-right:none}
 .som-titre{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--prune);
   letter-spacing:.04em;margin-bottom:12px}
@@ -319,6 +319,10 @@ footer{margin-top:22px;padding:10px 30px 0;border-top:1.5px solid var(--trait);f
   justify-content:center}
 .enveloppe-rep:hover .gomme,.gomme:focus{opacity:1}
 .gomme:hover{background:#fdecec;border-color:#b3261e;color:#b3261e}
+.croix-ex::before{content:"\00D7"}
+.croix-ex{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;
+  border-radius:50%;border:1.5px solid var(--trait);background:#fff;color:var(--gris);
+  font-size:15px;line-height:1;vertical-align:middle;margin:0 1px}
 @media print{.gomme{display:none!important}}
 kbd{background:#fff;border:1.6px solid #7a8b9c;border-bottom-width:3px;border-radius:6px;padding:1px 8px;
   font-family:inherit;font-weight:700;display:inline-block;line-height:1.35;vertical-align:middle;margin:3px 1px}
@@ -347,12 +351,12 @@ kbd{background:#fff;border:1.6px solid #7a8b9c;border-bottom-width:3px;border-ra
   <div class="boite" id="boite-lecture"></div>
   <div class="boite" id="boite-reglages"></div>
   <div class="boite boite-micro" id="boite-micro"></div>
+  <div class="rangee-volets">
+    <button class="replier" id="replier-aide" data-vol="aide-voix">Mode d'emploi</button>
+  </div>
   <div class="etat-lecture" id="etat-lecture"></div>
   <div class="rangee-volets">
     <button class="replier" id="replier" data-vol="nav-sec">Sommaire</button>
-  </div>
-  <div class="rangee-volets">
-    <button class="replier" id="replier-aide" data-vol="aide-voix">Mode d'emploi</button>
   </div>
 </div>
 <div class="console-dictee" id="console-dictee">
@@ -383,10 +387,11 @@ kbd{background:#fff;border:1.6px solid #7a8b9c;border-bottom-width:3px;border-ra
   <div class="ligne-infos"><span>Professeure : Mme Perry</span><span>Classe : 1<sup>ère</sup> CAP EPC1</span><span>Date : <input class="champ-date" data-id="date"></span></div>
 </header>
 <div class="corps">
-<section class="sec" data-titre="Introduction">
+<section class="sec" data-titre="Objectifs de la séance">
 <div class="rappel-dictee"><b>Pour écrire avec la voix :</b> clique sur le bouton bleu <b>Parler</b> en haut à gauche de l'écran. <b>Autorise</b> l'utilisation du micro.<br>
 <b>Clique</b> ensuite dans une case de réponse pour répondre. Pour la question suivante, clique dans sa case et parle.<br>
-Pour faire une pause, appuie sur la touche <kbd>Entrée</kbd>.
+Pour faire une pause, appuie sur la touche <kbd>Entrée</kbd>.<br>
+Pour effacer ta réponse, appuie sur la croix <span class="croix-ex" aria-hidden="true"></span>.
 <button class="btn-micro" id="micro"><span class="rond"></span><span class="lab">Parler</span></button>
 <span class="info-micro" id="info-micro"></span></div>
 <div class="panneau"><h2>Objectifs de la séance</h2><ul class="objectifs"><li><span class="puce">1</span><span class="txt"><b>Identifier</b> les différents métiers du secteur du commerce et de la vente</span></li>
@@ -394,6 +399,8 @@ Pour faire une pause, appuie sur la touche <kbd>Entrée</kbd>.
 <li><span class="puce">3</span><span class="txt"><b>Distinguer</b> secteur alimentaire et secteur non alimentaire</span></li>
 <li><span class="puce">4</span><span class="txt"><b>Faire</b> le lien entre les métiers observés et la grille de notation CCF</span></li>
 <li><span class="puce">5</span><span class="txt"><b>Situer</b> ces métiers dans les différents types d'organisations commerciales</span></li></ul></div>
+</section>
+<section class="sec" data-titre="Introduction">
 <h2 class="sect">Introduction — à partir de vos connaissances</h2>
 <div class="activite">
 <div class="question"><span class="num">1.</span> Quels sont les métiers du commerce et de la vente que vous connaissez déjà ?
