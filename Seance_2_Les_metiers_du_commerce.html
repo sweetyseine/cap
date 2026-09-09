@@ -390,7 +390,7 @@ kbd{background:#fff;border:1.6px solid #7a8b9c;border-bottom-width:3px;border-ra
 <section class="sec" data-titre="Objectifs de la séance">
 <div class="rappel-dictee"><b>Pour écrire avec la voix :</b> clique sur le bouton bleu <b>Parler</b> en haut à gauche de l'écran. <b>Autorise</b> l'utilisation du micro.<br>
 <b>Clique</b> ensuite dans une case de réponse pour répondre. Pour la question suivante, clique dans sa case et parle.<br>
-Pour faire une pause, appuie sur la touche <kbd>Entrée</kbd>.<br>
+Tu peux aussi écrire au clavier dans les cases, pour corriger.<br>
 Pour effacer ta réponse, appuie sur la croix <span class="croix-ex" aria-hidden="true"></span>.
 <button class="btn-micro" id="micro"><span class="rond"></span><span class="lab">Parler</span></button>
 <span class="info-micro" id="info-micro"></span></div>
@@ -942,16 +942,7 @@ Pour chaque métier découvert, <b>coche</b> la ou les bonnes cases.</div>
     else demarrerDictee();
   });
 
-  /* Entrée : met la dictée en pause, comme le bouton Parler/Pause. */
-  document.querySelectorAll('textarea.rep-saisie, input.champ-date').forEach(function(ch){
-    ch.addEventListener('keydown', function(e){
-      if(e.key !== 'Enter') return;
-      e.preventDefault();
-      ch.classList.add('valide');
-      setTimeout(function(){ ch.classList.remove('valide'); }, 1000);
-      if(ecrit){ arreterDictee(); dire("En pause. Reclique sur Parler pour reprendre."); }
-    });
-  });
+
 
   var consStop = document.getElementById('console-stop');
   if(consStop) consStop.addEventListener('click', function(){
