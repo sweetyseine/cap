@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Séance 1 — La recherche de stage : réaliser mon CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--prune:#5a2d63;--prune-clair:#7d4a88;--ocre:#b26a12;--vert:#2f7d4f;
+      --encre:#1b1b26;--gris:#4a4a58;--trait:#b3a6bb;--fond:#f3eef5;--carte:#fff}
+*{box-sizing:border-box}
+body{font-family:'Source Sans 3',system-ui,'Segoe UI',sans-serif;background:var(--fond);
+  color:var(--encre);margin:0;padding:0;font-size:17px;line-height:1.6}
+.cadre{display:flex;align-items:flex-start;gap:0;min-height:100vh}
+.sommaire{width:300px;flex:0 0 300px;background:#fff;border-right:2px solid #e0d3e6;
+  padding:316px 16px 20px;position:sticky;top:0;height:100vh;overflow:auto;transition:width .18s,flex-basis .18s}
+.replie .sommaire{width:0;flex-basis:0;padding:0;overflow:hidden;border-right:none}
+.som-titre{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--prune);
+  letter-spacing:.04em;margin-bottom:12px}
+.som-lien{display:block;width:100%;text-align:left;background:#faf7fc;border:2px solid #e6dbea;
+  border-radius:10px;padding:10px 14px;margin-bottom:8px;font-family:inherit;font-size:16.5px;
+  color:var(--encre);cursor:pointer}
+.som-lien:hover{background:#f2e9f5}
+.som-lien.actif{background:var(--prune);border-color:var(--prune);color:#fff;font-weight:700}
+#nav-sec{padding-top:2px}
+.sous-liens{margin:-4px 0 12px 14px;padding-left:12px;border-left:2px solid #e6dbea}
+.sous-lien{display:block;width:100%;text-align:left;background:none;border:none;padding:5px 6px;
+  font-family:inherit;font-size:14.5px;color:var(--gris);cursor:pointer;border-radius:6px;line-height:1.3}
+.sous-lien:hover{background:#f2e9f5;color:var(--prune)}
+.onglets{display:none}
+.onglet{flex:1;background:#f2e9f5;border:2px solid #e0d3e6;border-radius:10px;padding:8px 6px;
+  font-family:inherit;font-size:15px;font-weight:700;color:var(--prune);cursor:pointer}
+.onglet:hover{background:#e9dcee}
+.onglet.actif{background:var(--prune);border-color:var(--prune);color:#fff}
+.outils{margin-top:4px}
+#outils .barre-audio{position:static;transform:none;background:#faf7fc;border:2px solid #e6dbea;
+  border-radius:14px;box-shadow:none;flex-wrap:wrap;gap:7px;padding:10px;margin-bottom:12px;
+  justify-content:flex-start}
+#outils .barre-audio .etat{width:100%;min-width:0;padding:2px 2px;font-size:12.5px;order:9}
+#outils .barre-audio .sep{display:none}
+#outils .barre-audio button{width:34px;height:34px;font-size:13px}
+#outils .barre-audio button.taille{width:auto;min-width:34px;padding:0 8px}
+.col-vitesse{display:flex;flex-direction:column;align-items:center;gap:3px;width:76px}
+.col-vitesse .legende{font-size:11.5px;line-height:1.2;color:var(--gris);text-align:center}
+.volets-boutons{position:fixed;top:10px;left:12px;z-index:30;display:flex;
+  flex-direction:column;align-items:stretch;gap:7px;width:132px}
+.rangee-volets{display:flex;gap:8px}
+.rangee-volets .replier{flex:1}
+.boite{background:#fff;border:2px solid #e0d3e6;border-radius:12px;padding:6px;box-sizing:border-box;
+  box-shadow:0 2px 10px rgba(50,20,60,.12);display:flex;align-items:center;justify-content:space-between;gap:4px}
+.boite:empty{display:none}
+.boite button{width:32px;height:32px;border-radius:50%;border:none;background:var(--prune);
+  color:#fff;font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;
+  justify-content:center;padding:0;flex:0 0 auto;font-family:inherit}
+.boite button:hover{background:var(--prune-clair)}
+.boite button.taille{width:32px;min-width:32px;padding:0;font-size:15px}
+.boite .sep{display:none}
+.boite .etat{display:none}
+.boite .etat.pourcent{display:block}
+.vitesse-flottante .pourcent{font-size:12.5px;font-weight:700;color:var(--prune);
+  min-width:34px;text-align:center}
+.vitesse-flottante button{width:30px;height:30px;font-size:18px}
+.vitesse-flottante .col-vitesse{width:auto;gap:0;flex-direction:row;align-items:center}
+.vitesse-flottante .legende{display:none}
+.boite-micro{padding:5px}
+.boite-micro .btn-micro{width:100%;justify-content:center;gap:7px;padding:8px 6px;font-size:15px;border-radius:9px}
+.boite-micro .etat-micro{width:100%;margin:0;justify-content:center;text-align:center;
+  font-size:11.5px;line-height:1.25;padding:4px 5px;gap:6px}
+.boite-micro .etat-micro.on,.boite-micro .etat-micro.veille{display:flex}
+.etat-micro{display:none!important}
+.etat-micro.veille{background:#6b6b76}
+.console-dictee.attente{background:#b26a12;box-shadow:0 6px 24px rgba(120,80,10,.35)}
+.console-dictee.attente .rond{animation:none;opacity:.7}
+.console-dictee.attente button{color:#8c5209}
+.etat-micro.veille .rond{animation:none;opacity:.55}
+.boite-micro .btn-micro{background:#1a4a7a}
+.boite-micro .btn-micro:hover{background:#2b6ba8}
+.boite-micro .btn-micro.ecoute-en-cours{background:#b3261e}
+.boite-micro .btn-micro{position:relative;justify-content:center;padding-left:6px;padding-right:6px}
+.boite-micro .btn-micro .lab{display:block}
+.boite-micro .btn-micro .rond{display:none}
+.boite-micro .etat-micro .rond{width:10px;height:10px;flex:0 0 auto}
+.boite-micro{flex-direction:column;gap:5px}
+.etat-lecture{font-size:11.5px;line-height:1.25;color:var(--gris);text-align:center;
+  background:#fff;border:2px solid #e0d3e6;border-radius:10px;padding:4px 5px;box-sizing:border-box;
+  box-shadow:0 2px 10px rgba(50,20,60,.12)}
+.etat-lecture:empty{display:none}
+.etat-lecture .etat{display:block;width:100%;border:none;background:none;padding:0;font-size:11.5px}
+.replier{background:var(--prune);color:#fff;border:none;border-radius:10px;padding:8px 10px;
+  font-size:15px;font-family:inherit;font-weight:700;cursor:pointer}
+.replier:hover{background:var(--prune-clair)}
+.replier.ouvert{background:#fff;color:var(--prune);box-shadow:inset 0 0 0 2px var(--prune)}
+.zone{flex:1;min-width:0;padding:128px 18px 40px}
+@media screen and (min-width:900px){.replie .zone{padding-left:160px}}
+.page{max-width:1080px;margin:0 auto;background:var(--carte);border-radius:16px;
+  box-shadow:0 0 50px rgba(50,20,60,.16);overflow:hidden;padding-bottom:40px}
+.sec{display:none}
+.pager{max-width:1080px;margin:16px auto 0;display:flex;align-items:center;gap:14px;
+  justify-content:space-between}
+.pager button{background:var(--prune);color:#fff;border:none;border-radius:24px;padding:12px 22px;
+  font-family:inherit;font-size:16.5px;font-weight:700;cursor:pointer}
+.pager button:hover{background:var(--prune-clair)}
+.pager button[disabled]{background:#cfc3d6;cursor:default}
+.pager-pos{color:var(--gris);font-size:15px}
+.sec.visible{display:block}
+header{background:linear-gradient(110deg,var(--prune),var(--prune-clair));color:#fff;
+  padding:22px 30px 20px;position:relative}
+.fil{font-size:15px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.92}
+header h1{font-family:'Barlow Condensed','Segoe UI',sans-serif;font-weight:700;font-size:40px;
+  line-height:1.05;margin:6px 0 12px}
+.ligne-infos{display:flex;flex-wrap:wrap;gap:10px;font-size:15px}
+.ligne-infos span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.5);
+  border-radius:20px;padding:4px 14px;display:inline-flex;align-items:center;gap:8px}
+input.champ-date{font-family:inherit;font-size:16px;color:#fff;background:rgba(255,255,255,.18);
+  border:none;border-bottom:2px solid #fff;border-radius:5px 5px 0 0;padding:2px 8px;width:190px}
+input.champ-date:focus{outline:none;background:#fff;color:var(--encre)}
+@media print{input.champ-date{color:#000;background:none;border-bottom:1px solid #000;width:170px}}
+.corps{padding:22px 30px 0}
+h2.sect{font-family:'Barlow Condensed','Segoe UI',sans-serif;font-size:27px;color:var(--prune);
+  border-bottom:3px solid var(--prune);padding-bottom:5px;margin:30px 0 14px}
+h3{font-size:19px;color:var(--ocre);margin:20px 0 8px}
+.panneau{background:#faf5fb;border:1.8px solid var(--trait);border-radius:12px;padding:14px 20px;margin:14px 0}
+.panneau h2{font-size:16px;text-transform:uppercase;letter-spacing:.06em;color:var(--prune);margin:0 0 8px}
+.panneau ul{margin:0;padding-left:22px}
+ul.objectifs{margin:4px 0 0;padding:0;list-style:none}
+ul.objectifs li{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;
+  padding:11px 0;border-bottom:1.5px solid #e3d6e9;margin:0}
+ul.objectifs li:last-child{border-bottom:none}
+ul.objectifs .puce{width:30px;height:30px;border-radius:50%;background:var(--prune);color:#fff;
+  font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+ul.objectifs .txt{font-size:17.5px;line-height:1.5}
+.panneau li{margin:4px 0}
+
+
+
+.doc-card{border:2px solid var(--prune-clair);border-radius:12px;overflow:hidden;margin:18px 0;background:#fff}
+.doc-card>.tete{background:#efe3f2;padding:8px 18px;font-weight:700;color:var(--prune);font-size:18px}
+.doc-card>.dedans{padding:16px 22px;font-size:17.5px;line-height:1.7}
+.doc-card>.tete{font-size:19px}
+.champs{margin:4px 0}
+.champ{display:grid;grid-template-columns:210px 1fr;gap:14px;align-items:baseline;
+  padding:9px 0;border-bottom:1.5px solid #e6dbea}
+.champ:last-child{border-bottom:none}
+.champ .et{font-size:14.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--prune)}
+.champ .val{font-size:18px}
+@media (max-width:700px){.champ{grid-template-columns:1fr}}
+.doc-card .surnom{color:var(--gris);font-style:italic}
+.missions{margin:10px 0 0;padding:0;list-style:none}
+.missions li{margin:7px 0;background:#faf5fb;border-left:6px solid var(--prune-clair);
+  border-radius:8px;padding:8px 14px;font-size:17px}
+.aide .missions li{background:#f2f9f4;border-left-color:var(--vert)}
+.consigne{background:#fff3d6;border:3px solid var(--ocre);border-left-width:14px;border-radius:14px;
+  padding:14px 22px 12px;margin:22px 0;font-size:19px;line-height:1.6;color:#4a3208;
+  box-shadow:0 3px 10px rgba(178,106,18,.18)}
+.consigne .titre-consigne{display:block;font-family:'Barlow Condensed','Segoe UI',sans-serif;
+  font-size:21px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ocre);
+  margin-bottom:2px}
+.consigne p:last-child,.consigne>*:last-child{margin-bottom:0}
+.consigne b{color:#4a3208}
+.activite{background:#fbf8fc;border:1.8px solid var(--trait);border-radius:14px;padding:16px 20px;margin:18px 0}
+.activite.ton1{border-left:10px solid #5a2d63;background:#faf6fb}
+.activite.ton2{border-left:10px solid #1a4a7a;background:#f4f8fc}
+.activite.ton3{border-left:10px solid #2f7d4f;background:#f4faf6}
+.activite.ton4{border-left:10px solid #b26a12;background:#fdf9f2}
+.activite.ton5{border-left:10px solid #a02360;background:#fdf5f9}
+.activite.ton1 h3{color:#5a2d63}
+.activite.ton2 h3{color:#1a4a7a}
+.activite.ton3 h3{color:#2f7d4f}
+.activite.ton4 h3{color:#b26a12}
+.activite.ton5 h3{color:#a02360}
+.amorce{font-size:20px;font-weight:600;color:var(--prune);border-left:7px solid var(--prune-clair);
+  background:#f7eefa;border-radius:0 10px 10px 0;padding:10px 16px;margin:4px 0 18px}
+.question{margin:14px 0;background:#fff;border:1.6px solid var(--trait);border-radius:10px;
+  padding:12px 16px}
+.question .num{font-weight:700;color:var(--prune)}
+textarea.rep-saisie{width:100%;font-family:inherit;font-size:17px;line-height:1.7;color:#123c7a;
+  border:2px solid #cbb9d3;border-left:7px solid var(--ocre);background:#fffdf5;padding:10px 12px;
+  resize:vertical;border-radius:10px;overflow:hidden;min-height:58px;
+  box-shadow:inset 0 2px 5px rgba(90,45,99,.09)}
+textarea.rep-saisie:focus{outline:none;background:#fffdf0;border-color:var(--ocre)}
+.enveloppe-rep{margin-top:10px}
+table.tbl textarea.rep-saisie{border:none;border-left:4px solid #e2d3e8;background:transparent;
+  box-shadow:none;border-radius:0;min-height:0;padding:4px 8px}
+table.tbl td:focus-within{background:#fffdf0;box-shadow:inset 0 0 0 2.5px var(--ocre)}
+table.tbl td:focus-within textarea.rep-saisie{background:transparent;border-left-color:var(--ocre)}
+table.tbl tr:focus-within td.lib{background:#faf3e0;color:#4a3208}
+@media print{textarea.rep-saisie{background:none;box-shadow:none;border:1px solid #999;
+  border-left:2px solid #333}}
+.valide{animation:valide 1s ease-out}
+@keyframes valide{0%{background:#d6f5df}100%{background:transparent}}
+table.tbl{width:100%;border-collapse:separate;border-spacing:0;margin:12px 0;font-size:17px;
+  border-radius:12px;overflow:hidden;box-shadow:0 0 0 2px var(--prune-clair)}
+table.tbl th,table.tbl td{border:0;border-right:2px solid var(--prune-clair);
+  border-bottom:2px solid var(--prune-clair);vertical-align:middle}
+table.tbl th{background:#efe3f2;padding:9px 12px;text-align:center;color:var(--prune)}
+table.tbl td{padding:6px 10px}
+table.tbl tr>*:last-child{border-right:0}
+table.tbl tr:last-child>*{border-bottom:0}
+table.tbl-plan{max-width:620px;margin:6px 0 2px}
+.plan{margin:6px 0 2px;padding:0;list-style:none;position:relative}
+.plan li{display:grid;grid-template-columns:158px 1fr;align-items:center;gap:16px;
+  padding:10px 0;border-bottom:1.5px solid #e3d6e9}
+.plan li:last-child{border-bottom:none}
+.plan .etape{background:var(--prune);color:#fff;border-radius:20px;padding:6px 14px;
+  font-size:15px;font-weight:700;letter-spacing:.04em;text-align:center;white-space:nowrap}
+.plan .quoi{font-size:18px}
+.panneau .tbl{background:#fff}
+table.tbl-plan td.lib{width:38%}
+table.tbl td.lib{background:#faf5fb;font-weight:700;width:32%;text-align:center}
+table.tbl td textarea{border:none;background:transparent;border-bottom:none}
+select.choix-liste{width:100%;font-family:inherit;font-size:17px;color:#123c7a;background:#fdfcfe;
+  border:2px solid var(--trait);border-radius:8px;padding:7px 10px}
+select.choix-liste:focus{outline:none;background:#fff8dc;border-color:var(--ocre)}
+@media print{select.choix-liste{border:none;border-bottom:1px solid #000;color:#000;background:none;
+  font-size:12px;appearance:none;-webkit-appearance:none}}
+.reserve{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.etiq-mob{background:#fff;border:2px solid var(--prune-clair);border-radius:10px;padding:8px 14px;
+  cursor:pointer;font-size:16px;box-shadow:0 1px 3px rgba(50,20,60,.12)}
+.etiq-mob:hover{background:#faf5fb}
+.etiq-mob.prise{background:var(--prune);color:#fff;border-color:var(--prune)}
+td.place{background:#fdfcfe;cursor:pointer;min-height:44px}
+td.place.vide::after{content:"cliquer ici";color:#8a7d92;font-style:italic}
+td.place.cible{background:#fffdf0;box-shadow:inset 0 0 0 2.5px var(--ocre)}
+td.place .dedans{display:inline-block;background:#efe3f2;border:2px solid var(--prune-clair);
+  border-radius:10px;padding:6px 12px}
+@media print{td.place.vide::after{content:""}
+  td.place .dedans{border:none;background:none;padding:0}}
+.cases{text-align:center}
+.cases input{width:22px;height:22px;accent-color:var(--prune)}
+.choix{display:block;margin:4px 0 4px 6px}
+.choix input{width:19px;height:19px;accent-color:var(--prune);vertical-align:-3px;margin-right:8px}
+.aide{background:#eef6f0;border:2px solid var(--vert);border-radius:12px;padding:12px 18px;margin:14px 0}
+.aide h4{margin:0 0 8px;color:var(--vert);font-size:17px}
+.grille2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.photos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:14px 0}
+.photos figure{margin:0;border:2px solid var(--prune-clair);border-radius:12px;overflow:hidden;background:#fff}
+.photos img{width:100%;display:block}
+.photos figcaption{padding:8px 10px;font-weight:700;color:var(--prune);text-align:center}
+.cv2{border:2px solid #cfc3d6;border-radius:12px;background:#fff;margin:16px 0;overflow:hidden}
+.etiq-champ{font-size:14.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--prune);margin:10px 0 2px}
+.cv2 .haut .etiq-champ:first-child{margin-top:0}
+.cv2 .haut{background:#f3ecf6;border-bottom:3px solid var(--prune);padding:18px 26px 14px}
+.cv2 .haut .nom{font-family:'Barlow Condensed',sans-serif;font-size:34px;font-weight:700;
+  letter-spacing:.08em;color:var(--prune);line-height:1.05}
+.cv2 .haut .poste{font-size:18px;color:var(--gris);margin-top:2px}
+.cv2 .haut .contact{margin-top:10px;font-size:16px;color:var(--encre);display:flex;flex-wrap:wrap;gap:6px 26px}
+.cv2 .colonnes{display:grid;grid-template-columns:0.82fr 1.6fr;gap:0;align-items:start}
+.cv2 .gauche{background:#faf7fc;border-right:2px solid #e6dbea;padding:18px 20px;height:100%}
+.cv2 .droite{padding:16px 24px}
+.cv2 h5{margin:0 0 10px;font-size:14.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--prune);border-bottom:2px solid var(--prune-clair);padding-bottom:4px}
+.cv2 .bloc{margin-bottom:22px}
+.cv2 .bloc:last-child{margin-bottom:4px}
+.cv2 .exp{display:grid;grid-template-columns:104px 1fr;gap:14px;margin-bottom:12px}
+.cv2 .exp .date{font-size:15px;font-weight:700;color:var(--gris);line-height:1.35}
+.cv2 .exp .quoi b{display:block;font-size:16.5px;line-height:1.35}
+.cv2 .exp .quoi span{font-size:15.5px;color:var(--gris);line-height:1.4;display:block;margin-top:2px}
+.cv2 ul.puces{margin:0;padding:0;list-style:none}
+.cv2 ul.puces li{padding:6px 0 6px 16px;position:relative;font-size:16.5px;line-height:1.4}
+.cv2 ul.puces li::before{content:"";position:absolute;left:0;top:13px;width:7px;height:7px;
+  border-radius:50%;background:var(--prune-clair)}
+.cv{border:2px solid var(--gris);border-radius:10px;padding:16px 20px;background:#fff;margin:14px 0}
+.cv .nom{text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:700;
+  letter-spacing:.06em;color:var(--encre)}
+.cv .accroche{text-align:center;color:var(--gris);margin-bottom:12px}
+.cv .colonnes{display:grid;grid-template-columns:34% 1fr;gap:22px}
+.cv h5{margin:0 0 6px;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--prune);
+  border-bottom:2px solid var(--prune);padding-bottom:3px}
+.cv .bloc{margin-bottom:14px}
+footer{margin-top:22px;padding:10px 30px 0;border-top:1.5px solid var(--trait);font-size:11.5px;
+  color:var(--gris);display:flex;flex-wrap:wrap;gap:2px 16px;line-height:1.45}
+.source{flex-basis:100%;font-size:11px;color:var(--gris)}
+.mention{flex-basis:100%;font-size:10.5px;color:#6b5f72;letter-spacing:.1px}
+@media print{.mention{font-size:8.5px;line-height:1.25}.source{font-size:9.5px}}
+.barre{display:flex;flex-wrap:wrap;gap:8px}
+.barre button{background:var(--prune);color:#fff;border:none;border-radius:22px;padding:9px 16px;
+  font-size:14.5px;font-weight:700;cursor:pointer;width:100%}
+.barre button:hover{background:var(--prune-clair)}
+.barre button.gris{background:#6b6b78}
+.rappel-dictee{background:#e8f0fb;border:2px solid #1a4a7a;border-radius:12px;padding:12px 18px;margin:16px 0;
+  font-size:16px;line-height:2}
+.rappel-dictee b{color:#1a4a7a}
+.btn-micro{display:inline-flex;align-items:center;gap:9px;background:#1a4a7a;color:#fff;border:none;
+  border-radius:24px;padding:9px 20px;font-family:inherit;font-size:17px;font-weight:700;cursor:pointer;
+  margin:6px 12px 6px 0;vertical-align:middle}
+.btn-micro:hover{background:#2b6ba8}
+.btn-micro.ecoute-en-cours{background:#b3261e}
+.btn-micro.ecoute-en-cours .rond{animation:pulse 1s infinite}
+.rond{width:13px;height:13px;border-radius:50%;background:#fff;display:inline-block}
+@keyframes pulse{50%{opacity:.25}}
+.info-micro{font-size:16px;color:#1a4a7a;display:inline-block;vertical-align:middle}
+.console-dictee{display:none;position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+  z-index:60;background:#b3261e;color:#fff;border-radius:16px;padding:12px 18px;
+  box-shadow:0 6px 24px rgba(120,20,15,.35);align-items:center;gap:14px;max-width:min(760px,92vw)}
+.console-dictee.on{display:flex}
+.console-dictee .rond{width:16px;height:16px;background:#fff;border-radius:50%;animation:pulse 1s infinite;
+  flex:0 0 auto}
+.console-dictee .txt{font-size:17px;font-weight:700;white-space:nowrap}
+.console-dictee .entendu{font-size:15px;font-weight:400;opacity:.92;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:80px}
+.console-dictee button{background:#fff;color:#b3261e;border:none;border-radius:20px;padding:8px 16px;
+  font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;flex:0 0 auto}
+@media print{.console-dictee{display:none!important}}
+.etat-micro{display:none;align-items:center;gap:10px;margin:10px 0 2px;background:#b3261e;color:#fff;
+  border-radius:12px;padding:9px 16px;font-size:17px;font-weight:700}
+.etat-micro.on{display:inline-flex}
+.etat-micro .rond{width:14px;height:14px;background:#fff;border-radius:50%;animation:pulse 1s infinite}
+@media print{.etat-micro{display:none!important}}
+.enveloppe-rep{position:relative}
+.gomme{position:absolute;top:5px;right:6px;width:26px;height:26px;border-radius:50%;
+  border:1.5px solid var(--trait);background:#fff;color:var(--gris);font-size:15px;line-height:1;
+  cursor:pointer;padding:0;opacity:.55;transition:opacity .15s;display:flex;align-items:center;
+  justify-content:center}
+.enveloppe-rep:hover .gomme,.gomme:focus{opacity:1}
+.gomme:hover{background:#fdecec;border-color:#b3261e;color:#b3261e}
+@media print{.gomme{display:none!important}}
+kbd{background:#fff;border:1.6px solid #7a8b9c;border-bottom-width:3px;border-radius:6px;padding:1px 8px;
+  font-family:inherit;font-weight:700;display:inline-block;line-height:1.35;vertical-align:middle;margin:3px 1px}
+@media print{
+  body{background:#fff;padding:0;font-size:12px}
+  .zone{padding:0!important}
+  .sommaire,.volets-boutons,.barre-audio,.pager{display:none!important}
+  .cadre{display:block}
+  .zone{padding:0}
+  .sec{display:block!important}
+  .page{box-shadow:none;border-radius:0;max-width:none}
+  .barre,.rappel-dictee{display:none!important}
+  header{color:#000;background:#fff;border-bottom:3px solid #000;padding:8px 0}
+  header h1{font-size:24px;color:#000}
+  .fil,.ligne-infos span{color:#000;background:none;border-color:#666}
+  textarea.rep-saisie{border-bottom:1px solid #000;color:#000;font-size:12px;background:none}
+  h2.sect{font-size:17px;margin:12px 0 6px}
+  .doc-card,.activite,.panneau,.aide,.consigne{break-inside:avoid}
+  .photos{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="volets-boutons">
+  <div class="vitesse-flottante boite" id="vitesse-flottante"></div>
+  <div class="boite" id="boite-lecture"></div>
+  <div class="boite" id="boite-reglages"></div>
+  <div class="boite boite-micro" id="boite-micro"></div>
+  <div class="etat-lecture" id="etat-lecture"></div>
+  <div class="rangee-volets">
+    <button class="replier" id="replier" data-vol="nav-sec">Sommaire</button>
+  </div>
+</div>
+<div class="console-dictee" id="console-dictee">
+  <span class="rond"></span>
+  <span class="txt">Enregistre&nbsp;: parle</span>
+  <span class="entendu" id="console-entendu"></span>
+  <button type="button" id="console-stop">Pause</button>
+</div>
+<div class="cadre replie" id="cadre">
+<aside class="sommaire" id="sommaire">
+  <div class="som-titre">Séance 1 — Le CV</div>
+  <div class="onglets">
+    <button class="onglet actif" data-vol="nav-sec">Sommaire</button>
+    <button class="onglet" data-vol="outils">Outils</button>
+  </div>
+  <nav id="nav-sec"></nav>
+  <div class="outils" id="outils" hidden></div>
+</aside>
+<div class="zone">
+<div class="page">
+<header>
+  <div class="titre-fiche">
+    <div class="fil">CAP Équipier Polyvalent du Commerce &middot; Recherche de stage</div>
+    <h1>Séance 1 — Réaliser mon CV</h1>
+  </div>
+  <div class="ligne-infos"><span>Professeure : Mme Perry</span><span>Niveau : CAP — 1<sup>ère</sup> année</span><span>Date : <input class="champ-date" data-id="date"></span></div>
+</header>
+<div class="corps">
+<section class="sec" data-titre="Introduction">
+<div class="rappel-dictee"><b>Pour répondre à la voix :</b> clique dans la case de réponse,
+puis clique sur le bouton <b>Parler</b> en haut à gauche de l'écran et parle. Le texte s'écrit tout seul dans la case.<br>
+<button class="btn-micro" id="micro"><span class="rond"></span><span class="lab">Parler</span></button>
+<span class="etat-micro" id="etat-micro"><span class="rond"></span>J'écoute&nbsp;: parle maintenant</span>
+<span class="info-micro" id="info-micro">Le micro s'ouvre au premier clic : il faut l'autoriser.</span><br>
+<kbd>Entrée</kbd> va à la ligne dans la case. <kbd>Entrée</kbd> une seconde fois : tu sors de la case.<br>
+Le micro reste allumé : pour répondre à la question suivante, clique dans sa case et continue de parler.</div>
+<div class="panneau"><h2>Objectifs de la séquence</h2><ul class="objectifs"><li><span class="puce">1</span><span class="txt"><b>Identifier</b> les rubriques indispensables d'un CV et les informations qu'elles contiennent.</span></li>
+<li><span class="puce">2</span><span class="txt"><b>Faire</b> le lien entre son propre parcours (scolarité, stages (PFMP), jobs, clubs sportifs...) et les rubriques d'un CV.</span></li>
+<li><span class="puce">3</span><span class="txt"><b>Compléter</b> un CV structuré en plaçant chaque information au bon endroit.</span></li>
+<li><span class="puce">4</span><span class="txt"><b>Utiliser</b> un vocabulaire professionnel adapté.</span></li></ul></div>
+<div class="panneau"><h2>Plan du cours</h2><ul class="plan"><li><span class="etape">Introduction</span><span class="quoi">À quoi sert un CV ?</span></li>
+<li><span class="etape">Mission 1</span><span class="quoi"><b>Lister</b> les éléments d'un CV</span></li>
+<li><span class="etape">Mission 2</span><span class="quoi"><b>Réaliser</b> son propre CV</span></li></ul></div>
+<h2 class="sect">Introduction — à quoi sert un CV ?</h2>
+<div class="activite"><p class="amorce">Avant de commencer, échangeons à l'oral à partir des questions suivantes.</p>
+<div class="question"><span class="num">1.</span> À quoi sert un CV ? À qui est-il destiné ?
+<textarea class="rep-saisie" rows="2"></textarea></div>
+<div class="question"><span class="num">2.</span> À quel moment un recruteur lit-il ton CV, et combien de temps y consacre-t-il en général ?
+<textarea class="rep-saisie" rows="2"></textarea></div>
+<div class="question"><span class="num">3.</span> Que peut penser un recruteur d'un CV avec des fautes d'orthographe ou mal présenté ?
+<textarea class="rep-saisie" rows="2"></textarea></div>
+<div class="question"><span class="num">4.</span> Que risque-t-on si on ment sur son CV (diplôme non obtenu, expérience inventée...) ?
+<textarea class="rep-saisie" rows="2"></textarea></div>
+</div>
+</section>
+<section class="sec" data-titre="Observe cet exemple de CV">
+<h2 class="sect">Observe cet exemple de CV</h2>
+<div class="consigne"><span class="titre-consigne">Consigne</span>
+<b>Lis</b> d'abord l'annonce d'emploi ci-dessous, puis <b>observe</b> le CV qui a été envoyé pour y
+répondre. <b>Relève</b> ensuite les éléments que tu repères dans le CV en <b>complétant</b> le tableau
+situé en dessous.</div>
+<div class="doc-card"><div class="tete">Offre d'emploi</div><div class="dedans">
+<div class="champs">
+  <div class="champ"><span class="et">Poste</span><span class="val"><b>Équipier(ère) polyvalent(e) de commerce</b></span></div>
+  <div class="champ"><span class="et">Entreprise</span><span class="val">Supermarché Hyper U — Cayenne, zone Collery</span></div>
+  <div class="champ"><span class="et">Missions</span><span class="val">Mise en rayon, accueil et conseil client, encaissement, tenue du rayon.</span></div>
+  <div class="champ"><span class="et">Profil recherché</span><span class="val">Sens du contact, dynamisme, ponctualité, esprit d'équipe.</span></div>
+  <div class="champ"><span class="et">Contrat</span><span class="val">CDD<sup>*</sup> selon profil.</span></div>
+  <div class="champ"><span class="et">Candidature</span><span class="val">Adresser CV et lettre de motivation à recrutement@superu-cayenne.fr</span></div>
+</div>
+<p class="surnom">* CDD : contrat à durée déterminée (une date de début et une date de fin).</p>
+</div></div>
+<div class="cv2">
+<div class="haut">
+  <div class="nom">Naomie Celestin</div>
+  <div class="poste">Recherche d'emploi : Équipier Polyvalent du Commerce</div>
+  <div class="contact">
+    <span>15 avenue du Général de Gaulle, 97300 Cayenne</span>
+    <span>0694 12 34 56</span>
+    <span>naomie.celestin@gmail.com</span>
+  </div>
+</div>
+<div class="colonnes">
+  <div class="gauche">
+    <div class="bloc"><h5>Compétences professionnelles</h5>
+      <ul class="puces">
+        <li>Accueil et conseil client</li>
+        <li>Encaissement</li>
+        <li>Mise en rayon</li>
+        <li>Travail en équipe</li>
+      </ul></div>
+    <div class="bloc"><h5>Centres d'intérêt</h5>
+      <ul class="puces">
+        <li>Basket-ball (club local)</li>
+        <li>Bénévolat association de quartier</li>
+      </ul></div>
+  </div>
+  <div class="droite">
+    <div class="bloc"><h5>Formation</h5>
+      <div class="exp"><div class="date">2024 – 2026</div>
+        <div class="quoi"><b>CAP Équipier Polyvalent du Commerce (EPC)</b>
+        <span>Lycée professionnel Max Joséphine — Cayenne</span></div></div>
+      <div class="exp"><div class="date">2023 – 2024</div>
+        <div class="quoi"><b>Classe de 3<sup>e</sup></b>
+        <span>Collège Paul Kapel — Cayenne</span></div></div>
+    </div>
+    <div class="bloc"><h5>Expériences professionnelles</h5>
+      <div class="exp"><div class="date">Juin 2025<br>2 semaines</div>
+        <div class="quoi"><b>Stage — hypermarché Hyper U, Cayenne</b>
+        <span>Mise en rayon, conseil client, tenue de caisse.</span></div></div>
+      <div class="exp"><div class="date">Juillet 2024<br>1 mois</div>
+        <div class="quoi"><b>Emploi saisonnier — boulangerie Savoureux Gâteaux, Rémire-Montjoly</b>
+        <span>Vente, accueil de la clientèle, tenue de caisse.</span></div></div>
+    </div>
+  </div>
+</div></div>
+<div class="activite"><h3>À toi de jouer : <b>relève</b> les éléments du CV</h3>
+<p><b>Clique</b> sur une étiquette, puis <b>clique</b> sur la ligne du tableau où elle doit aller.
+Pour la <b>retirer</b>, <b>clique</b> sur la case du tableau.</p>
+<div class="jeu">
+<div class="reserve"><div class="etiq-mob" tabindex="0">Naomie Celestin</div><div class="etiq-mob" tabindex="0">CAP Équipier Polyvalent du Commerce</div><div class="etiq-mob" tabindex="0">15 avenue du Général de Gaulle à Cayenne, 0694 12 34 56, naomie.celestin@gmail.com</div><div class="etiq-mob" tabindex="0">CAP EPC au lycée Max Joséphine, après une 3e au collège Paul Kapel</div><div class="etiq-mob" tabindex="0">Un stage chez Hyper U et un emploi saisonnier en boulangerie</div><div class="etiq-mob" tabindex="0">Accueil et conseil client, encaissement, mise en rayon, travail en équipe</div><div class="etiq-mob" tabindex="0">Basket-ball en club et bénévolat dans une association de quartier</div></div>
+<table class="tbl tbl-places"><tr><td class="lib">Nom et prénom du candidat</td><td class="place vide" data-id="cv-a"></td></tr>
+<tr><td class="lib">Métier préparé (diplôme)</td><td class="place vide" data-id="cv-b"></td></tr>
+<tr><td class="lib">Coordonnées relevées</td><td class="place vide" data-id="cv-c"></td></tr>
+<tr><td class="lib">Formation(s) suivie(s)</td><td class="place vide" data-id="cv-d"></td></tr>
+<tr><td class="lib">Expérience(s) professionnelle(s)</td><td class="place vide" data-id="cv-e"></td></tr>
+<tr><td class="lib">Compétence(s) citée(s)</td><td class="place vide" data-id="cv-f"></td></tr>
+<tr><td class="lib">Centre(s) d'intérêt</td><td class="place vide" data-id="cv-g"></td></tr></table>
+</div>
+<div class="question"><span class="num"></span> A ton avis, a-t-elle des chances d'être recruté ? Pourquoi ?
+<textarea class="rep-saisie" rows="4"></textarea></div>
+</div>
+</section>
+<section class="sec" data-titre="Mission 1 — Lister les éléments de mon CV">
+<h2 class="sect">Mission 1 — Lister les éléments de mon CV</h2>
+<div class="consigne"><span class="titre-consigne">Consigne</span>
+Avant de <b>rédiger</b> ton CV, tu vas <b>rassembler</b> toutes les informations utiles.
+<b>Réponds</b> directement dans les tableaux ci-dessous, avec des phrases courtes et précises.</div>
+<div class="activite ton1"><h3>1. Mes coordonnées</h3>
+<table class="tbl tbl-places"><tr><td class="lib">Nom</td><td><textarea class="rep-saisie" rows="1"></textarea></td></tr>
+<tr><td class="lib">Prénom</td><td><textarea class="rep-saisie" rows="1"></textarea></td></tr>
+<tr><td class="lib">Date de naissance</td><td><textarea class="rep-saisie" rows="1"></textarea></td></tr>
+<tr><td class="lib">Adresse</td><td><textarea class="rep-saisie" rows="2"></textarea></td></tr>
+<tr><td class="lib">Téléphone</td><td><textarea class="rep-saisie" rows="1"></textarea></td></tr>
+<tr><td class="lib">Adresse e-mail (professionnelle)</td><td><textarea class="rep-saisie" rows="1"></textarea></td></tr></table>
+</div>
+<div class="activite ton2"><h3>2. Ma formation (depuis la classe de 3<sup>e</sup>)</h3>
+<p><b>Complète</b> la ligne pour chaque année : <b>indique</b> la classe suivie, l'établissement et la
+ville. <b>Commence</b> par l'année la plus récente.</p>
+<table class="tbl tbl-places"><thead><tr><th>Année(s)</th><th>Classe / Diplôme préparé</th><th>Établissement</th><th>Ville</th></tr></thead><tbody><tr><td><textarea class="rep-saisie" rows="2"></textarea></td><td><textarea class="rep-saisie" rows="2"></textarea></td><td><textarea class="rep-saisie" rows="2"></textarea></td><td><textarea class="rep-saisie" rows="2"></textarea></td></tr><tr><td><textarea class="rep-saisie" rows="2"></textarea></td><td><textarea class="rep-saisie" rows="2"></textarea></td><td><textarea class="rep-saisie" rows="2"></textarea></td><td><textarea class="rep-saisie" rows="2"></textarea></td></tr><tr><td><textarea class="rep-saisie" rows="2"></textarea></td><td><textarea class="rep-saisie" rows="2"></textarea></td><td><textarea class="rep-saisie" rows="2"></textarea></td><td><textarea class="rep-saisie" rows="2"></textarea></td></tr><tr><td><textarea class="rep-saisie" rows="2"></textarea></td><td><textarea class="rep-saisie" rows="2"></textarea></td><td><textarea class="rep-saisie" rows="2"></textarea></td><td><textarea class="rep-saisie" rows="2"></textarea></td></tr></tbody></table>
+</div>
+<div class="activite ton3"><h3>3. Mes expériences en entreprise (stages, jobs d'été...)</h3>
+<p>Pour chaque expérience, <b>précise</b> l'entreprise, le métier observé ou exercé, les dates et ce
+que tu as appris ou réalisé.</p>
+<table class="tbl tbl-places"><thead><tr><th>Dates</th><th>Entreprise</th><th>Métier / Poste</th><th>Tâches réalisées</th></tr></thead><tbody><tr><td><textarea class="rep-saisie" rows="3"></textarea></td><td><textarea class="rep-saisie" rows="3"></textarea></td><td><textarea class="rep-saisie" rows="3"></textarea></td><td><textarea class="rep-saisie" rows="3"></textarea></td></tr><tr><td><textarea class="rep-saisie" rows="3"></textarea></td><td><textarea class="rep-saisie" rows="3"></textarea></td><td><textarea class="rep-saisie" rows="3"></textarea></td><td><textarea class="rep-saisie" rows="3"></textarea></td></tr><tr><td><textarea class="rep-saisie" rows="3"></textarea></td><td><textarea class="rep-saisie" rows="3"></textarea></td><td><textarea class="rep-saisie" rows="3"></textarea></td><td><textarea class="rep-saisie" rows="3"></textarea></td></tr></tbody></table>
+</div>
+<div class="activite ton4"><h3>4. Mes compétences et qualités</h3>
+<p>Identifie des compétences et des qualités utiles dans le métier que tu prépares.</p>
+<p>Pour t'aider, voici des exemples (<b>choisis</b> ceux qui te correspondent, ou <b>trouve</b> les
+tiens) : <b>clique</b> sur une étiquette, puis <b>clique</b> sur la case où elle doit aller.</p>
+<div class="jeu">
+<div class="reserve"><div class="etiq-mob" tabindex="0">Accueil et conseil client</div><div class="etiq-mob" tabindex="0">Encaissement / tenue de caisse</div><div class="etiq-mob" tabindex="0">Mise en rayon</div><div class="etiq-mob" tabindex="0">Gestion des stocks</div><div class="etiq-mob" tabindex="0">Mise en valeur des produits</div><div class="etiq-mob" tabindex="0">Utilisation d'un logiciel de caisse</div><div class="etiq-mob" tabindex="0">Réception de marchandises</div><div class="etiq-mob" tabindex="0">Techniques de vente</div><div class="etiq-mob" tabindex="0">Sens du contact, sourire</div><div class="etiq-mob" tabindex="0">Ponctualité</div><div class="etiq-mob" tabindex="0">Dynamisme</div><div class="etiq-mob" tabindex="0">Esprit d'équipe</div><div class="etiq-mob" tabindex="0">Rigueur, sens de l'organisation</div><div class="etiq-mob" tabindex="0">Autonomie</div><div class="etiq-mob" tabindex="0">Patience</div><div class="etiq-mob" tabindex="0">Politesse, courtoisie</div><div class="etiq-mob" tabindex="0">Capacité d'adaptation</div></div>
+<p><b>a)</b> Des compétences que je possède déjà, en lien avec mon stage de 3<sup>e</sup> ou mes expériences professionnelles :</p>
+<table class="tbl tbl-places"><thead><tr><th>Compétence</th><th>Acquise grâce à... (stage, job, expérience...)</th></tr></thead><tbody><tr><td class="place vide" data-id="comp-1"></td><td><textarea class="rep-saisie" rows="2"></textarea></td></tr><tr><td class="place vide" data-id="comp-2"></td><td><textarea class="rep-saisie" rows="2"></textarea></td></tr><tr><td class="place vide" data-id="comp-3"></td><td><textarea class="rep-saisie" rows="2"></textarea></td></tr><tr><td class="place vide" data-id="comp-4"></td><td><textarea class="rep-saisie" rows="2"></textarea></td></tr></tbody></table>
+<p><b>b)</b> Trois qualités que je possède :</p>
+<table class="tbl tbl-places"><tr><td class="lib">Qualité 1</td><td class="place vide" data-id="qual-1"></td></tr>
+<tr><td class="lib">Qualité 2</td><td class="place vide" data-id="qual-2"></td></tr>
+<tr><td class="lib">Qualité 3</td><td class="place vide" data-id="qual-3"></td></tr></table>
+</div>
+</div>
+<div class="activite ton5"><h3>5. Mes centres d'intérêt</h3>
+<p><b>Cite</b> 2 ou 3 activités (sport, musique, associations, loisirs créatifs...) qui montrent une
+qualité intéressante pour un employeur.</p>
+<table class="tbl tbl-places"><tr><td class="lib">Centre d'intérêt 1</td><td><textarea class="rep-saisie" rows="1"></textarea></td></tr>
+<tr><td class="lib">Centre d'intérêt 2</td><td><textarea class="rep-saisie" rows="1"></textarea></td></tr>
+<tr><td class="lib">Centre d'intérêt 3</td><td><textarea class="rep-saisie" rows="1"></textarea></td></tr></table>
+</div>
+<div class="activite"><h3>À retenir</h3><textarea class="rep-saisie" rows="8"></textarea></div>
+</section>
+<section class="sec" data-titre="Mission 2 — Réaliser son propre CV">
+<h2 class="sect">Mission 2 — Compléter un CV à trous</h2>
+<div class="consigne"><span class="titre-consigne">Consigne</span>
+À l'aide des informations rassemblées dans la Mission 1, <b>complète</b> le CV ci-dessous en
+<b>écrivant</b> dans chaque case, au bon emplacement.</div>
+<div class="activite"><div class="cv2">
+<div class="haut">
+  <div class="etiq-champ">Prénom et nom</div><textarea class="rep-saisie" rows="1" data-id="cv-nom"></textarea>
+  <div class="etiq-champ">Intitulé du métier préparé</div><textarea class="rep-saisie" rows="1" data-id="cv-metier"></textarea>
+</div>
+<div class="colonnes">
+  <div class="gauche">
+    <div class="bloc"><h5>Coordonnées</h5>
+      <div class="etiq-champ">Adresse</div><textarea class="rep-saisie" rows="2" data-id="cv-adr"></textarea>
+      <div class="etiq-champ">Téléphone</div><textarea class="rep-saisie" rows="1" data-id="cv-tel"></textarea>
+      <div class="etiq-champ">E-mail</div><textarea class="rep-saisie" rows="1" data-id="cv-mail"></textarea>
+    </div>
+    <div class="bloc"><h5>Compétences professionnelles</h5><textarea class="rep-saisie" rows="4" data-id="cv-comp"></textarea></div>
+    <div class="bloc"><h5>Centres d'intérêt</h5><textarea class="rep-saisie" rows="3" data-id="cv-interets"></textarea></div>
+  </div>
+  <div class="droite">
+    <div class="bloc"><h5>Formation</h5><textarea class="rep-saisie" rows="5" data-id="cv-form"></textarea></div>
+    <div class="bloc"><h5>Expériences professionnelles</h5><textarea class="rep-saisie" rows="6" data-id="cv-exp"></textarea></div>
+  </div>
+</div></div></div>
+</section>
+</div>
+<footer>
+  <span class="source">Cours de Mme Perry &middot; Séance 1 &middot; La recherche de stage — le CV - 1CAP EPC</span>
+  <span class="mention">Adaptation numérique Sylvaine Talbaut &middot; Usage interne &mdash;
+  reproduction et diffusion interdites</span>
+</footer>
+</div>
+<div class="pager">
+  <button id="prec">&#8249; Page précédente</button>
+  <div class="pager-pos" id="pager-pos"></div>
+  <button id="suiv">Page suivante &#8250;</button>
+</div>
+</div>
+</div>
+
+<div class="barre" id="barre-outils">
+  <button onclick="window.print()">Imprimer</button>
+  <button class="gris" id="effacer">Effacer mes réponses</button>
+</div>
+
+<script>
+/* ---- sommaire : une page par section ---- */
+(function(){
+  /* à l'ouverture : première page, et tout en haut */
+  try{ if('scrollRestoration' in history) history.scrollRestoration = 'manual'; }catch(e){}
+  window.addEventListener('load', function(){
+    window.scrollTo(0, 0);
+    setTimeout(function(){ window.scrollTo(0, 0); }, 60);
+  });
+
+  var secs = [].slice.call(document.querySelectorAll('.sec'));
+  var nav = document.getElementById('nav-sec');
+  var courant = 0;
+  function montrer(i){
+    secs.forEach(function(s, k){ s.classList.toggle('visible', k === i); });
+    [].forEach.call(nav.querySelectorAll('.som-lien'), function(b, k){ b.classList.toggle('actif', k === i); });
+    [].forEach.call(nav.querySelectorAll('.sous-liens'), function(g){
+      g.style.display = (+g.dataset.pour === i) ? '' : 'none'; });
+    var prec = document.getElementById('prec'), suiv = document.getElementById('suiv');
+    prec.disabled = (i === 0); suiv.disabled = (i === secs.length - 1);
+    prec.style.display = (i === 0) ? 'none' : '';
+    suiv.style.display = (i === secs.length - 1) ? 'none' : '';
+    prec.innerHTML = '&#8249; Page précédente';
+    suiv.innerHTML = 'Page suivante &#8250;';
+    document.getElementById('pager-pos').textContent = 'Page ' + (i+1) + ' sur ' + secs.length;
+    courant = i;
+    window.scrollTo(0, 0);
+  }
+  secs.forEach(function(s, i){
+    var b = document.createElement('div');
+    b.className = 'som-lien'; b.textContent = s.dataset.titre;
+    b.tabIndex = 0; b.setAttribute('role', 'button');
+    b.addEventListener('click', function(){ montrer(i); });
+    b.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') montrer(i); });
+    nav.appendChild(b);
+
+    /* sous-parties de la section */
+    var titres = s.querySelectorAll('h2.sect, .panneau > h2, .activite > h3');
+    if(!titres.length) return;
+    var sous = document.createElement('div');
+    sous.className = 'sous-liens'; sous.dataset.pour = i;
+    [].forEach.call(titres, function(t, k){
+      if(!t.id) t.id = 'p' + i + '-' + k;
+      var l = document.createElement('div');
+      l.className = 'sous-lien'; l.tabIndex = 0; l.setAttribute('role', 'button');
+      l.textContent = t.textContent.replace(/\s+/g, ' ').replace(/^[▶\s]+/, '').trim();
+      l.addEventListener('click', function(){
+        montrer(i);
+        setTimeout(function(){ t.scrollIntoView({block:'start', behavior:'smooth'}); }, 30);
+      });
+      sous.appendChild(l);
+    });
+    nav.appendChild(sous);
+  });
+  document.getElementById('prec').addEventListener('click', function(){ if(courant > 0) montrer(courant - 1); });
+  document.getElementById('suiv').addEventListener('click', function(){ if(courant < secs.length - 1) montrer(courant + 1); });
+  montrer(0);   /* à l'ouverture, toujours la première page */
+
+  /* deux onglets dans le volet : Sommaire / Outils */
+  var onglets = [].slice.call(document.querySelectorAll('.onglet'));
+  onglets.forEach(function(o){
+    o.addEventListener('click', function(){
+      onglets.forEach(function(x){
+        x.classList.toggle('actif', x === o);
+        document.getElementById(x.dataset.vol).hidden = (x !== o);
+      });
+    });
+  });
+
+  var cadre = document.getElementById('cadre');
+  var boutonsVolet = [].slice.call(document.querySelectorAll('.replier'));
+
+  function ouvrirVolet(vol){
+    var dejaOuvert = !cadre.classList.contains('replie');
+    var actif = document.querySelector('.onglet.actif');
+    if(dejaOuvert && actif && actif.dataset.vol === vol){
+      cadre.classList.add('replie');           /* même onglet : on referme */
+    } else {
+      cadre.classList.remove('replie');
+      onglets.forEach(function(x){
+        x.classList.toggle('actif', x.dataset.vol === vol);
+        document.getElementById(x.dataset.vol).hidden = (x.dataset.vol !== vol);
+      });
+    }
+    majBoutonsVolet();
+  }
+  function majBoutonsVolet(){
+    var ouvert = !cadre.classList.contains('replie');
+    var actif = document.querySelector('.onglet.actif');
+    boutonsVolet.forEach(function(b){
+      b.classList.toggle('ouvert', ouvert && actif && actif.dataset.vol === b.dataset.vol);
+    });
+  }
+  boutonsVolet.forEach(function(b){
+    b.addEventListener('click', function(){ ouvrirVolet(b.dataset.vol); });
+  });
+  onglets.forEach(function(o){ o.addEventListener('click', majBoutonsVolet); });
+  document.addEventListener('keydown', function(e){
+    if((e.key === 's' || e.key === 'S') && !/input|textarea|select/i.test((e.target.tagName||'')))
+      ouvrirVolet('nav-sec');
+  });
+  majBoutonsVolet();
+
+  /* les commandes descendent dans le volet, plus rien n'est fixé en bas */
+  window.addEventListener('load', function(){
+    var outils = document.getElementById('outils');
+    var audio = document.querySelector('.barre-audio');
+    if(audio){
+      outils.appendChild(audio);
+      /* les deux boutons de vitesse reçoivent leur légende */
+      [['vMoins', 'parle moins vite'], ['vPlus', 'parle plus vite']].forEach(function(p){
+        var b = document.getElementById(p[0]); if(!b) return;
+        var col = document.createElement('div'); col.className = 'col-vitesse';
+        b.parentNode.insertBefore(col, b); col.appendChild(b);
+        var l = document.createElement('span'); l.className = 'legende'; l.textContent = p[1];
+        col.appendChild(l);
+        document.getElementById('vitesse-flottante').appendChild(col);
+      });
+      var zone = document.getElementById('vitesse-flottante');
+      var pc = document.getElementById('aVitesse');
+      if(pc){ pc.classList.add('pourcent'); zone.insertBefore(pc, zone.children[1] || null); }
+      var lecture = document.getElementById('boite-lecture');
+      ['aPlay','aPause','aStop'].forEach(function(id){
+        var e = document.getElementById(id); if(e) lecture.appendChild(e); });
+      var reglages = document.getElementById('boite-reglages');
+      ['aRepeter','aMoins','aPlus'].forEach(function(id){
+        var e = document.getElementById(id); if(e) reglages.appendChild(e); });
+      var et = document.getElementById('aEtat');
+      if(et) document.getElementById('etat-lecture').appendChild(et);
+      var bm = document.getElementById('boite-micro');
+      var m = document.getElementById('micro'); if(m) bm.appendChild(m);
+      audio.remove();
+    }
+    document.getElementById('outils').hidden = false;
+    outils.appendChild(document.getElementById('barre-outils'));
+  });
+})();
+
+/* ---- champs de saisie : hauteur automatique et sauvegarde sur le poste ---- */
+(function(){
+  var cle = 'seance-' + document.title;
+  var memoire = {};
+  try{ memoire = JSON.parse(localStorage.getItem(cle) || '{}'); }catch(e){}
+  function ranger(){ try{ localStorage.setItem(cle, JSON.stringify(memoire)); }catch(e){} }
+  function ajuster(t){
+    t.style.height = 'auto';
+    var mini = (parseInt(t.getAttribute('rows'), 10) || 2) * 30;   /* la case garde sa hauteur prévue */
+    t.style.height = Math.max(t.scrollHeight + 4, mini) + 'px';
+  }
+  document.querySelectorAll('input.champ-date').forEach(function(t, i){
+    var id = t.dataset.id || ('d'+i); t.dataset.id = id;
+    if(memoire[id]) t.value = memoire[id];
+    t.addEventListener('input', function(){ memoire[id]=t.value; ranger(); });
+  });
+  document.querySelectorAll('textarea.rep-saisie').forEach(function(t, i){
+    var id = t.dataset.id || ('c'+i); t.dataset.id = id;
+    if(memoire[id]){ t.value = memoire[id]; }
+    ajuster(t);
+    t.addEventListener('input', function(){ memoire[id]=t.value; ranger(); ajuster(t); });
+  });
+  /* ---- étiquettes à placer (un ou plusieurs jeux par page) ---- */
+  document.querySelectorAll('.jeu').forEach(function(jeu){
+    var prise = null;
+    var reserve = jeu.querySelector('.reserve');
+    if(!reserve) return;
+    var places = [].slice.call(jeu.querySelectorAll('.place'));
+
+    function texteEtiquette(e){
+      var c = e.cloneNode(true);
+      [].slice.call(c.querySelectorAll('button')).forEach(function(b){ b.remove(); });
+      return c.textContent.trim();
+    }
+    function poser(td, texte){
+      td.innerHTML = '<span class="dedans">' + texte + '</span>';
+      td.classList.remove('vide');
+      memoire['place-' + td.dataset.id] = texte; ranger();
+    }
+    function montrer(t){
+      [].slice.call(reserve.children).forEach(function(e){
+        if(texteEtiquette(e) === t) e.style.display = '';
+      });
+    }
+    function rendre(td){
+      var t = td.textContent.trim();
+      if(!t) return;
+      td.innerHTML = ''; td.classList.add('vide');
+      delete memoire['place-' + td.dataset.id]; ranger();
+      montrer(t);
+    }
+    function brancher(e){
+      e.addEventListener('click', function(ev){
+        if(ev.target.closest && ev.target.closest('.ecoute')) return;
+        if(prise === e){ e.classList.remove('prise'); prise = null; }
+        else {
+          if(prise) prise.classList.remove('prise');
+          prise = e; e.classList.add('prise');
+        }
+        places.forEach(function(td){ td.classList.toggle('cible', !!prise); });
+      });
+    }
+    [].slice.call(reserve.querySelectorAll('.etiq-mob')).forEach(brancher);
+
+    places.forEach(function(td){
+      td.addEventListener('click', function(){
+        if(prise){
+          if(!td.classList.contains('vide')) rendre(td);
+          poser(td, texteEtiquette(prise));
+          prise.style.display = 'none'; prise.classList.remove('prise'); prise = null;
+          places.forEach(function(c){ c.classList.remove('cible'); });
+        } else if(!td.classList.contains('vide')){
+          rendre(td);
+        }
+      });
+      var t = memoire['place-' + td.dataset.id];
+      if(!t) return;
+      td.innerHTML = '<span class="dedans">' + t + '</span>'; td.classList.remove('vide');
+      [].slice.call(reserve.children).forEach(function(e){
+        if(texteEtiquette(e) === t) e.style.display = 'none';
+      });
+    });
+  });
+
+  document.querySelectorAll('select.choix-liste').forEach(function(sel, i){
+    var id = sel.dataset.id || ('s'+i); sel.dataset.id = id;
+    if(memoire[id]) sel.value = memoire[id];
+    sel.addEventListener('change', function(){
+      if(sel.value) memoire[id] = sel.value; else delete memoire[id];
+      ranger();
+    });
+  });
+  document.querySelectorAll('.page input[type=checkbox], .page input[type=radio]').forEach(function(c, i){
+    var id = c.dataset.id || ('k'+i); c.dataset.id = id;
+    if(memoire[id]) c.checked = true;
+    c.addEventListener('change', function(){
+      if(c.type === 'radio'){
+        [].forEach.call(document.getElementsByName(c.name), function(r){ delete memoire[r.dataset.id]; });
+      }
+      if(c.checked) memoire[id] = 1; else delete memoire[id];
+      ranger();
+    });
+  });
+  /* ---- dictée : un bouton dans la page, pas de raccourci clavier ---- */
+  var champCourant = null, reco = null, enMarche = false, recuQuelqueChose = false;
+  var ecrit = false;   /* le micro reste ouvert ; ce drapeau dit si la voix écrit */
+  var actif = false;   /* la reconnaissance tourne-t-elle vraiment ? */
+  var btn = document.getElementById('micro'), info = document.getElementById('info-micro');
+
+  document.querySelectorAll('textarea.rep-saisie, input.champ-date').forEach(function(ch){
+    ch.addEventListener('focus', function(){ champCourant = ch; majAttente(); });
+    ch.addEventListener('blur', function(){
+      setTimeout(function(){
+        if(document.activeElement !== btn && document.activeElement === document.body){
+          champCourant = null;      /* plus de case choisie : la voix n'écrit nulle part */
+          majAttente(); }
+      }, 0);
+    });
+  });
+
+  /* ---- une gomme sur chaque case de réponse ---- */
+  document.querySelectorAll('textarea.rep-saisie').forEach(function(t){
+    var env = document.createElement('div'); env.className = 'enveloppe-rep';
+    t.parentNode.insertBefore(env, t); env.appendChild(t);
+    var g = document.createElement('button');
+    g.className = 'gomme'; g.type = 'button'; g.tabIndex = -1;
+    g.title = 'Effacer cette réponse'; g.innerHTML = '&times;';
+    g.addEventListener('click', function(){
+      t.value = ''; t.dispatchEvent(new Event('input')); t.focus();
+    });
+    env.appendChild(g);
+  });
+
+  function dire(t){ if(info) info.textContent = t; }
+
+  function arreterDictee(){
+    ecrit = false;                 /* mise en veille : plus rien ne s'écrit */
+    var bandeau = document.getElementById('etat-micro');
+    if(bandeau){ bandeau.classList.remove('on'); bandeau.classList.remove('attente');
+                 if(enMarche){ bandeau.classList.add('veille');
+                               bandeau.innerHTML = '<span class="rond"></span>En pause'; }
+                 else bandeau.classList.remove('veille'); }
+    var cons = document.getElementById('console-dictee');
+    if(cons){ cons.classList.remove('on'); cons.classList.remove('attente'); }
+    if(btn){ btn.classList.remove('ecoute-en-cours');
+             btn.innerHTML = '<span class="rond"></span><span class="lab">Parler</span>'; }
+  }
+
+  /* coupure réelle du micro : uniquement en cas de refus ou d'erreur */
+  function couperDictee(){
+    arreterDictee();
+    enMarche = false;
+    if(reco){ try{ reco.stop(); }catch(e){} }
+  }
+
+  function demarrerDictee(){
+    var Reco = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if(!Reco){ dire("Ce navigateur ne sait pas écrire sous la dictée. Ouvre la page avec Chrome ou Edge."); return; }
+    recuQuelqueChose = false;
+    /* un seul objet de reconnaissance pour toute la page :
+       le micro n'est autorisé qu'une fois, pas à chaque clic sur Parler */
+    if(reco && enMarche){        /* le micro n'a jamais été coupé : reprise immédiate */
+      if(!actif){ try{ reco.start(); }catch(e){} }   /* Chrome l'avait arrêté : on relance */
+      marcheVisible();
+      return;
+    }
+    if(reco){
+      enMarche = true;
+      try{ reco.start(); }
+      catch(e){ if(!/already started/i.test(e && e.message || '')){
+                  enMarche = false; dire("La dictée n'a pas pu démarrer."); return; } }
+      marcheVisible();
+      return;
+    }
+    reco = new Reco();
+    reco.lang = 'fr-FR'; reco.continuous = true; reco.interimResults = true;
+    reco.onresult = function(e){
+      if(!ecrit) return;                       /* en veille : on n'écoute pas */
+      var t = '', provisoire = '';
+      for(var i = e.resultIndex; i < e.results.length; i++){
+        if(e.results[i].isFinal) t += e.results[i][0].transcript;
+        else provisoire += e.results[i][0].transcript;
+      }
+      var vu = document.getElementById('console-entendu');
+      if(vu && (t || provisoire)){ vu.textContent = '« ' + (t || provisoire).trim() + ' »'; }
+      if(!champCourant){                       /* aucune case choisie : rien ne s'écrit */
+        dire("Clique dans une case de réponse : le texte s'y écrira aussitôt.");
+        majAttente(); return; }
+      if(provisoire) recuQuelqueChose = true;
+      recuQuelqueChose = true;
+      t = t.replace(/^\s+/, '');
+      if(!t || !champCourant) return;
+      var v = champCourant.value;
+      champCourant.value = v + ((v && !/\s$/.test(v)) ? ' ' : '') + t;
+      champCourant.dispatchEvent(new Event('input'));
+    };
+    reco.onerror = function(e){
+      if(e.error === 'not-allowed'){ reco = null;   /* refus : on repartira d'un objet neuf */
+        dire("Le micro a été refusé. Autorise-le dans la barre d'adresse, puis réessaie."); }
+      else if(e.error === 'network') dire("La dictée a besoin d'une connexion internet.");
+      else if(e.error !== 'no-speech' && e.error !== 'aborted') dire("La dictée s'est arrêtée (" + e.error + ").");
+      if(e.error === 'no-speech' || e.error === 'aborted') return;   /* le micro reste ouvert */
+      couperDictee();
+    };
+    reco.onstart = function(){ actif = true; };
+    reco.onend = function(){
+      actif = false;
+      if(enMarche){ try{ reco.start(); }catch(e){ couperDictee(); } }
+    };
+    try{ reco.start(); }catch(e){ dire("La dictée n'a pas pu démarrer."); return; }
+    enMarche = true;
+    marcheVisible();
+  }
+
+
+  /* bandeau d'état : rappelle qu'il manque une case de réponse */
+  function majAttente(){
+    if(!ecrit) return;
+    var cons = document.getElementById('console-dictee');
+    if(!cons) return;
+    var t = cons.querySelector('.txt');
+    if(t) t.textContent = champCourant ? 'Enregistre : parle'
+                                       : 'Clique dans une case de réponse';
+    cons.classList.toggle('attente', !champCourant);
+  }
+  /* affichage « micro en route », commun au premier démarrage et aux suivants */
+  function marcheVisible(){
+    ecrit = true; recuQuelqueChose = false;
+    var bandeau = document.getElementById('etat-micro');
+    if(bandeau){ bandeau.classList.remove('veille'); bandeau.classList.add('on');
+                 bandeau.innerHTML = '<span class="rond"></span>Enregistre&hellip;'; }
+    var cons = document.getElementById('console-dictee');
+    if(cons){ cons.classList.add('on');
+              document.getElementById('console-entendu').textContent = ''; }
+    setTimeout(function(){                       /* rien entendu au bout de 6 s : on le dit */
+      if(enMarche && !recuQuelqueChose)
+        dire("Je n'entends rien. Vérifie que le micro est autorisé (icône dans la barre d'adresse) et que tu es connecté à internet.");
+    }, 6000);
+    btn.classList.add('ecoute-en-cours');
+    btn.innerHTML = '<span class="rond"></span><span class="lab">Pause</span>';
+    if(champCourant){ dire("Parle, le texte s'écrit dans la case."); champCourant.focus(); }
+    else dire("Micro ouvert. Clique dans une case de réponse, puis parle.");
+    majAttente();
+  }
+
+  if(btn) btn.addEventListener('mousedown', function(e){ e.preventDefault(); });
+  if(btn) btn.addEventListener('click', function(){
+    if(ecrit) { arreterDictee(); dire("En pause. Reclique sur Parler pour reprendre."); }
+    else demarrerDictee();
+  });
+
+  /* Entrée : la première fois, arrête la dictée et va à la ligne.
+     Une seconde fois de suite, sort de la case. */
+  document.querySelectorAll('textarea.rep-saisie, input.champ-date').forEach(function(ch){
+    var armee = false;
+    ch.addEventListener('keydown', function(e){
+      if(e.key !== 'Enter'){ armee = false; return; }
+      e.preventDefault();
+      if(armee){ armee = false; ch.blur(); ch.classList.add('valide');
+                 setTimeout(function(){ ch.classList.remove('valide'); }, 1000); return; }
+      armee = true;
+      if(ecrit) dire("Le micro reste allumé. Clique dans une autre case pour continuer.");
+      if(ch.tagName === 'TEXTAREA'){
+        var p = ch.selectionStart;
+        ch.value = ch.value.slice(0, p) + String.fromCharCode(10) + ch.value.slice(p);
+        ch.selectionStart = ch.selectionEnd = p + 1;
+        ch.dispatchEvent(new Event('input'));
+      }
+    });
+  });
+
+  var consStop = document.getElementById('console-stop');
+  if(consStop) consStop.addEventListener('click', function(){
+    arreterDictee(); dire('En pause. Reclique sur Parler pour reprendre.'); });
+
+  document.getElementById('effacer').addEventListener('click', function(){
+    if(!confirm('Effacer toutes les réponses de cette page ?')) return;
+    memoire = {}; ranger();
+    document.querySelectorAll('textarea.rep-saisie').forEach(function(t){ t.value=''; ajuster(t); });
+    document.querySelectorAll('.page input').forEach(function(c){
+      if(c.type === 'checkbox' || c.type === 'radio') c.checked = false; else c.value = '';
+    });
+    document.querySelectorAll('select.choix-liste').forEach(function(sel){ sel.value = ''; });
+    if(document.querySelector('td.place')) location.reload();
+  });
+})();
+</script>
+<!-- ====================== LECTURE À VOIX HAUTE ====================== -->
+<style>
+.etiq-mob .ecoute{width:22px;height:22px}
+.ecoute{position:static;width:24px;height:24px;border:1.5px solid #9db0be;flex:0 0 auto;
+  border-radius:50%;background:#fff;color:#1a4a7a;cursor:pointer;padding:0;font-size:10.5px;
+  display:inline-flex;align-items:center;justify-content:center;line-height:1;z-index:4;
+  margin:0 0 0 8px;vertical-align:middle}
+.ecoute:hover{background:#eaf1f7;border-color:#3a6ea5}
+.ecoute.actif{background:#1a4a7a;border-color:#1a4a7a;color:#fff}
+.zone-audio{position:relative}
+.ecoute-bloc{position:absolute;top:10px;right:12px;margin:0}
+
+header .ecoute{background:rgba(255,255,255,.92);border-color:rgba(255,255,255,.9)}
+header .ecoute.actif{background:#12384f;border-color:#fff;color:#fff}
+.col-ecoute{width:34px;text-align:center;vertical-align:middle;padding:4px!important}
+.ecoute-ligne{width:22px;height:22px;border:1.5px solid #9db0be;border-radius:50%;background:#fff;
+  color:#1a4a7a;cursor:pointer;padding:0;font-size:10px;display:inline-flex;align-items:center;
+  justify-content:center;line-height:1}
+.ecoute-ligne:hover{background:#eaf1f7}
+.lu{background:#fdf0bd}
+span.lu,td.lu,th.lu,li.lu,p.lu,.mot.lu{border-radius:6px}
+h1.lu,h2.lu{box-shadow:0 0 0 3px #fdf0bd}
+th.lu{background:#fbe7a4}
+.mot.lu{background:#1a4a7a;color:#fff;border-radius:4px;box-shadow:0 0 0 1px #1a4a7a}
+.sur-clair .mot.lu{background:#fff;color:#12384f;box-shadow:0 0 0 2px #fff}
+.barre-audio{position:fixed;bottom:22px;left:22px;background:#fff;border-radius:999px;
+  box-shadow:0 4px 18px rgba(20,40,60,.22);padding:7px 11px;display:flex;gap:7px;align-items:center;z-index:20}
+.barre-audio button{border:none;border-radius:50%;width:34px;height:34px;font-size:13px;background:#1a4a7a;
+  color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.barre-audio button:hover{background:#3a6ea5}
+.barre-audio button[disabled]{background:#c3cfd8;cursor:default}
+.barre-audio .etat{font-size:12px;color:#455a68;padding:0 8px;min-width:130px}
+@media screen{.page{zoom:var(--zoom,1.2)}
+  .page [data-gros]{font-size:16px!important;line-height:1.5!important}
+  .page [data-gros="s"]{font-size:15px!important}}
+.barre-audio .taille{font-family:'Source Sans 3',system-ui,sans-serif;font-weight:700;font-size:14px}
+.barre-audio .sep{width:1px;height:24px;background:#d3dde4}
+@media print{.ecoute,.ecoute-ligne,.col-ecoute,.barre-audio{display:none!important}
+  .lu,.mot.lu{background:none!important;box-shadow:none!important;color:inherit!important}}
+</style>
+
+<div class="barre-audio">
+  <button id="aPlay" title="Lire la page">&#9654;</button>
+  <button id="aPause" title="Pause" disabled>&#10074;&#10074;</button>
+  <button id="aStop" title="Arrêt" disabled>&#9632;</button>
+  <button id="aRepeter" title="Réécouter ce passage" disabled>&#8635;</button>
+  <span class="etat" id="aEtat">&#9654; lire la page</span>
+  <span class="sep"></span>
+  <button id="aMoins" class="taille" title="Réduire le texte">A&minus;</button>
+  <button id="aPlus" class="taille" title="Agrandir le texte">A+</button>
+  <span class="sep"></span>
+  <button id="vMoins" class="taille" title="Parler moins vite">&#128034;</button>
+  <span class="etat" id="aVitesse" style="min-width:44px;text-align:center">—</span>
+  <button id="vPlus" class="taille" title="Parler plus vite">&#128007;</button>
+</div>
+
+<script>
+(function(){
+var EN_LIGNE = {B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SUP:1,SUB:1,U:1,SMALL:1,ABBR:1,IMG:1,SVG:1,KBD:1,CODE:1};
+var file=[], enPause=false, btnActif=null, motises=[], idx=0, motCourant=0, motsLus=[];
+var SIGLES = {CAP:'C.A.P.', EPC:'E.P.C.', PFMP:'P.F.M.P.', CCF:'C.C.F.', CDD:'C.D.D.',
+              SAV:'S.A.V.', LP:'L.P.', TVA:'T.V.A.', CV:'C.V.'};
+var dernier = null;
+var vitesse = 0.63;
+try{ var vv = localStorage.getItem('epc-vitesse3'); if(vv) vitesse = parseFloat(vv); }catch(e){}
+
+/* ---------- voix ---------- */
+function voix(){
+  var v = speechSynthesis.getVoices().filter(function(x){ return /^fr/i.test(x.lang); });
+  return v.filter(function(x){ return x.localService; })[0] || v[0] || null;
+}
+function etat(t){ document.getElementById('aEtat').textContent = t; }
+function boutons(on){ document.getElementById('aPause').disabled=!on;
+                      document.getElementById('aStop').disabled=!on;
+                      document.getElementById('aRepeter').disabled = !on && !dernier; }
+
+/* ---------- découpage d'un bloc en éléments lisibles ---------- */
+function feuilles(racine, avecTableaux, avecBoutons){
+  var out=[];
+  (function creuser(el){
+    if(el.classList && (el.classList.contains('ecoute') || el.classList.contains('ecoute-ligne'))) return;
+    if(el.tagName==='BUTTON'){
+      if(avecBoutons && txtVisible(el)) out.push(el);
+      return;
+    }
+    if(el.tagName==='TABLE' && !avecTableaux) return;
+    var enfants = [].filter.call(el.children, function(c){
+      if(EN_LIGNE[c.tagName]) return false;
+      if(c.tagName === 'BUTTON') return !!avecBoutons;
+      if(c.tagName === 'TEXTAREA' || c.tagName === 'INPUT' || c.tagName === 'SELECT') return false;
+      if(c.classList && c.classList.contains('enveloppe-rep')) return false;  /* case de réponse */
+      return true;
+    });
+    if(!enfants.length){ if(txtVisible(el)) out.push(el); return; }
+    enfants.forEach(creuser);
+  })(racine);
+  return out;
+}
+function txtVisible(el){ return (el.textContent||'').replace(/\s+/g,' ').trim().length > 1; }
+
+/* ---------- habillage des mots (conserve gras, italique, .rep) ---------- */
+function motiser(el){
+  if(el._mots) return el._mots;
+  var tw = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null), n, noeuds=[];
+  while((n = tw.nextNode())) noeuds.push(n);
+  var mots=[];
+  noeuds.forEach(function(t){
+    if(!/\S/.test(t.nodeValue)) return;
+    var pt = t.parentNode.tagName;
+    if((pt === 'BUTTON' && t.parentNode !== el) || pt === 'TEXTAREA' || pt === 'SCRIPT' || pt === 'STYLE') return;
+    var frag=document.createDocumentFragment();
+    t.nodeValue.split(/(\s+)/).forEach(function(m){
+      if(m==='') return;
+      if(/^\s+$/.test(m)){ frag.appendChild(document.createTextNode(m)); return; }
+      var s=document.createElement('span'); s.className='mot'; s.textContent=m;
+      frag.appendChild(s); mots.push(s);
+    });
+    t.parentNode.replaceChild(frag, t);
+  });
+  el._mots = mots; motises.push(el); return mots;
+}
+function demotiser(el){
+  if(!el._mots) return;
+  el._mots.forEach(function(s){
+    if(s.parentNode) s.parentNode.replaceChild(document.createTextNode(s.textContent), s);
+  });
+  try{ el.normalize(); }catch(e){}
+  el._mots = null; el._html0 = null;
+}
+function texteClair(el){
+  /* écriture blanche sur fond coloré : le mot en bleu suffit, pas de fond jaune */
+  var m = /(\d+),\s*(\d+),\s*(\d+)/.exec(getComputedStyle(el).color);
+  if(!m) return false;
+  return (0.299*(+m[1]) + 0.587*(+m[2]) + 0.114*(+m[3])) > 165;
+}
+function motLu(s){
+  /* une réponse de corrigé masquée est en couleur transparente : on ne la lit pas */
+  var c = getComputedStyle(s).color;
+  return c.indexOf('rgba(0, 0, 0, 0)') === -1;
+}
+
+/* ---------- prononciation d'un élément ---------- */
+function segment(el){ return {el: el}; }
+
+function dire(i, depuis){
+  idx = i; depuis = depuis || 0;
+  if(i >= file.length){ arreter(true); return; }
+  var seg = file[i], el = seg.el;
+  document.querySelectorAll('.lu').forEach(function(e){ e.classList.remove('lu'); });
+  document.querySelectorAll('.sur-clair').forEach(function(e){ e.classList.remove('sur-clair'); });
+  if(texteClair(el)) el.classList.add('sur-clair'); else el.classList.add('lu');
+  if(seg.aussi){ if(texteClair(seg.aussi)) seg.aussi.classList.add('sur-clair');
+                 else seg.aussi.classList.add('lu'); }
+  el.scrollIntoView({block:'center', behavior:'smooth'});
+
+  motsLus = motiser(el).filter(motLu);
+  if(depuis >= motsLus.length){ dire(i+1); return; }
+  var texte='', deb=[];
+  for(var j = depuis; j < motsLus.length; j++){
+    var m = motsLus[j].textContent;
+    if(/^[\u2013\u2014\u2022\u00b7\-\u2605\u25cf\u2039\u203a]+$/.test(m)) m = ',';  /* tiret ou puce : une pause */
+    else { var nu = m.replace(/[^A-Za-z]/g, ''); if(SIGLES[nu]) m = m.replace(nu, SIGLES[nu]); }
+    deb.push(texte.length); texte += (m ? m + ' ' : ' ');
+  }
+  texte = texte.trim();
+  if(!texte){ dire(i+1); return; }
+  motCourant = depuis;
+
+  var u = new SpeechSynthesisUtterance(texte);
+  u.lang='fr-FR'; var v=voix(); if(v) u.voice=v; u.rate=vitesse;
+  u.onboundary = function(e){
+    if(e.name && e.name!=='word') return;
+    var k=-1;
+    for(var j=0;j<deb.length;j++){ if(deb[j] <= e.charIndex) k=j; else break; }
+    if(k < 0) return;
+    motCourant = depuis + k;
+    for(var j=0;j<motsLus.length;j++) motsLus[j].classList.toggle('lu', j===motCourant);
+  };
+  u.onend   = function(){ if(!enPause) dire(i+1); };
+  u.onerror = function(){ if(!enPause) dire(i+1); };
+  dernier = {f: file, i: i};
+  speechSynthesis.speak(u);
+  etat('Lecture — ' + (i+1) + ' sur ' + file.length);
+  boutons(true);
+}
+
+function nettoyer(){
+  document.querySelectorAll('.lu').forEach(function(e){ e.classList.remove('lu'); });
+  document.querySelectorAll('.sur-clair').forEach(function(e){ e.classList.remove('sur-clair'); });
+  motises.splice(0).forEach(demotiser);
+  document.querySelectorAll('.ecoute.actif').forEach(function(b){
+    b.classList.remove('actif'); b.innerHTML='&#9654;'; });
+}
+function lancer(segs, bouton, depuisSeg, depuisMot){
+  speechSynthesis.cancel(); nettoyer();
+  file = segs; enPause = false; idx = depuisSeg || 0; motCourant = 0; btnActif = bouton || null;
+  if(bouton){ bouton.classList.add('actif'); bouton.innerHTML='&#10074;&#10074;'; }
+  dire(idx, depuisMot || 0);
+}
+function arreter(fini){
+  speechSynthesis.cancel(); enPause=false;
+  file=[]; idx=0; motCourant=0;
+  nettoyer(); boutons(false);
+  etat(fini ? 'Terminé. Le bouton ↻ réécoute le dernier passage.' : 'Arrêté.');
+}
+function basculerPause(){
+  if(!file.length) return;
+  if(enPause){
+    enPause = false;
+    if(btnActif) btnActif.innerHTML='&#10074;&#10074;';
+    etat('Lecture reprise.');
+    dire(idx, motCourant);          /* reprise sur le mot où la voix s\'est arrêtée */
+  } else {
+    enPause = true;
+    speechSynthesis.cancel();
+    if(btnActif) btnActif.innerHTML='&#9654;';
+    etat('En pause.');
+  }
+}
+
+/* ---------- cliquer un mot pour partir de là ---------- */
+function motSousLeCurseur(el, x, y){
+  motiser(el);
+  var cible = document.elementFromPoint(x, y);
+  var mots = (el._mots || []).filter(motLu);
+  for(var i = 0; i < mots.length; i++) if(mots[i] === cible) return i;
+  return 0;
+}
+function clicDansBloc(bloc, boutonBloc, faire){
+  bloc.addEventListener('click', function(e){
+    var t = e.target;
+    if(t.closest && t.closest('button, input, textarea, select, .etiq-mob, td.place, a, .som-lien, .sous-lien')) return;
+    var segs;
+    try{ segs = faire(); }catch(err){ return; }
+    for(var i = 0; i < segs.length; i++){
+      if(segs[i].el === t || segs[i].el.contains(t)){
+        var m = motSousLeCurseur(segs[i].el, e.clientX, e.clientY);
+        e.stopPropagation();
+        lancer([segs[i]], null, 0, m);   /* une seule ligne : la voix s'arrête au bout */
+        return;
+      }
+    }
+  });
+}
+
+/* ---------- pose des boutons ---------- */
+function apresLeTexte(el){
+  /* insère juste après le texte lu, avant la case de réponse ou le tableau qui suit */
+  var bloc = el.querySelector(':scope > .enveloppe-rep, :scope > table, :scope > .reserve,'
+        + ' :scope > .colonnes, :scope > .champs, :scope > .photos, :scope > .plan,'
+        + ' :scope > .grille2, :scope > textarea, :scope > select');
+  return {parent: el, avant: bloc || null};
+}
+
+function ancre(cible, segs){
+  if(/^H[1-6]$/.test(cible.tagName)) return {parent: cible, avant: null};
+  if(cible.classList.contains('etiq-mob')) return {parent: cible, avant: null};
+  if(cible.classList.contains('titre-fiche')) return {parent: cible, avant: cible.firstChild, bloc: true};
+
+  /* une seule phrase : bouton à droite ; plusieurs phrases : en haut à droite du bloc */
+  var phrases = 0;
+  (segs || []).forEach(function(s){
+    var t = (s.el.textContent || '').replace(/\s+/g, ' ').trim();
+    phrases += Math.max(1, (t.match(/[.!?](\s|$)/g) || []).length);
+  });
+  if(segs && segs.length === 1 && phrases <= 1){
+    var el = segs[0].el;
+    var t1 = el.querySelector(':scope > .txt, :scope > .val, :scope > .quoi');
+    if(t1) return {parent: t1, avant: null};
+    return apresLeTexte(el);
+  }
+
+  var t = cible.querySelector(':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5,'
+        + ' :scope > .tete, :scope > .titre-consigne, :scope > .som-titre, :scope > figcaption');
+  if(t) return {parent: t, avant: null};
+  var txt = cible.querySelector(':scope > .txt, :scope > .val, :scope > .quoi');
+  if(txt) return {parent: txt, avant: null};
+  return {parent: cible, avant: cible.firstChild, bloc: true};   /* plusieurs parties : au-dessus */
+}
+
+function bouton(cible, titre, faire){
+  try{ if(!faire().length) return null; }catch(e){ return null; }
+  cible.classList.add('zone-audio');
+  var b=document.createElement('button');
+  b.className='ecoute'; b.title=titre; b.innerHTML='&#9654;'; b.tabIndex = -1; b.type = 'button';
+  b.addEventListener('click', function(){
+    if(b.classList.contains('actif')){ basculerPause(); return; }
+    lancer(faire(), b);
+  });
+  var segs = faire();
+  var a = ancre(cible, segs);
+  if(a.bloc){
+    b.classList.add('ecoute-bloc'); b._segs = segs; b._bloc = cible;
+    cible.style.paddingRight = Math.max(44,
+      parseFloat(getComputedStyle(cible).paddingRight) || 0) + 'px';
+  }
+  a.parent.insertBefore(b, a.avant);
+  clicDansBloc(cible, b, faire);
+  return b;
+}
+
+var titre = document.querySelector('.titre-fiche');
+if(titre) bouton(titre, 'Écouter le titre', function(){
+  return feuilles(titre, false).map(segment); });
+
+document.querySelectorAll('h2.sect').forEach(function(t){
+  bouton(t, 'Écouter le titre', function(){ return [{el: t}]; });
+});
+document.querySelectorAll('#nav-sec, .amorce, .rappel-dictee, .panneau, .panneau li, .doc-card, .champ, .activite, .consigne, .aide, .cv, .cv2 .haut, .cv2 .bloc, .question, .photos figure, .etiq-mob').forEach(function(bl){
+  bouton(bl, 'Écouter ce bloc', function(){
+    return feuilles(bl, false, bl.classList.contains('pager')).map(segment); });
+});
+
+document.querySelectorAll('table.tbl').forEach(function(tab){
+  var ths = tab.querySelectorAll('thead th');
+  if(tab.classList.contains('tbl-places')){
+    /* tableau à étiquettes : le bouton se met dans la case du libellé, pas dans une colonne */
+    [].forEach.call(tab.rows, function(tr){
+      var enTete = !!tr.querySelector('th');
+      var cibles = enTete ? [].slice.call(tr.cells) : [tr.cells[0]];
+      cibles.forEach(function(c){
+        if(!c || !txtVisible(c)) return;
+        var b = document.createElement('button');
+        b.className = 'ecoute-ligne'; b.innerHTML = '&#9654;'; b.tabIndex = -1; b.type = 'button';
+        b.title = enTete ? 'Écouter ce titre de colonne' : 'Écouter cette ligne';
+        b.style.marginLeft = '8px'; b.style.verticalAlign = 'middle';
+        b.addEventListener('click', function(e){
+          e.stopPropagation();
+          lancer([{el: c}], null, 0, 0);
+        });
+        c.appendChild(b);
+      });
+    });
+    return;
+  }
+  [].forEach.call(tab.rows, function(tr){
+    var enTete = tr.parentNode.tagName === 'THEAD' || !!tr.querySelector('th');
+    var lisible = [].some.call(tr.cells, function(td){ return txtVisible(td); });
+    if(!enTete && !lisible) return;   /* ligne uniquement à remplir : pas de bouton */
+    var c = document.createElement(enTete ? 'th' : 'td');
+    c.className = 'col-ecoute';
+    var b = document.createElement('button');
+    b.className='ecoute-ligne'; b.innerHTML='&#9654;'; b.tabIndex = -1; b.type = 'button';
+    b.title = enTete ? 'Écouter les titres des colonnes' : 'Écouter cette ligne';
+    b.addEventListener('click', function(){
+      var cells = [].filter.call(tr.cells, function(td){
+        return !td.classList.contains('col-ecoute') && txtVisible(td); });
+      lancer(cells.map(function(td, j){
+        return {el: td, aussi: (!enTete && ths[j]) ? ths[j] : null}; }), null);
+    });
+    c.appendChild(b); tr.appendChild(c);
+  });
+});
+
+/* un bouton de bloc devient inutile si chaque partie a déjà le sien */
+document.querySelectorAll('.ecoute-bloc').forEach(function(b){
+  var tout = (b._segs || []).every(function(s){
+    var z = s.el.closest('.zone-audio');
+    return z && z !== b._bloc;
+  });
+  if(tout && (b._segs || []).length){ b._bloc.style.paddingRight = ''; b.remove(); }
+});
+
+document.getElementById('aPause').addEventListener('click', basculerPause);
+document.getElementById('aStop').addEventListener('click', function(){ arreter(false); });
+document.getElementById('aRepeter').addEventListener('click', function(){
+  if(file.length){ enPause = false; dire(idx, 0); return; }
+  if(dernier){ lancer(dernier.f, null, dernier.i, 0); }   /* réécouter le dernier passage */
+});
+function segmentsPage(){
+  var sec = document.querySelector('.sec.visible') || document.querySelector('.page') || document.body;
+  return feuilles(sec, true).map(segment);
+}
+document.getElementById('aPlay').addEventListener('click', function(){
+  if(enPause){ basculerPause(); return; }
+  if(file.length) return;                       /* lecture déjà en cours */
+  var segs = segmentsPage();
+  if(!segs.length){ etat('Rien à lire sur cette page.'); return; }
+  lancer(segs, null);
+});
+/* ---------- vitesse de la voix ---------- */
+document.getElementById('aVitesse').textContent = Math.round(vitesse * 100) + ' %';
+document.getElementById('vPlus').addEventListener('click', function(){
+  vitesse = Math.min(1.3, Math.round((vitesse + 0.08) * 100) / 100); rangerVitesse(); });
+document.getElementById('vMoins').addEventListener('click', function(){
+  vitesse = Math.max(0.5, Math.round((vitesse - 0.08) * 100) / 100); rangerVitesse(); });
+function rangerVitesse(){
+  try{ localStorage.setItem('epc-vitesse3', vitesse); }catch(e){}
+  document.getElementById('aVitesse').textContent = Math.round(vitesse * 100) + ' %';
+  etat('Vitesse de la voix : ' + Math.round(vitesse * 100) + ' %');
+  if(file.length && !enPause) dire(idx, motCourant);   /* reprend à la nouvelle vitesse */
+}
+
+/* ---------- taille minimale des textes à l'écran ---------- */
+(function(){
+  var page = document.querySelector('.page'); if(!page) return;
+  [].forEach.call(page.querySelectorAll('*'), function(el){
+    if(el.closest('.barre-audio, footer, .mention, .source') ||
+       el.tagName==='BUTTON' || el.tagName==='SVG') return;   /* le pied de page reste petit */
+    var t = parseFloat(getComputedStyle(el).fontSize);
+    if(t && t < 15) el.dataset.gros = (t < 10.2) ? 's' : '';
+  });
+})();
+
+/* ---------- taille du texte à l'écran (sans effet sur l'impression) ---------- */
+var zoom = 1.3;
+try{ var z = localStorage.getItem('epc-zoom'); if(z) zoom = parseFloat(z); }catch(e){}
+function poserZoom(){
+  zoom = Math.min(2, Math.max(1, Math.round(zoom*100)/100));
+  document.documentElement.style.setProperty('--zoom', zoom);
+  try{ localStorage.setItem('epc-zoom', zoom); }catch(e){}
+}
+poserZoom();
+document.getElementById('aPlus').addEventListener('click', function(){ zoom += 0.15; poserZoom(); });
+document.getElementById('aMoins').addEventListener('click', function(){ zoom -= 0.15; poserZoom(); });
+
+speechSynthesis.getVoices();
+})();
+</script>
+<!-- ==================== FIN LECTURE À VOIX HAUTE ==================== -->
+
+</body>
+</html>
