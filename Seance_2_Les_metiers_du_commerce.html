@@ -377,10 +377,10 @@ kbd{background:#fff;border:1.6px solid #7a8b9c;border-bottom-width:3px;border-ra
 <div class="corps">
 <section class="sec" data-titre="Introduction">
 <div class="rappel-dictee"><b>Pour écrire avec la voix :</b> clique sur le bouton bleu <b>Parler</b> en haut à gauche de l'écran.<br>
-La première fois, Chrome demande l'autorisation du micro : clique sur <b>Autoriser</b>.<br>
-Clique ensuite dans une case de réponse pour répondre<br>
+Autorise l'utilisation du micro.<br>
+Clique ensuite dans une case de réponse pour répondre.<br>
 Pour la question suivante, clique dans sa case et parle.<br>
-<kbd>Entrée</kbd> va à la ligne dans la case. <kbd>Entrée</kbd> une seconde fois : tu sors de la case.
+<kbd>Entrée</kbd> met la dictée en pause.
 <button class="btn-micro" id="micro"><span class="rond"></span><span class="lab">Parler</span></button>
 <span class="info-micro" id="info-micro"></span></div>
 <div class="panneau"><h2>Objectifs de la séance</h2><ul class="objectifs"><li><span class="puce">1</span><span class="txt"><b>Identifier</b> les différents métiers du secteur du commerce et de la vente</span></li>
@@ -926,23 +926,14 @@ Pour chaque métier découvert, <b>coche</b> la ou les bonnes cases.</div>
     else demarrerDictee();
   });
 
-  /* Entrée : la première fois, arrête la dictée et va à la ligne.
-     Une seconde fois de suite, sort de la case. */
+  /* Entrée : met la dictée en pause, comme le bouton Parler/Pause. */
   document.querySelectorAll('textarea.rep-saisie, input.champ-date').forEach(function(ch){
-    var armee = false;
     ch.addEventListener('keydown', function(e){
-      if(e.key !== 'Enter'){ armee = false; return; }
+      if(e.key !== 'Enter') return;
       e.preventDefault();
-      if(armee){ armee = false; ch.blur(); ch.classList.add('valide');
-                 setTimeout(function(){ ch.classList.remove('valide'); }, 1000); return; }
-      armee = true;
-      if(ecrit) dire("Le micro reste allumé. Clique dans une autre case pour continuer.");
-      if(ch.tagName === 'TEXTAREA'){
-        var p = ch.selectionStart;
-        ch.value = ch.value.slice(0, p) + String.fromCharCode(10) + ch.value.slice(p);
-        ch.selectionStart = ch.selectionEnd = p + 1;
-        ch.dispatchEvent(new Event('input'));
-      }
+      ch.classList.add('valide');
+      setTimeout(function(){ ch.classList.remove('valide'); }, 1000);
+      if(ecrit){ arreterDictee(); dire("En pause. Reclique sur Parler pour reprendre."); }
     });
   });
 
