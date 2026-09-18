@@ -362,6 +362,7 @@
       if(!ecrit){ barriere = vus; return; }    /* en pause : rien ne s'écrit, et ce qui
                                                   vient d'être dit est mis de côté */
       var t = '', provisoire = '';
+      if(barriere > e.results.length) barriere = 0;   /* filet de securite */
       var depart = Math.max(e.resultIndex, barriere);
       for(var i = depart; i < e.results.length; i++){
         if(e.results[i].isFinal) t += e.results[i][0].transcript;
@@ -389,7 +390,11 @@
       if(e.error === 'no-speech' || e.error === 'aborted') return;   /* le micro reste ouvert */
       couperDictee();
     };
-    reco.onstart = function(){ actif = true; };
+    reco.onstart = function(){ actif = true;
+      /* Chrome repart d'une liste de phrases vide a chaque nouvelle session
+         d'ecoute : la barriere, qui est un rang dans cette liste, doit repartir
+         de zero, sinon plus rien ne s'ecrit ensuite. */
+      vus = 0; barriere = 0; };
     reco.onend = function(){
       actif = false;
       if(enMarche){ try{ reco.start(); }catch(e){ couperDictee(); } }
