@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Page du professeur - 1CAP EPC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  color:#0d1a22;background:#f6f4fb;line-height:1.55}
+a{color:inherit}
+.bar{background:#fff;border-bottom:2.5px solid #22323b}
+.bar .in{max-width:1000px;margin:0 auto;padding:12px 20px;display:flex;
+  align-items:center;gap:14px;flex-wrap:wrap}
+.bar .lg{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:18px;
+  text-decoration:none}
+.bar .fil{font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.bar .fil a{color:#5b3fa8;font-weight:600}
+.bar .qui{margin-left:auto;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;
+  font-size:14px;white-space:nowrap}
+main{max-width:1000px;margin:0 auto;padding:30px 20px 60px}
+h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:34px;
+  letter-spacing:-.02em;margin:0 0 6px}
+.kick{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:#5b3fa8;font-weight:700;margin:0 0 8px}
+.sub{font-size:17px;margin:0 0 30px}
+.carte{display:block;background:#fff;border:2.5px solid #22323b;border-radius:18px;
+  padding:20px 24px;text-decoration:none;box-shadow:0 14px 30px -24px rgba(13,26,34,.7)}
+.carte:hover{border-color:var(--c);box-shadow:0 18px 34px -22px rgba(13,26,34,.55)}
+.carte h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:22px;
+  margin:0 0 4px;color:var(--c)}
+.carte p{margin:0;font-size:15.5px}
+.gr{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center;
+  margin:0 0 34px}
+.hero svg{width:100%;height:auto;max-width:100%;display:block}
+.doc{background:#fff;border:2.5px solid #22323b;border-radius:18px;padding:22px 24px;
+  margin:0 0 18px}
+.doc h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;
+  margin:0 0 6px;color:var(--c)}
+.doc p{margin:0 0 16px;font-size:15.5px}
+.bt{display:inline-flex;align-items:center;gap:9px;font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:800;font-size:16px;text-decoration:none;color:#fff;background:var(--c);
+  border-radius:12px;padding:11px 20px;margin:0 10px 10px 0}
+.bt.sec{background:#fff;color:var(--c);border:2.5px solid var(--c)}
+.bt:hover{filter:brightness(1.08)}
+.vide{background:#fff;border:2.5px dashed #22323b;border-radius:18px;padding:20px 24px;
+  font-size:15.5px}
+.vide h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:22px;
+  margin:0 0 4px;color:#5a6b74}
+.vide p{margin:0}
+.gr.ch3{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.carte.ch{padding:16px 16px 18px}
+.carte .ill{display:block;width:100%;height:auto;border:2.5px solid #22323b;
+  border-radius:12px;margin:0 0 12px}
+.carte.ch .no{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:700;color:#5a6b74;margin:0 0 2px}
+.carte.ch h2{font-size:19px;line-height:1.2;margin:0 0 4px}
+.carte.ch p{font-size:14.5px}
+.carte.ch.off{border-style:dashed;box-shadow:none;background:#fbfbfd}
+.carte.ch.off .ill{filter:grayscale(1);opacity:.45}
+.carte.ch.off h2{color:#5a6b74}
+.carte.ch.off p{color:#5a6b74}
+.carte.dis{padding:16px 16px 18px}
+.carte.dis h2{margin:0 0 6px}
+footer.pied{border-top:2.5px solid #22323b;background:#fff}
+footer.pied .in{max-width:1000px;margin:0 auto;padding:14px 20px;display:flex;
+  flex-wrap:wrap;gap:6px 16px;align-items:center;
+  font-family:"Bricolage Grotesque",sans-serif;font-size:14px}
+footer.pied .sep{color:#5b3fa8;font-weight:800}
+footer.pied b{font-weight:800}
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr}
+  h1{font-size:27px}
+  .bar .qui{margin-left:0;width:100%}}
+
+.grp{margin:26px 0 0}
+.grp>h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;
+  margin:0 0 10px;color:var(--c)}
+table.pf{border-collapse:collapse;width:100%;background:#fff;border:2.5px solid #22323b}
+table.pf th,table.pf td{border:1.5px solid #22323b;padding:9px 12px;font-size:15px;
+  vertical-align:middle}
+table.pf thead th{background:var(--c);color:#fff;font-size:13.5px;text-align:center}
+table.pf td.sw{text-align:center;width:120px}
+table.pf tr.sq td{background:#eef2f5;font-family:"IBM Plex Mono",monospace;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+  color:#22323b;text-align:center}
+table.pf tr.on td{background:#f4fbf4}
+.int{position:relative;display:inline-block;width:62px;height:30px}
+.int input{opacity:0;width:0;height:0}
+.int span{position:absolute;inset:0;cursor:pointer;background:#cfd8dd;
+  border:2px solid #22323b;border-radius:16px;transition:.15s}
+.int span:before{content:"";position:absolute;width:20px;height:20px;left:3px;top:3px;
+  background:#fff;border:2px solid #22323b;border-radius:50%;transition:.15s}
+.int input:checked + span{background:#5da65d}
+.int input:checked + span:before{transform:translateX(30px)}
+.bar2{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:26px 0 0;
+  padding:16px 20px;background:#fff;border:2.5px solid #22323b;border-radius:16px}
+.bar2 button{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:15px;
+  color:#fff;background:#5b3fa8;border:0;border-radius:11px;padding:11px 18px;cursor:pointer}
+.bar2 .cpt{font-size:15px}
+.bar2 .ok{color:#2f6b34;font-weight:700;font-size:15px}
+#porte{max-width:440px;margin:40px auto;background:#fff;border:2.5px solid #22323b;
+  border-radius:18px;padding:26px 24px}
+#porte h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:21px;margin:0 0 6px}
+#porte p{margin:0 0 16px;font-size:15.5px}
+#porte input{width:100%;padding:11px 12px;border:2.5px solid #22323b;border-radius:11px;font-size:17px}
+#porte button{margin-top:12px;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  font-size:15px;color:#fff;background:#5b3fa8;border:0;border-radius:11px;padding:11px 18px;cursor:pointer}
+#porte .err{color:#a8185b;font-weight:700;font-size:15px;margin-top:10px}
+</style>
+</head>
+<body>
+<header class="bar"><div class="in"><a class="lg" href="../index.html">1CAP EPC</a><nav class="fil"><span class="sep">&rsaquo;</span><span>Professeur</span></nav><span class="qui">Mme Talbaut</span></div></header>
+<main>
+<div id="porte"><h2>Page du professeur</h2><p>Écrire le code d’inscription.</p><input id="pc" type="password" autocomplete="off"><button id="pgo" type="button">Entrer</button><div class="err" id="perr"></div></div><div id="tout" hidden><p class="kick">1CAP EPC1 et EPC2</p><h1>Les corrections visibles</h1><p class="sub">Une correction s’ouvre quand les deux classes ont fait l’exercice. Cocher, copier la liste, et la donner pour mise en ligne.</p><div class="grp" style="--c:#0b5cab"><h2>Mathématiques - Chapitre 1 Proportionnalité</h2><table class="pf"><thead><tr><th>Exercice ou partie</th><th>Correction visible</th></tr></thead><tbody><tr class="sq"><td colspan="2">Séance 1 - Activité 1 - Les deux ardoises de Ryan</td></tr><tr class="on"><td>Activité 1 - Les deux ardoises de Ryan</td><td class="sw"><label class="int"><input type="checkbox" data-grp="maths-ch01" data-id="s1/Activité 1" checked><span></span></label></td></tr><tr class="sq"><td colspan="2">AP 1 - Vérifier la proportionnalité</td></tr><tr><td>Exercice 1</td><td class="sw"><label class="int"><input type="checkbox" data-grp="maths-ch01" data-id="ap1/Exercice 1"><span></span></label></td></tr><tr><td>Exercice 2</td><td class="sw"><label class="int"><input type="checkbox" data-grp="maths-ch01" data-id="ap1/Exercice 2"><span></span></label></td></tr><tr><td>Exercice 3</td><td class="sw"><label class="int"><input type="checkbox" data-grp="maths-ch01" data-id="ap1/Exercice 3"><span></span></label></td></tr><tr><td>Exercice 4</td><td class="sw"><label class="int"><input type="checkbox" data-grp="maths-ch01" data-id="ap1/Exercice 4"><span></span></label></td></tr></tbody></table></div><div class="grp" style="--c:#b3261e"><h2>Sciences - Chapitre 1 La sécurité en chimie</h2><table class="pf"><thead><tr><th>Exercice ou partie</th><th>Correction visible</th></tr></thead><tbody><tr class="on"><td>La chimie au quotidien</td><td class="sw"><label class="int"><input type="checkbox" data-grp="sciences-ch01" data-id="p1" checked><span></span></label></td></tr><tr class="on"><td>Activité 1 · Les pictogrammes</td><td class="sw"><label class="int"><input type="checkbox" data-grp="sciences-ch01" data-id="p2" checked><span></span></label></td></tr><tr class="on"><td>Activité 2 · Les étiquettes</td><td class="sw"><label class="int"><input type="checkbox" data-grp="sciences-ch01" data-id="p2b" checked><span></span></label></td></tr><tr><td>Les consignes de sécurité</td><td class="sw"><label class="int"><input type="checkbox" data-grp="sciences-ch01" data-id="p3"><span></span></label></td></tr><tr><td>En conclusion</td><td class="sw"><label class="int"><input type="checkbox" data-grp="sciences-ch01" data-id="p4"><span></span></label></td></tr></tbody></table></div><div class="grp" style="--c:#6b3fa0"><h2>Sciences - Chapitre 2 La verrerie au laboratoire</h2><table class="pf"><thead><tr><th>Exercice ou partie</th><th>Correction visible</th></tr></thead><tbody><tr><td>La verrerie courante</td><td class="sw"><label class="int"><input type="checkbox" data-grp="sciences-ch02" data-id="p1"><span></span></label></td></tr><tr><td>Autre matériel</td><td class="sw"><label class="int"><input type="checkbox" data-grp="sciences-ch02" data-id="p2"><span></span></label></td></tr></tbody></table></div><div class="bar2"><button id="cop" type="button">Copier la liste</button><span class="cpt" id="cpt"></span><span class="ok" id="okc"></span><textarea id="zone" hidden rows="8" style="width:100%;font-family:monospace"></textarea></div></div>
+</main>
+<footer class="pied"><div class="in"><span>1CAP EPC</span><span class="sep">&middot;</span><b>Mme Talbaut</b><span class="sep">&middot;</span><span>LP Max Joséphine, Cayenne</span></div></footer>
+
+<script>
+var SEL = "TALBAUT-MANUELS-2026", EMP = "50ae79d44fffb15ab04af58620f9d71071959e55b0509687b12dfe0180ae68ca", LISTE = {"maths-ch01": 1, "sciences-ch01": 1, "sciences-ch02": 1};
+async function empreinte(code){
+  var d = new TextEncoder().encode(SEL + "|" + code.trim());
+  var h = await crypto.subtle.digest("SHA-256", d);
+  return Array.prototype.map.call(new Uint8Array(h),
+    function(b){ return ("0" + b.toString(16)).slice(-2); }).join("");
+}
+var porte = document.getElementById("porte"), tout = document.getElementById("tout");
+try{ if(sessionStorage.getItem("profcap") === "1"){ porte.hidden = true; tout.hidden = false; } }catch(e){}
+document.getElementById("pgo").addEventListener("click", async function(){
+  var v = document.getElementById("pc").value;
+  if(await empreinte(v) === EMP){
+    try{ sessionStorage.setItem("profcap", "1"); }catch(e){}
+    porte.hidden = true; tout.hidden = false;
+  }else{
+    document.getElementById("perr").textContent = "Code refusé.";
+    document.getElementById("pc").value = "";
+  }
+});
+document.getElementById("pc").addEventListener("keydown", function(e){
+  if(e.key === "Enter") document.getElementById("pgo").click(); });
+function compter(){
+  var n = document.querySelectorAll(".int input:checked").length;
+  document.getElementById("cpt").textContent =
+    n === 0 ? "Rien d’ouvert." : (n === 1 ? "1 correction ouverte." : n + " corrections ouvertes.");
+}
+document.querySelectorAll(".int input").forEach(function(i){
+  i.addEventListener("change", function(){ i.closest("tr").classList.toggle("on", i.checked); compter(); });
+});
+compter();
+document.getElementById("cop").addEventListener("click", function(){
+  var out = {};
+  Object.keys(LISTE).forEach(function(k){ out[k] = []; });
+  document.querySelectorAll(".int input:checked").forEach(function(i){ out[i.dataset.grp].push(i.dataset.id); });
+  var t = JSON.stringify(out, null, 1);
+  navigator.clipboard.writeText(t).then(function(){
+    document.getElementById("okc").textContent = "Liste copiée.";
+  }, function(){
+    document.getElementById("okc").textContent = "";
+    var z = document.getElementById("zone"); z.hidden = false; z.value = t; z.select();
+  });
+});
+</script>
+</body>
+</html>

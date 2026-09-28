@@ -1,4 +1,4 @@
-/* Moteur commun des séances numériques — Sylvaine Talbaut
+/* Moteur commun des séances numériques - Sylvaine Talbaut
    Lecture audio, dictée vocale, sommaire, pagination, impression.
    Partagé par toutes les séances : une correction ici les corrige toutes.
    Doit rester dans le même dossier que les fichiers de séance. */
@@ -480,7 +480,7 @@
 })();
 
 /* ---- barre d'outils audio, créée ici et non recopiée dans chaque séance ---- */
-document.body.insertAdjacentHTML('beforeend', '<div class="barre-audio">\n  <button id="aPlay" title="Lire la page">&#9654;</button>\n  <button id="aPause" title="Pause" disabled>&#10074;&#10074;</button>\n  <button id="aStop" title="Arrêt" disabled>&#9632;</button>\n  <button id="aRepeter" title="Réécouter ce passage" disabled>&#8635;</button>\n  <span class="etat" id="aEtat">&#9654; lire la page</span>\n  <span class="sep"></span>\n  <button id="aMoins" class="taille" title="Réduire le texte">A&minus;</button>\n  <button id="aPlus" class="taille" title="Agrandir le texte">A+</button>\n  <span class="sep"></span>\n  <button id="vMoins" class="taille" title="Parler moins vite">&#128034;</button>\n  <span class="etat" id="aVitesse" style="min-width:44px;text-align:center">&mdash;</span>\n  <button id="vPlus" class="taille" title="Parler plus vite">&#128007;</button>\n</div>');
+document.body.insertAdjacentHTML('beforeend', '<div class="barre-audio">\n  <button id="aPlay" title="Lire la page">&#9654;</button>\n  <button id="aPause" title="Pause" disabled>&#10074;&#10074;</button>\n  <button id="aStop" title="Arrêt" disabled>&#9632;</button>\n  <button id="aRepeter" title="Réécouter ce passage" disabled>&#8635;</button>\n  <span class="etat" id="aEtat">&#9654; lire la page</span>\n  <span class="sep"></span>\n  <button id="aMoins" class="taille" title="Réduire le texte">A&minus;</button>\n  <button id="aPlus" class="taille" title="Agrandir le texte">A+</button>\n  <span class="sep"></span>\n  <button id="vMoins" class="taille" title="Parler moins vite">&#128034;</button>\n  <span class="etat" id="aVitesse" style="min-width:44px;text-align:center">-</span>\n  <button id="vPlus" class="taille" title="Parler plus vite">&#128007;</button>\n</div>');
 
 (function(){
 var EN_LIGNE = {B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SUP:1,SUB:1,U:1,SMALL:1,ABBR:1,IMG:1,SVG:1,KBD:1,CODE:1};
@@ -630,7 +630,7 @@ function dire(i, depuis){
   u.onerror = function(){ if(!enPause) dire(i+1); };
   dernier = {f: file, i: i};
   speechSynthesis.speak(u);
-  etat('Lecture — ' + (i+1) + ' sur ' + file.length);
+  etat('Lecture - ' + (i+1) + ' sur ' + file.length);
   boutons(true);
 }
 
