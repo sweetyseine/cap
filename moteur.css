@@ -381,3 +381,26 @@ th.lu{background:#fbe7a4}
 .barre-audio .sep{width:1px;height:24px;background:#d3dde4}
 @media print{.ecoute,.ecoute-ligne,.col-ecoute,.barre-audio{display:none!important}
   .lu,.mot.lu{background:none!important;box-shadow:none!important;color:inherit!important}}
+/* Sur un telephone (28/09/2026) : la colonne d'outils fixee a gauche ecrasait la
+   page, coupee a droite. Sous 700 px, les outils passent en haut et defilent avec
+   la page, qui reprend toute la largeur. Le zoom se lit par rapport a son reglage
+   par defaut (1,3) : a 1,3 la page est a sa taille, A+ et A- agrandissent et
+   reduisent a partir de la, et elle se remet en page sans jamais deborder. */
+@media screen and (max-width:700px){
+.volets-boutons{position:static;flex-direction:row;flex-wrap:wrap;align-items:center;width:auto;margin:10px 10px 0;gap:8px}
+.volets-boutons>*{width:auto}
+.boite-micro,.boite-micro.suit{position:static!important;width:auto;top:auto!important}
+.place-micro{display:none}
+.cadre{flex-direction:column;align-items:stretch}
+.zone{min-width:0}
+.zone,.replie .zone{padding:12px 10px 40px}
+.page{zoom:calc(var(--zoom,1.3) / 1.3);width:auto;max-width:none;margin:0}
+table.tbl-plan{display:block;overflow-x:auto;max-width:100%}
+.ligne-infos span{max-width:100%;box-sizing:border-box;flex-wrap:wrap}
+input.champ-date{width:auto;flex:1 1 120px;min-width:0;max-width:100%;box-sizing:border-box}
+.plan li{grid-template-columns:1fr;gap:6px}
+.plan .etape{justify-self:start}
+.sommaire{width:auto;flex:none;height:auto;top:auto;overflow:visible;transition:none;
+  padding:12px 10px 16px;position:static;border-right:none;border-bottom:2px solid #e0d3e6;box-sizing:border-box}
+.replie .sommaire{display:none}
+}
