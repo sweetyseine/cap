@@ -1350,12 +1350,21 @@ input.ec.xl{width:300px;text-align:center}
 html,body{background:#fff!important}
 .pilote,.notation,.bareme-p,#note,.note,.rq-prof,.zoom-b,.ap-nav,.prop-pied,
 .lien-meth,.ong.meth:has(.lien-meth),nav.tabs,footer.pied,header.hero .kick{display:none!important}
+/* les onglets d'un AP : chaque exercice s'ouvre depuis sa carte, un seul a la
+   fois ; les onglets restaient visibles, inertes, « Exemple 1 » allume (06/10/2026) */
+nav.ap-fil{display:none!important}
 .tete .mrq,.tete .etat{display:none!important}
 body{padding-bottom:0!important}
 .baudio{max-width:calc(100% - 16px)!important;flex-wrap:wrap!important}
 @media (max-width:700px){
   .rel{overflow-x:auto!important}
-  .rel .gr{min-width:600px!important}}
+  .rel .gr{min-width:600px!important}
+  /* les quotients « a / b = c » : cinq colonnes de 84 px ne tenaient pas sur
+     un telephone, les nombres etaient coupes (06/10/2026) */
+  .calcs:not(.avecnotes){grid-template-columns:repeat(5,auto)!important;
+    justify-content:start!important;column-gap:6px!important;max-width:100%;overflow-x:auto}
+  .calcs .n{width:auto!important;min-width:0!important}
+  .calcs .case{min-width:3.2em!important}}
 .glisse{margin:0 0 6px;font-size:14.5px;font-weight:700;color:#22323b}
 .wrap{margin-top:0!important;padding-bottom:14px!important;margin-bottom:0!important;min-height:0!important}
 </style>

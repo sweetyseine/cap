@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Chapitre 1 - Activité 2 - Le bon de commande du client · corrigé</title>
+<title>AP 1 - Vérifier la proportionnalité · corrigé</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
@@ -252,7 +252,7 @@ body.copie .barre-b{display:none}
 .note-env .lien-depot{display:inline-block;margin-top:6px;padding:8px 16px;border-radius:9px;background:#00778a;color:#fff;font-weight:700;text-decoration:none}
 .note-env .lien-depot:hover{background:#005d6c}
 .prop-pied .src{margin:0;font-size:13px;color:#0d1a22;font-weight:600}
-.prop-pied .adp{display:block;margin:3px 0 0;font-size:12px;color:#0d1a22}
+.prop-pied .adp{margin:3px 0 0;font-size:12px;color:#0d1a22}
 @media print{.env,.auto,.exo-f{display:none}}
 
 /* ---------- écran d'identification ---------- */
@@ -1344,66 +1344,335 @@ input.ec.xl{width:300px;text-align:center}
   .dbl svg,.q4 svg,.docu svg{max-width:100%;height:auto}
 }
 
-/* Le tableau refait, avec ses colonnes nommees et sa ligne Quotient : les
-   eleves ne savent pas ce qu'est une colonne, alors on la nomme. */
-.tw table.num thead th.col{background:#2E5266;color:#fff;font-size:13px;
-  font-family:"IBM Plex Mono",monospace;letter-spacing:.06em;padding:5px 10px;
-  text-transform:uppercase}
+/* Les badges qui annoncent : Situation, Tableau, Graphique, Méthode.
+   Meme couleur pour tous, differente de celle des etapes. */
+.bdg{display:inline-block;margin:0 0 9px;
+  font-family:"Source Sans 3","Segoe UI",sans-serif;font-weight:700;
+  font-size:13.5px;line-height:1.35;color:#fff;background:#2E5266;
+  border-radius:20px;padding:6px 15px}
+
+/* Chaque bloc porte un vrai cadre : on voit ou il commence et ou il finit. */
+.situ-b,.tabl-b,.graf-b,.meth-b{margin:14px 0 0;padding:13px 17px 15px;
+  background:#fff;border:1.8px solid #2E5266;border-radius:14px}
+.situ-b p{margin:0;font-size:16px;line-height:1.55}
+/* La phrase qui relie la situation a la donnee : entre les deux blocs,
+   sans cadre, elle fait le pont. */
+p.pont{margin:12px 4px 0;font-size:16px;line-height:1.55;color:#0d1a22}
+.graf-b,.tabl-b{text-align:center}
+.graf-b .bdg,.tabl-b .bdg{text-align:left}
+/* Le tableau reste au milieu de son bloc, ajuste a son contenu. */
+.tabl-b .tbw{margin:2px 0 0}
+.tabl-b .tw{margin-left:auto;margin-right:auto}
+.tabl-b .tw.ajuste{margin-top:0}
+.meth-b{padding-bottom:13px}
+.meth-b .pass{margin:0}
+
+@media screen and (max-width:620px){
+  .situ-b,.tabl-b{padding:11px 13px 12px}
+  .situ-b p{font-size:14.5px}
+}
+/* Sur le papier, les cadres restent aussi visibles, mais la feuille est
+   comptee : un ecran tient sur une page. Le texte garde sa taille ; c'est
+   le blanc autour qui se resserre. */
+@media print{
+  .situ-b,.tabl-b,.graf-b{margin:6px 0 0;break-inside:avoid}
+  .situ-b,.tabl-b,.graf-b,.meth-b{margin-top:6px;padding:6px 7px 7px}
+  .situ-b p,p.pont{font-size:14.5px}
+  .bdg{font-size:11.5px;margin-bottom:3px;padding:2px 10px}
+  p.pont{margin:7px 4px 0}
+  .meth-b>*+*{margin-top:4px}
+  .meth-b .sq,.meth-b .qcm{padding-top:5px;padding-bottom:5px}
+  .meth-b .calcs{padding-top:3px;padding-bottom:3px;gap:5px 12px;margin:6px 0 0}
+}
+
+/* Le tableau des exemples porte trois choses de plus, toutes nees de la
+   seance du 24/09/2026 : les eleves ne savaient pas ce qu'est une colonne,
+   et ils ne faisaient pas le lien entre un calcul pose a cote du tableau et
+   les nombres qu'il utilise.
+   - une ligne d'en-tete qui nomme chaque colonne,
+   - une ligne Quotient,
+   - le calcul ecrit en entier dans la case, sous ses deux nombres. */
+.tw table.num thead th.col{background:var(--ch);color:#fff;font-size:13px;
+  font-weight:700;letter-spacing:.02em;padding:5px 10px;text-align:center;
+  border-color:var(--ch)}
 .tw table.num thead th.coin{background:#fff;border-color:#fff}
-.tw.refait table.num tbody tr:last-child th{background:#2E5266;color:#fff}
-.tw table.num td.quo{font-weight:600;font-size:15px;line-height:1.35;
-  background:#f2f9fb;text-align:center;white-space:nowrap}
-.tw table.num td.quo.fait{color:#245c42}
-.tw table.num td.quo .case,.tw table.num td.quo input.ec{min-width:0;width:58px;
-  padding:2px 5px;margin:1px 0}
-@media print{.tw table.num td.quo .case,.tw table.num td.quo input.ec{width:52px}}
+.tw.refait table.num tr:last-child th{background:var(--ch);color:#fff;
+  border-color:var(--ch)}
+/* Le tableau refait se pose ENTRE deux etapes, sur toute la largeur du bloc
+   Methode : a six colonnes il n'entre pas a cote de l'etiquette. Il n'a pas
+   de badge de titre, l'etape juste au-dessus le nomme.
+   Il occupe la largeur qu'on lui donne et ses colonnes se partagent la
+   place : ainsi il ne sort jamais de la feuille ni de l'ecran. */
+.pass > .tw.refait{margin:2px 0 0;min-width:0}
+/* Centre sous l'etape. */
+.tw.refait table.num{max-width:100%;margin-left:auto;margin-right:auto}
+.tw.refait table.num th,.tw.refait table.num td{padding-left:8px;padding-right:8px}
+.pas > div{min-width:0}
+/* La liste des etapes laisse ses blocs se resserrer : sans cela le plus
+   large impose sa largeur a tous, et le bloc sort de l'ecran. */
+.pass{grid-template-columns:minmax(0,1fr)}
+.tw table.num td.quo{font-weight:600;font-size:15px;line-height:1.3;
+  background:#f2f9fb;text-align:center}
+.tw table.num td.quo b{color:#0f5c4a}
+.tw table.num td.stop{font-weight:600;font-style:italic;white-space:nowrap;
+  background:#fdf3ea;color:#8a4b12}
 @media screen and (max-width:620px){
-  .tw table.num td.quo{white-space:normal}
-  .tw table.num td.quo .case,.tw table.num td.quo input.ec{width:46px}}
-/* Le mot a ecrire, seul sur sa ligne : a l'evaluation, noye dans la phrase,
-   il n'etait pas vu. */
-.qcm p.seul{margin:9px 0;text-align:center}
-/* Le tableau du bon de commande a cinq colonnes : il tient dans l'ecran
-   d'une tablette sans defiler. */
-.tw.ajuste.cinq table.num td{padding-left:10px;padding-right:10px}
-.tw.ajuste.cinq td input.ec{width:62px}
-.tw.ajuste.cinq td.aremplir{min-width:62px}
+  .tw table.num thead th.col{font-size:11.5px;padding:4px 6px}
+  .tw table.num td.quo,.tw table.num td.stop{font-size:13.5px}
+}
+@media print{
+  .tw table.num thead th.col{font-size:11.5px;padding:3px 7px}
+  .tw table.num td.quo,.tw table.num td.stop{font-size:13.5px}
+  .tw.ajuste table.num td.quo{padding-left:8px;padding-right:8px}
+}
+
+/* La methode deroulee sur un exemple : la regle, puis ce qu'elle donne ici. */
+.ong p.enonce{margin:10px 0 0;font-size:16px}
+.sq p{margin:0}
+.sq p + p{margin-top:6px}
+/* Les exercices de fin se passent des reperes : la colonne de gauche
+   disparait, la grille n'a plus que les colonnes de calcul. */
+.calcs.nuls{grid-template-columns:84px 22px 84px 22px 84px;justify-content:center}
 @media screen and (max-width:620px){
-  .tw.ajuste.cinq table.num td{padding-left:4px;padding-right:4px}
-  .tw.ajuste.cinq td input.ec{width:46px}}
-/* Le vocabulaire de cette fiche tient sur une colonne : le dessin des deux
-   fleches a besoin de la largeur. */
-.ong.voc .lst.une{grid-template-columns:1fr!important}
-.ong.voc .lst dd,.ong.voc .lst>div{min-width:0}
-/* L'entree qui porte le dessin prend toute la largeur de sa carte :
-   l'etiquette passe au-dessus du texte au lieu d'etre a cote. */
-.ong.voc .lst>div.pleine{grid-template-columns:1fr;gap:8px}
-.ong.voc .lst>div.pleine>dt{justify-self:start}
-.flcoef{margin:11px 0 2px;min-width:0}
-.formules{margin:12px 0 0;padding:10px 14px;border:2px solid #1D7A33;border-radius:10px;background:#fff}
-.formules p{margin:3px 0}
-/* Une seule ardoise : elle garde la taille d'une ardoise de l'activite 1, centree. */
-.ardoises .ardoise.a1{max-width:460px;width:100%;margin-left:auto;margin-right:auto}
-.ardoises:has(.ardoise:only-child){display:flex;justify-content:center}
-/* Tableau Quotient : titres de ligne et de colonne en clair, comme les autres. */
-.tw.refait table.num tbody tr:last-child th{background:#e8f1f4;color:#0d1a22}
-.tw.refait table.num thead th.col{background:#e8f1f4;color:#0d1a22;border-color:#2E5266}
-/* Coup de pouce : onglet sur fond jaune, rien de gris. */
-.cdp .lab{background:#FFE27A;color:#0d1a22;border-radius:6px;padding:3px 9px}
-.rep.vide{background:#fffdf3;border-color:#d9a400;border-left-color:#d9a400}
-.rep.vide>.lb{color:#0d1a22;background:#FFE27A}
-.rep.vide p{color:#0d1a22}
-@media print{.ong.situ,.situ-corps,.ong.ens{break-inside:avoid}.calcs{break-before:avoid}.sq,.q-h{break-after:avoid}.q.quest{break-inside:avoid}}
-/* Coup de pouce : le texte a gauche, le petit dessin a droite. */
-.pouce2{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.pouce2>div{flex:1 1 200px}
-.pouce2 .sachw{flex:0 1 540px;min-width:0;overflow-x:auto}
-.pouce2 svg.sachets{display:block;width:540px;max-width:100%;height:auto}
-@media screen and (max-width:620px){.pouce2 svg.sachets{max-width:none;width:440px}}
+  .calcs.nuls{grid-template-columns:70px 18px 70px 18px 70px}}
+.pass{margin:15px 0 0;display:grid;gap:11px}
+.pas{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;
+  background:#fff;border:1.6px solid var(--ch);border-radius:12px;padding:12px 16px}
+.pas .et{min-width:132px;font-family:"Source Sans 3","Segoe UI",sans-serif;
+  font-weight:600;font-size:12.5px;color:#fff;background:var(--ch);
+  border-radius:20px;padding:4px 11px;text-align:center;line-height:1.45}
+.pas p{margin:0;font-size:16px;line-height:1.5}
+.pas p.regle + p.regle{margin-top:4px}
+.pas p.cas{padding-left:12px;border-left:3px solid #9ec89e;
+  font-style:italic;color:#1c5c39}
+.pas p.regle + p.cas{margin-top:9px}
+.pas p.cas + p.cas{margin-top:4px}
+/* Dans l'exercice, le bloc Méthode commence apres la question. */
+.grp.fus>.meth-b{margin-top:13px}
 
-.flcoef svg{display:block;width:100%;max-width:600px;height:auto;margin:0 auto}
-@media print{.flcoef{margin:7px 0 0}.flcoef svg{max-width:450px}}
+/* Le bandeau qui ouvre les exercices. */
+.bandeau{margin:28px 0 12px;padding:11px 20px;border-radius:12px;
+  background:#2E5266;color:#fff;text-align:center;
+  font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:700;
+  font-size:17px;letter-spacing:.2px;text-transform:uppercase;line-height:1.35}
 
+/* La question de l'exercice : celle a laquelle les quatre etapes repondent. */
+.prob{margin:13px 0 0;padding:10px 16px;border-radius:10px;
+  background:#fdf1e4;border:1.6px solid #b5793a;
+  font-weight:700;font-size:16.5px;color:#8a4b12}
+
+@media screen and (max-width:620px){
+  .pas{grid-template-columns:1fr;gap:8px}
+  .pas .et{justify-self:start}
+  .bandeau{font-size:15px;padding:10px 14px}
+}
+@media print{
+  .pass{gap:7px;margin:10px 0 0}
+  .pas{padding:8px 13px;gap:11px;break-inside:avoid}
+  .pas p,.ong p.enonce{font-size:14px}
+  .pas p.cas{margin-top:5px}
+  .pas .et{font-size:11px;min-width:118px;padding:3px 9px}
+  .bandeau{margin:16px 0 9px;padding:7px 15px;font-size:14.5px}
+  .prob{margin:9px 0 0;padding:7px 13px;font-size:14.5px;break-inside:avoid}
+  .print-id{display:flex!important}
+  /* Sur le papier, les deux mots restent noirs : l'eleve entoure le bon. */
+  .mo{font-size:14.5px;padding:3px 13px;border-color:#6f97a8;color:#0d1a22}
+  .mo.fane{opacity:1}
+}
+
+
+/* Un document mis en deux colonnes garde ses dessins et ses tableaux a sa
+   largeur : sur telephone, ils prennent celle de l'ecran. */
+@media screen{
+  .dbl>*,.q4>*{min-width:0}
+  .dbl svg,.q4 svg,.docu svg{max-width:100%;height:auto}
+}
+
+/* Le corps d'un exercice doit pouvoir se retrecir. Sans cela, sur un
+   telephone, chaque bloc gardait sa largeur naturelle : la fiche sortait de
+   l'ecran a droite, et rien ne defilait - la derniere colonne des tableaux et
+   la colonne « quotient » etaient perdues pour l'eleve.
+   (A l'impression, la mise en page ne change pas.) */
+@media screen{
+  .q-n{min-width:0}
+  .calcs{overflow-x:auto}
+}
+/* Un tableau large se lit quand meme sur un telephone : le titre de la
+   premiere colonne passe a la ligne, les colonnes se resserrent, et s'il
+   reste trop large il se fait glisser du doigt. */
+@media screen and (max-width:620px){
+  .tw table.num th:first-child{white-space:normal}
+  .tw.ajuste table.num td{padding-left:12px;padding-right:12px}
+}
+/* Sur un telephone tenu a la main, un tableau de trois colonnes tient en
+   entier : il n'y a plus que les tableaux tres larges a faire glisser. */
+@media screen and (max-width:430px){
+  .tw.ajuste table.num td{padding-left:6px;padding-right:6px}
+}
+
+/* Les bords des cases ou l'eleve ecrit se voient : jamais de gris pale.
+   Le calculatrice suit la meme regle que le reste de la fiche. */
+input.ec,textarea.ec,.rep-lib{border:1.4px solid #2E5266}
+input.ec:focus,textarea.ec:focus,.rep-lib:focus{outline:2px solid #00778a}
+#calc{border-color:#2E5266}
+#calc-e,#calc-t button{border:1.4px solid #2E5266}
+.lst .fx{border:1.4px solid #2E5266}
+.zoom-b{border:1.4px solid #2E5266}
+/* L'identite, une seule fois, en haut de la fiche. */
+/* Les deux mots sont ecrits dans la phrase : a l'ecran on clique sur le bon,
+   sur le papier on l'entoure. */
+.ouou{display:inline-flex;gap:8px;vertical-align:middle;margin:0 2px}
+.mo{font-family:"Source Sans 3","Segoe UI",sans-serif;font-weight:700;
+  font-size:15.5px;color:#2E5266;background:#fff;border:1.8px solid #2E5266;
+  border-radius:20px;padding:4px 15px;cursor:pointer;
+  transition:background .12s,color .12s,opacity .12s}
+.mo:hover{background:#eef4f7}
+.mo.pris,.mo.pose{color:#fff;background:#3f7f5f;border-color:#3f7f5f}
+.mo.fane{opacity:.3}
+
+/* Le pied de page : la ligne d'identification, puis la mention. Il degage
+   la barre flottante du bas. */
+.prop-pied{margin-bottom:88px}
+.prop-pied .src{margin:0;font-weight:400}
+.prop-pied .src b{font-weight:700}
+.prop-pied .adp{display:block;margin:4px 0 0}
+.prop-pied .pm{color:#00A5BF;font-weight:700}
+
+.ap-moi{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;
+  margin:0 0 16px;padding:12px 18px;background:#f4f8fa;
+  border:1.6px solid #2E5266;border-radius:12px}
+.ap-moi .et{font-family:"IBM Plex Mono",monospace;font-size:9.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:#fff;background:#2E5266;
+  border-radius:8px;padding:4px 10px}
+.ap-moi label{font-weight:700;font-size:14.5px;color:#2E5266}
+.ap-moi input,.ap-moi select{margin-left:7px;font:inherit;font-weight:400;
+  padding:6px 10px;border:1.6px solid #2E5266;border-radius:9px;background:#fff}
+/* Le nom verifie s'ecrit en entier : PINEDA MORILLO ne doit pas
+   s'afficher coupe. */
+.ap-moi input{width:150px}
+.ap-moi label:first-of-type input{width:210px}
+@media screen and (max-width:900px){
+  .ap-moi label:first-of-type input{width:170px}
+}
+
+/* Une page a l'ecran, tout a la suite a l'impression. */
+.ap-ecr{display:none}
+.ap-ecr.on{display:block}
+.ap-fil{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 16px}
+.ap-fil .ap-ft{font-family:"Source Sans 3","Segoe UI",sans-serif;font-weight:600;
+  font-size:13px;color:#2E5266;background:#fff;border:1.6px solid #2E5266;
+  border-radius:20px;padding:6px 14px;cursor:pointer}
+.ap-fil .ap-ft:hover{background:#eef4f7}
+.ap-fil .ap-ft.on{color:#fff;background:#2E5266;border-color:#2E5266}
+.ap-fil .ap-ft.fait{border-color:#3f7f5f;color:#1c5c39;background:#e8f5ee}
+.ap-fil .ap-ft.on.fait{color:#fff;background:#3f7f5f}
+.ap-nav{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  margin:18px 0 0;padding:12px 16px;background:#f4f8fa;
+  border:1.6px solid #2E5266;border-radius:12px}
+.ap-nav .ap-nb{font-family:"Source Sans 3","Segoe UI",sans-serif;font-weight:600;
+  font-size:15px;color:#fff;background:#2E5266;border:0;border-radius:20px;
+  padding:9px 20px;cursor:pointer}
+.ap-nav .ap-nb[disabled]{background:#c3d0d7;cursor:default}
+.ap-nav .ap-nbi{font-family:"IBM Plex Mono",monospace;font-size:13px;color:#2E5266}
+
+/* Le bouton d'envoi, au bas de chaque exercice. */
+.ap-env{margin:18px 0 0;padding:14px 18px;background:#f0f9f4;
+  border:1.6px solid #3f7f5f;border-radius:12px}
+.ap-env p{margin:0 0 10px;font-size:15.5px;color:#1c5c39}
+.ap-env .ap-benv{font-family:"Source Sans 3","Segoe UI",sans-serif;font-weight:600;
+  font-size:15px;color:#fff;background:#3f7f5f;border:0;border-radius:20px;
+  padding:10px 22px;cursor:pointer}
+.ap-env .ap-benv:hover{background:#34694f}
+.ap-env .ap-etat{margin-left:14px;font-size:14.5px;font-weight:700;color:#1c5c39}
+.ap-env .ap-etat.ko{color:#9a3412}
+@media screen and (max-width:620px){
+  .ap-moi input{width:100%}
+  .ap-moi label{display:block;width:100%}
+  .ap-nav{flex-direction:column}
+  .ap-nav .ap-nb{width:100%}
+}
+@media print{
+  .ap-ecr{display:block!important;break-after:page}
+  .ap-ecr:last-child{break-after:auto}
+  .ap-off{display:none!important}
+  .print-id{display:flex!important}
+  /* Sur le papier, les deux mots restent noirs : l'eleve entoure le bon. */
+  .mo{font-size:14.5px;padding:3px 13px;border-color:#6f97a8;color:#0d1a22}
+  .mo.fane{opacity:1}
+  /* A l'impression, c'est Chromium qui ecrit le pied et la pagination :
+     celui du HTML se retire pour ne pas doubler. */
+  .prop-pied{display:none!important}
+
+  /* Lisibilite avant tout : un seul bloc par feuille, un corps genereux,
+     des interlignes larges et des blocs bien detaches les uns des autres.
+     Les eleves lisent mal ; la fiche est faite comme pour des dys. */
+  header.tete{padding:0}
+  header.tete{margin-bottom:6px}
+  header.tete .wrap{padding:2px 0 1px}
+  header.tete h1{font-size:19px;margin:1px 0}
+  /* Le sur-titre redit ce que le pied de page ecrit deja. */
+  header.tete .kick{display:none}
+  header.tete .sub{font-size:13.5px;margin:2px 0 0}
+  .print-id{margin-top:3px;font-size:12.5px}
+
+  .ong.meth{margin:3px 0 6px;padding:8px 12px 7px}
+  .ong.meth .lb{font-size:14px;padding:4px 12px}
+  .ong p.enonce{margin:10px 0 0;font-size:14.5px}
+  .pass{gap:5px;margin:8px 0 0}
+  .pas{padding:6px 11px;gap:10px}
+  .pas p{font-size:14.5px;line-height:1.45}
+  .pas p.regle + p.regle{margin-top:3px}
+  .pas p.regle + p.cas{margin-top:6px}
+  .pas p.cas + p.cas{margin-top:3px}
+  .pas .et{font-size:12px;min-width:112px;padding:3px 8px}
+
+  .ong.quest{margin:5px 0 5px;padding:8px 12px 6px}
+  .qn,.cmp{font-size:18px}
+  .bandeau{margin:0 0 8px;padding:5px 12px;font-size:13.5px}
+  .prob{margin:7px 0 0;padding:6px 12px;font-size:16px}
+  .grp.fus{margin:7px 0 0;padding:7px 8px}
+  .grp.fus>.sq+*{margin-top:10px}
+  .sq{gap:12px}
+  .sq .sql{font-size:15px;padding:3px 11px}
+  .sq p{font-size:15px;line-height:1.45}
+  .sq p + p{margin-top:7px}
+  .qcm p{font-size:15px;line-height:1.55}
+  .tw table.num th,.tw table.num td{font-size:14.5px;padding-top:6px;
+    padding-bottom:6px}
+  .tw.ajuste table.num td{padding-left:16px;padding-right:16px}
+  .calcs{gap:5px 12px;margin:8px 0 0}
+  .calcs .ct{font-size:14px}
+  .calcs .cl{font-size:15px}
+  .coche{padding:6px 14px;font-size:14.5px}
+  input.ec{font-size:15px;padding:5px 7px}
+  .case.xl{min-width:238px}
+  input.ec.xl{width:238px}
+}
+
+
+/* La calculatrice de l'ecran. */
+#calc-b{position:fixed;right:18px;bottom:18px;z-index:40;
+  font:inherit;font-size:14px;font-weight:700;cursor:pointer;color:#fff;
+  background:#2E5266;border:0;border-radius:24px;padding:11px 20px;
+  box-shadow:0 6px 18px -6px rgba(13,26,34,.5)}
+#calc-b:hover{background:#00778a}
+#calc{position:fixed;right:18px;bottom:70px;z-index:40;width:266px;
+  background:#fff;border:1px solid #9fb0bb;border-radius:18px;padding:14px;
+  box-shadow:0 14px 40px -12px rgba(13,26,34,.45)}
+#calc.ferme{display:none}
+#calc-e{font-family:"IBM Plex Mono",monospace;font-size:26px;font-weight:600;
+  text-align:right;background:#f2f6f8;border:1px solid #c6d3db;border-radius:11px;
+  padding:12px 14px;margin:0 0 12px;overflow-x:auto;white-space:nowrap}
+#calc-t{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+#calc-t button{font:inherit;font-size:18px;font-weight:600;cursor:pointer;
+  color:#0d1a22;background:#f5f8fa;border:1px solid #c6d3db;border-radius:11px;
+  padding:11px 0}
+#calc-t button:hover{background:#e2f6fa;border-color:#00A5BF}
+#calc-t button.g{background:#eaeff3;font-size:16px}
+#calc-t button.o{background:#e2f6fa;color:#00778a}
+#calc-t button.eg{background:#00778a;color:#fff;border-color:#00778a}
+#calc-t button.l0{grid-column:span 2}
+@media print{ #calc-b,#calc{display:none} }
 </style>
 
 <style id="site-cap">
@@ -1435,188 +1704,18 @@ body{padding-bottom:0!important}
 <body class="identifie">
 <header class="tete">
   <div class="wrap" style="padding-bottom:0">
-    <span class="mrq">Correction</span>
     <p class="kick">1CAP EPC · Mathématiques · M<sup>me</sup> Talbaut</p>
-    <div class="tete-h"><h1>Activité 2 - Le bon de commande du client</h1><span class="tete-d"><span class="note" id="note">Note 0 / 10</span><span class="etat cor">corrigé</span></span></div>
-    <p class="sub">Chapitre 1 · Proportionnalité - Séquence 1, séance 2</p>
+    <h1>AP 1 - Vérifier la proportionnalité</h1>
+    <p class="sub">Comment reconnaître un tableau de proportionnalité ?</p>
   </div>
 </header>
 
 <div class="wrap">
-<section class="exo" data-exo="act2"><div class="exo-c">
-
-<div class="ong obj"><span class="lb">Objectif</span><dl class="lst"><div><dt>Capacité travaillée</dt><dd><ul class="idees"><li><b>Trouver le coefficient de proportionnalité.</b></li></ul></dd></div><div><dt>Programme</dt><dd>module <b>« Résolution d’un problème relevant de la proportionnalité »</b> <span class="bo">(BO CAP mathématiques 2019)</span></dd></div></dl></div>
-
-<div class="ong voc"><span class="lb">Le vocabulaire de la séance</span><dl class="lst une"><div class="pleine"><dt>Le coefficient de proportionnalité</dt><dd><ul class="idees"><li>Il correspond au <b>quotient</b> (voir activité 1) dans un tableau de proportionnalité.</li><li>C’est le nombre par lequel on <b>multiplie</b> toute la <b>première ligne</b> pour obtenir la <b>deuxième ligne</b>.</li><li>Pour <b>descendre</b> dans le tableau, <b>multiplier</b> par le coefficient.</li><li>Pour <b>remonter</b> dans le tableau, <b>diviser</b> par le coefficient.</li></ul><div class="flcoef"><svg viewBox="-50 0 700 140" role="img"
-  aria-label="Un tableau de deux lignes. Une flèche descend de la première ligne vers la deuxième : multiplier par le coefficient de proportionnalité. Une flèche remonte de la deuxième vers la première : diviser par le coefficient de proportionnalité.">
-<defs>
-  <marker id="pte" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7"
-    markerHeight="7" orient="auto-start-reverse">
-    <path d="M0,1 L9,5 L0,9 z" fill="#2E5266"/>
-  </marker>
-</defs>
-<rect x="190" y="25" width="220" height="90" fill="#fff" stroke="#2E5266"
-  stroke-width="2" rx="6"/>
-<line x1="190" y1="70" x2="410" y2="70" stroke="#2E5266" stroke-width="2"/>
-<line x1="263.3" y1="25" x2="263.3" y2="115" stroke="#2E5266" stroke-width="2"/>
-<line x1="336.7" y1="25" x2="336.7" y2="115" stroke="#2E5266" stroke-width="2"/>
-<path d="M190,47 C150,47 150,93 188,93" fill="none" stroke="#2E5266"
-  stroke-width="2.6" marker-end="url(#pte)"/>
-<path d="M410,93 C450,93 450,47 412,47" fill="none" stroke="#2E5266"
-  stroke-width="2.6" marker-end="url(#pte)"/>
-<text x="144" y="79" text-anchor="end" font-family="Source Sans 3, Segoe UI, Arial, sans-serif"
-  font-size="26" font-weight="700" fill="#B5470B">× Coef. Prop.</text>
-<text x="456" y="79" text-anchor="start" font-family="Source Sans 3, Segoe UI, Arial, sans-serif"
-  font-size="26" font-weight="700" fill="#B5470B">/ Coef. Prop.</text>
-</svg></div></dd></div><div><dt>Le prix unitaire</dt><dd><ul class="idees"><li>C’est le prix d’<b>un seul article</b>.</li><li>Dans un tableau de prix, c’est justement le <b>coefficient</b>.</li></ul></dd></div></dl></div>
-
-<div class="ong situ"><span class="lb">Situation</span><div class="situ-corps"><div class="txt"><p>Ryan est à sa deuxième semaine de stage à « l’épicerie de Madame Léa », sur le marché de Cayenne.</p><p>Madame Léa lui demande de s’occuper de la caisse pendant son absence.</p><p>Sur l’ardoise, trois prix seulement sont affichés.</p><p>Un client par téléphone lui demande de préparer une commande de couac pour un montant de 21 €.</p></div><div class="dessin"><svg class="dsvg" viewBox="0 0 320 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="situ-titre">
-<title id="situ-titre">Ryan tient la caisse de l’épicerie de Madame Léa, sur le marché de Cayenne. Les deux ardoises de prix sont accrochées au-dessus du comptoir.</title>
-<defs>
-<linearGradient id="s-ciel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eaf8fc"/><stop offset="1" stop-color="#d2ecf5"/></linearGradient>
-<linearGradient id="s-bois" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c58f52"/><stop offset="1" stop-color="#94642f"/></linearGradient>
-<linearGradient id="s-toile" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf7"/><stop offset="1" stop-color="#f0e1c8"/></linearGradient>
-<linearGradient id="s-sac" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6ecd6"/><stop offset="1" stop-color="#e3d2b2"/></linearGradient>
-<clipPath id="s-cadre"><rect width="320" height="250" rx="18"/></clipPath>
-<path id="s-auvent" d="M28 60 H292 V84 a12 10 0 0 1 -24 0 a12 10 0 0 1 -24 0 a12 10 0 0 1 -24 0 a12 10 0 0 1 -24 0 a12 10 0 0 1 -24 0 a12 10 0 0 1 -24 0 a12 10 0 0 1 -24 0 a12 10 0 0 1 -24 0 a12 10 0 0 1 -24 0 a12 10 0 0 1 -24 0 a12 10 0 0 1 -24 0 Z"/>
-<clipPath id="s-clip-auvent"><use href="#s-auvent"/></clipPath>
-</defs>
-
-<g clip-path="url(#s-cadre)">
-  <rect width="320" height="250" fill="url(#s-ciel)"/>
-
-  <!-- le soleil de Cayenne -->
-  <circle cx="46" cy="34" r="21" fill="#ffd98a" opacity=".8"/>
-  <circle cx="46" cy="34" r="30" fill="#ffd98a" opacity=".28"/>
-
-  <!-- une palme, en haut à droite -->
-  <g fill="#49a06f">
-    <path transform="translate(315 -2) rotate(150) scale(1.06 .62)" d="M0 0 C26 1 52 10 70 29 C52 26 47 30 39 25 C35 30 28 28 22 21 C19 26 13 23 9 16 C7 20 3 16 0 8 Z"/>
-    <path transform="translate(315 -2) rotate(108) scale(1.02 .6)" opacity=".85" d="M0 0 C21 1 43 9 58 25 C43 22 39 26 32 21 C29 26 23 24 18 18 C15 22 10 20 7 14 C6 17 2 14 0 7 Z"/>
-    <path transform="translate(315 -2) rotate(188) scale(1 .58)" opacity=".62" d="M0 0 C18 1 37 8 50 21 C37 18 33 22 28 18 C25 22 20 20 16 15 C13 19 9 17 6 12 C5 15 2 12 0 6 Z"/>
-    <circle cx="315" cy="-2" r="4.5"/>
-  </g>
-
-  <!-- le sol du marché -->
-  <rect y="220" width="320" height="30" fill="#bfd9e3"/>
-  <rect y="220" width="320" height="3" fill="#a8c7d4"/>
-
-  <!-- les montants de l’étal -->
-  <rect x="30" y="84" width="11" height="140" rx="3" fill="url(#s-bois)"/>
-  <rect x="279" y="84" width="11" height="140" rx="3" fill="url(#s-bois)"/>
-
-  <!-- l’auvent, rayé -->
-  <g clip-path="url(#s-clip-auvent)">
-    <rect x="28" y="58" width="264" height="40" fill="url(#s-toile)"/>
-    <g fill="#e2705c" opacity=".92">
-      <rect x="52" y="58" width="24" height="40"/>
-      <rect x="100" y="58" width="24" height="40"/>
-      <rect x="148" y="58" width="24" height="40"/>
-      <rect x="196" y="58" width="24" height="40"/>
-      <rect x="244" y="58" width="24" height="40"/>
-    </g>
-  </g>
-  <use href="#s-auvent" fill="none" stroke="#b4562f" stroke-width="2.4" opacity=".55"/>
-  <rect x="24" y="40" width="272" height="23" rx="7" fill="#2E5266"/>
-  <text x="160" y="56" text-anchor="middle" fill="#ffffff"
-        font-family="Bricolage Grotesque, Segoe UI, system-ui, sans-serif"
-        font-size="12.5" font-weight="700" letter-spacing=".3">Épicerie de Madame Léa</text>
-
-  <!-- les deux ardoises accrochées -->
-  <g stroke="#7d8f99" stroke-width="1.6">
-    <line x1="72" y1="90" x2="72" y2="100"/><line x1="110" y1="90" x2="110" y2="100"/>
-    <line x1="212" y1="90" x2="212" y2="100"/><line x1="250" y1="90" x2="250" y2="100"/>
-  </g>
-  <g>
-    <rect x="54" y="98" width="72" height="50" rx="5" fill="#8D6A3A"/>
-    <rect x="59" y="103" width="62" height="40" rx="3" fill="#2C3A33"/>
-    <g stroke="#f2f0e6" stroke-width="2.6" stroke-linecap="round" opacity=".85">
-      <line x1="65" y1="112" x2="98" y2="112"/>
-      <line x1="65" y1="121" x2="92" y2="121"/>
-      <line x1="65" y1="130" x2="102" y2="130"/>
-    </g>
-    <g stroke="#FFC65C" stroke-width="2.8" stroke-linecap="round">
-      <line x1="106" y1="112" x2="115" y2="112"/>
-      <line x1="106" y1="121" x2="115" y2="121"/>
-      <line x1="106" y1="130" x2="115" y2="130"/>
-    </g>
-  </g>
-  <g>
-    <rect x="194" y="98" width="72" height="50" rx="5" fill="#5D6D7E"/>
-    <rect x="199" y="103" width="62" height="40" rx="3" fill="#2C3A33"/>
-    <g stroke="#f2f0e6" stroke-width="2.6" stroke-linecap="round" opacity=".85">
-      <line x1="205" y1="112" x2="234" y2="112"/>
-      <line x1="205" y1="121" x2="228" y2="121"/>
-      <line x1="205" y1="130" x2="238" y2="130"/>
-    </g>
-    <g stroke="#FFC65C" stroke-width="2.8" stroke-linecap="round">
-      <line x1="244" y1="112" x2="255" y2="112"/>
-      <line x1="244" y1="121" x2="255" y2="121"/>
-      <line x1="244" y1="130" x2="255" y2="130"/>
-    </g>
-  </g>
-
-  <!-- Ryan, derrière la caisse -->
-  <g>
-    <path d="M136 184 v-14 q0-16 16-20 h16 q16 4 16 20 v14 z" fill="#00A5BF"/>
-    <path d="M150 150 h20 l-4 34 h-12 z" fill="#f6ecd6"/>
-    <rect x="154" y="142" width="12" height="12" rx="3" fill="#a9702f"/>
-    <circle cx="160" cy="128" r="17" fill="#bd7f3d"/>
-    <path d="M143 126 a17 17 0 0 1 34 0 q-9-8-17-6.5 q-8-1.5-17 6.5 z" fill="#2a1c14"/>
-    <circle cx="153" cy="129" r="2" fill="#2a1c14"/>
-    <circle cx="167" cy="129" r="2" fill="#2a1c14"/>
-    <path d="M154 136 q6 5 12 0" fill="none" stroke="#2a1c14" stroke-width="2" stroke-linecap="round"/>
-  </g>
-
-  <!-- le comptoir -->
-  <rect x="34" y="182" width="252" height="13" rx="5" fill="#d9b47e"/>
-  <rect x="44" y="195" width="232" height="27" fill="url(#s-bois)"/>
-  <g stroke="#7d5427" stroke-width="1.6" opacity=".55">
-    <line x1="98" y1="197" x2="98" y2="220"/>
-    <line x1="160" y1="197" x2="160" y2="220"/>
-    <line x1="222" y1="197" x2="222" y2="220"/>
-  </g>
-
-  <!-- les sachets de couac -->
-  <g>
-    <path d="M52 182 v-22 l7 -7 h26 l7 7 v22 z" fill="url(#s-sac)"/>
-    <path d="M59 153 l-7 7 h40 l-7 -7 z" fill="#d9c49d"/>
-    <rect x="59" y="164" width="26" height="11" rx="2" fill="#00778a"/>
-    <path d="M97 182 v-16 l5 -5 h18 l5 5 v16 z" fill="url(#s-sac)"/>
-    <path d="M102 161 l-5 5 h28 l-5 -5 z" fill="#d9c49d"/>
-    <rect x="103" y="170" width="16" height="8" rx="2" fill="#00778a"/>
-  </g>
-
-  <!-- la caisse -->
-  <g>
-    <rect x="212" y="164" width="58" height="18" rx="3" fill="#2E5266"/>
-    <rect x="219" y="170" width="44" height="6" rx="2" fill="#5c7d90"/>
-    <path d="M220 164 v-13 q0-4 4-4 h34 q4 0 4 4 v13 z" fill="#3c5a6d"/>
-    <rect x="226" y="152" width="21" height="8" rx="2" fill="#d9f2f8"/>
-    <circle cx="256" cy="156" r="4" fill="#FFB627"/>
-  </g>
-
-  <!-- l’ombre portée du comptoir -->
-  <ellipse cx="160" cy="224" rx="118" ry="5" fill="#0d1a22" opacity=".1"/>
-</g>
-<rect x="1" y="1" width="318" height="248" rx="18" fill="none" stroke="#a9cfdd" stroke-width="2"/>
-</svg>
-</div></div></div>
-
-<div class="ong docu"><span class="lb">Document</span><p class="dtit">L’ardoise des prix laissée par Madame Léa</p><div class="ardoises"><figure class="ardoise a1"><div class="craie"><div class="tt">COUAC DU PAYS<small>en sachets de 1 kg</small></div><div class="li"><span>3 sachets</span><i></i><b>9 €</b></div><div class="li"><span>5 sachets</span><i></i><b>15 €</b></div><div class="li"><span>8 sachets</span><i></i><b>24 €</b></div></div></figure></div>
-</div>
-
-<div class="ong prob"><span class="lb">Problématique</span><div class="txt"><p><b>Comment retrouver un prix ou un nombre de sachets qui ne sont pas sur l’ardoise ?</b></p></div></div>
-
-<p class="badge-q">Questions</p><div class="q ong quest" data-pts="1"><div class="q-h"><span class="q-n"><span class="qn">1.</span> <span class="cmp">S’approprier</span> <b>Compléter</b> le tableau du bon de commande avec les trois prix de l’ardoise.<p class="ttab">Tableau du bon de commande</p><div class="tw ajuste cinq"><table class="num"><tbody><tr><th>Nombre de sachets</th><td>3</td><td>5</td><td>8</td><td>12</td><td class="aremplir" id="q1-e"></td></tr><tr><th>Prix à payer (en €)</th><td class="don">9</td><td class="aremplir" id="q1-b"></td><td class="aremplir" id="q1-c"></td><td class="aremplir" id="q1-d"></td><td>21</td></tr></tbody></table></div></span></div><div class="rep cel" data-cel="q1-b" data-val="15"><div class="rc"></div></div><div class="rep cel" data-cel="q1-c" data-val="24"><div class="rc"></div></div></div><div class="q ong quest" data-pts="2"><div class="q-h"><span class="q-n"><span class="qn">2.</span> <span class="cmp">Réaliser</span> <b>Écrire</b> le calcul et son résultat dans la <b>ligne Quotient</b>, pour la <b>colonne 2</b> puis pour la <b>colonne 3</b>.<p class="ttab">Le même tableau, avec la ligne Quotient</p><div class="tw ajuste refait"><table class="num"><thead><tr><th class="coin"></th><th class="col">Colonne 1</th><th class="col">Colonne 2</th><th class="col">Colonne 3</th></tr></thead><tbody><tr><th>Nombre de sachets</th><td>3</td><td>5</td><td>8</td></tr><tr><th>Prix à payer (en €)</th><td class="don">9</td><td class="don">15</td><td class="don">24</td></tr><tr><th>Quotient</th><td class="quo fait">9 / 3<br><b>= 3</b></td><td class="quo"><span class="case" id="q2-a2"></span> / <span class="case" id="q2-b2"></span><br>= <span class="case" id="q2-r2"></span></td><td class="quo"><span class="case" id="q2-a3"></span> / <span class="case" id="q2-b3"></span><br>= <span class="case" id="q2-r3"></span></td></tr></tbody></table></div></span></div><div class="rep cel" data-cel="q2-a2" data-val="15"><div class="rc"></div></div><div class="rep cel" data-cel="q2-b2" data-val="5"><div class="rc"></div></div><div class="rep cel" data-cel="q2-r2" data-val="3"><div class="rc"></div></div><div class="rep cel" data-cel="q2-a3" data-val="24"><div class="rc"></div></div><div class="rep cel" data-cel="q2-b3" data-val="8"><div class="rc"></div></div><div class="rep cel" data-cel="q2-r3" data-val="3"><div class="rc"></div></div><div class="rep vide"><button type="button" class="lb">Coup de pouce</button><div class="rc"><p><b>Quotient</b> : On divise toujours <b>la ligne du bas par la ligne du haut</b> (dans la même colonne).</p></div></div></div><div class="q ong quest" data-pts="1.5"><div class="q-h"><span class="q-n"><span class="qn">3.</span> <span class="cmp">Valider</span> <div class="grp fus"><div class="sq"><span class="sql">a.</span><div><b>Comparer</b> les trois quotients.</div></div><div class="qcm"><p>Les trois quotients sont-ils égaux ?</p><div class="ch"><span id="q3-eg" class="chx">Oui</span><span class="chx">Non</span><span class="expl" id="q3-x1"></span></div></div></div><div class="grp fus"><div class="sq"><span class="sql">b.</span><div><b>Compléter</b> la phrase.</div></div><div class="qcm"><p>Le prix à payer <span class="case" id="q3-m"></span> proportionnel au nombre de sachets.</p></div></div><div class="grp fus"><div class="sq"><span class="sql">c.</span><div><b>Écrire</b> le coefficient de proportionnalité.</div></div><div class="qcm"><p>Le coefficient de proportionnalité est <span class="case" id="q3-k"></span>.</p><p>Le prix unitaire d’un sachet de couac est donc de <span class="case" id="q3-u"></span> €.</p></div></div></span></div><div class="rep cel" data-cel="q3-eg|q3-x1" data-val="Oui|3 ; 3 ; 3 : les trois quotients sont égaux."><div class="rc"></div></div><div class="rep cel" data-cel="q3-m" data-val="EST"><div class="rc"></div></div><div class="rep cel" data-cel="q3-k" data-val="3"><div class="rc"></div></div><div class="rep cel" data-cel="q3-u" data-val="3"><div class="rc"></div></div></div><div class="q ong quest" data-pts="1.5"><div class="q-h"><span class="q-n"><span class="qn">4.</span> <span class="cmp">Réaliser</span> <div class="grp fus"><div class="sq"><span class="sql">a.</span><div><b>Calculer</b> le prix de <b>12 sachets</b>.</div></div><div class="calcs"><div class="cl"></div><div class="ct">nombre de sachets</div><div class="ct vide">×</div><div class="ct">coefficient (prix unitaire)</div><div class="ct vide">=</div><div class="ct">prix (€)</div><div class="cl">Pour 12 sachets</div><div class="n"><span class="donne">12</span></div><div class="s">×</div><div class="n"><span class="case" id="q4-k"></span></div><div class="s">=</div><div class="n"><span class="case" id="q4-p"></span></div></div></div><div class="sq"><span class="sql">b.</span><div><b>Compléter</b> la case sous <b>12</b> dans le tableau du bon de commande (question 1).</div></div></span></div><div class="rep cel" data-cel="q4-k|q4-p" data-val="3|36"><div class="rc"></div></div><div class="rep cel" data-cel="q1-d" data-val="36"><div class="rc"></div></div></div><div class="q ong quest" data-pts="1.5"><div class="q-h"><span class="q-n"><span class="qn">5.</span> <span class="cmp">Réaliser</span> <div class="grp fus"><div class="sq"><span class="sql">a.</span><div><b>Calculer</b> le nombre de sachets que le client peut avoir avec <b>21 €</b>.</div></div><div class="calcs"><div class="cl"></div><div class="ct">prix (€)</div><div class="ct vide">/</div><div class="ct">coefficient</div><div class="ct vide">=</div><div class="ct">nombre de sachets</div><div class="cl">Avec 21 €</div><div class="n"><span class="case" id="q5-p"></span></div><div class="s">/</div><div class="n"><span class="case" id="q5-k"></span></div><div class="s">=</div><div class="n"><span class="case" id="q5-n"></span></div></div></div><div class="sq"><span class="sql">b.</span><div><b>Compléter</b> la case au-dessus de <b>21</b> dans le tableau du bon de commande (question 1).</div></div></span></div><div class="rep cel" data-cel="q5-p|q5-k|q5-n" data-val="21|3|7"><div class="rc"></div></div><div class="rep cel" data-cel="q1-e" data-val="7"><div class="rc"></div></div><div class="rep vide"><button type="button" class="lb">Coup de pouce</button><div class="rc"><div class="pouce2"><div><p>On cherche combien de fois <b>3&nbsp;€</b> tiennent dans <b>21&nbsp;€</b>.</p></div><div class="sachw"><svg class="sachets" viewBox="0 0 550 74" role="img" aria-label="Sept sachets de couac à 3 euros : 3 + 3 + 3 + 3 + 3 + 3 + 3 = 21 euros."><g transform="translate(0,0)"><path d="M6,14 L38,14 L41,64 Q41,70 35,70 L9,70 Q3,70 3,64 Z" fill="#E9D3A6" stroke="#7A4E1E" stroke-width="2"/><path d="M6,14 L10,4 L34,4 L38,14" fill="#D9BD86" stroke="#7A4E1E" stroke-width="2"/><text x="22" y="49" text-anchor="middle" font-family="Source Sans 3, Segoe UI, Arial, sans-serif" font-size="14.5" font-weight="700" fill="#2E5266">3 €</text></g><text x="55" y="46" text-anchor="middle" font-family="Source Sans 3, Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" fill="#2E5266">+</text><g transform="translate(66,0)"><path d="M6,14 L38,14 L41,64 Q41,70 35,70 L9,70 Q3,70 3,64 Z" fill="#E9D3A6" stroke="#7A4E1E" stroke-width="2"/><path d="M6,14 L10,4 L34,4 L38,14" fill="#D9BD86" stroke="#7A4E1E" stroke-width="2"/><text x="22" y="49" text-anchor="middle" font-family="Source Sans 3, Segoe UI, Arial, sans-serif" font-size="14.5" font-weight="700" fill="#2E5266">3 €</text></g><text x="121" y="46" text-anchor="middle" font-family="Source Sans 3, Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" fill="#2E5266">+</text><g transform="translate(132,0)"><path d="M6,14 L38,14 L41,64 Q41,70 35,70 L9,70 Q3,70 3,64 Z" fill="#E9D3A6" stroke="#7A4E1E" stroke-width="2"/><path d="M6,14 L10,4 L34,4 L38,14" fill="#D9BD86" stroke="#7A4E1E" stroke-width="2"/><text x="22" y="49" text-anchor="middle" font-family="Source Sans 3, Segoe UI, Arial, sans-serif" font-size="14.5" font-weight="700" fill="#2E5266">3 €</text></g><text x="187" y="46" text-anchor="middle" font-family="Source Sans 3, Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" fill="#2E5266">+</text><g transform="translate(198,0)"><path d="M6,14 L38,14 L41,64 Q41,70 35,70 L9,70 Q3,70 3,64 Z" fill="#E9D3A6" stroke="#7A4E1E" stroke-width="2"/><path d="M6,14 L10,4 L34,4 L38,14" fill="#D9BD86" stroke="#7A4E1E" stroke-width="2"/><text x="22" y="49" text-anchor="middle" font-family="Source Sans 3, Segoe UI, Arial, sans-serif" font-size="14.5" font-weight="700" fill="#2E5266">3 €</text></g><text x="253" y="46" text-anchor="middle" font-family="Source Sans 3, Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" fill="#2E5266">+</text><g transform="translate(264,0)"><path d="M6,14 L38,14 L41,64 Q41,70 35,70 L9,70 Q3,70 3,64 Z" fill="#E9D3A6" stroke="#7A4E1E" stroke-width="2"/><path d="M6,14 L10,4 L34,4 L38,14" fill="#D9BD86" stroke="#7A4E1E" stroke-width="2"/><text x="22" y="49" text-anchor="middle" font-family="Source Sans 3, Segoe UI, Arial, sans-serif" font-size="14.5" font-weight="700" fill="#2E5266">3 €</text></g><text x="319" y="46" text-anchor="middle" font-family="Source Sans 3, Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" fill="#2E5266">+</text><g transform="translate(330,0)"><path d="M6,14 L38,14 L41,64 Q41,70 35,70 L9,70 Q3,70 3,64 Z" fill="#E9D3A6" stroke="#7A4E1E" stroke-width="2"/><path d="M6,14 L10,4 L34,4 L38,14" fill="#D9BD86" stroke="#7A4E1E" stroke-width="2"/><text x="22" y="49" text-anchor="middle" font-family="Source Sans 3, Segoe UI, Arial, sans-serif" font-size="14.5" font-weight="700" fill="#2E5266">3 €</text></g><text x="385" y="46" text-anchor="middle" font-family="Source Sans 3, Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" fill="#2E5266">+</text><g transform="translate(396,0)"><path d="M6,14 L38,14 L41,64 Q41,70 35,70 L9,70 Q3,70 3,64 Z" fill="#E9D3A6" stroke="#7A4E1E" stroke-width="2"/><path d="M6,14 L10,4 L34,4 L38,14" fill="#D9BD86" stroke="#7A4E1E" stroke-width="2"/><text x="22" y="49" text-anchor="middle" font-family="Source Sans 3, Segoe UI, Arial, sans-serif" font-size="14.5" font-weight="700" fill="#2E5266">3 €</text></g><text x="448" y="46" text-anchor="start" font-family="Source Sans 3, Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" fill="#B5470B">= 21 €</text></svg></div></div></div></div></div><div class="q ong quest" data-pts="1.5"><div class="q-h"><span class="q-n"><span class="qn">6.</span> <span class="cmp">Communiquer</span> <b>Répondre</b> à la problématique : <i>comment retrouver un prix ou un nombre de sachets qui ne sont pas sur l’ardoise ?</i><div class="ecrire"><textarea class="redac" rows="3" aria-label="Votre réponse"></textarea><i></i><i></i><i></i></div></span></div><div class="rep"><button type="button" class="lb">Réponse</button><div class="rc"><p>On calcule le <b>coefficient de proportionnalité</b> : 9 / 3 = <b>3</b>.</p><p>C’est le prix de <b>1 sachet</b>.</p><p>12 sachets coûtent 12 × 3 = <b>36 €</b>.</p><p>Avec 21 €, le client peut avoir 21 / 3 = <b>7 sachets</b>.</p><div class="formules"><p><b>Le prix à payer</b> = nombre de sachets achetés multiplié par le prix unitaire (le coefficient de proportionnalité)</p><p><b>Le nombre de sachets</b> = prix à payer divisé par le prix unitaire</p></div></div></div></div>
-
-<div class="ong ens"><span class="lb">Je fais le point</span><h3>Ce que je sais faire en sortant de la séance</h3><dl class="lst"><div><dt>Trouver</dt><dd>☐ Je sais trouver le <b>coefficient de proportionnalité</b> d’un tableau (diviser le nombre du bas par le nombre du haut, dans la même colonne).</dd></div><div><dt>Vérifier</dt><dd>☐ Je sais vérifier que le coefficient est le même dans toutes les colonnes.</dd></div><div><dt>Descendre</dt><dd>☐ Je sais multiplier par le coefficient pour <b>trouver un prix</b>.</dd></div><div><dt>Remonter</dt><dd>☐ Je sais diviser par le coefficient pour <b>trouver une quantité</b>.</dd></div></dl><p class="aidec">Une case non cochée ? Demander la fiche <b>AP 2 - Calculer le coefficient</b>, et la faire avant d’aller plus loin.</p></div>
-
-</div></section>
+<section class="exo" data-exo="act1"><div class="exo-c"><nav class="ap-fil ap-off"><button type="button" class="ap-ft on" data-n="0">Exemple 1</button><button type="button" class="ap-ft" data-n="1">Exemple 2</button><button type="button" class="ap-ft" data-n="2">Exercice 1</button><button type="button" class="ap-ft" data-n="3">Exercice 2</button><button type="button" class="ap-ft" data-n="4">Exercice 3</button><button type="button" class="ap-ft" data-n="5">Exercice 4</button></nav><section class="ap-ecr on" data-t="Exemple 1"><div class="ong meth"><span class="lb">Exercice corrigé : exemple 1 - le tableau est proportionnel</span><div class="situ-b"><span class="bdg">Situation</span><p>Le tableau donne le prix de l’huile achetée, en fonction du nombre de litres.</p></div><div class="tabl-b"><span class="bdg">Tableau : Prix à payer en fonction du nombre de litres</span><div class="tbw"><div class="tw ajuste"><table class="num"><tbody><tr><th>Nombre de litres</th><td>2</td><td>3</td><td>5</td><td>15</td><td>20</td><td>25</td></tr><tr><th>Prix à payer (en €)</th><td class="don">12</td><td class="don">18</td><td class="don">30</td><td class="don">90</td><td class="don">120</td><td class="don">150</td></tr></tbody></table></div></div></div><div class="meth-b"><span class="bdg">Méthode</span><div class="pass"><div class="pas"><span class="et">1. Lire le tableau</span><div><p class="regle">La ligne du <b>haut</b>, c’est <b>ce qu’on connaît</b> : le <b>nombre de litres</b>.</p><p class="regle">La ligne du <b>bas</b>, c’est <b>ce qu’on cherche</b> : le <b>prix à payer</b>.</p></div></div><div class="pas"><span class="et">2. Diviser</span><div><p class="regle">Je calcule les quotients de <b>toutes les colonnes</b>.</p><p class="regle">Je divise le <b>nombre du bas</b> par le <b>nombre du haut</b>.</p><p class="regle">Le résultat d’une division s’appelle un <b>quotient</b>.</p><p class="regle">Le quotient donne <b>ce qu’on cherche pour 1</b> : pour 1 litre, pour 1 sachet, pour 1 mois.</p><p class="regle">Je <b>refais le tableau</b> et j’écris chaque calcul dans la <b>ligne Quotient</b>.</p></div></div><div class="tw ajuste refait"><table class="num"><thead><tr><th class="coin"></th><th class="col">Colonne 1</th><th class="col">Colonne 2</th><th class="col">Colonne 3</th><th class="col">Colonne 4</th><th class="col">Colonne 5</th><th class="col">Colonne 6</th></tr></thead><tbody><tr><th>Nombre de litres</th><td>2</td><td>3</td><td>5</td><td>15</td><td>20</td><td>25</td></tr><tr><th>Prix à payer (en €)</th><td class="don">12</td><td class="don">18</td><td class="don">30</td><td class="don">90</td><td class="don">120</td><td class="don">150</td></tr><tr><th>Quotient</th><td class="quo">12 / 2<br><b>= 6</b></td><td class="quo">18 / 3<br><b>= 6</b></td><td class="quo">30 / 5<br><b>= 6</b></td><td class="quo">90 / 15<br><b>= 6</b></td><td class="quo">120 / 20<br><b>= 6</b></td><td class="quo">150 / 25<br><b>= 6</b></td></tr></tbody></table></div><div class="pas"><span class="et">3. Comparer</span><div><p class="regle">Je regarde si les quotients sont <b>tous égaux</b>.</p><div class="cass"><p class="cas">Les six quotients : 6 ; 6 ; 6 ; 6 ; 6 ; 6.</p><p class="cas">Ils sont <b>tous égaux</b>.</p></div></div></div><div class="pas"><span class="et">4. Conclure</span><div><p class="regle">Tous les quotients sont égaux → <b>c’est proportionnel</b>.</p><p class="regle">Ce quotient s’appelle le <b>coefficient de proportionnalité</b>.</p><p class="regle">Je complète la <b>phrase qui répond à la question</b>.</p><p class="regle">J’ajoute ce que coûte <b>1 unité</b>.</p><div class="cass"><p class="cas">Le coefficient de proportionnalité est <b>6</b>.</p><p class="cas">Le nombre de litres <b>est</b> proportionnel au prix à payer.</p><p class="cas">1 litre coûte <b>6 €</b>.</p></div></div></div></div></div></div><div class="ap-nav ap-off"><button type="button" class="ap-nb ap-prec" disabled>← Précédent</button><span class="ap-nbi">1 / 6</span><button type="button" class="ap-nb ap-suiv">Suivant →</button></div></section><section class="ap-ecr ap-coupe" data-t="Exemple 2"><div class="ong meth"><span class="lb">Exercice corrigé : exemple 2 - le tableau n’est pas proportionnel</span><div class="situ-b"><span class="bdg">Situation</span><p>Le tableau donne la taille d’un bébé, en fonction de son âge.</p></div><div class="tabl-b"><span class="bdg">Tableau : Taille du bébé en fonction de son âge</span><div class="tbw"><div class="tw ajuste"><table class="num"><tbody><tr><th>Âge du bébé (en mois)</th><td>2</td><td>3</td><td>4</td><td>5</td></tr><tr><th>Taille du bébé (en cm)</th><td class="don">60</td><td class="don">62</td><td class="don">63</td><td class="don">65</td></tr></tbody></table></div></div></div><div class="meth-b"><span class="bdg">Méthode</span><div class="pass"><div class="pas"><span class="et">1. Lire le tableau</span><div><p class="regle">La ligne du <b>haut</b>, c’est <b>ce qu’on connaît</b> : l’<b>âge du bébé</b>.</p><p class="regle">La ligne du <b>bas</b>, c’est <b>ce qu’on cherche</b> : la <b>taille du bébé</b>.</p></div></div><div class="pas"><span class="et">2. Diviser</span><div><p class="regle">Je calcule les quotients, <b>colonne après colonne</b>.</p><p class="regle">Je divise le <b>nombre du bas</b> par le <b>nombre du haut</b>.</p><p class="regle">Le quotient donne <b>ce qu’on cherche pour 1</b> : ici, pour 1 mois.</p><p class="regle">Je <b>refais le tableau</b> et j’écris chaque calcul dans la <b>ligne Quotient</b>.</p><div class="cass"><p class="cas">Colonne 1 : <b>30</b>, soit <b>30 cm pour 1 mois</b>.</p><p class="cas">Colonne 2 : <b>20,66</b>, soit <b>20,66 cm pour 1 mois</b>.</p></div></div></div><div class="tw ajuste refait"><table class="num"><thead><tr><th class="coin"></th><th class="col">Colonne 1</th><th class="col">Colonne 2</th><th class="col">Colonne 3</th><th class="col">Colonne 4</th></tr></thead><tbody><tr><th>Âge du bébé (en mois)</th><td>2</td><td>3</td><td>4</td><td>5</td></tr><tr><th>Taille du bébé (en cm)</th><td class="don">60</td><td class="don">62</td><td class="don">63</td><td class="don">65</td></tr><tr><th>Quotient</th><td class="quo">60 / 2<br><b>= 30</b></td><td class="quo">62 / 3<br><b>= 20,66</b></td><td class="quo stop" colspan="2">je m’arrête</td></tr></tbody></table></div><div class="pas"><span class="et">3. Comparer</span><div><p class="regle">Je regarde si les quotients sont <b>tous égaux</b>.</p><p class="regle">Je m’arrête dès que <b>deux quotients sont différents</b>.</p><div class="cass"><p class="cas">30 et 20,66 ne sont <b>pas égaux</b>.</p></div></div></div><div class="pas"><span class="et">4. Conclure</span><div><p class="regle">Un seul quotient différent des autres suffit → <b>ce n’est pas proportionnel</b>.</p><p class="regle">Il n’y a alors <b>pas de coefficient de proportionnalité</b>.</p><p class="regle">Je complète la <b>phrase qui répond à la question</b>.</p><p class="regle"><b>Ce n’est pas proportionnel.</b></p><div class="cass"><p class="cas">L’âge du bébé <b>n’est pas</b> proportionnel à sa taille.</p></div></div></div></div></div></div><div class="ap-nav ap-off"><button type="button" class="ap-nb ap-prec">← Précédent</button><span class="ap-nbi">2 / 6</span><button type="button" class="ap-nb ap-suiv">Suivant →</button></div></section><section class="ap-ecr" data-t="Exercice 1"><p class="bandeau">À toi de trouver si les tableaux suivants sont des tableaux de proportionnalité</p><div class="q ong quest" data-pts="2.5"><div class="q-h"><span class="q-n"><span class="qn">Exercice 1</span> <span class="cmp">Étape par étape</span> <div class="situ-b"><span class="bdg">Situation</span><p>Le tableau donne le prix d’un lot de feutres, dans le magasin A.</p></div><div class="tabl-b"><span class="bdg">Tableau : Prix du lot en fonction du nombre de feutres - magasin A</span><div class="tbw"><div class="tw ajuste"><table class="num"><tbody><tr><th>Nombre de feutres par lot</th><td>12</td><td>18</td><td>30</td></tr><tr><th>Prix du lot (en €)</th><td class="don">3</td><td class="don">4,50</td><td class="don">7,50</td></tr></tbody></table></div></div></div><p class="prob">Le nombre de feutres par lot est-il proportionnel au prix du lot ?</p><div class="meth-b"><span class="bdg">Méthode</span><div class="sq"><span class="sql">1.</span><div><p><b>Lire</b> le tableau.</p></div></div><div class="qcm"><p>La ligne du <b>haut</b>, c’est <b>ce qu’on connaît</b> : <span class="case xl" id="e1-h"></span><br>La ligne du <b>bas</b>, c’est <b>ce qu’on cherche</b> : <span class="case xl" id="e1-b"></span></p></div><div class="sq"><span class="sql">2.</span><div><p><b>Calculer</b> les quotients.</p><p><b>Diviser</b> le nombre du bas par le nombre du haut, colonne après colonne.</p></div></div><div class="calcs"><div class="cl"></div><div class="ct">nombre du bas</div><div class="ct vide">/</div><div class="ct">nombre du haut</div><div class="ct vide">=</div><div class="ct">quotient</div><div class="cl">Colonne 1</div><div class="n"><span class="case" id="e1-a1"></span></div><div class="s">/</div><div class="n"><span class="case" id="e1-b1"></span></div><div class="s">=</div><div class="n"><span class="case" id="e1-r1"></span></div><div class="cl">Colonne 2</div><div class="n"><span class="case" id="e1-a2"></span></div><div class="s">/</div><div class="n"><span class="case" id="e1-b2"></span></div><div class="s">=</div><div class="n"><span class="case" id="e1-r2"></span></div><div class="cl">Colonne 3</div><div class="n"><span class="case" id="e1-a3"></span></div><div class="s">/</div><div class="n"><span class="case" id="e1-b3"></span></div><div class="s">=</div><div class="n"><span class="case" id="e1-r3"></span></div></div><div class="sq"><span class="sql">3.</span><div><p><b>Comparer</b> les quotients obtenus.</p></div></div><div class="qcm"><p>Les quotients sont-ils tous égaux ?</p><div class="ch"><span id="e1-eg" class="chx">Oui</span><span id="e1-ne" class="chx">Non</span><span class="expl" id="e1-x1"></span></div></div><div class="sq"><span class="sql">4.</span><div><p><b>Compléter</b> la phrase de conclusion.</p></div></div><div class="qcm"><p>Le nombre de feutres par lot <span class="ouou" id="e1-mot"><span class="mo" id="e1-mot-ok">EST</span><span class="mo" id="e1-mot-no">N’EST PAS</span></span> proportionnel au prix du lot.<br>1 feutre coûte <span class="case" id="e1-p2"></span> €.</p></div></div></span></div><div class="rep cel" data-cel="e1-h|e1-b" data-val="le nombre de feutres par lot|le prix du lot (en €)"><div class="rc"></div></div><div class="rep cel" data-cel="e1-a1|e1-b1|e1-r1" data-val="3|12|0,25"><div class="rc"></div></div><div class="rep cel" data-cel="e1-a2|e1-b2|e1-r2" data-val="4,50|18|0,25"><div class="rc"></div></div><div class="rep cel" data-cel="e1-a3|e1-b3|e1-r3" data-val="7,50|30|0,25"><div class="rc"></div></div><div class="rep cel" data-cel="e1-eg|e1-x1" data-val="Oui|0,25 ; 0,25 ; 0,25 : les quotients sont tous égaux."><div class="rc"></div></div><div class="rep cel" data-cel="e1-mot-ok" data-val="EST"><div class="rc"></div></div><div class="rep cel" data-cel="e1-p2" data-val="0,25"><div class="rc"></div></div></div><div class="ap-nav ap-off"><button type="button" class="ap-nb ap-prec">← Précédent</button><span class="ap-nbi">3 / 6</span><button type="button" class="ap-nb ap-suiv">Suivant →</button></div></section><section class="ap-ecr ap-coupe" data-t="Exercice 2"><div class="q ong quest" data-pts="2.5"><div class="q-h"><span class="q-n"><span class="qn">Exercice 2</span> <span class="cmp">Étape par étape</span> <div class="situ-b"><span class="bdg">Situation</span><p>Le tableau donne le prix d’un lot de feutres, dans le magasin B.</p></div><div class="tabl-b"><span class="bdg">Tableau : Prix du lot en fonction du nombre de feutres - magasin B</span><div class="tbw"><div class="tw ajuste"><table class="num"><tbody><tr><th>Nombre de feutres par lot</th><td>12</td><td>18</td><td>30</td></tr><tr><th>Prix du lot (en €)</th><td class="don">3</td><td class="don">4,50</td><td class="don">6</td></tr></tbody></table></div></div></div><p class="prob">Le nombre de feutres par lot est-il proportionnel au prix du lot ?</p><div class="meth-b"><span class="bdg">Méthode</span><div class="sq"><span class="sql">1.</span><div><p><b>Lire</b> le tableau.</p></div></div><div class="qcm"><p>La ligne du <b>haut</b>, c’est <b>ce qu’on connaît</b> : <span class="case xl" id="e2-h"></span><br>La ligne du <b>bas</b>, c’est <b>ce qu’on cherche</b> : <span class="case xl" id="e2-b"></span></p></div><div class="sq"><span class="sql">2.</span><div><p><b>Calculer</b> les quotients.</p><p><b>Diviser</b> le nombre du bas par le nombre du haut, colonne après colonne.</p></div></div><div class="calcs"><div class="cl"></div><div class="ct">nombre du bas</div><div class="ct vide">/</div><div class="ct">nombre du haut</div><div class="ct vide">=</div><div class="ct">quotient</div><div class="cl">Colonne 1</div><div class="n"><span class="case" id="e2-a1"></span></div><div class="s">/</div><div class="n"><span class="case" id="e2-b1"></span></div><div class="s">=</div><div class="n"><span class="case" id="e2-r1"></span></div><div class="cl">Colonne 2</div><div class="n"><span class="case" id="e2-a2"></span></div><div class="s">/</div><div class="n"><span class="case" id="e2-b2"></span></div><div class="s">=</div><div class="n"><span class="case" id="e2-r2"></span></div><div class="cl">Colonne 3</div><div class="n"><span class="case" id="e2-a3"></span></div><div class="s">/</div><div class="n"><span class="case" id="e2-b3"></span></div><div class="s">=</div><div class="n"><span class="case" id="e2-r3"></span></div></div><div class="sq"><span class="sql">3.</span><div><p><b>Comparer</b> les quotients obtenus.</p></div></div><div class="qcm"><p>Les quotients sont-ils tous égaux ?</p><div class="ch"><span id="e2-eg" class="chx">Oui</span><span id="e2-ne" class="chx">Non</span><span class="expl" id="e2-x1"></span></div></div><div class="sq"><span class="sql">4.</span><div><p><b>Compléter</b> la phrase de conclusion.</p></div></div><div class="qcm"><p>Le nombre de feutres par lot <span class="ouou" id="e2-mot"><span class="mo" id="e2-mot-no">EST</span><span class="mo" id="e2-mot-ok">N’EST PAS</span></span> proportionnel au prix du lot.</p></div></div></span></div><div class="rep cel" data-cel="e2-h|e2-b" data-val="le nombre de feutres par lot|le prix du lot (en €)"><div class="rc"></div></div><div class="rep cel" data-cel="e2-a1|e2-b1|e2-r1" data-val="3|12|0,25"><div class="rc"></div></div><div class="rep cel" data-cel="e2-a2|e2-b2|e2-r2" data-val="4,50|18|0,25"><div class="rc"></div></div><div class="rep cel" data-cel="e2-a3|e2-b3|e2-r3" data-val="6|30|0,2"><div class="rc"></div></div><div class="rep cel" data-cel="e2-ne|e2-x1" data-val="Non|0,25 ; 0,25 ; 0,2 : les quotients ne sont pas tous égaux."><div class="rc"></div></div><div class="rep cel" data-cel="e2-mot-ok" data-val="N’EST PAS"><div class="rc"></div></div></div><div class="ap-nav ap-off"><button type="button" class="ap-nb ap-prec">← Précédent</button><span class="ap-nbi">4 / 6</span><button type="button" class="ap-nb ap-suiv">Suivant →</button></div></section><section class="ap-ecr" data-t="Exercice 3"><div class="q ong quest" data-pts="2.5"><div class="q-h"><span class="q-n"><span class="qn">Exercice 3</span> <span class="cmp">Étape par étape</span> <div class="situ-b"><span class="bdg">Situation</span><p>Le tableau donne la quantité de farine nécessaire, en fonction du nombre de miches de pain à faire.</p></div><div class="tabl-b"><span class="bdg">Tableau : Quantité de farine en fonction du nombre de miches</span><div class="tbw"><div class="tw ajuste"><table class="num"><tbody><tr><th>Nombre de miches</th><td>15</td><td>20</td><td>50</td></tr><tr><th>Quantité de farine (en kg)</th><td class="don">9</td><td class="don">12</td><td class="don">30</td></tr></tbody></table></div></div></div><p class="prob">Le nombre de miches est-il proportionnel à la quantité de farine ?</p><div class="meth-b"><span class="bdg">Méthode</span><div class="sq"><span class="sql">1.</span><div><p><b>Lire</b> le tableau.</p></div></div><div class="sq"><span class="sql">2.</span><div><p><b>Calculer</b> les quotients.</p><p><b>Diviser</b> le nombre du bas par le nombre du haut, colonne après colonne.</p></div></div><div class="calcs nuls"><div class="ct">nombre du bas</div><div class="ct vide">/</div><div class="ct">nombre du haut</div><div class="ct vide">=</div><div class="ct">quotient</div><div class="n"><span class="case" id="e3-a1"></span></div><div class="s">/</div><div class="n"><span class="case" id="e3-b1"></span></div><div class="s">=</div><div class="n"><span class="case" id="e3-r1"></span></div><div class="n"><span class="case" id="e3-a2"></span></div><div class="s">/</div><div class="n"><span class="case" id="e3-b2"></span></div><div class="s">=</div><div class="n"><span class="case" id="e3-r2"></span></div><div class="n"><span class="case" id="e3-a3"></span></div><div class="s">/</div><div class="n"><span class="case" id="e3-b3"></span></div><div class="s">=</div><div class="n"><span class="case" id="e3-r3"></span></div></div><div class="sq"><span class="sql">3.</span><div><p><b>Comparer</b> les quotients obtenus.</p></div></div><div class="qcm"><p>Les quotients sont-ils tous égaux ?</p><div class="ch"><span id="e3-eg" class="chx">Oui</span><span id="e3-ne" class="chx">Non</span><span class="expl" id="e3-x1"></span></div></div><div class="sq"><span class="sql">4.</span><div><p><b>Compléter</b> la phrase de conclusion.</p></div></div><div class="qcm"><p>Le nombre de miches <span class="ouou" id="e3-mot"><span class="mo" id="e3-mot-ok">EST</span><span class="mo" id="e3-mot-no">N’EST PAS</span></span> proportionnel à la quantité de farine.<br>1 miche demande <span class="case" id="e3-p2"></span> kg de farine.</p></div></div></span></div><div class="rep cel" data-cel="e3-a1|e3-b1|e3-r1" data-val="9|15|0,6"><div class="rc"></div></div><div class="rep cel" data-cel="e3-a2|e3-b2|e3-r2" data-val="12|20|0,6"><div class="rc"></div></div><div class="rep cel" data-cel="e3-a3|e3-b3|e3-r3" data-val="30|50|0,6"><div class="rc"></div></div><div class="rep cel" data-cel="e3-eg|e3-x1" data-val="Oui|0,6 ; 0,6 ; 0,6 : les quotients sont tous égaux."><div class="rc"></div></div><div class="rep cel" data-cel="e3-mot-ok" data-val="EST"><div class="rc"></div></div><div class="rep cel" data-cel="e3-p2" data-val="0,6"><div class="rc"></div></div></div><div class="ap-nav ap-off"><button type="button" class="ap-nb ap-prec">← Précédent</button><span class="ap-nbi">5 / 6</span><button type="button" class="ap-nb ap-suiv">Suivant →</button></div></section><section class="ap-ecr" data-t="Exercice 4"><div class="q ong quest" data-pts="2.5"><div class="q-h"><span class="q-n"><span class="qn">Exercice 4</span> <span class="cmp">Étape par étape</span> <div class="situ-b"><span class="bdg">Situation</span><p>Le tableau donne le périmètre d’un carré, en fonction de la longueur de son côté.</p></div><div class="tabl-b"><span class="bdg">Tableau : Périmètre du carré en fonction de la longueur du côté</span><div class="tbw"><div class="tw ajuste"><table class="num"><tbody><tr><th>Longueur du côté (en cm)</th><td>5,8</td><td>2,7</td><td>45,2</td><td>23,3</td></tr><tr><th>Périmètre du carré (en cm)</th><td class="don">23,2</td><td class="don">10,8</td><td class="don">180,8</td><td class="don">93,2</td></tr></tbody></table></div></div></div><p class="prob">La longueur du côté est-elle proportionnelle au périmètre du carré ?</p><div class="meth-b"><span class="bdg">Méthode</span><div class="sq"><span class="sql">1.</span><div><p><b>Lire</b> le tableau.</p></div></div><div class="sq"><span class="sql">2.</span><div><p><b>Calculer</b> les quotients.</p></div></div><div class="calcs nuls"><div class="n"><span class="case" id="e4-a1"></span></div><div class="s">/</div><div class="n"><span class="case" id="e4-b1"></span></div><div class="s">=</div><div class="n"><span class="case" id="e4-r1"></span></div><div class="n"><span class="case" id="e4-a2"></span></div><div class="s">/</div><div class="n"><span class="case" id="e4-b2"></span></div><div class="s">=</div><div class="n"><span class="case" id="e4-r2"></span></div><div class="n"><span class="case" id="e4-a3"></span></div><div class="s">/</div><div class="n"><span class="case" id="e4-b3"></span></div><div class="s">=</div><div class="n"><span class="case" id="e4-r3"></span></div><div class="n"><span class="case" id="e4-a4"></span></div><div class="s">/</div><div class="n"><span class="case" id="e4-b4"></span></div><div class="s">=</div><div class="n"><span class="case" id="e4-r4"></span></div></div><div class="sq"><span class="sql">3.</span><div><p><b>Comparer</b> les quotients obtenus.</p></div></div><div class="qcm"><p>Les quotients sont-ils tous égaux ?</p><div class="ch"><span id="e4-eg" class="chx">Oui</span><span id="e4-ne" class="chx">Non</span><span class="expl" id="e4-x1"></span></div></div><div class="sq"><span class="sql">4.</span><div><p><b>Compléter</b> la phrase de conclusion.</p></div></div><div class="qcm"><p>La longueur du côté <span class="ouou" id="e4-mot"><span class="mo" id="e4-mot-ok">EST</span><span class="mo" id="e4-mot-no">N’EST PAS</span></span> proportionnelle au périmètre du carré.<br>1 cm de côté donne <span class="case" id="e4-p2"></span> cm de périmètre.</p></div></div></span></div><div class="rep cel" data-cel="e4-a1|e4-b1|e4-r1" data-val="23,2|5,8|4"><div class="rc"></div></div><div class="rep cel" data-cel="e4-a2|e4-b2|e4-r2" data-val="10,8|2,7|4"><div class="rc"></div></div><div class="rep cel" data-cel="e4-a3|e4-b3|e4-r3" data-val="180,8|45,2|4"><div class="rc"></div></div><div class="rep cel" data-cel="e4-a4|e4-b4|e4-r4" data-val="93,2|23,3|4"><div class="rc"></div></div><div class="rep cel" data-cel="e4-eg|e4-x1" data-val="Oui|4 ; 4 ; 4 ; 4 : les quotients sont tous égaux."><div class="rc"></div></div><div class="rep cel" data-cel="e4-mot-ok" data-val="EST"><div class="rc"></div></div><div class="rep cel" data-cel="e4-p2" data-val="4"><div class="rc"></div></div></div><div class="ap-nav ap-off"><button type="button" class="ap-nb ap-prec">← Précédent</button><span class="ap-nbi">6 / 6</span><button type="button" class="ap-nb ap-suiv" disabled>Suivant →</button></div></section></div></section>
 </div>
 
 <footer class="prop-pied">
-  <p class="src">1CAP EPC · Chapitre 1 Proportionnalité · Séquence 1, séance 2</p>
+  <p class="src">Maths 1CAP EPC <span class="pm">·</span> <b>M<sup>me</sup> Talbaut</b> <span class="pm">·</span> AP 1 : Vérifier la proportionnalité <span class="pm">·</span> CORRIGÉ</p>
   <p class="adp">Adaptation numérique Sylvaine Talbaut · LP Max Joséphine · Usage interne - reproduction et diffusion interdites</p>
 </footer>
 
@@ -1989,6 +2088,424 @@ document.querySelectorAll(".rep.cel").forEach(function(rep){
     });
   });
 });
+})();
+</script>
+
+<!-- La calculatrice n'existe qu'a l'ecran : elle ne s'imprime pas. -->
+<button type="button" id="calc-b" title="Ouvrir la calculatrice">Calculatrice</button>
+<div id="calc" class="ferme" role="dialog" aria-label="Calculatrice">
+  <div id="calc-e">0</div>
+  <div id="calc-t">
+    <button type="button" data-k="C" class="g">C</button>
+    <button type="button" data-k="<" class="g">&#9003;</button>
+    <button type="button" data-k="%" class="g">%</button>
+    <button type="button" data-k="/" class="o">/</button>
+    <button type="button" data-k="7">7</button><button type="button" data-k="8">8</button>
+    <button type="button" data-k="9">9</button><button type="button" data-k="*" class="o">&#215;</button>
+    <button type="button" data-k="4">4</button><button type="button" data-k="5">5</button>
+    <button type="button" data-k="6">6</button><button type="button" data-k="-" class="o">&#8722;</button>
+    <button type="button" data-k="1">1</button><button type="button" data-k="2">2</button>
+    <button type="button" data-k="3">3</button><button type="button" data-k="+" class="o">+</button>
+    <button type="button" data-k="0" class="l0">0</button>
+    <button type="button" data-k=",">,</button>
+    <button type="button" data-k="=" class="eg">=</button>
+  </div>
+</div>
+<script>
+(function(){
+"use strict";
+// Une calculatrice a quatre operations, la meme que celle de leur poche :
+// on tape un nombre, une operation, un nombre, puis =.
+var ecran = document.getElementById("calc-e");
+var boite = document.getElementById("calc");
+var bouton = document.getElementById("calc-b");
+var courant = "0", garde = null, op = null, neuf = true;
+
+function fr(x){
+  if(!isFinite(x)) return "Erreur";
+  return (Math.round(x * 1e10) / 1e10).toString().replace(".", ",");
+}
+function montre(){ ecran.textContent = courant; }
+function nombre(t){ return parseFloat(t.replace(",", ".")) || 0; }
+
+function calcule(){
+  if(op === null || garde === null) return nombre(courant);
+  var a = garde, b = nombre(courant);
+  if(op === "+") return a + b;
+  if(op === "-") return a - b;
+  if(op === "*") return a * b;
+  if(op === "/") return b === 0 ? NaN : a / b;
+  return b;
+}
+function touche(k){
+  if(k >= "0" && k <= "9"){
+    courant = (neuf || courant === "0") ? k : courant + k;
+    neuf = false;
+  } else if(k === ","){
+    if(neuf){ courant = "0,"; neuf = false; }
+    else if(courant.indexOf(",") < 0) courant += ",";
+  } else if(k === "C"){
+    courant = "0"; garde = null; op = null; neuf = true;
+  } else if(k === "<"){
+    courant = (courant.length > 1) ? courant.slice(0, -1) : "0";
+    if(courant === "0") neuf = true;
+  } else if(k === "%"){
+    courant = fr(nombre(courant) / 100); neuf = true;
+  } else if(k === "+" || k === "-" || k === "*" || k === "/"){
+    var r = calcule();
+    courant = fr(r); garde = nombre(courant); op = k; neuf = true;
+  } else if(k === "="){
+    courant = fr(calcule()); garde = null; op = null; neuf = true;
+  }
+  montre();
+}
+document.getElementById("calc-t").addEventListener("click", function(e){
+  var b = e.target.closest("button"); if(!b) return;
+  touche(b.getAttribute("data-k"));
+});
+function ouvre(v){
+  boite.classList.toggle("ferme", !v);
+  bouton.textContent = v ? "Fermer la calculatrice" : "Calculatrice";
+}
+bouton.addEventListener("click", function(){ ouvre(boite.classList.contains("ferme")); });
+document.addEventListener("keydown", function(e){
+  if(boite.classList.contains("ferme")) return;
+  if(e.target.matches("input, textarea")) return;
+  var k = e.key;
+  if(k === "Escape"){ ouvre(false); return; }
+  if(k === "Enter") k = "=";
+  if(k === "Backspace") k = "<";
+  if(k === "Delete" || k === "Escape") k = "C";
+  if(k === ".") k = ",";
+  if("0123456789,+-*/=%C<".indexOf(k) >= 0){ touche(k); e.preventDefault(); }
+});
+montre();
+})();
+</script>
+
+<style>
+/* Rangee dans la barre, la calculatrice n'est plus un bouton flottant. */
+.pilote #calc-b,.ap-bas #calc-b{position:static;right:auto;bottom:auto;
+  z-index:auto;box-shadow:none;font-size:14px;padding:8px 16px;
+  border-radius:20px}
+.ap-bas #calc-b{background:#00778a}
+.ap-bas #calc-b:hover{background:#2E5266}
+</style>
+<script>
+(function(){
+"use strict";
+var b = document.getElementById("calc-b"), c = document.getElementById("calc");
+if(!b) return;
+var barre = document.querySelector(".pilote") || document.querySelector(".ap-bas");
+if(!barre) return;
+
+// Le bouton quitte le coin de l'ecran pour la barre : a gauche du pilotage
+// du corrige, a gauche aussi dans la barre de l'eleve.
+var creux = barre.querySelector(".ap-bg");
+if(creux) creux.appendChild(b);
+else {
+  var ast = barre.querySelector(".ast");
+  if(ast) barre.insertBefore(b, ast); else barre.appendChild(b);
+}
+
+// Le clavier se pose juste au-dessus du bouton, jamais hors de l'ecran.
+function pose(){
+  if(!c) return;
+  var r = barre.getBoundingClientRect(), t = b.getBoundingClientRect();
+  c.style.bottom = Math.round(window.innerHeight - r.top + 10) + "px";
+  c.style.right = "auto";
+  var x = Math.max(10, Math.min(t.left, window.innerWidth - c.offsetWidth - 10));
+  c.style.left = Math.round(x) + "px";
+}
+pose();
+b.addEventListener("click", function(){ setTimeout(pose, 0); });
+addEventListener("resize", pose);
+})();
+</script>
+
+<script>
+(function(){
+  var REPS = {};
+  var NUAGE = {};
+
+  /* --- les pages ---------------------------------------------------- */
+  var ecrans = [].slice.call(document.querySelectorAll('.ap-ecr'));
+  var onglets = [].slice.call(document.querySelectorAll('.ap-fil .ap-ft'));
+  function montre(n){
+    if(n < 0 || n >= ecrans.length) return;
+    ecrans.forEach(function(e,i){ e.classList.toggle('on', i === n); });
+    onglets.forEach(function(b,i){ b.classList.toggle('on', i === n); });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  onglets.forEach(function(b){
+    b.addEventListener('click', function(){ montre(+b.dataset.n); });
+  });
+  ecrans.forEach(function(e,i){
+    var p = e.querySelector('.ap-prec'), s = e.querySelector('.ap-suiv');
+    if(p) p.addEventListener('click', function(){ montre(i-1); });
+    if(s) s.addEventListener('click', function(){ montre(i+1); });
+  });
+
+  /* --- choisir un mot dans la phrase --------------------------------- */
+  document.querySelectorAll('.ouou').forEach(function(g){
+    var mots = [].slice.call(g.querySelectorAll('.mo'));
+    mots.forEach(function(m){
+      m.addEventListener('click', function(){
+        var deja = m.classList.contains('pris');
+        mots.forEach(function(x){ x.classList.remove('pris','fane'); });
+        if(!deja){
+          m.classList.add('pris');
+          mots.forEach(function(x){ if(x !== m) x.classList.add('fane'); });
+        }
+      });
+    });
+  });
+
+  /* --- comparer ce qui est ecrit et ce qui est attendu --------------- */
+  function net(t){
+    t = (t || '').toString().trim().toLowerCase();
+    t = t.replace(/\s+/g,' ').replace(/[.;]+$/,'');
+    t = t.replace(/^(le |la |les |l')/,'');
+    if(/^[0-9 ,.]+$/.test(t)){
+      t = t.replace(/\s/g,'').replace(',','.');
+      if(t.indexOf('.') >= 0) t = t.replace(/0+$/,'').replace(/\.$/,'');
+    }
+    return t;
+  }
+  function val(id){
+    var e = document.getElementById(id);
+    return e ? e.value : '';
+  }
+  function coche(id){
+    var e = document.getElementById(id);
+    var c = e ? e.querySelector('input[type=checkbox]') : null;
+    return !!(c && c.checked);
+  }
+  function marque(ok){ return ok ? '[juste]' : '[à revoir]'; }
+
+  /* --- fabriquer le compte rendu ------------------------------------ */
+  function rendu(num, nom, pre, cla){
+    var r = REPS[num], L = [], just = 0, tot = 0;
+    L.push("AP 1 - Vérifier la proportionnalité");
+    L.push("Exercice " + num);
+    L.push(nom.toUpperCase() + " " + pre + "  -  " + cla);
+    L.push("Envoyé le " + new Date().toLocaleString('fr-FR'));
+    L.push("");
+    if(r.lire.length){
+      L.push("1. Lire le tableau");
+      var et = ["Ligne du haut", "Ligne du bas"];
+      r.lire.forEach(function(p,i){
+        var ok = net(val(p[0])) === net(p[1]); tot++; if(ok) just++;
+        L.push("   " + et[i] + " : " + (val(p[0]) || "(vide)") + "  " + marque(ok));
+      });
+      L.push("");
+    }
+    L.push("2. Calculer les quotients");
+    r.lignes.forEach(function(g){
+      var a = val(g.a[0]), b = val(g.b[0]), q = val(g.r[0]);
+      var oa = net(a) === net(g.a[1]), ob = net(b) === net(g.b[1]),
+          oq = net(q) === net(g.r[1]);
+      tot += 3; just += (oa?1:0) + (ob?1:0) + (oq?1:0);
+      L.push("   " + g.lab + " : " + (a||"_") + " / " + (b||"_") + " = " + (q||"_")
+             + "  " + marque(oa && ob && oq));
+    });
+    L.push("");
+    var t = ["3. Comparer les quotients"];
+    r.chk.forEach(function(c,i){
+      var ok = coche(c.ok) && !coche(c.no); tot++; if(ok) just++;
+      var dit = coche(c.ok) ? c.val : (coche(c.no) ? (c.val === "Oui" ? "Non" :
+                c.val === "Non" ? "Oui" : c.val === "Vrai" ? "Faux" : "Vrai")
+                : "(rien de coché)");
+      L.push(t[i]);
+      L.push("   " + c.q);
+      L.push("   Réponse : " + dit + "  " + marque(ok));
+      L.push("");
+    });
+    if(r.fin){
+      L.push("4. Completer la phrase de conclusion");
+      var g = document.getElementById(r.fin.grp);
+      var pris = g ? g.querySelector('.mo.pris') : null;
+      var okm = !!(pris && pris.id === r.fin.ok); tot++; if(okm) just++;
+      L.push("   Mot choisi : " + (pris ? pris.textContent : "(rien)")
+             + "  " + marque(okm));
+      if(r.fin.unite){
+        var u = r.fin.unite, ok2 = net(val(u[0])) === net(u[1]);
+        tot++; if(ok2) just++;
+        L.push("   Pour 1 : " + (val(u[0]) || "(vide)") + "  " + marque(ok2));
+      }
+      L.push("");
+    }
+    L.push("RÉSULTAT : " + just + " bonnes reponses sur " + tot);
+    return {texte: L.join("\n"), just: just, tot: tot};
+  }
+
+  /* --- envoyer ------------------------------------------------------ */
+  document.querySelectorAll('.ap-benv').forEach(function(b){
+    b.addEventListener('click', function(){
+      var num = +b.dataset.x, e = document.getElementById('ap-etat' + num);
+      var nom = document.getElementById('id-nom').value.trim();
+      var pre = document.getElementById('id-pre').value.trim();
+      var cla = document.getElementById('id-cla').value;
+      if(!nom || !pre || !cla){
+        e.className = 'ap-etat ko';
+        e.textContent = 'Ecrire son nom, son prenom et sa classe en haut de la fiche.';
+        montre(0);
+        return;
+      }
+      var res = rendu(num, nom, pre, cla);
+      var f = "AP1 - Exercice " + num + " - " + nom.toUpperCase() + " " + pre + ".txt";
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([res.texte], {type:'text/plain;charset=utf-8'}));
+      a.download = f;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      window.open(NUAGE[cla], '_blank', 'noopener');
+      e.className = 'ap-etat';
+      e.textContent = 'Fichier "' + f + '" enregistre. Le deposer dans la page Nuage qui vient de s\'ouvrir.';
+      onglets.forEach(function(o){
+        if(o.textContent === 'Exercice ' + num) o.classList.add('fait');
+      });
+    });
+  });
+})();
+</script>
+
+<style>
+/* Mode corrige : l'onglet « Réponse » devient une etiquette. */
+body.cor-ouvert .rep>.lb{pointer-events:none;cursor:default;background:none;
+  border:0;box-shadow:none;padding:0 0 0 2px;color:#1c5c39;font-weight:700;
+  font-size:11.5px;letter-spacing:.09em;text-transform:uppercase}
+body.cor-ouvert .rep>.lb::before,body.cor-ouvert .rep>.lb::after{content:none}
+body.cor-ouvert .case.cliquable,body.cor-ouvert td.cliquable,
+body.cor-ouvert .mo{cursor:default}
+</style>
+<script>
+(function(){
+"use strict";
+// ------------------------------------------------------------ MODE CORRIGE
+// Ce document est le corrige du professeur, pas une projection de classe.
+// Il s'ouvre avec TOUTES les reponses affichees : rien a cliquer, aucune
+// reponse a faire venir une ligne apres l'autre.
+var barre = document.querySelector(".pilote");
+if(!barre) return;
+var bTout = document.getElementById("bTout"),
+    bRien = document.getElementById("bRien"),
+    bMode = document.getElementById("bMode"),
+    astuce = document.getElementById("astuce");
+
+// Un seul bouton remplace « Tout afficher / Tout masquer / Mode lecture ».
+var bc = document.createElement("button");
+bc.type = "button";
+bc.id = "bCor";
+if(bTout) barre.insertBefore(bc, bTout);
+else barre.appendChild(bc);
+[bTout, bRien, bMode].forEach(function(b){
+  if(b) b.style.display = "none";
+});
+
+// Le clic dans la page ne revele plus rien : on lit un corrige, on ne
+// fait pas avancer une projection.
+document.body.classList.add("lecture");
+
+var ouvert = null;
+function pose(v){
+  if(ouvert === v) return;
+  ouvert = v;
+  var b = v ? bTout : bRien;      // on passe par le moteur de la seance,
+  if(b) b.click();                // pour que le compteur suive.
+  bc.textContent = v ? "Masquer les réponses" : "Afficher les réponses";
+  bc.className = v ? "" : "g";
+  // Corrige affiche : l'onglet « Réponse » n'est plus un bouton, c'est une
+  // etiquette. Rien sur la page n'a l'air d'attendre un clic.
+  document.body.classList.toggle("cor-ouvert", v);
+  if(astuce) astuce.textContent = v
+    ? "corrig\u00e9 affich\u00e9 \u00b7 toutes les r\u00e9ponses sont visibles"
+    : "corrig\u00e9 masqu\u00e9 \u00b7 le document est vierge";
+}
+
+// Corrige masque : un clic sur une case corrige CETTE case, et rien
+// d'autre. On passe par pointerdown, que le mode lecture n'intercepte pas.
+var deCase = {};
+document.querySelectorAll(".rep.cel").forEach(function(rep){
+  rep.getAttribute("data-cel").split("|").forEach(function(id){
+    deCase[id] = rep;
+  });
+});
+document.addEventListener("pointerdown", function(e){
+  if(ouvert) return;
+  var c = e.target.closest("[id]");
+  if(!c || !deCase[c.id]) return;
+  deCase[c.id].classList.toggle("on");
+}, true);
+
+// A l'ouverture, le corrige est ferme : la correction se decouvre, case par
+// case ou d'un coup. Le document ne donne pas ses reponses avant qu'on les
+// demande.
+pose(false);
+addEventListener("load", function(){
+  var v = ouvert; ouvert = null; pose(v);
+});
+bc.addEventListener("click", function(){ pose(!ouvert); });
+})();
+</script>
+
+<style>
+/* Le corrige change d'ecran depuis la barre du bas, comme la fiche eleve :
+   la navigation ne reste pas au milieu de la page. */
+@media screen{ .ap-ecr>.ap-nav{display:none} }
+.pilote .ap-bi{font-family:"IBM Plex Mono",monospace;font-size:13px;
+  font-weight:600;color:#2E5266;white-space:nowrap}
+.pilote .ap-nb{font-size:13.5px;font-weight:600;color:#fff;background:#2E5266;
+  border:1px solid #2E5266;border-radius:20px;padding:6px 15px;cursor:pointer}
+.pilote .ap-nb:hover{background:#00778a;border-color:#00778a}
+.pilote .ap-nb[disabled]{background:#8fa3ae;border-color:#8fa3ae;cursor:default}
+/* Sur telephone, la barre porte maintenant six choses : elle passe sur deux
+   rangees plutot que de sortir de l'ecran. */
+@media screen and (max-width:820px){
+  .pilote{flex-wrap:wrap;justify-content:center;row-gap:6px;
+    padding-left:10px;padding-right:10px}
+}
+@media screen and (max-width:620px){
+  .pilote .ap-bi,.pilote .cpt{display:none}
+  .pilote .ap-nb{font-size:12.5px;padding:3px 12px}
+}
+</style>
+<script>
+(function(){
+"use strict";
+var barre = document.querySelector(".pilote");
+if(!barre) return;
+
+function bouton(cl, txt){
+  var b = document.createElement("button");
+  b.type = "button"; b.className = "ap-nb " + cl; b.textContent = txt;
+  return b;
+}
+var bi = document.createElement("span"); bi.className = "ap-bi";
+var bp = bouton("ap-bp", "\u2190 Pr\u00e9c\u00e9dent");
+var bs = bouton("ap-bs", "Suivant \u2192");
+barre.appendChild(bi); barre.appendChild(bp); barre.appendChild(bs);
+
+function actif(sel){ return document.querySelector(".ap-ecr.on " + sel); }
+function maj(){
+  var n = actif(".ap-nbi");
+  bi.textContent = n ? n.textContent : "";
+  var p = actif(".ap-prec"), s = actif(".ap-suiv");
+  bp.disabled = !p || p.disabled;
+  bs.disabled = !s || s.disabled;
+}
+// Les deux boutons ne refont rien : ils appuient sur ceux de l'ecran affiche.
+function pousse(sel){
+  var e = actif(sel);
+  if(e && !e.disabled){ e.click(); setTimeout(maj, 60); }
+}
+bp.addEventListener("click", function(){ pousse(".ap-prec"); });
+bs.addEventListener("click", function(){ pousse(".ap-suiv"); });
+
+document.querySelectorAll(".ap-ecr").forEach(function(e){
+  new MutationObserver(maj).observe(e, {attributes: true,
+                                        attributeFilter: ["class"]});
+});
+maj();
 })();
 </script>
 
