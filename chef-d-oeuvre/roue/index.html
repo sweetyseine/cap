@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>La roue des produits - 1CAP EPC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  color:#0d1a22;background:#f6f4fb;line-height:1.55}
+a{color:inherit}
+.bar{background:#fff;border-bottom:2.5px solid #22323b}
+.bar .in{max-width:1000px;margin:0 auto;padding:12px 20px;display:flex;
+  align-items:center;gap:14px;flex-wrap:wrap}
+.bar .lg{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:18px;
+  text-decoration:none}
+.bar .fil{font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.bar .fil a{color:#b5541a;font-weight:600}
+.bar .qui{margin-left:auto;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;
+  font-size:14px;white-space:nowrap}
+main{max-width:1000px;margin:0 auto;padding:30px 20px 60px}
+h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:34px;
+  letter-spacing:-.02em;margin:0 0 6px}
+.kick{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:#b5541a;font-weight:700;margin:0 0 8px}
+.sub{font-size:17px;margin:0 0 30px}
+.carte{display:block;background:#fff;border:2.5px solid #22323b;border-radius:18px;
+  padding:20px 24px;text-decoration:none;box-shadow:0 14px 30px -24px rgba(13,26,34,.7)}
+.carte:hover{border-color:var(--c);box-shadow:0 18px 34px -22px rgba(13,26,34,.55)}
+.carte h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:22px;
+  margin:0 0 4px;color:var(--c)}
+.carte p{margin:0;font-size:15.5px}
+.gr{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center;
+  margin:0 0 34px}
+.hero svg{width:100%;height:auto;max-width:100%;display:block}
+.doc{background:#fff;border:2.5px solid #22323b;border-radius:18px;padding:22px 24px;
+  margin:0 0 18px}
+.doc h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;
+  margin:0 0 6px;color:var(--c)}
+.doc p{margin:0 0 16px;font-size:15.5px}
+.bt{display:inline-flex;align-items:center;gap:9px;font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:800;font-size:16px;text-decoration:none;color:#fff;background:var(--c);
+  border-radius:12px;padding:11px 20px;margin:0 10px 10px 0}
+.bt.sec{background:#fff;color:var(--c);border:2.5px solid var(--c)}
+.bt:hover{filter:brightness(1.08)}
+.vide{background:#fff;border:2.5px dashed #22323b;border-radius:18px;padding:20px 24px;
+  font-size:15.5px}
+.vide h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:22px;
+  margin:0 0 4px;color:#5a6b74}
+.vide p{margin:0}
+.gr.ch3{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.carte.ch{padding:16px 16px 18px}
+.carte .ill{display:block;width:100%;height:auto;border:2.5px solid #22323b;
+  border-radius:12px;margin:0 0 12px}
+.carte.ch .no{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:700;color:#5a6b74;margin:0 0 2px}
+.carte.ch h2{font-size:19px;line-height:1.2;margin:0 0 4px}
+.carte.ch p{font-size:14.5px}
+.carte.ch.off{border-style:dashed;box-shadow:none;background:#fbfbfd}
+.carte.ch.off .ill{filter:grayscale(1);opacity:.45}
+.carte.ch.off h2{color:#5a6b74}
+.carte.ch.off p{color:#5a6b74}
+.carte.dis{padding:16px 16px 18px}
+.carte.dis h2{margin:0 0 6px}
+footer.pied{border-top:2.5px solid #22323b;background:#fff}
+footer.pied .in{max-width:1000px;margin:0 auto;padding:14px 20px;display:flex;
+  flex-wrap:wrap;gap:6px 16px;align-items:center;
+  font-family:"Bricolage Grotesque",sans-serif;font-size:14px}
+footer.pied .sep{color:#b5541a;font-weight:800}
+footer.pied b{font-weight:800}
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr}
+  h1{font-size:27px}
+  .bar .qui{margin-left:0;width:100%}}
+
+[hidden]{display:none!important}
+.etape{background:#fff;border:2.5px solid #22323b;border-radius:18px;padding:18px 20px;margin:0 0 18px}
+.etape h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;margin:0 0 4px;color:#b5541a}
+.etape p{margin:0 0 10px;font-size:15.5px}
+.choix{display:flex;flex-wrap:wrap;gap:10px}
+.choix button{font:inherit;font-weight:700;font-size:15.5px;border:2.5px solid #22323b;border-radius:12px;
+  background:#fff;color:#0d1a22;padding:9px 14px;cursor:pointer}
+.choix button.on{background:#b5541a;border-color:#b5541a;color:#fff}
+.roue-z{display:flex;flex-direction:column;align-items:center;gap:12px}
+.roue-t{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:17px;margin:6px 0 4px;text-align:center}
+.roue-b{position:relative;width:min(84vw,340px);aspect-ratio:1}
+.roue-b svg{width:100%;height:100%;display:block}
+.roue-b g{transition:transform 4.2s cubic-bezier(.12,.6,.1,1);transform-origin:50% 50%}
+.fleche{position:absolute;left:50%;top:-6px;transform:translateX(-50%);width:0;height:0;
+  border-left:16px solid transparent;border-right:16px solid transparent;border-top:30px solid #0d1a22;z-index:2}
+.gros{font:inherit;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:18px;color:#fff;
+  background:#b5541a;border:2.5px solid #b5541a;border-radius:14px;padding:11px 22px;cursor:pointer;
+  text-decoration:none;display:inline-block}
+.gros:disabled{opacity:.5;cursor:default}
+.gros.sec{background:#fff;color:#b5541a}
+.cartes{display:grid;gap:18px}
+.carte-t{border:3px solid #22323b;border-radius:16px;overflow:hidden;background:#fff}
+.carte-t .bd{display:flex;justify-content:space-between;align-items:center;color:#fff;padding:10px 16px;
+  font-weight:800;font-size:14px;letter-spacing:.06em;text-transform:uppercase;background:var(--c)}
+.carte-t .cp{padding:14px 16px 16px}
+.carte-t h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:22px;line-height:1.2;margin:0 0 8px}
+.carte-t p{margin:0 0 3px;font-size:15.5px}
+.carte-t .bts{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.carte-t .bts .gros{font-size:15.5px;padding:9px 14px}
+.cons{margin:0 0 14px;padding-left:22px}
+.cons li{margin:0 0 4px}
+.msg{font-weight:700;color:#8a1c3c;margin:8px 0 0}
+.msg.ok{color:#2f6b34}
+table.tir{border-collapse:collapse;width:100%;background:#fff;border:2px solid #22323b}
+table.tir th,table.tir td{border:1.5px solid #22323b;padding:7px 10px;font-size:15px;vertical-align:middle}
+table.tir thead th{background:#f8eee8;text-align:center}
+table.tir td{text-align:center}
+@media (max-width:600px){table.tir th,table.tir td{padding:6px 5px;font-size:13.5px}table.tir .cat{display:none}
+  .rendre{font-size:12.5px;padding:4px 6px}.etape{padding:16px 12px}}
+table.tir caption{caption-side:top;text-align:center;font-weight:800;padding:0 0 6px}
+.rendre{font:inherit;font-weight:700;font-size:14px;color:#8a1c3c;background:#fff;border:2px solid #8a1c3c;
+  border-radius:10px;padding:5px 10px;cursor:pointer}
+.prof{margin:16px 0 0;border-top:1.5px solid #22323b;padding:12px 0 0}
+.prof summary{cursor:pointer;font-weight:700;color:#5a6670;font-size:14.5px}
+.prof p{margin:10px 0 0}
+.pf{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 0}
+.pf input{font:inherit;font-size:16px;border:2.5px solid #22323b;border-radius:12px;padding:9px 12px;width:200px;max-width:100%}
+#pfok .gros{margin:10px 0 0;font-size:15.5px;padding:9px 14px}
+.attente{border:2.5px dashed #22323b;border-radius:16px;padding:16px 18px;background:#fff}
+</style>
+</head>
+<body>
+<header class="bar"><div class="in"><a class="lg" href="../../index.html">1CAP EPC</a><nav class="fil"><span class="sep">&rsaquo;</span><a href="../index.html">Chef-d’œuvre</a><span class="sep">&rsaquo;</span><span>La roue des produits</span></nav><span class="qui">Mme Talbaut</span></div></header>
+<main>
+<p class="kick">Chef-d’œuvre &middot; 1CAP EPC1</p><h1>La roue des produits</h1><p class="sub">Chaque groupe tire le produit de Guyane qu’il va étudier.</p><p id="msg0" class="msg"></p><section class="etape" id="e1"><h2>1. Votre groupe</h2><p>D’abord, cliquez sur le nom de votre groupe.</p><div class="choix" id="grp"></div></section><section class="etape" id="e2" hidden><h2>2. Tirer une carte : <span id="qui2"></span></h2><p>Cliquez une première fois : la roue des catégories tourne.</p><p>Cliquez une seconde fois : la roue des cartes tourne.</p><p>Une catégorie déjà faite par votre groupe ne revient pas.</p><div class="roue-z"><div id="r1z"><p class="roue-t">Les catégories</p><div class="roue-b"><span class="fleche"></span><svg viewBox="0 0 320 320" aria-label="La roue des catégories"><g id="r1"></g></svg></div></div><div id="r2z" hidden><p class="roue-t" id="r2t"></p><div class="roue-b"><span class="fleche"></span><svg viewBox="0 0 320 320" aria-label="La roue des cartes"><g id="r2"></g></svg></div></div><button class="gros" id="tourner" type="button">Tourner la roue des catégories</button><p class="msg" id="msg3"></p></div></section><section class="etape" id="e3" hidden><h2>3. Vos cartes : <span id="qui"></span></h2><ol class="cons"><li>Cliquez sur <b>Enregistrer la fiche et ouvrir le dossier</b>.</li><li>Dans le dossier qui s’ouvre, <b>tapez</b> le mot de passe de votre groupe.</li><li><b>Glissez</b> la fiche dans le dossier (ou bouton <b>+</b>, puis <b>Téléverser</b>).</li></ol><div class="cartes" id="mes"></div></section><section class="etape"><h2>Les cartes déjà tirées</h2><div id="tir"></div><details class="prof"><summary>Espace professeur</summary><p>Pour rendre une carte à la roue, par exemple si un groupe s’est trompé de nom.</p><div class="pf" id="pf"><input id="cle" type="password" autocomplete="off" aria-label="Code professeur" placeholder="Code professeur"><button class="gros" id="okcle" type="button">Valider</button></div><div id="pfok" hidden><p>Cliquez sur « Rendre » dans le tableau.</p><button class="gros sec" id="fin" type="button">Fermer l’espace professeur</button></div><p class="msg" id="msgp"></p></details></section>
+</main>
+<footer class="pied"><div class="in"><span>Chef-d’œuvre 1CAP EPC</span><span class="sep">&middot;</span><b>Mme Talbaut</b><span class="sep">&middot;</span><span>LP Max Joséphine, Cayenne</span></div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script>
+(function(){
+var URL_ROUE = "https://script.google.com/macros/s/AKfycbwInd3-GPvTyLtuNbshTJfdRJA7CQFXtU75KQU8jTZJR-_400YHcKGHTmzUqsh4xY4qaQ/exec", CARTES = {"1": ["Alimentaire", "Confitures de fruits de Guyane", "Confitures", "Délices de Guyane", "Rémire-Montjoly"], "2": ["Alimentaire", "Toco, condiment de piments doux", "Toco", "Délices de Guyane", "Rémire-Montjoly"], "3": ["Alimentaire", "Chocolat", "Chocolat", "Theobroma", "Saint-Laurent-du-Maroni"], "4": ["Alimentaire", "Eau de source", "Eau de source", "Dilo", "Montsinéry-Tonnegrande"], "5": ["Alimentaire", "Huile de palmiers de Guyane", "Huile de palmiers", "Yana Farm", "Montsinéry"], "6": ["Alimentaire", "Couac (farine de manioc)", "Couac", "à trouver sur Internet", ""], "7": ["Alimentaire", "Jus de fruits Caresse Guyanaise", "Jus Caresse", "SOLAM (Société Laitière de Macouria)", "Macouria"], "8": ["Alimentaire", "Cassave", "Cassave", "à trouver sur Internet", ""], "9": ["Artisanat", "Bijoux en graines", "Bijoux en graines", "Kréa’Ouest Guyane", "Mana"], "10": ["Artisanat", "Bijoux et objets en bois", "Bijoux en bois", "Fabee Design", ""], "11": ["Artisanat", "Sculpture et ébénisterie", "Sculpture", "Denis Gaspard", "Montsinéry-Tonnégrande"], "12": ["Artisanat", "Vannerie amérindienne", "Vannerie", "Artisans vendus par GADEPAM", "Cayenne"], "13": ["Artisanat", "Art tembé", "Art tembé", "à trouver sur Internet", ""], "14": ["Cosmétique", "Huile de carapa", "Huile de carapa", "Nature Amazonie", ""], "15": ["Cosmétique", "Savon au carapa", "Savon au carapa", "Nature Amazonie", ""], "16": ["Cosmétique", "Soins pour cheveux naturels", "Soins cheveux", "à trouver sur Internet", ""], "17": ["Joker", "Votre idée !", "Joker", "Proposez un autre produit fabriqué en Guyane, à faire valider par le professeur.", ""], "18": ["Boisson alcoolisée", "Rhum agricole La Belle Cabresse", "Rhum", "Rhumerie Saint-Maurice", "Saint-Laurent-du-Maroni"], "19": ["Boisson alcoolisée", "Punchs aux fruits", "Punchs", "Héritaj", ""], "20": ["Boisson alcoolisée", "Bière artisanale", "Bière", "Brasserie de l’Ouest Guyanais", ""]}, CATS = [["Alimentaire", "#2f7d32"], ["Artisanat", "#b5541a"], ["Cosmétique", "#7c4bd8"], ["Boisson alcoolisée", "#8a1c3c"], ["Joker", "#c98a00"]], GROUPES = [["Les 4BG", "https://nuage09.apps.education.fr/index.php/s/axor29dtKTLxJXb"], ["Les 5 serpents", "https://nuage09.apps.education.fr/index.php/s/b8QdkRP7KQW8d2Y"], ["Les flamants roses", "https://nuage09.apps.education.fr/index.php/s/nr4QqmEJLJXtKa9"], ["Les capitaines", "https://nuage09.apps.education.fr/index.php/s/YfLon7an6NoAzbD"], ["No lesch", "https://nuage09.apps.education.fr/index.php/s/DfWSxw6o7DQLBdd"], ["Groupe 6", "https://nuage09.apps.education.fr/index.php/s/8nRkGR5cmp8mC7T"], ["Groupe 7", "https://nuage09.apps.education.fr/index.php/s/FzJ9Tow7cFtBJHJ"]];
+var $ = function(s){ return document.querySelector(s); };
+var pris = [], groupe = null, tourne = false, attente = null, cle = "";
+try { cle = sessionStorage.getItem("roue_cle") || ""; } catch (e) {}
+var T1 = "Tourner la roue des catégories", T2 = "Tourner la roue des cartes";
+var A_TROUVER = "à trouver sur Internet";
+function couleur(c){ for (var i = 0; i < CATS.length; i++) if (CATS[i][0] === c) return CATS[i][1]; return "#b5541a"; }
+function estPrise(n){ return pris.some(function(p){ return p.n === String(n); }); }
+function cartesDe(g){ return pris.filter(function(p){ return p.groupe === g; }).map(function(p){ return p.n; }); }
+function faites(g){ return cartesDe(g).map(function(n){ return CARTES[n] ? CARTES[n][0] : ""; }); }
+function libres(c){ return Object.keys(CARTES).filter(function(n){ return CARTES[n][0] === c && !estPrise(n); }); }
+function possibles(g){ var f = faites(g); return CATS.map(function(c){ return c[0]; })
+  .filter(function(c){ return f.indexOf(c) < 0 && libres(c).length > 0; }); }
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function attendre(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+
+function appel(params){
+  var u = URL_ROUE + (URL_ROUE.indexOf("?") < 0 ? "?" : "&") + params + "&t=" + Date.now();
+  return fetch(u).then(function(r){ return r.json(); });
+}
+function appelProf(o){
+  return fetch(URL_ROUE, {method: "POST", body: JSON.stringify(o)}).then(function(r){ return r.json(); });
+}
+function charger(){
+  return appel("action=etat").then(function(d){ pris = d.pris || []; tout(); })
+    .catch(function(){ $("#msg0").textContent = "La roue ne répond pas. Rechargez la page dans un instant."; });
+}
+function tout(){ dessinerGroupes(); dessinerTirage(); dessinerMesCartes(); dessinerTirages(); }
+
+function dessinerGroupes(){
+  $("#grp").innerHTML = GROUPES.map(function(g, i){
+    return '<button type="button" data-i="' + i + '"' + (groupe === g[0] ? ' class="on"' : '') + '>' + esc(g[0]) + '</button>';
+  }).join("");
+  [].forEach.call($("#grp").querySelectorAll("button"), function(b){
+    b.onclick = function(){ if (tourne || attente) return; groupe = GROUPES[+b.dataset.i][0]; tout(); };
+  });
+}
+
+function lienGroupe(){ var l = ""; GROUPES.forEach(function(g){ if (g[0] === groupe) l = g[1]; }); return l; }
+
+function vueCarte(n){
+  var c = CARTES[n];
+  return '<div class="carte-t" style="--c:' + couleur(c[0]) + '"><div class="bd"><span>' + esc(c[0]) +
+    '</span><span>n° ' + n + '</span></div><div class="cp"><h3>' + esc(c[1]) + '</h3>' +
+    (c[0] === "Joker" ? '<p>' + esc(c[3]) + '</p>' :
+      '<p>Producteur : <b>' + esc(c[3]) + '</b></p>' + (c[4] ? '<p>Commune : <b>' + esc(c[4]) + '</b></p>' : '')) +
+    '<div class="bts"><button class="gros" type="button" data-fiche="' + n +
+    '">Enregistrer la fiche et ouvrir le dossier</button></div><p class="msg ok" data-msg="' + n + '"></p>' +
+    '</div></div>';
+}
+
+function dessinerMesCartes(){
+  var z = $("#e3"), ns = groupe ? cartesDe(groupe) : [];
+  if (!ns.length) { z.hidden = true; return; }
+  z.hidden = false;
+  $("#qui").textContent = groupe;
+  $("#mes").innerHTML = ns.slice().reverse().map(vueCarte).join("");
+  [].forEach.call($("#mes").querySelectorAll("[data-fiche]"), function(b){
+    b.onclick = function(){
+      // le dossier s'ouvre tout de suite (dans le clic, sinon le navigateur le bloque),
+      // la fiche s'enregistre dans cet onglet
+      var w = window.open(lienGroupe(), "_blank");
+      if (w) w.opener = null;
+      fiche(b.dataset.fiche, !!w);
+    };
+  });
+}
+
+function dessinerTirage(){
+  var z = $("#e2");
+  if (!groupe) { z.hidden = true; return; }
+  z.hidden = false;
+  if (tourne || attente) return;
+  $("#qui2").textContent = groupe;
+  var ps = possibles(groupe);
+  $("#r2z").hidden = true;
+  if (!ps.length) {
+    $("#r1z").hidden = true; $("#tourner").hidden = true;
+    $("#msg3").className = "msg";
+    $("#msg3").textContent = cartesDe(groupe).length ? "Votre groupe a fait toutes les catégories possibles."
+                                                     : "Il ne reste plus de carte.";
+    return;
+  }
+  $("#r1z").hidden = false; $("#tourner").hidden = false; $("#tourner").disabled = false;
+  $("#tourner").textContent = T1;
+  $("#msg3").textContent = "";
+  roue($("#r1"), ps.map(function(c){ return {t: c, c: couleur(c)}; }));
+}
+
+/* une roue : une case par element ; si toutes les cases ont la meme couleur,
+   une sur deux est blanche ; le texte suit le rayon */
+function roue(g, cases){
+  var k = cases.length, R = 150, o = 160, s = "";
+  g.style.transition = "none"; g.style.transform = "rotate(0deg)"; void g.getBoundingClientRect(); g.style.transition = "";
+  var une = cases.every(function(x){ return x.c === cases[0].c; });
+  for (var i = 0; i < k; i++) {
+    var a0 = (i / k) * 2 * Math.PI - Math.PI / 2, a1 = ((i + 1) / k) * 2 * Math.PI - Math.PI / 2;
+    var fond = une && k > 1 && i % 2 === 0 ? "#ffffff" : cases[i].c, texte = fond === "#ffffff" ? "#0d1a22" : "#ffffff";
+    if (k === 1) s += '<circle cx="' + o + '" cy="' + o + '" r="' + R + '" fill="' + fond + '" stroke="#22323b" stroke-width="3"/>';
+    else s += '<path d="M' + o + ' ' + o + ' L' + (o + R * Math.cos(a0)).toFixed(1) + ' ' + (o + R * Math.sin(a0)).toFixed(1) +
+      ' A' + R + ' ' + R + ' 0 ' + ((a1 - a0) > Math.PI ? 1 : 0) + ' 1 ' + (o + R * Math.cos(a1)).toFixed(1) + ' ' +
+      (o + R * Math.sin(a1)).toFixed(1) + ' Z" fill="' + fond + '" stroke="#22323b" stroke-width="3"/>';
+    /* le texte tient entre le moyeu et le bord : coupe en deux lignes si long, police reduite si besoin */
+    var am = k === 1 ? -Math.PI / 2 : (a0 + a1) / 2, rm = (24 + R - 8) / 2;
+    var tx = o + rm * Math.cos(am), ty = o + rm * Math.sin(am);
+    var rot = k === 1 ? 0 : am * 180 / Math.PI; if (rot > 90 || rot < -90) rot -= 180;
+    var mots = String(cases[i].t), lignes = [mots], m = mots.indexOf(" ", Math.floor(mots.length / 2) - 3);
+    if (mots.length > 12 && m > 0) lignes = [mots.slice(0, m), mots.slice(m + 1)];
+    var lg = Math.max.apply(null, lignes.map(function(l){ return l.length; }));
+    var fs = Math.min(k > 6 ? 13 : 15, Math.floor((R - 32) / (0.62 * lg)));
+    s += '<text fill="' + texte + '" font-family="Arial,sans-serif" font-weight="700" font-size="' + fs +
+      '" text-anchor="middle" dominant-baseline="middle" transform="rotate(' + rot.toFixed(1) + ' ' +
+      tx.toFixed(1) + ' ' + ty.toFixed(1) + ')">' + lignes.map(function(l, j){
+        return '<tspan x="' + tx.toFixed(1) + '" y="' + (ty + (j - (lignes.length - 1) / 2) * fs * 1.1).toFixed(1) + '">' + esc(l) + '</tspan>';
+      }).join("") + '</text>';
+  }
+  s += '<circle cx="' + o + '" cy="' + o + '" r="16" fill="#22323b"/>';
+  g.innerHTML = s;
+}
+/* la case i s'arrete sous la fleche, en haut, apres six tours */
+function lancer(g, i, k){
+  g.style.transform = "rotate(" + (360 * 6 + (360 - (i + 0.5) * 360 / k)) + "deg)";
+  return attendre(4400);
+}
+
+/* un jeu en deux clics : le 1er fait tourner la roue des categories, le 2nd
+   celle des cartes. Le script Google tire les deux au 1er clic (la carte est
+   donc deja au groupe) ; la page ne fait que les montrer. */
+function tirer(){
+  if (tourne || !groupe) return;
+  if (attente) return tirer2();
+  var ps = possibles(groupe);
+  if (!ps.length) return;
+  tourne = true; $("#tourner").disabled = true;
+  $("#msg3").className = "msg ok"; $("#msg3").textContent = "La roue des catégories tourne…";
+  appel("action=tirer&groupe=" + encodeURIComponent(groupe)).then(function(d){
+    if (d.pris) pris = d.pris;
+    if (!d.ok) {
+      tourne = false;
+      $("#msg3").className = "msg";
+      $("#msg3").textContent = d.erreur === "fini" ? "Votre groupe a fait toutes les catégories possibles."
+                                                   : "La roue n’a pas pu tirer. Réessayez.";
+      tout(); return;
+    }
+    var i = ps.indexOf(d.cat);
+    if (i < 0) { ps.push(d.cat); roue($("#r1"), ps.map(function(c){ return {t: c, c: couleur(c)}; })); i = ps.length - 1; }
+    return lancer($("#r1"), i, ps.length).then(function(){
+      // la seconde roue : les cartes encore libres de la categorie, et celle tiree
+      var ns = libres(d.cat).concat([String(d.n)]).sort(function(a, b){ return +a - +b; });
+      attente = {d: d, ns: ns};
+      tourne = false;
+      $("#r2t").textContent = "Catégorie : " + d.cat;
+      $("#r2z").hidden = false;
+      roue($("#r2"), ns.map(function(n){ return {t: CARTES[n][2], c: couleur(d.cat)}; }));
+      $("#msg3").textContent = "Catégorie : " + d.cat + ". À vous de tourner la roue des cartes !";
+      $("#tourner").textContent = T2; $("#tourner").disabled = false;
+      $("#tourner").scrollIntoView({behavior: "smooth", block: "end"});
+    });
+  }).catch(function(){
+    tourne = false; $("#tourner").disabled = false;
+    $("#msg3").className = "msg"; $("#msg3").textContent = "La roue ne répond pas. Vérifiez la connexion et réessayez.";
+  });
+}
+function tirer2(){
+  var d = attente.d, ns = attente.ns;
+  tourne = true; $("#tourner").disabled = true;
+  $("#msg3").textContent = "La roue des cartes tourne…";
+  lancer($("#r2"), ns.indexOf(String(d.n)), ns.length).then(function(){
+    tourne = false; attente = null;
+    $("#tourner").hidden = true;
+    $("#msg3").textContent = "Votre carte : " + CARTES[d.n][1].replace(/([^!.])$/, "$1.");
+    dessinerGroupes(); dessinerMesCartes(); dessinerTirages();
+    setTimeout(function(){ $("#e3").scrollIntoView({behavior: "smooth", block: "start"}); }, 1200);
+  });
+}
+
+function fiche(n, ouvert){
+  var c = CARTES[n], msg = document.querySelector('[data-msg="' + n + '"]');
+  var fab = c[0] === "Joker" || c[3] === A_TROUVER ? "" : c[3] + (c[4] ? " (" + c[4] + ")" : "");
+  var prod = c[0] === "Joker" ? "" : c[1];
+  var x = function(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); };
+  msg.className = "msg ok"; msg.textContent = "";
+  fetch("modele-fiche.docx").then(function(r){ return r.arrayBuffer(); })
+  .then(function(b){ return JSZip.loadAsync(b); })
+  .then(function(z){
+    var noms = ["word/document.xml", "word/footer1.xml"];
+    return Promise.all(noms.map(function(nm){ return z.file(nm).async("string"); })).then(function(t){
+      noms.forEach(function(nm, i){
+        z.file(nm, t[i].split("{{GROUPE}}").join(x(groupe)).split("{{PRODUIT}}").join(x(prod))
+                        .split("{{FABRICANT}}").join(x(fab)));
+      });
+      return z.generateAsync({type: "blob", compression: "DEFLATE",
+        mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"});
+    });
+  }).then(function(blob){
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Fiche de recherche - " + groupe + " - " + (c[0] === "Joker" ? "Joker" : c[1]).replace(/[\\/:*?"<>|]/g, "") + ".docx";
+    document.body.appendChild(a); a.click(); a.remove();
+    msg.textContent = "La fiche est enregistrée sur cet appareil (dossier Téléchargements).";
+    if (ouvert) msg.textContent += " Le dossier du groupe est ouvert dans un nouvel onglet.";
+    else msg.innerHTML += ' <a href="' + lienGroupe() + '" target="_blank" rel="noopener">Ouvrir le dossier du groupe</a>';
+  }).catch(function(){ msg.className = "msg"; msg.textContent = "La fiche n’a pas pu être fabriquée. Réessayez."; });
+}
+
+function dessinerTirages(){
+  var l = pris.slice().sort(function(a, b){ return +a.n - +b.n; });
+  $("#tir").innerHTML = l.length ? '<table class="tir"><caption>Les cartes tirées par les groupes</caption>' +
+    '<thead><tr><th>N°</th><th class="cat">Catégorie</th><th>Produit</th><th>Groupe</th>' + (cle ? '<th>Rendre</th>' : '') +
+    '</tr></thead><tbody>' +
+    l.map(function(p){ var c = CARTES[p.n] || ["", "?"]; return '<tr><td>' + p.n +
+      '</td><td class="cat">' + esc(c[0]) + '</td><td>' + esc(c[1]) + '</td><td>' + esc(p.groupe) + '</td>' +
+      (cle ? '<td><button class="rendre" type="button" data-n="' + p.n + '">Rendre</button></td>' : '') +
+      '</tr>'; }).join("") + '</tbody></table>'
+    : '<p>Aucune carte tirée pour le moment.</p>';
+  [].forEach.call($("#tir").querySelectorAll("[data-n]"), function(b){ b.onclick = function(){ rendre(b.dataset.n); }; });
+  $("#pf").hidden = !!cle; $("#pfok").hidden = !cle;
+}
+
+/* l'espace professeur : rendre une carte a la roue (erreur de groupe...) */
+function oublierCle(){ cle = ""; try { sessionStorage.removeItem("roue_cle"); } catch (e) {} }
+function verifier(){
+  var c = $("#cle").value.trim().toUpperCase();
+  if (!c) return;
+  $("#msgp").className = "msg ok"; $("#msgp").textContent = "Vérification…";
+  appelProf({action: "verif", cle: c}).then(function(d){
+    if (!d.ok) { $("#msgp").className = "msg"; $("#msgp").textContent = "Code refusé."; return; }
+    cle = c; try { sessionStorage.setItem("roue_cle", c); } catch (e) {}
+    pris = d.pris || pris; $("#cle").value = "";
+    $("#msgp").textContent = "Code accepté : le bouton « Rendre » est dans le tableau.";
+    tout();
+  }).catch(function(){ $("#msgp").className = "msg"; $("#msgp").textContent = "La roue ne répond pas. Réessayez."; });
+}
+function rendre(n){
+  var c = CARTES[n] || ["", "?"], p = pris.filter(function(x){ return x.n === String(n); })[0];
+  if (!confirm("Rendre la carte n° " + n + " (" + c[1] + ")" + (p ? " du groupe " + p.groupe : "") + " à la roue ?")) return;
+  $("#msgp").className = "msg ok"; $("#msgp").textContent = "La carte revient dans la roue…";
+  appelProf({action: "rendre", cle: cle, n: String(n)}).then(function(d){
+    if (!d.ok) {
+      oublierCle(); dessinerTirages();
+      $("#msgp").className = "msg"; $("#msgp").textContent = "Code refusé : tapez-le de nouveau."; return;
+    }
+    pris = d.pris || pris;
+    $("#msgp").textContent = "La carte n° " + n + " est de nouveau dans la roue.";
+    tout();
+  }).catch(function(){ $("#msgp").className = "msg"; $("#msgp").textContent = "La roue ne répond pas. Réessayez."; });
+}
+$("#okcle").onclick = verifier;
+$("#cle").onkeydown = function(e){ if (e.key === "Enter") verifier(); };
+$("#fin").onclick = function(){ oublierCle(); $("#msgp").textContent = ""; dessinerTirages(); };
+
+if (!URL_ROUE) {
+  $("#e1").innerHTML = '<div class="attente"><b>La roue n’est pas encore ouverte.</b> Elle le sera en classe.</div>';
+  return;
+}
+$("#tourner").onclick = tirer;
+charger();
+})();
+</script>
+</body>
+</html>
