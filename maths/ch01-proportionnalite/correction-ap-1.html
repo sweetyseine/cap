@@ -1336,6 +1336,25 @@ input.ec.xl{width:300px;text-align:center}
   .deux .calcs input.ec,.deux .calcs .case,
   .grp.fus>.calcs input.ec,.grp.fus>.calcs .case{width:100%;min-width:0}
 }
+/* Exception (09/10/2026) : sur une largeur moyenne (le cadre du site fait
+   moins de 1000 px), une grille de divisions d'une question reste en ligne -
+   l'etiquette, le calcul, puis la remarque a droite s'il y en a une. Empilee,
+   elle s'etalait sur toute la largeur, « Pour 1 kg » seul sur sa ligne. */
+@media screen and (min-width:761px) and (max-width:1000px){
+  .grp.fus>.calcs{grid-template-columns:auto 84px 22px 84px 22px 84px;
+    justify-content:start;gap:8px 8px}
+  .grp.fus>.calcs.avecnotes{
+    grid-template-columns:auto 64px 16px 64px 16px 64px minmax(0,1fr)}
+  .grp.fus>.calcs .cl{grid-column:auto;white-space:nowrap}
+  .grp.fus>.calcs .nt{grid-column:auto;white-space:normal;min-width:0}
+  .deux .calcs:not(.avecnotes){grid-template-columns:auto 56px 14px 56px 14px 56px;
+    justify-content:start;gap:8px 6px}
+  .deux .calcs:not(.avecnotes) .cl{grid-column:auto;white-space:nowrap}
+}
+/* Dans une grille, une case remplit sa colonne : sans la petite marge qu'elle
+   a dans une phrase, sinon elle depasse de 3 px et son bord droit est coupe. */
+.calcs .n>.case{margin-left:0;margin-right:0}
+
 
 /* Un document mis en deux colonnes garde ses dessins et ses tableaux a sa
    largeur : sur telephone, ils prennent celle de l'ecran. */
