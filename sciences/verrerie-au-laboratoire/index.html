@@ -77,6 +77,18 @@ footer.pied b{font-weight:800}
   h1{font-size:27px}
   .bar .qui{margin-left:0;width:100%}}
 
+.menu{background:#fff;border-bottom:2.5px solid #22323b;position:sticky;top:0;z-index:29}
+.menu .in{max-width:1000px;margin:0 auto;padding:8px 20px;display:flex;gap:8px;
+  flex-wrap:wrap;align-items:center}
+.menu a{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:15px;
+  text-decoration:none;color:var(--m);border:2.5px solid var(--m);border-radius:999px;
+  padding:6px 15px;background:#fff;line-height:1.1}
+.menu a:hover{background:var(--m);color:#fff}
+.menu a.on{background:var(--m);color:#fff}
+@media (max-width:600px){.menu .in{padding:7px 12px;gap:6px}
+  .menu a{font-size:13.5px;padding:5px 11px}}
+@media print{.menu{display:none}}
+
 .ttm{margin:28px 0 18px;padding:16px 24px;border:3.5px solid #12202a;
   border-radius:18px;color:#fff;background:var(--c);
   box-shadow:0 14px 30px -24px rgba(13,26,34,.75)}
@@ -121,23 +133,51 @@ footer.pied b{font-weight:800}
 .cor-cadre iframe{display:block;width:100%;height:600px;border:0}
 .attente{background:#fff;border:3.5px solid #12202a;border-radius:18px;padding:22px 24px;
   margin:0;font-size:17px;color:var(--c);font-weight:700}
+.ongl{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+.ongl a{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:15px;
+  text-decoration:none;color:var(--c);background:#fff;border:2.5px solid var(--c);
+  border-radius:12px;padding:7px 14px;line-height:1.15}
+.ongl a:hover{background:var(--c);color:#fff}
+.ongl a.on{background:var(--c);color:#fff}
+.ongl.p{margin-top:-4px}
+.ongl.p a{font-size:13.5px;padding:5px 11px;border-width:2px;border-radius:10px}
+.suite{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 0}
+.suite a{display:block;text-decoration:none;background:#fff;color:#0d1a22;
+  border:3px solid #12202a;border-radius:16px;padding:12px 16px;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:16px;line-height:1.25}
+.suite a:hover{border-color:var(--c)}
+.suite a small{display:block;font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--c);margin:0 0 3px}
+.suite a.ap{text-align:right}
+.chs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.chs a{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:14px;
+  text-decoration:none;color:var(--c);border:2px solid var(--c);border-radius:10px;
+  padding:5px 12px;background:#fff}
+.chs a.on{background:var(--c);color:#fff}
+@media (max-width:600px){.suite{grid-template-columns:1fr}.suite a.ap{text-align:left}
+  .ongl a{font-size:14px;padding:6px 11px}}
 @media (max-width:760px){.ttm .l1{font-size:20px}.band .l1{font-size:19px}}
 </style>
 </head>
 <body>
 <header class="bar"><div class="in"><a class="lg" href="../../index.html">1CAP EPC</a><nav class="fil"><span class="sep">&rsaquo;</span><a href="../index.html">Sciences</a><span class="sep">&rsaquo;</span><span>La verrerie au laboratoire</span></nav><span class="qui">Mme Talbaut</span></div></header>
+<nav class="menu" aria-label="Menu du site"><div class="in"><a href="../../index.html" style="--m:#22323b">Accueil</a><a href="../../maths/index.html" style="--m:#5b3fa8">Mathématiques</a><a href="../../sciences/index.html" style="--m:#00778a" class="on" aria-current="page">Sciences</a><a href="../../chef-d-oeuvre/index.html" style="--m:#b5541a">Chef-d’œuvre</a></div></nav>
 <main>
-<div id="vac"><p class="kick">Sciences &middot; Chapitre 2</p><h1>La verrerie au laboratoire</h1><p class="sub">Reconnaître et nommer la verrerie et le matériel.</p><a class="cv" style="--c:#6b3fa0" href="verrerie-au-laboratoire-eleve.pdf" target="_blank" rel="noopener"><h2>Le document élève</h2><div class="vg"><img src="verrerie-au-laboratoire-couverture.png" alt="Première page du document élève"><span class="bt" style="--c:#6b3fa0">Ouvrir le document</span></div></a><div class="ttm" style="--c:#6b3fa0"><p class="l1">Chapitre 2 La verrerie au laboratoire</p><p class="l2">Les parties du cours</p></div><div class="gr ch3"><button class="carte mc" type="button" data-u="0" style="--c:#6b3fa0;--f:#f0ecf6"><span class="ba"></span><p class="no">Partie 1</p><h3>La verrerie courante</h3><p class="et">Après la séance</p></button><button class="carte mc" type="button" data-u="1" style="--c:#6b3fa0;--f:#f0ecf6"><span class="ba"></span><p class="no">Partie 2</p><h3>Autre matériel</h3><p class="et">Après la séance</p></button></div></div><div id="vex" hidden></div>
+<nav class="chs" style="--c:#6b3fa0"><a href="../securite-en-chimie/index.html">Chapitre 1 : La sécurité en chimie</a><a href="../verrerie-au-laboratoire/index.html" class="on" aria-current="page">Chapitre 2 : La verrerie au laboratoire</a></nav><div id="vac"><p class="kick">Sciences &middot; Chapitre 2</p><h1>La verrerie au laboratoire</h1><p class="sub">Reconnaître et nommer la verrerie et le matériel.</p><a class="cv" style="--c:#6b3fa0" href="verrerie-au-laboratoire-eleve.pdf" target="_blank" rel="noopener"><h2>Le document élève</h2><div class="vg"><img src="verrerie-au-laboratoire-couverture.png" alt="Première page du document élève"><span class="bt" style="--c:#6b3fa0">Ouvrir le document</span></div></a><div class="ttm" style="--c:#6b3fa0"><p class="l1">Chapitre 2 La verrerie au laboratoire</p><p class="l2">Les parties du cours</p></div><div class="gr ch3"><button class="carte mc" type="button" data-u="0" style="--c:#6b3fa0;--f:#f0ecf6"><span class="ba"></span><p class="no">Partie 1</p><h3>La verrerie courante</h3><p class="et">Après la séance</p></button><button class="carte mc" type="button" data-u="1" style="--c:#6b3fa0;--f:#f0ecf6"><span class="ba"></span><p class="no">Partie 2</p><h3>Autre matériel</h3><p class="et">Après la séance</p></button></div></div><div id="vex" hidden></div>
 </main>
 <footer class="pied"><div class="in"><span>Sciences 1CAP EPC</span><span class="sep">&middot;</span><b>Mme Talbaut</b><span class="sep">&middot;</span><span>LP Max Joséphine, Cayenne</span></div></footer>
 
 <script>
+// Navigation dans un chapitre (09/10/2026) : des onglets pour passer d'une
+// seance (ou d'une partie) a l'autre, « precedente / suivante » en bas, et
+// l'adresse qui change (#s2, #s3-e1, #p1) : le bouton Retour du navigateur
+// revient a l'ecran d'avant, et un lien mene droit a une seance.
 var D = {"c": "#6b3fa0", "f": "#f0ecf6", "kick": "Chapitre 2", "unites": [{"id": "p1", "t": "La verrerie courante", "ok": false, "no": "Partie 1", "src": ""}, {"id": "p2", "t": "Autre matériel", "ok": false, "no": "Partie 2", "src": ""}]};
 var ecrans = {acc: document.getElementById("vac"), sc: document.getElementById("vsc"),
               ex: document.getElementById("vex")};
 function montre(n){ Object.keys(ecrans).forEach(function(k){
   if(ecrans[k]) ecrans[k].hidden = (k !== n); }); window.scrollTo(0, 0); }
-function esc(s){ return s; }
+function va(h){ if(location.hash === h) route(); else location.hash = h; }
 
 function carte(u, i, c, f){
   return '<button class="carte mc" type="button" data-u="' + i + '" style="--c:' + c +
@@ -155,22 +195,35 @@ function corrige(u){
     'après la séance.</p>';
 }
 
-function ecranUnite(s, u, retour){
-  var h = '<button class="s-ret" type="button" id="ret2" style="--c:' + D.c + '">&larr; ' +
-    retour + '</button><div class="band" style="--c:' + D.c + '"><p class="l0">' +
-    (s ? s.no : D.kick) + '</p><p class="l1">' + u.t + '</p></div>';
-  h += corrige(u);
-  ecrans.ex.innerHTML = h;
-  montre("ex");
-  document.getElementById("ret2").addEventListener("click", function(){
-    montre(s && ecrans.sc ? "sc" : "acc"); });
+// une rangee d'onglets : [[libelle, adresse], ...], l'onglet actif allume
+function onglets(liste, actif, petit){
+  return '<nav class="ongl' + (petit ? ' p' : '') + '" style="--c:' + D.c + '">' +
+    liste.map(function(o, k){
+      return '<a href="' + o[1] + '"' + (k === actif ? ' class="on" aria-current="page"' : '') +
+        '>' + o[0] + '</a>'; }).join("") + '</nav>';
+}
+// en bas : l'ecran d'avant et celui d'apres
+function suite(prec, suiv){
+  if(!prec && !suiv) return "";
+  return '<nav class="suite" style="--c:' + D.c + '">' +
+    (prec ? '<a class="av" href="' + prec[1] + '"><small>&larr; Précédent</small>' + prec[0] + '</a>'
+          : '<span></span>') +
+    (suiv ? '<a class="ap" href="' + suiv[1] + '"><small>Suivant &rarr;</small>' + suiv[0] + '</a>'
+          : '<span></span>') + '</nav>';
+}
+function bande(l0, l1){
+  return '<div class="band" style="--c:' + D.c + '"><p class="l0">' + l0 +
+    '</p><p class="l1">' + l1 + '</p></div>';
+}
+
+function ongletsSeances(i){
+  return onglets([["Toutes les séances", "#"]].concat(D.seances.map(function(s, k){
+    return [s.no, "#s" + (k + 1)]; })), i + 1);
 }
 
 function ecranSeance(i){
-  var s = D.seances[i];
-  var h = '<button class="s-ret" type="button" id="ret1" style="--c:' + D.c +
-    '">&larr; Les séances</button><div class="band" style="--c:' + D.c +
-    '"><p class="l0">' + s.no + '</p><p class="l1">' + s.titre + '</p></div>' +
+  var s = D.seances[i], n = D.seances.length;
+  var h = ongletsSeances(i) + bande(s.no, s.titre) +
     '<a class="cv" style="--c:' + D.c + '" href="' + s.pdf +
     '" target="_blank" rel="noopener"><h2>La fiche de la séance</h2><div class="vg">' +
     '<img src="' + s.img + '" alt="Première page de la fiche">' +
@@ -180,21 +233,53 @@ function ecranSeance(i){
       '<p class="l2">Les exercices</p></div>' +
       '<div class="gr ch3">' + s.unites.map(function(u, j){
         return carte(u, j, D.c, D.f); }).join("") + '</div>'
-      : corrige(s.unites[0]));
+      : corrige(s.unites[0])) +
+    suite(i > 0 ? [D.seances[i - 1].no + " : " + D.seances[i - 1].titre, "#s" + i] : null,
+          i < n - 1 ? [D.seances[i + 1].no + " : " + D.seances[i + 1].titre, "#s" + (i + 2)] : null);
   ecrans.sc.innerHTML = h;
   montre("sc");
-  document.getElementById("ret1").addEventListener("click", function(){ montre("acc"); });
   ecrans.sc.querySelectorAll(".carte.mc").forEach(function(b){
-    b.addEventListener("click", function(){
-      ecranUnite(s, s.unites[+b.dataset.u], "La séance"); }); });
+    b.addEventListener("click", function(){ va("#s" + (i + 1) + "-e" + (+b.dataset.u + 1)); }); });
+}
+
+function ecranExercice(i, j){
+  var s = D.seances[i], u = s.unites[j], n = s.unites.length, base = "#s" + (i + 1);
+  var h = ongletsSeances(i) +
+    onglets([["La fiche", base]].concat(s.unites.map(function(v, k){
+      return [v.t, base + "-e" + (k + 1)]; })), j + 1, true) +
+    bande(s.no, u.t) + corrige(u) +
+    suite(j > 0 ? [s.unites[j - 1].t, base + "-e" + j] : ["La fiche de la séance", base],
+          j < n - 1 ? [s.unites[j + 1].t, base + "-e" + (j + 2)] : null);
+  ecrans.ex.innerHTML = h;
+  montre("ex");
+}
+
+function ecranPartie(j){
+  var u = D.unites[j], n = D.unites.length;
+  var h = onglets([["Toutes les parties", "#"]].concat(D.unites.map(function(v, k){
+      return [v.no, "#p" + (k + 1)]; })), j + 1) +
+    bande(u.no, u.t) + corrige(u) +
+    suite(j > 0 ? [D.unites[j - 1].no + " : " + D.unites[j - 1].t, "#p" + j] : null,
+          j < n - 1 ? [D.unites[j + 1].no + " : " + D.unites[j + 1].t, "#p" + (j + 2)] : null);
+  ecrans.ex.innerHTML = h;
+  montre("ex");
+}
+
+function route(){
+  var h = location.hash, m;
+  if(D.seances && (m = /^#s(\d+)-e(\d+)$/.exec(h)) && D.seances[m[1] - 1]
+     && D.seances[m[1] - 1].unites[m[2] - 1]) return ecranExercice(m[1] - 1, m[2] - 1);
+  if(D.seances && (m = /^#s(\d+)$/.exec(h)) && D.seances[m[1] - 1]) return ecranSeance(m[1] - 1);
+  if(D.unites && (m = /^#p(\d+)$/.exec(h)) && D.unites[m[1] - 1]) return ecranPartie(m[1] - 1);
+  montre("acc");
 }
 
 document.querySelectorAll("#vac .carte.mc").forEach(function(b){
   b.addEventListener("click", function(){
-    if(D.seances) ecranSeance(+b.dataset.u);
-    else ecranUnite(null, D.unites[+b.dataset.u], "Les parties");
-  });
+    va((D.seances ? "#s" : "#p") + (+b.dataset.u + 1)); });
 });
+window.addEventListener("hashchange", route);
+route();
 
 window.addEventListener("message", function(e){
   if(!e.data || e.data.h === undefined) return;

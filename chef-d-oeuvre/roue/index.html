@@ -77,6 +77,18 @@ footer.pied b{font-weight:800}
   h1{font-size:27px}
   .bar .qui{margin-left:0;width:100%}}
 
+.menu{background:#fff;border-bottom:2.5px solid #22323b;position:sticky;top:0;z-index:29}
+.menu .in{max-width:1000px;margin:0 auto;padding:8px 20px;display:flex;gap:8px;
+  flex-wrap:wrap;align-items:center}
+.menu a{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:15px;
+  text-decoration:none;color:var(--m);border:2.5px solid var(--m);border-radius:999px;
+  padding:6px 15px;background:#fff;line-height:1.1}
+.menu a:hover{background:var(--m);color:#fff}
+.menu a.on{background:var(--m);color:#fff}
+@media (max-width:600px){.menu .in{padding:7px 12px;gap:6px}
+  .menu a{font-size:13.5px;padding:5px 11px}}
+@media print{.menu{display:none}}
+
 [hidden]{display:none!important}
 .etape{background:#fff;border:2.5px solid #22323b;border-radius:18px;padding:18px 20px;margin:0 0 18px}
 .etape h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;margin:0 0 4px;color:#b5541a}
@@ -133,6 +145,7 @@ table.tir caption{caption-side:top;text-align:center;font-weight:800;padding:0 0
 </head>
 <body>
 <header class="bar"><div class="in"><a class="lg" href="../../index.html">1CAP EPC</a><nav class="fil"><span class="sep">&rsaquo;</span><a href="../index.html">Chef-d’œuvre</a><span class="sep">&rsaquo;</span><span>La roue des produits</span></nav><span class="qui">Mme Talbaut</span></div></header>
+<nav class="menu" aria-label="Menu du site"><div class="in"><a href="../../index.html" style="--m:#22323b">Accueil</a><a href="../../maths/index.html" style="--m:#5b3fa8">Mathématiques</a><a href="../../sciences/index.html" style="--m:#00778a">Sciences</a><a href="../../chef-d-oeuvre/index.html" style="--m:#b5541a" class="on" aria-current="page">Chef-d’œuvre</a></div></nav>
 <main>
 <p class="kick">Chef-d’œuvre &middot; 1CAP EPC1</p><h1>La roue des produits</h1><p class="sub">Chaque groupe tire le produit de Guyane qu’il va étudier.</p><p id="msg0" class="msg"></p><section class="etape" id="e1"><h2>1. Votre groupe</h2><p>D’abord, cliquez sur le nom de votre groupe.</p><div class="choix" id="grp"></div></section><section class="etape" id="e2" hidden><h2>2. Tirer une carte : <span id="qui2"></span></h2><p>Cliquez une première fois : la roue des catégories tourne.</p><p>Cliquez une seconde fois : la roue des cartes tourne.</p><p>Une catégorie déjà faite par votre groupe ne revient pas.</p><div class="roue-z"><div id="r1z"><p class="roue-t">Les catégories</p><div class="roue-b"><span class="fleche"></span><svg viewBox="0 0 320 320" aria-label="La roue des catégories"><g id="r1"></g></svg></div></div><div id="r2z" hidden><p class="roue-t" id="r2t"></p><div class="roue-b"><span class="fleche"></span><svg viewBox="0 0 320 320" aria-label="La roue des cartes"><g id="r2"></g></svg></div></div><button class="gros" id="tourner" type="button">Tourner la roue des catégories</button><p class="msg" id="msg3"></p></div></section><section class="etape" id="e3" hidden><h2>3. Vos cartes : <span id="qui"></span></h2><ol class="cons"><li>Cliquez sur <b>Enregistrer la fiche et ouvrir le dossier</b>.</li><li>Dans le dossier qui s’ouvre, <b>tapez</b> le mot de passe de votre groupe.</li><li><b>Glissez</b> la fiche dans le dossier (ou bouton <b>+</b>, puis <b>Téléverser</b>).</li></ol><div class="cartes" id="mes"></div></section><section class="etape"><h2>Les cartes déjà tirées</h2><div id="tir"></div><details class="prof"><summary>Espace professeur</summary><p>Pour rendre une carte à la roue, par exemple si un groupe s’est trompé de nom.</p><div class="pf" id="pf"><input id="cle" type="password" autocomplete="off" aria-label="Code professeur" placeholder="Code professeur"><button class="gros" id="okcle" type="button">Valider</button></div><div id="pfok" hidden><p>Cliquez sur « Rendre » dans le tableau.</p><button class="gros sec" id="fin" type="button">Fermer l’espace professeur</button></div><p class="msg" id="msgp"></p></details></section>
 </main>

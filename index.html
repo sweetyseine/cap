@@ -76,10 +76,23 @@ footer.pied b{font-weight:800}
   .hero{grid-template-columns:1fr}
   h1{font-size:27px}
   .bar .qui{margin-left:0;width:100%}}
+
+.menu{background:#fff;border-bottom:2.5px solid #22323b;position:sticky;top:0;z-index:29}
+.menu .in{max-width:1000px;margin:0 auto;padding:8px 20px;display:flex;gap:8px;
+  flex-wrap:wrap;align-items:center}
+.menu a{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:15px;
+  text-decoration:none;color:var(--m);border:2.5px solid var(--m);border-radius:999px;
+  padding:6px 15px;background:#fff;line-height:1.1}
+.menu a:hover{background:var(--m);color:#fff}
+.menu a.on{background:var(--m);color:#fff}
+@media (max-width:600px){.menu .in{padding:7px 12px;gap:6px}
+  .menu a{font-size:13.5px;padding:5px 11px}}
+@media print{.menu{display:none}}
 </style>
 </head>
 <body>
 <header class="bar"><div class="in"><a class="lg" href="./index.html">1CAP EPC</a><nav class="fil"></nav><span class="qui">Mme Talbaut</span></div></header>
+<nav class="menu" aria-label="Menu du site"><div class="in"><a href="./index.html" style="--m:#22323b" class="on" aria-current="page">Accueil</a><a href="./maths/index.html" style="--m:#5b3fa8">Mathématiques</a><a href="./sciences/index.html" style="--m:#00778a">Sciences</a><a href="./chef-d-oeuvre/index.html" style="--m:#b5541a">Chef-d’œuvre</a></div></nav>
 <main>
 <div class="hero"><div><p class="kick">Lycée professionnel Max Joséphine</p><h1>Les cours de 1CAP EPC</h1><p class="sub">Les fiches de l’année et leurs corrections. Un élève absent, ou qui a égaré sa feuille, la retrouve ici.</p></div><div>
 <svg viewBox="0 0 520 380" role="img" aria-label="Sciences et mathématiques">

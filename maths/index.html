@@ -76,10 +76,23 @@ footer.pied b{font-weight:800}
   .hero{grid-template-columns:1fr}
   h1{font-size:27px}
   .bar .qui{margin-left:0;width:100%}}
+
+.menu{background:#fff;border-bottom:2.5px solid #22323b;position:sticky;top:0;z-index:29}
+.menu .in{max-width:1000px;margin:0 auto;padding:8px 20px;display:flex;gap:8px;
+  flex-wrap:wrap;align-items:center}
+.menu a{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:15px;
+  text-decoration:none;color:var(--m);border:2.5px solid var(--m);border-radius:999px;
+  padding:6px 15px;background:#fff;line-height:1.1}
+.menu a:hover{background:var(--m);color:#fff}
+.menu a.on{background:var(--m);color:#fff}
+@media (max-width:600px){.menu .in{padding:7px 12px;gap:6px}
+  .menu a{font-size:13.5px;padding:5px 11px}}
+@media print{.menu{display:none}}
 </style>
 </head>
 <body>
 <header class="bar"><div class="in"><a class="lg" href="../index.html">1CAP EPC</a><nav class="fil"><span class="sep">&rsaquo;</span><span>Mathématiques</span></nav><span class="qui">Mme Talbaut</span></div></header>
+<nav class="menu" aria-label="Menu du site"><div class="in"><a href="../index.html" style="--m:#22323b">Accueil</a><a href="../maths/index.html" style="--m:#5b3fa8" class="on" aria-current="page">Mathématiques</a><a href="../sciences/index.html" style="--m:#00778a">Sciences</a><a href="../chef-d-oeuvre/index.html" style="--m:#b5541a">Chef-d’œuvre</a></div></nav>
 <main>
 <p class="kick">Mathématiques</p><h1>Les chapitres</h1><p class="sub">Cliquer sur un chapitre pour ouvrir ses documents.</p><div class="gr ch3"><a class="carte ch" style="--c:#0b5cab" href="ch01-proportionnalite/index.html"><svg class="ill" viewBox="0 0 160 110" role="presentation"><rect width="160" height="110" rx="14" fill="#dde8f3"/><g stroke="#22323b" stroke-width="5" stroke-linecap="round" fill="none"><path d="M28 86 H136"/><path d="M28 86 V22"/></g><path d="M28 86 L130 26" stroke="#0b5cab" stroke-width="8" stroke-linecap="round"/><g fill="#fff" stroke="#22323b" stroke-width="5"><circle cx="62" cy="66" r="7"/><circle cx="96" cy="46" r="7"/></g></svg><p class="no">Chapitre 1</p><h2>Proportionnalité</h2><p>Reconnaître deux suites de nombres proportionnelles.</p></a></div>
 </main>
