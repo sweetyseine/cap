@@ -88,6 +88,13 @@ footer.pied b{font-weight:800}
 @media (max-width:600px){.menu .in{padding:7px 12px;gap:6px}
   .menu a{font-size:13.5px;padding:5px 11px}}
 @media print{.menu{display:none}}
+/* le bas de page : discret, sans bande blanche, colle en bas de l'ecran meme
+   quand la page est courte (Mme Talbaut, 17/10/2026) */
+body{min-height:100vh;display:flex;flex-direction:column}
+body>main{flex:1 0 auto;width:100%;box-sizing:border-box;padding-bottom:28px!important}
+footer.pied{background:transparent!important;border-top:1.5px solid #c9d2d7!important}
+footer.pied .in{padding:8px 20px!important;font-size:12.5px!important;color:#55666f}
+footer.pied b{font-weight:700!important}
 
 .ttm{margin:28px 0 18px;padding:16px 24px;border:3.5px solid #12202a;
   border-radius:18px;color:#fff;background:var(--c);
@@ -175,18 +182,34 @@ footer.pied b{font-weight:800}
 .enc>h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;
   margin:0;padding:18px 0 14px;color:var(--c)}
 .enc .attente{border-width:2.5px}
-/* les fiches des seances, cote a cote */
-.docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
-.doc-s{display:flex;flex-direction:column;align-items:center;gap:10px;text-decoration:none;
-  color:#0d1a22;border:2.5px solid #12202a;border-radius:14px;padding:14px 12px 16px;background:#fff}
-.doc-s:hover{border-color:var(--c)}
-.doc-s .no{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.16em;
-  text-transform:uppercase;font-weight:800;color:var(--c);align-self:flex-start}
-.doc-s img{width:100%;max-width:190px;height:auto;display:block;border:2px solid #12202a;border-radius:8px;
-  aspect-ratio:210/148.5;object-fit:cover;object-position:top}   /* la moitie haute de la fiche suffit */
-.doc-s .t{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:16px;
-  line-height:1.25;text-align:center}
-.doc-s .bt{margin:auto 0 0}
+/* les seances de maths : une carte chacune, sur le fond bleu des cartes
+   (17/10/2026) ; titres sur deux lignes pour que les apercus s'alignent */
+.crt{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.crt .k{display:flex;flex-direction:column;background:var(--f);border:3.5px solid #12202a;
+  border-radius:18px;overflow:hidden;box-shadow:0 14px 30px -26px rgba(13,26,34,.7)}
+.crt .ba{display:block;height:14px;background:var(--c);border-bottom:3.5px solid #12202a}
+.crt .in{display:flex;flex-direction:column;gap:10px;padding:14px 18px 18px;flex:1}
+.crt .no{align-self:flex-start;font-family:"Bricolage Grotesque",sans-serif;font-size:17px;
+  letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:#fff;background:var(--c);
+  border-radius:999px;padding:5px 16px;margin:0}   /* bien visible (Mme Talbaut, 17/10/2026) */
+.crt .t{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:19px;
+  line-height:1.2;margin:0;color:#0d1a22;min-height:2.4em}
+.crt .ap{display:block;line-height:0}
+.crt .ap img{width:100%;aspect-ratio:210/105;object-fit:cover;object-position:top;
+  border:2px solid #12202a;border-radius:10px;display:block;background:#fff}
+.crt .et{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:14.5px;
+  color:var(--c);margin:0}
+.crt .et.ok{color:#137A3A}
+.crt .bts{display:flex;gap:8px;margin-top:auto}
+.crt .bts>*{flex:1}
+.crt .b1,.crt .b2{display:block;text-align:center;font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:800;font-size:15px;border-radius:12px;padding:9px 10px;text-decoration:none;
+  white-space:nowrap}
+.crt .b1{background:#fff;color:var(--c);border:2.5px solid var(--c)}
+.crt .b1:hover{background:var(--c);color:#fff}
+.crt .b2{background:#1D7A33;color:#fff;border:2.5px solid #1D7A33}
+.crt .b2:hover{filter:brightness(1.1)}
+.crt .b2.off{background:#e9edef;color:#7a8a93;border-color:#c9d2d7}
 @media (max-width:600px){.enc{padding:0 12px 14px}}
 @media (max-width:600px){.suite{grid-template-columns:1fr}.suite a.ap{text-align:left}
   .ongl a{font-size:14px;padding:6px 11px}}

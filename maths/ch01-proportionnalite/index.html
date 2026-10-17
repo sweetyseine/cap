@@ -88,6 +88,13 @@ footer.pied b{font-weight:800}
 @media (max-width:600px){.menu .in{padding:7px 12px;gap:6px}
   .menu a{font-size:13.5px;padding:5px 11px}}
 @media print{.menu{display:none}}
+/* le bas de page : discret, sans bande blanche, colle en bas de l'ecran meme
+   quand la page est courte (Mme Talbaut, 17/10/2026) */
+body{min-height:100vh;display:flex;flex-direction:column}
+body>main{flex:1 0 auto;width:100%;box-sizing:border-box;padding-bottom:28px!important}
+footer.pied{background:transparent!important;border-top:1.5px solid #c9d2d7!important}
+footer.pied .in{padding:8px 20px!important;font-size:12.5px!important;color:#55666f}
+footer.pied b{font-weight:700!important}
 
 .ttm{margin:28px 0 18px;padding:16px 24px;border:3.5px solid #12202a;
   border-radius:18px;color:#fff;background:var(--c);
@@ -175,18 +182,34 @@ footer.pied b{font-weight:800}
 .enc>h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;
   margin:0;padding:18px 0 14px;color:var(--c)}
 .enc .attente{border-width:2.5px}
-/* les fiches des seances, cote a cote */
-.docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
-.doc-s{display:flex;flex-direction:column;align-items:center;gap:10px;text-decoration:none;
-  color:#0d1a22;border:2.5px solid #12202a;border-radius:14px;padding:14px 12px 16px;background:#fff}
-.doc-s:hover{border-color:var(--c)}
-.doc-s .no{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.16em;
-  text-transform:uppercase;font-weight:800;color:var(--c);align-self:flex-start}
-.doc-s img{width:100%;max-width:190px;height:auto;display:block;border:2px solid #12202a;border-radius:8px;
-  aspect-ratio:210/148.5;object-fit:cover;object-position:top}   /* la moitie haute de la fiche suffit */
-.doc-s .t{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:16px;
-  line-height:1.25;text-align:center}
-.doc-s .bt{margin:auto 0 0}
+/* les seances de maths : une carte chacune, sur le fond bleu des cartes
+   (17/10/2026) ; titres sur deux lignes pour que les apercus s'alignent */
+.crt{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.crt .k{display:flex;flex-direction:column;background:var(--f);border:3.5px solid #12202a;
+  border-radius:18px;overflow:hidden;box-shadow:0 14px 30px -26px rgba(13,26,34,.7)}
+.crt .ba{display:block;height:14px;background:var(--c);border-bottom:3.5px solid #12202a}
+.crt .in{display:flex;flex-direction:column;gap:10px;padding:14px 18px 18px;flex:1}
+.crt .no{align-self:flex-start;font-family:"Bricolage Grotesque",sans-serif;font-size:17px;
+  letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:#fff;background:var(--c);
+  border-radius:999px;padding:5px 16px;margin:0}   /* bien visible (Mme Talbaut, 17/10/2026) */
+.crt .t{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:19px;
+  line-height:1.2;margin:0;color:#0d1a22;min-height:2.4em}
+.crt .ap{display:block;line-height:0}
+.crt .ap img{width:100%;aspect-ratio:210/105;object-fit:cover;object-position:top;
+  border:2px solid #12202a;border-radius:10px;display:block;background:#fff}
+.crt .et{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:14.5px;
+  color:var(--c);margin:0}
+.crt .et.ok{color:#137A3A}
+.crt .bts{display:flex;gap:8px;margin-top:auto}
+.crt .bts>*{flex:1}
+.crt .b1,.crt .b2{display:block;text-align:center;font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:800;font-size:15px;border-radius:12px;padding:9px 10px;text-decoration:none;
+  white-space:nowrap}
+.crt .b1{background:#fff;color:var(--c);border:2.5px solid var(--c)}
+.crt .b1:hover{background:var(--c);color:#fff}
+.crt .b2{background:#1D7A33;color:#fff;border:2.5px solid #1D7A33}
+.crt .b2:hover{filter:brightness(1.1)}
+.crt .b2.off{background:#e9edef;color:#7a8a93;border-color:#c9d2d7}
 @media (max-width:600px){.enc{padding:0 12px 14px}}
 @media (max-width:600px){.suite{grid-template-columns:1fr}.suite a.ap{text-align:left}
   .ongl a{font-size:14px;padding:6px 11px}}
@@ -197,7 +220,7 @@ footer.pied b{font-weight:800}
 <header class="bar"><div class="in"><a class="lg" href="../../index.html">1CAP EPC</a><nav class="fil"><span class="sep">&rsaquo;</span><a href="../index.html">Mathématiques</a><span class="sep">&rsaquo;</span><span>Proportionnalité</span></nav><span class="qui">Mme Talbaut</span></div></header>
 <nav class="menu" aria-label="Menu du site"><div class="in"><a href="../../index.html" style="--m:#22323b">Accueil</a><a href="../../maths/index.html" style="--m:#5b3fa8" class="on" aria-current="page">Mathématiques</a><a href="../../sciences/index.html" style="--m:#00778a">Sciences</a><a href="../../chef-d-oeuvre/index.html" style="--m:#b5541a">Chef-d’œuvre</a></div></nav>
 <main>
-<div class="ttm top" style="--c:#0b5cab"><span class="tx"><span class="l1">Chapitre 1 Proportionnalité</span><span class="l2">Reconnaître deux suites de nombres proportionnelles.</span></span></div><div id="vac"><section class="enc" style="--c:#0b5cab"><h2>Les documents élèves</h2><div class="docs"><a class="doc-s" href="seance-1-eleve.pdf" target="_blank" rel="noopener"><span class="no">Séance 1</span><img src="seance-1-couverture.png" alt="Première page de la fiche"><span class="t">Activité 1 - Les deux ardoises de Ryan</span><span class="bt" style="--c:#0b5cab">Ouvrir la fiche</span></a><a class="doc-s" href="seance-2-eleve.pdf" target="_blank" rel="noopener"><span class="no">Séance 2</span><img src="seance-2-couverture.png" alt="Première page de la fiche"><span class="t">Activité 2 - Le bon de commande du client</span><span class="bt" style="--c:#0b5cab">Ouvrir la fiche</span></a><a class="doc-s" href="ap-1-eleve.pdf" target="_blank" rel="noopener"><span class="no">AP 1</span><img src="ap-1-couverture.png" alt="Première page de la fiche"><span class="t">Vérifier la proportionnalité</span><span class="bt" style="--c:#0b5cab">Ouvrir la fiche</span></a></div></section><section class="enc" style="--c:#0b5cab"><h2>Les séances faites en classe</h2><div class="gr ch3"><button class="carte mc" type="button" data-u="0" style="--c:#0b5cab;--f:#e7eff7"><span class="ba"></span><p class="no">Séance 1</p><h3>Activité 1 - Les deux ardoises de Ryan</h3><p class="et ok">Correction en ligne</p></button><button class="carte mc" type="button" data-u="1" style="--c:#0b5cab;--f:#e7eff7"><span class="ba"></span><p class="no">Séance 2</p><h3>Activité 2 - Le bon de commande du client</h3><p class="et ok">Correction en ligne</p></button><button class="carte mc" type="button" data-u="2" style="--c:#0b5cab;--f:#e7eff7"><span class="ba"></span><p class="no">AP 1</p><h3>Vérifier la proportionnalité</h3><p class="et ok">Correction en ligne</p></button></div></section></div><div id="vsc" hidden></div><div id="vex" hidden></div>
+<div class="ttm top" style="--c:#0b5cab"><span class="tx"><span class="l1">Chapitre 1 Proportionnalité</span><span class="l2">Reconnaître deux suites de nombres proportionnelles.</span></span></div><div id="vac"><section class="enc" style="--c:#0b5cab;--f:#e7eff7"><h2>Les séances</h2><div class="crt"><div class="k"><span class="ba"></span><div class="in"><p class="no">Séance 1</p><p class="t">Activité 1 - Les deux ardoises de Ryan</p><a class="ap" href="seance-1-eleve.pdf" target="_blank" rel="noopener"><img src="seance-1-couverture.png" alt="Première page de la fiche : Activité 1 - Les deux ardoises de Ryan"></a><p class="et ok">Correction en ligne</p><div class="bts"><a class="b1" href="seance-1-eleve.pdf" target="_blank" rel="noopener">La fiche</a><a class="b2" href="#s1">La correction</a></div></div></div><div class="k"><span class="ba"></span><div class="in"><p class="no">Séance 2</p><p class="t">Activité 2 - Le bon de commande du client</p><a class="ap" href="seance-2-eleve.pdf" target="_blank" rel="noopener"><img src="seance-2-couverture.png" alt="Première page de la fiche : Activité 2 - Le bon de commande du client"></a><p class="et ok">Correction en ligne</p><div class="bts"><a class="b1" href="seance-2-eleve.pdf" target="_blank" rel="noopener">La fiche</a><a class="b2" href="#s2">La correction</a></div></div></div><div class="k"><span class="ba"></span><div class="in"><p class="no">AP 1</p><p class="t">Vérifier la proportionnalité</p><a class="ap" href="ap-1-eleve.pdf" target="_blank" rel="noopener"><img src="ap-1-couverture.png" alt="Première page de la fiche : Vérifier la proportionnalité"></a><p class="et ok">Correction en ligne</p><div class="bts"><a class="b1" href="ap-1-eleve.pdf" target="_blank" rel="noopener">La fiche</a><a class="b2" href="#s3">La correction</a></div></div></div></div></section></div><div id="vsc" hidden></div><div id="vex" hidden></div>
 </main>
 <footer class="pied"><div class="in"><span>Mathématiques 1CAP EPC</span><span class="sep">&middot;</span><b>Mme Talbaut</b><span class="sep">&middot;</span><span>LP Max Joséphine, Cayenne</span></div></footer>
 
