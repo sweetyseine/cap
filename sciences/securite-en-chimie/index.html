@@ -182,6 +182,32 @@ footer.pied b{font-weight:700!important}
 .enc>h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;
   margin:0;padding:18px 0 14px;color:var(--c)}
 .enc .attente{border-width:2.5px}
+/* un chapitre de plusieurs parties et une seule fiche (27/10/2026) */
+.cours2{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:24px;align-items:start;
+  background:var(--f);border:3.5px solid #12202a;border-top:14px solid var(--c);border-radius:18px;
+  padding:18px 22px 22px;box-shadow:0 14px 30px -26px rgba(13,26,34,.7)}
+.cours2 h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;margin:0 0 10px;color:var(--c)}
+.cours2 .g{display:flex;flex-direction:column;gap:10px;min-width:0}
+.cours2 .ap{display:block;line-height:0}
+.cours2 .ap img{width:100%;aspect-ratio:210/150;object-fit:cover;object-position:top;
+  border:2px solid #12202a;border-radius:10px;background:#fff;display:block}
+.cours2 .b1{display:block;text-align:center;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  font-size:15px;border-radius:12px;padding:9px 16px;text-decoration:none;background:#fff;
+  color:var(--c);border:2.5px solid var(--c)}
+.cours2 .b1:hover{background:var(--c);color:#fff}
+.cours2 .d{min-width:0}
+.cours2 .pls{display:flex;flex-direction:column;gap:10px}
+.cours2 .pl{display:flex;align-items:center;gap:12px;text-decoration:none;background:#fff;color:#0d1a22;
+  border:2.5px solid #12202a;border-radius:14px;padding:10px 14px;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:16px;line-height:1.25}
+.cours2 a.pl:hover{border-color:var(--c)}
+.cours2 .pl .n{flex:none;background:var(--c);color:#fff;border-radius:999px;padding:4px 12px;font-size:14px}
+.cours2 .pl .tt{flex:1;min-width:0}
+.cours2 .pl .v{flex:none;background:#1D7A33;color:#fff;border-radius:10px;padding:6px 12px;font-size:14px}
+.cours2 .pl.off .v{background:#e9edef;color:#7a8a93}
+@media (max-width:700px){.cours2{grid-template-columns:minmax(0,1fr);padding:14px 12px 16px}
+  .cours2 .pl{flex-wrap:wrap;gap:8px 12px}.cours2 .pl .v{margin-left:auto}
+  .cours2 .pl .tt{order:3;flex-basis:100%}}
 /* les seances de maths : une carte chacune, sur le fond bleu des cartes
    (17/10/2026) ; titres sur deux lignes pour que les apercus s'alignent */
 .crt{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
@@ -222,7 +248,7 @@ footer.pied b{font-weight:700!important}
 <header class="bar"><div class="in"><a class="lg" href="../../index.html">1CAP EPC</a><nav class="fil"><span class="sep">&rsaquo;</span><a href="../index.html">Sciences</a><span class="sep">&rsaquo;</span><span>La sécurité en chimie</span></nav><span class="qui">Mme Talbaut</span></div></header>
 <nav class="menu" aria-label="Menu du site"><div class="in"><a href="../../index.html" style="--m:#22323b">Accueil</a><a href="../../maths/index.html" style="--m:#5b3fa8">Mathématiques</a><a href="../../sciences/index.html" style="--m:#00778a" class="on" aria-current="page">Sciences</a><a href="../../chef-d-oeuvre/index.html" style="--m:#b5541a">Chef-d’œuvre</a></div></nav>
 <main>
-<details class="tch" style="--c:#b3261e"><summary class="ttm top"><span class="tx"><span class="l1">Chapitre 1 La sécurité en chimie</span><span class="l2">Pictogrammes, étiquettes et consignes au laboratoire.</span></span><span class="fl">Changer de chapitre</span></summary><nav class="tch-l"><a href="../verrerie-au-laboratoire/index.html">Chapitre 2 : La verrerie au laboratoire</a></nav></details><div id="vac"><a class="cv" style="--c:#b3261e" href="securite-en-chimie-eleve.pdf" target="_blank" rel="noopener"><h2>Le document élève</h2><div class="vg"><img src="securite-en-chimie-couverture.png" alt="Première page du document élève"><span class="bt" style="--c:#b3261e">Ouvrir le document</span></div></a><section class="enc" style="--c:#b3261e"><h2>Le cours corrigé</h2><div class="gr ch3"><button class="carte mc" type="button" data-u="0" style="--c:#b3261e;--f:#f7e9e8"><span class="ba"></span><p class="no">Partie 1</p><h3>La chimie au quotidien</h3><p class="et ok">Correction en ligne</p></button><button class="carte mc" type="button" data-u="1" style="--c:#b3261e;--f:#f7e9e8"><span class="ba"></span><p class="no">Partie 2</p><h3>Activité 1 · Les pictogrammes</h3><p class="et ok">Correction en ligne</p></button><button class="carte mc" type="button" data-u="2" style="--c:#b3261e;--f:#f7e9e8"><span class="ba"></span><p class="no">Partie 3</p><h3>Activité 2 · Les étiquettes</h3><p class="et ok">Correction en ligne</p></button><button class="carte mc" type="button" data-u="3" style="--c:#b3261e;--f:#f7e9e8"><span class="ba"></span><p class="no">Partie 4</p><h3>Activité 3 · Les consignes de sécurité</h3><p class="et ok">Correction en ligne</p></button><button class="carte mc" type="button" data-u="4" style="--c:#b3261e;--f:#f7e9e8"><span class="ba"></span><p class="no">Partie 5</p><h3>En conclusion</h3><p class="et ok">Correction en ligne</p></button></div></section></div><div id="vex" hidden></div>
+<details class="tch" style="--c:#b3261e"><summary class="ttm top"><span class="tx"><span class="l1">Chapitre 1 La sécurité en chimie</span><span class="l2">Pictogrammes, étiquettes et consignes au laboratoire.</span></span><span class="fl">Changer de chapitre</span></summary><nav class="tch-l"><a href="../verrerie-au-laboratoire/index.html">Chapitre 2 : La verrerie au laboratoire</a></nav></details><div id="vac"><div class="cours2" style="--c:#b3261e;--f:#f7e9e8"><div class="g"><h2>Le document élève</h2><a class="ap" href="securite-en-chimie-eleve.pdf" target="_blank" rel="noopener"><img src="securite-en-chimie-couverture.png" alt="Première page du document élève"></a><a class="b1" href="securite-en-chimie-eleve.pdf" target="_blank" rel="noopener">La fiche</a></div><div class="d"><h2>Le cours corrigé</h2><div class="pls"><a class="pl" href="#p1"><span class="n">Partie 1</span><span class="tt">La chimie au quotidien</span><span class="v">La correction</span></a><a class="pl" href="#p2"><span class="n">Partie 2</span><span class="tt">Activité 1 · Les pictogrammes</span><span class="v">La correction</span></a><a class="pl" href="#p3"><span class="n">Partie 3</span><span class="tt">Activité 2 · Les étiquettes</span><span class="v">La correction</span></a><a class="pl" href="#p4"><span class="n">Partie 4</span><span class="tt">Activité 3 · Les consignes de sécurité</span><span class="v">La correction</span></a><a class="pl" href="#p5"><span class="n">Partie 5</span><span class="tt">En conclusion</span><span class="v">La correction</span></a></div></div></div></div><div id="vex" hidden></div>
 </main>
 <footer class="pied"><div class="in"><span>Sciences 1CAP EPC</span><span class="sep">&middot;</span><b>Mme Talbaut</b><span class="sep">&middot;</span><span>LP Max Joséphine, Cayenne</span></div></footer>
 
