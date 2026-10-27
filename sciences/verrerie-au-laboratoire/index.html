@@ -187,6 +187,8 @@ footer.pied b{font-weight:700!important}
 .crt{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
 .crt .k{display:flex;flex-direction:column;background:var(--f);border:3.5px solid #12202a;
   border-radius:18px;overflow:hidden;box-shadow:0 14px 30px -26px rgba(13,26,34,.7)}
+.crt.seule{grid-template-columns:minmax(0,400px);justify-content:center}   /* une seule carte : centree */
+.crt.seule .t,.crt.seule .et{min-height:0;text-align:center}
 .crt .ba{display:block;height:14px;background:var(--c);border-bottom:3.5px solid #12202a}
 .crt .in{display:flex;flex-direction:column;gap:10px;padding:14px 18px 18px;flex:1}
 .crt .no{align-self:flex-start;font-family:"Bricolage Grotesque",sans-serif;font-size:17px;
@@ -220,7 +222,7 @@ footer.pied b{font-weight:700!important}
 <header class="bar"><div class="in"><a class="lg" href="../../index.html">1CAP EPC</a><nav class="fil"><span class="sep">&rsaquo;</span><a href="../index.html">Sciences</a><span class="sep">&rsaquo;</span><span>La verrerie au laboratoire</span></nav><span class="qui">Mme Talbaut</span></div></header>
 <nav class="menu" aria-label="Menu du site"><div class="in"><a href="../../index.html" style="--m:#22323b">Accueil</a><a href="../../maths/index.html" style="--m:#5b3fa8">Mathématiques</a><a href="../../sciences/index.html" style="--m:#00778a" class="on" aria-current="page">Sciences</a><a href="../../chef-d-oeuvre/index.html" style="--m:#b5541a">Chef-d’œuvre</a></div></nav>
 <main>
-<details class="tch" style="--c:#6b3fa0"><summary class="ttm top"><span class="tx"><span class="l1">Chapitre 2 La verrerie au laboratoire</span><span class="l2">Reconnaître et nommer la verrerie et le matériel.</span></span><span class="fl">Changer de chapitre</span></summary><nav class="tch-l"><a href="../securite-en-chimie/index.html">Chapitre 1 : La sécurité en chimie</a></nav></details><div id="vac"><a class="cv" style="--c:#6b3fa0" href="verrerie-au-laboratoire-eleve.pdf" target="_blank" rel="noopener"><h2>Le document élève</h2><div class="vg"><img src="verrerie-au-laboratoire-couverture.png" alt="Première page du document élève"><span class="bt" style="--c:#6b3fa0">Ouvrir le document</span></div></a><section class="enc" style="--c:#6b3fa0"><h2>Le cours corrigé</h2><div class="gr ch3"><button class="carte mc" type="button" data-u="0" style="--c:#6b3fa0;--f:#f0ecf6"><span class="ba"></span><p class="no">Partie 1</p><h3>La verrerie courante</h3><p class="et ok">Correction en ligne</p></button></div></section></div><div id="vex" hidden></div>
+<details class="tch" style="--c:#6b3fa0"><summary class="ttm top"><span class="tx"><span class="l1">Chapitre 2 La verrerie au laboratoire</span><span class="l2">Reconnaître et nommer la verrerie et le matériel.</span></span><span class="fl">Changer de chapitre</span></summary><nav class="tch-l"><a href="../securite-en-chimie/index.html">Chapitre 1 : La sécurité en chimie</a></nav></details><div id="vac"><div class="crt seule" style="--c:#6b3fa0;--f:#f0ecf6"><div class="k"><span class="ba"></span><div class="in"><p class="t">La verrerie courante</p><a class="ap" href="verrerie-au-laboratoire-eleve.pdf" target="_blank" rel="noopener"><img src="verrerie-au-laboratoire-couverture.png" alt="Première page de la fiche : La verrerie courante"></a><p class="et ok">Correction en ligne</p><div class="bts"><a class="b1" href="verrerie-au-laboratoire-eleve.pdf" target="_blank" rel="noopener">La fiche</a><a class="b2" href="#p1">La correction</a></div></div></div></div></div><div id="vex" hidden></div>
 </main>
 <footer class="pied"><div class="in"><span>Sciences 1CAP EPC</span><span class="sep">&middot;</span><b>Mme Talbaut</b><span class="sep">&middot;</span><span>LP Max Joséphine, Cayenne</span></div></footer>
 
@@ -229,7 +231,7 @@ footer.pied b{font-weight:700!important}
 // seance (ou d'une partie) a l'autre, « precedente / suivante » en bas, et
 // l'adresse qui change (#s2, #s3-e1, #p1) : le bouton Retour du navigateur
 // revient a l'ecran d'avant, et un lien mene droit a une seance.
-var D = {"c": "#6b3fa0", "f": "#f0ecf6", "kick": "Chapitre 2", "unites": [{"id": "p1", "t": "La verrerie courante", "ok": true, "no": "Partie 1", "src": "correction.html#p1"}]};
+var D = {"c": "#6b3fa0", "f": "#f0ecf6", "kick": "Chapitre 2", "unites": [{"id": "p1", "t": "La verrerie courante", "ok": true, "no": "", "src": "correction.html#p1"}]};
 var ecrans = {acc: document.getElementById("vac"), sc: document.getElementById("vsc"),
               ex: document.getElementById("vex")};
 function montre(n){ Object.keys(ecrans).forEach(function(k){
@@ -313,9 +315,10 @@ function ecranExercice(i, j){
 
 function ecranPartie(j){
   var u = D.unites[j], n = D.unites.length;
-  var h = onglets([["Toutes les parties", "#"]].concat(D.unites.map(function(v, k){
-      return [v.no, "#p" + (k + 1)]; })), j + 1) +
-    bande(u.no, u.t) + corrige(u) +
+  // une seule partie : pas d'onglets, pas de « Partie 1 » (27/10/2026)
+  var h = (n > 1 ? onglets([["Toutes les parties", "#"]].concat(D.unites.map(function(v, k){
+      return [v.no, "#p" + (k + 1)]; })), j + 1) : "") +
+    bande(u.no || "Le cours corrigé", u.t) + corrige(u) +
     suite(j > 0 ? [D.unites[j - 1].no + " : " + D.unites[j - 1].t, "#p" + j] : null,
           j < n - 1 ? [D.unites[j + 1].no + " : " + D.unites[j + 1].t, "#p" + (j + 2)] : null);
   ecrans.ex.innerHTML = h;
