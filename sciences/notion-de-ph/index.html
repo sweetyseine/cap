@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>La notion de pH - 1CAP EPC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  color:#0d1a22;background:#f6f4fb;line-height:1.55}
+a{color:inherit}
+.bar{background:#fff;border-bottom:2.5px solid #22323b}
+.bar .in{max-width:1000px;margin:0 auto;padding:12px 20px;display:flex;
+  align-items:center;gap:14px;flex-wrap:wrap}
+.bar .lg{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:18px;
+  text-decoration:none}
+.bar .fil{font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.bar .fil a{color:#00778a;font-weight:600}
+.bar .qui{margin-left:auto;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;
+  font-size:14px;white-space:nowrap}
+main{max-width:1000px;margin:0 auto;padding:30px 20px 60px}
+h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:34px;
+  letter-spacing:-.02em;margin:0 0 6px}
+.kick{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:#00778a;font-weight:700;margin:0 0 8px}
+.sub{font-size:17px;margin:0 0 30px}
+.carte{display:block;background:#fff;border:2.5px solid #22323b;border-radius:18px;
+  padding:20px 24px;text-decoration:none;box-shadow:0 14px 30px -24px rgba(13,26,34,.7)}
+.carte:hover{border-color:var(--c);box-shadow:0 18px 34px -22px rgba(13,26,34,.55)}
+.carte h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:22px;
+  margin:0 0 4px;color:var(--c)}
+.carte p{margin:0;font-size:15.5px}
+.gr{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center;
+  margin:0 0 34px}
+.hero svg{width:100%;height:auto;max-width:100%;display:block}
+.doc{background:#fff;border:2.5px solid #22323b;border-radius:18px;padding:22px 24px;
+  margin:0 0 18px}
+.doc h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;
+  margin:0 0 6px;color:var(--c)}
+.doc p{margin:0 0 16px;font-size:15.5px}
+.bt{display:inline-flex;align-items:center;gap:9px;font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:800;font-size:16px;text-decoration:none;color:#fff;background:var(--c);
+  border-radius:12px;padding:11px 20px;margin:0 10px 10px 0}
+.bt.sec{background:#fff;color:var(--c);border:2.5px solid var(--c)}
+.bt:hover{filter:brightness(1.08)}
+.vide{background:#fff;border:2.5px dashed #22323b;border-radius:18px;padding:20px 24px;
+  font-size:15.5px}
+.vide h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:22px;
+  margin:0 0 4px;color:#5a6b74}
+.vide p{margin:0}
+.gr.ch3{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.carte.ch{padding:16px 16px 18px}
+.carte .ill{display:block;width:100%;height:auto;border:2.5px solid #22323b;
+  border-radius:12px;margin:0 0 12px}
+.carte.ch .no{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:700;color:#5a6b74;margin:0 0 2px}
+.carte.ch h2{font-size:19px;line-height:1.2;margin:0 0 4px}
+.carte.ch p{font-size:14.5px}
+.carte.ch.off{border-style:dashed;box-shadow:none;background:#fbfbfd}
+.carte.ch.off .ill{filter:grayscale(1);opacity:.45}
+.carte.ch.off h2{color:#5a6b74}
+.carte.ch.off p{color:#5a6b74}
+.carte.dis{padding:16px 16px 18px}
+.carte.dis h2{margin:0 0 6px}
+footer.pied{border-top:2.5px solid #22323b;background:#fff}
+footer.pied .in{max-width:1000px;margin:0 auto;padding:14px 20px;display:flex;
+  flex-wrap:wrap;gap:6px 16px;align-items:center;
+  font-family:"Bricolage Grotesque",sans-serif;font-size:14px}
+footer.pied .sep{color:#00778a;font-weight:800}
+footer.pied b{font-weight:800}
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr}
+  h1{font-size:27px}
+  .bar .qui{margin-left:0;width:100%}}
+
+.menu{background:#fff;border-bottom:2.5px solid #22323b;position:sticky;top:0;z-index:29}
+.menu .in{max-width:1000px;margin:0 auto;padding:8px 20px;display:flex;gap:8px;
+  flex-wrap:wrap;align-items:center}
+.menu a{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:15px;
+  text-decoration:none;color:var(--m);border:2.5px solid var(--m);border-radius:999px;
+  padding:6px 15px;background:#fff;line-height:1.1}
+.menu a:hover{background:var(--m);color:#fff}
+.menu a.on{background:var(--m);color:#fff}
+@media (max-width:600px){.menu .in{padding:7px 12px;gap:6px}
+  .menu a{font-size:13.5px;padding:5px 11px}}
+@media print{.menu{display:none}}
+/* le bas de page : discret, sans bande blanche, colle en bas de l'ecran meme
+   quand la page est courte (Mme Talbaut, 17/10/2026) */
+body{min-height:100vh;display:flex;flex-direction:column}
+body>main{flex:1 0 auto;width:100%;box-sizing:border-box;padding-bottom:28px!important}
+footer.pied{background:transparent!important;border-top:1.5px solid #c9d2d7!important}
+footer.pied .in{padding:8px 20px!important;font-size:12.5px!important;color:#55666f}
+footer.pied b{font-weight:700!important}
+
+.ttm{margin:28px 0 18px;padding:16px 24px;border:3.5px solid #12202a;
+  border-radius:18px;color:#fff;background:var(--c);
+  box-shadow:0 14px 30px -24px rgba(13,26,34,.75)}
+.ttm .l1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  font-size:23px;line-height:1.2;margin:0;text-transform:uppercase}
+.ttm .l2{margin:3px 0 0;font-size:16px}
+.carte.mc{display:flex;flex-direction:column;justify-content:flex-start;width:100%;text-align:left;font:inherit;cursor:pointer;
+  color:inherit;background:var(--f);border:3.5px solid #12202a;border-radius:18px;
+  padding:0 20px 18px;overflow:hidden;box-shadow:0 14px 30px -26px rgba(13,26,34,.7)}
+.carte.mc:hover{border-color:var(--c)}
+.carte.mc .ba{display:block;height:14px;background:var(--c);
+  margin:0 -20px 16px;border-bottom:3.5px solid #12202a}
+.carte.mc .no{font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+  letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--c);margin:0 0 3px}
+.carte.mc h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  font-size:19px;line-height:1.2;margin:0 0 8px;color:#0d1a22}
+.carte.mc .et{margin:0;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  font-size:14.5px;color:var(--c)}
+.carte.mc .et.ok{color:#137A3A}
+.cv{display:block;margin:0 0 18px;border:3.5px solid #12202a;border-radius:18px;
+  overflow:hidden;background:#fff;text-decoration:none;
+  box-shadow:0 14px 30px -24px rgba(13,26,34,.75)}
+.cv:hover{border-color:var(--c)}
+.cv h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;
+  margin:0;padding:18px 22px 14px;color:var(--c)}
+.cv .vg{display:flex;justify-content:center;align-items:center;gap:26px;
+  flex-wrap:wrap;padding:0 22px 20px}
+.cv .vg img{width:230px;height:auto;display:block;border:2.5px solid #12202a;
+  border-radius:10px}
+.cv .bt{margin:0}
+.s-ret{display:inline-flex;align-items:center;gap:8px;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:16px;
+  background:none;border:0;cursor:pointer;padding:0;margin:0 0 4px;color:var(--c)}
+.band{margin:12px 0 18px;padding:14px 22px;border:3.5px solid #12202a;border-radius:18px;
+  background:var(--c);color:#fff}
+.band .l0{margin:0;font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+  letter-spacing:.16em;text-transform:uppercase;font-weight:800}
+.band .l1{margin:2px 0 0;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  font-size:22px;line-height:1.2}
+.cor-cadre{background:#fff;border:3.5px solid #1D7A33;border-radius:18px;
+  overflow:hidden;box-shadow:0 14px 30px -26px rgba(13,26,34,.7)}
+.cor-cadre iframe{display:block;width:100%;height:600px;border:0}
+.attente{background:#fff;border:3.5px solid #12202a;border-radius:18px;padding:22px 24px;
+  margin:0;font-size:17px;color:var(--c);font-weight:700}
+.ongl{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+.ongl a{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:15px;
+  text-decoration:none;color:var(--c);background:#fff;border:2.5px solid var(--c);
+  border-radius:12px;padding:7px 14px;line-height:1.15}
+.ongl a:hover{background:var(--c);color:#fff}
+.ongl a.on{background:var(--c);color:#fff}
+.ongl.p{margin-top:-4px}
+.ongl.p a{font-size:13.5px;padding:5px 11px;border-width:2px;border-radius:10px}
+.suite{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 0}
+.suite a{display:block;text-decoration:none;background:#fff;color:#0d1a22;
+  border:3px solid #12202a;border-radius:16px;padding:12px 16px;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:16px;line-height:1.25}
+.suite a:hover{border-color:var(--c)}
+.suite a small{display:block;font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--c);margin:0 0 3px}
+.suite a.ap{text-align:right}
+/* le titre du chapitre, tout en haut ; avec d'autres chapitres, un clic le
+   deroule (16/10/2026) */
+.ttm.top{margin:4px 0 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.ttm.top .tx{flex:1 1 300px;min-width:0}
+.ttm.top .l1{display:block}
+.ttm.top .l2{display:block}
+.tch{margin:0}
+.tch>summary{list-style:none;cursor:pointer}
+.tch>summary::-webkit-details-marker{display:none}
+.tch>summary:hover{filter:brightness(1.07)}
+.tch .fl{flex:none;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:14px;
+  background:#fff;color:var(--c);border:2.5px solid #12202a;border-radius:999px;padding:6px 14px}
+.tch .fl::after{content:" \25BE"}
+.tch[open] .fl::after{content:" \25B4"}
+.tch[open]>summary{margin-bottom:8px}
+.tch-l{display:flex;flex-direction:column;gap:8px;margin:0 0 18px}
+.tch-l a{display:block;text-decoration:none;font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:800;font-size:17px;color:var(--c);background:#fff;border:3px solid var(--c);
+  border-radius:14px;padding:12px 18px}
+.tch-l a:hover{background:var(--c);color:#fff}
+/* un encadre, comme celui du document eleve */
+.enc{margin:0 0 18px;border:3.5px solid #12202a;border-radius:18px;background:#fff;
+  padding:0 22px 22px;box-shadow:0 14px 30px -24px rgba(13,26,34,.75)}
+.enc>h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;
+  margin:0;padding:18px 0 14px;color:var(--c)}
+.enc .attente{border-width:2.5px}
+/* un chapitre de plusieurs parties et une seule fiche (27/10/2026) */
+.cours2{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:24px;align-items:start;
+  background:var(--f);border:3.5px solid #12202a;border-top:14px solid var(--c);border-radius:18px;
+  padding:18px 22px 22px;box-shadow:0 14px 30px -26px rgba(13,26,34,.7)}
+.cours2 h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;margin:0 0 10px;color:var(--c)}
+.cours2 .g{display:flex;flex-direction:column;gap:10px;min-width:0}
+.cours2 .ap{display:block;line-height:0}
+.cours2 .ap img{width:100%;aspect-ratio:210/150;object-fit:cover;object-position:top;
+  border:2px solid #12202a;border-radius:10px;background:#fff;display:block}
+.cours2 .b1{display:block;text-align:center;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  font-size:15px;border-radius:12px;padding:9px 16px;text-decoration:none;background:#fff;
+  color:var(--c);border:2.5px solid var(--c)}
+.cours2 .b1:hover{background:var(--c);color:#fff}
+.cours2 .d{min-width:0}
+.cours2 .pls{display:flex;flex-direction:column;gap:10px}
+.cours2 .pl{display:flex;align-items:center;gap:12px;text-decoration:none;background:#fff;color:#0d1a22;
+  border:2.5px solid #12202a;border-radius:14px;padding:10px 14px;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:16px;line-height:1.25}
+.cours2 a.pl:hover{border-color:var(--c)}
+.cours2 .pl .n{flex:none;background:var(--c);color:#fff;border-radius:999px;padding:4px 12px;font-size:14px}
+.cours2 .pl .tt{flex:1;min-width:0}
+.cours2 .pl .v{flex:none;background:#1D7A33;color:#fff;border-radius:10px;padding:6px 12px;font-size:14px}
+.cours2 .pl.off .v{background:#e9edef;color:#7a8a93}
+@media (max-width:700px){.cours2{grid-template-columns:minmax(0,1fr);padding:14px 12px 16px}
+  .cours2 .pl{flex-wrap:wrap;gap:8px 12px}.cours2 .pl .v{margin-left:auto}
+  .cours2 .pl .tt{order:3;flex-basis:100%}}
+/* les seances de maths : une carte chacune, sur le fond bleu des cartes
+   (17/10/2026) ; titres sur deux lignes pour que les apercus s'alignent */
+.crt{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.crt .k{display:flex;flex-direction:column;background:var(--f);border:3.5px solid #12202a;
+  border-radius:18px;overflow:hidden;box-shadow:0 14px 30px -26px rgba(13,26,34,.7)}
+.crt.seule{grid-template-columns:minmax(0,400px);justify-content:center}   /* une seule carte : centree */
+.crt.seule .t,.crt.seule .et{min-height:0;text-align:center}
+.crt .ba{display:block;height:14px;background:var(--c);border-bottom:3.5px solid #12202a}
+.crt .in{display:flex;flex-direction:column;gap:10px;padding:14px 18px 18px;flex:1}
+.crt .no{align-self:flex-start;font-family:"Bricolage Grotesque",sans-serif;font-size:17px;
+  letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:#fff;background:var(--c);
+  border-radius:999px;padding:5px 16px;margin:0}   /* bien visible (Mme Talbaut, 17/10/2026) */
+.crt .t{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:19px;
+  line-height:1.2;margin:0;color:#0d1a22;min-height:2.4em}
+.crt .ap{display:block;line-height:0}
+.crt .ap img{width:100%;aspect-ratio:210/105;object-fit:cover;object-position:top;
+  border:2px solid #12202a;border-radius:10px;display:block;background:#fff}
+.crt .et{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:14.5px;
+  color:var(--c);margin:0}
+.crt .et.ok{color:#137A3A}
+.crt .bts{display:flex;gap:8px;margin-top:auto}
+.crt .bts>*{flex:1}
+.crt .b1,.crt .b2{display:block;text-align:center;font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:800;font-size:15px;border-radius:12px;padding:9px 10px;text-decoration:none;
+  white-space:nowrap}
+.crt .b1{background:#fff;color:var(--c);border:2.5px solid var(--c)}
+.crt .b1:hover{background:var(--c);color:#fff}
+.crt .b2{background:#1D7A33;color:#fff;border:2.5px solid #1D7A33}
+.crt .b2:hover{filter:brightness(1.1)}
+.crt .b2.off{background:#e9edef;color:#7a8a93;border-color:#c9d2d7}
+@media (max-width:600px){.enc{padding:0 12px 14px}}
+@media (max-width:600px){.suite{grid-template-columns:1fr}.suite a.ap{text-align:left}
+  .ongl a{font-size:14px;padding:6px 11px}}
+@media (max-width:760px){.ttm .l1{font-size:20px}.band .l1{font-size:19px}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="in"><a class="lg" href="../../index.html">1CAP EPC</a><nav class="fil"><span class="sep">&rsaquo;</span><a href="../index.html">Sciences</a><span class="sep">&rsaquo;</span><span>La notion de pH</span></nav><span class="qui">Mme Talbaut</span></div></header>
+<nav class="menu" aria-label="Menu du site"><div class="in"><a href="../../index.html" style="--m:#22323b">Accueil</a><a href="../../maths/index.html" style="--m:#5b3fa8">Mathématiques</a><a href="../../sciences/index.html" style="--m:#00778a" class="on" aria-current="page">Sciences</a><a href="../../chef-d-oeuvre/index.html" style="--m:#b5541a">Chef-d’œuvre</a><a href="../../copies/index.html" style="--m:#1D7A33">Mes copies</a></div></nav>
+<main>
+<details class="tch" style="--c:#0f7b6c"><summary class="ttm top"><span class="tx"><span class="l1">Chapitre 3 La notion de <span style="text-transform:none">pH</span></span><span class="l2">Mesurer le pH et dire si une solution est acide, neutre ou basique.</span></span><span class="fl">Changer de chapitre</span></summary><nav class="tch-l"><a href="../securite-en-chimie/index.html">Chapitre 1 : La sécurité en chimie</a><a href="../verrerie-au-laboratoire/index.html">Chapitre 2 : La verrerie au laboratoire</a></nav></details><div id="vac"><section class="enc" style="--c:#0f7b6c;--f:#e7f2f0"><h2>Les séances</h2><div class="crt"><div class="k"><span class="ba"></span><div class="in"><p class="no">Séance 1</p><p class="t">TP découverte - Mesurer le pH avec un pH-mètre</p><a class="ap" href="seance-1-eleve.pdf" target="_blank" rel="noopener"><img src="seance-1-couverture.png" alt="Première page de la fiche : TP découverte - Mesurer le pH avec un pH-mètre"></a><p class="et">Correction après la séance</p><div class="bts"><a class="b1" href="seance-1-eleve.pdf" target="_blank" rel="noopener">La fiche</a><span class="b2 off">La correction</span></div></div></div><div class="k"><span class="ba"></span><div class="in"><p class="no">Séance 2</p><p class="t">Activité 1 - L’échelle de pH</p><a class="ap" href="seance-2-eleve.pdf" target="_blank" rel="noopener"><img src="seance-2-couverture.png" alt="Première page de la fiche : Activité 1 - L’échelle de pH"></a><p class="et">Correction après la séance</p><div class="bts"><a class="b1" href="seance-2-eleve.pdf" target="_blank" rel="noopener">La fiche</a><span class="b2 off">La correction</span></div></div></div></div></section></div><div id="vsc" hidden></div><div id="vex" hidden></div>
+</main>
+<footer class="pied"><div class="in"><span>Sciences 1CAP EPC</span><span class="sep">&middot;</span><b>Mme Talbaut</b><span class="sep">&middot;</span><span>LP Max Joséphine, Cayenne</span></div></footer>
+
+<script>
+// Navigation dans un chapitre (09/10/2026) : des onglets pour passer d'une
+// seance (ou d'une partie) a l'autre, « precedente / suivante » en bas, et
+// l'adresse qui change (#s2, #s3-e1, #p1) : le bouton Retour du navigateur
+// revient a l'ecran d'avant, et un lien mene droit a une seance.
+var D = {"c": "#0f7b6c", "f": "#e7f2f0", "kick": "Chapitre 3", "seances": [{"no": "Séance 1", "titre": "TP découverte - Mesurer le pH avec un pH-mètre", "pdf": "seance-1-eleve.pdf", "img": "seance-1-couverture.png", "unites": [{"id": "s1/TP découverte", "t": "TP découverte - Mesurer le pH", "ok": false, "no": "Séance 1", "src": ""}]}, {"no": "Séance 2", "titre": "Activité 1 - L’échelle de pH", "pdf": "seance-2-eleve.pdf", "img": "seance-2-couverture.png", "unites": [{"id": "s2/Activité 1", "t": "Activité 1 - L’échelle de pH", "ok": false, "no": "Séance 2", "src": ""}]}]};
+var ecrans = {acc: document.getElementById("vac"), sc: document.getElementById("vsc"),
+              ex: document.getElementById("vex")};
+function montre(n){ Object.keys(ecrans).forEach(function(k){
+  if(ecrans[k]) ecrans[k].hidden = (k !== n); }); window.scrollTo(0, 0); }
+function va(h){ if(location.hash === h) route(); else location.hash = h; }
+
+function carte(u, i, c, f){
+  return '<button class="carte mc" type="button" data-u="' + i + '" style="--c:' + c +
+    ';--f:' + f + '"><span class="ba"></span>' +
+    (u.no ? '<p class="no">' + u.no + '</p>' : '') + '<h3>' + u.t + '</h3>' +
+    '<p class="et' + (u.ok ? ' ok' : '') + '">' +
+    (u.ok ? 'Correction en ligne' : 'Après la séance') + '</p></button>';
+}
+
+function corrige(u){
+  // pas d'etiquette « Correction » : le cadre vert suffit a le dire (28/09/2026)
+  if(u.ok) return '<div class="cor-cadre">' +
+    '<iframe title="Correction" src="' + u.src + '"></iframe></div>';
+  return '<p class="attente" style="--c:' + D.c + '">La correction sera mise en ligne ' +
+    'après la séance.</p>';
+}
+
+// une rangee d'onglets : [[libelle, adresse], ...], l'onglet actif allume
+function onglets(liste, actif, petit){
+  return '<nav class="ongl' + (petit ? ' p' : '') + '" style="--c:' + D.c + '">' +
+    liste.map(function(o, k){
+      return '<a href="' + o[1] + '"' + (k === actif ? ' class="on" aria-current="page"' : '') +
+        '>' + o[0] + '</a>'; }).join("") + '</nav>';
+}
+// en bas : l'ecran d'avant et celui d'apres
+function suite(prec, suiv){
+  if(!prec && !suiv) return "";
+  return '<nav class="suite" style="--c:' + D.c + '">' +
+    (prec ? '<a class="av" href="' + prec[1] + '"><small>&larr; Précédent</small>' + prec[0] + '</a>'
+          : '<span></span>') +
+    (suiv ? '<a class="ap" href="' + suiv[1] + '"><small>Suivant &rarr;</small>' + suiv[0] + '</a>'
+          : '<span></span>') + '</nav>';
+}
+function bande(l0, l1){
+  return '<div class="band" style="--c:' + D.c + '"><p class="l0">' + l0 +
+    '</p><p class="l1">' + l1 + '</p></div>';
+}
+
+function ongletsSeances(i){
+  return onglets([["Toutes les séances", "#"]].concat(D.seances.map(function(s, k){
+    return [s.no, "#s" + (k + 1)]; })), i + 1);
+}
+
+function ecranSeance(i){
+  var s = D.seances[i], n = D.seances.length;
+  var h = ongletsSeances(i) + bande(s.no, s.titre) +
+    '<a class="cv" style="--c:' + D.c + '" href="' + s.pdf +
+    '" target="_blank" rel="noopener"><h2>La fiche de la séance</h2><div class="vg">' +
+    '<img src="' + s.img + '" alt="Première page de la fiche">' +
+    '<span class="bt" style="--c:' + D.c + '">Ouvrir la fiche</span></div></a>' +
+    (s.unites.length > 1 ?
+      '<div class="ttm" style="--c:' + D.c + '"><p class="l1">' + s.titre + '</p>' +
+      '<p class="l2">Les exercices</p></div>' +
+      '<div class="gr ch3">' + s.unites.map(function(u, j){
+        return carte(u, j, D.c, D.f); }).join("") + '</div>'
+      : corrige(s.unites[0])) +
+    suite(i > 0 ? [D.seances[i - 1].no + " : " + D.seances[i - 1].titre, "#s" + i] : null,
+          i < n - 1 ? [D.seances[i + 1].no + " : " + D.seances[i + 1].titre, "#s" + (i + 2)] : null);
+  ecrans.sc.innerHTML = h;
+  montre("sc");
+  ecrans.sc.querySelectorAll(".carte.mc").forEach(function(b){
+    b.addEventListener("click", function(){ va("#s" + (i + 1) + "-e" + (+b.dataset.u + 1)); }); });
+}
+
+function ecranExercice(i, j){
+  var s = D.seances[i], u = s.unites[j], n = s.unites.length, base = "#s" + (i + 1);
+  var h = ongletsSeances(i) +
+    onglets([["La fiche", base]].concat(s.unites.map(function(v, k){
+      return [v.t, base + "-e" + (k + 1)]; })), j + 1, true) +
+    bande(s.no, u.t) + corrige(u) +
+    suite(j > 0 ? [s.unites[j - 1].t, base + "-e" + j] : ["La fiche de la séance", base],
+          j < n - 1 ? [s.unites[j + 1].t, base + "-e" + (j + 2)] : null);
+  ecrans.ex.innerHTML = h;
+  montre("ex");
+}
+
+function ecranPartie(j){
+  var u = D.unites[j], n = D.unites.length;
+  // une seule partie : pas d'onglets, pas de « Partie 1 » (27/10/2026)
+  var h = (n > 1 ? onglets([["Toutes les parties", "#"]].concat(D.unites.map(function(v, k){
+      return [v.no, "#p" + (k + 1)]; })), j + 1) : "") +
+    bande(u.no || "Le cours corrigé", u.t) + corrige(u) +
+    suite(j > 0 ? [D.unites[j - 1].no + " : " + D.unites[j - 1].t, "#p" + j] : null,
+          j < n - 1 ? [D.unites[j + 1].no + " : " + D.unites[j + 1].t, "#p" + (j + 2)] : null);
+  ecrans.ex.innerHTML = h;
+  montre("ex");
+}
+
+function route(){
+  var h = location.hash, m;
+  if(D.seances && (m = /^#s(\d+)-e(\d+)$/.exec(h)) && D.seances[m[1] - 1]
+     && D.seances[m[1] - 1].unites[m[2] - 1]) return ecranExercice(m[1] - 1, m[2] - 1);
+  if(D.seances && (m = /^#s(\d+)$/.exec(h)) && D.seances[m[1] - 1]) return ecranSeance(m[1] - 1);
+  if(D.unites && (m = /^#p(\d+)$/.exec(h)) && D.unites[m[1] - 1]) return ecranPartie(m[1] - 1);
+  montre("acc");
+}
+
+document.querySelectorAll("#vac .carte.mc").forEach(function(b){
+  b.addEventListener("click", function(){
+    va((D.seances ? "#s" : "#p") + (+b.dataset.u + 1)); });
+});
+window.addEventListener("hashchange", route);
+route();
+
+window.addEventListener("message", function(e){
+  if(!e.data || e.data.h === undefined) return;
+  document.querySelectorAll(".cor-cadre iframe").forEach(function(f){
+    if(f.contentWindow === e.source) f.style.height = (e.data.h + 8) + "px"; });
+});
+</script>
+</body>
+</html>
