@@ -1,0 +1,2486 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ch1 - Exercices - Passer par l'unité</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef1f4;--card:#fff;--ink:#0d1a22;--ink2:#0d1a22;--mut:#0d1a22;
+  --line:#9fb0bb;--line2:#5d707b;--cy:#00A5BF;--cy-d:#00778a;--cy-l:#e2f6fa;
+  --vi:#7C4BD8;--or:#FFB627;--ve:#2f7f2f;--r:16px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Source Sans 3","Segoe UI",system-ui,sans-serif;font-size:16.5px;line-height:1.6;
+  -webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;font-weight:700;
+  letter-spacing:-.02em;margin:0}
+.wrap{max-width:940px;margin:0 auto;padding:0 20px 120px}
+
+.tete{background:linear-gradient(150deg,#dcf2f8 0%,#e8e3fb 58%,#fdeee6 100%);
+  border-radius:0 0 24px 24px;padding:30px 34px 26px;margin:0 0 24px}
+.tete .kick{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--mut);margin:0 0 10px}
+.tete h1{font-size:clamp(24px,3.4vw,36px);line-height:1.08;margin:0 0 6px}
+.tete .sub{font-size:17px;color:var(--cy-d);font-weight:600;margin:0}
+.ident{display:flex;gap:14px;flex-wrap:wrap;margin:22px 0 0}
+.ident>div{flex:1 1 200px}
+.ident label{display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--mut);margin:0 0 5px 10px}
+.ident input{width:100%;font:inherit;font-size:17px;padding:11px 14px;border:2px solid #fff;
+  border-radius:12px;background:rgba(255,255,255,.75);color:var(--ink)}
+.ident input:focus{outline:none;border-color:var(--cy);background:#fff}
+/* page du code : le nom reconnu, et de quoi en changer */
+#idw .qui{margin:0 0 16px;font-size:15.5px;color:var(--ink)}
+#idw .qui b{font-weight:700}
+#idw .qui button{font:inherit;font-size:14px;font-weight:600;color:var(--cy-d);
+  background:none;border:0;border-bottom:1.5px solid var(--cy-d);padding:0 0 1px;
+  margin-left:6px;cursor:pointer}
+#idw .qui button:hover{color:var(--ink)}
+
+/* changer d'eleve sur un poste partage, ou reprendre un nom mal saisi */
+.pasmoi{flex:0 0 auto;align-self:flex-end;font:inherit;font-size:13.5px;font-weight:600;
+  color:var(--cy-d);background:none;border:0;border-bottom:1.5px solid var(--cy-d);
+  padding:0 0 2px;margin:0 0 12px;cursor:pointer}
+.pasmoi:hover{color:var(--ink)}
+@media print{.pasmoi{display:none}}
+
+.cons{background:var(--card);border-radius:var(--r);padding:18px 22px;margin:0 0 22px;
+  box-shadow:0 1px 2px rgba(13,26,34,.05),0 10px 30px -18px rgba(13,26,34,.4);
+  border-left:5px solid var(--or)}
+.cons h3{font-size:16px;margin:0 0 8px}
+.cons ol{margin:0;padding-left:20px;font-size:15px;color:var(--ink2)}
+.cons li{margin:0 0 5px}
+
+/* l'etiquette d'une zone de reponse : Calculs, Phrase reponse */
+.zlb{margin:14px 0 4px;font-size:13.5px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--cy-d)}
+
+/* les touches du clavier, dessinees */
+.tch{display:inline-flex;align-items:center;gap:5px;vertical-align:-2px;margin:0 2px}
+.tch .k{display:inline-flex;align-items:center;justify-content:center;
+  min-width:26px;height:26px;padding:0 7px;border-radius:6px;
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;
+  color:var(--ink);background:linear-gradient(#fff,#eef3f6);
+  border:1px solid #9fb2bd;border-bottom-width:3px;border-bottom-color:#7d95a3;
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset}
+.tch .pl{font-size:12px;color:var(--ink2);font-weight:600}
+.tch .k svg{display:block}
+
+.exo{background:var(--card);border-radius:var(--r);margin:0 0 20px;overflow:hidden;
+  box-shadow:0 1px 2px rgba(13,26,34,.05),0 10px 30px -18px rgba(13,26,34,.4)}
+.exo-h{display:flex;align-items:center;gap:12px;padding:15px 24px;background:#fbfdfe;
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.exo-t{flex:1 1 auto;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:17px}
+.etat{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;background:#eef3f6;color:var(--mut);border-radius:20px;padding:4px 12px}
+.etat.ok{background:#eaf8ea;color:var(--ve)}
+.exo-c{padding:22px 24px 6px}
+.exo-f{padding:16px 24px 20px;border-top:1px solid var(--line);display:flex;
+  align-items:center;gap:14px;flex-wrap:wrap}
+.env{border:0;background:var(--cy-d);color:#fff;border-radius:12px;padding:11px 20px;
+  font:inherit;font-weight:700;font-size:15px;cursor:pointer;transition:.16s}
+.env:hover{background:#006373;transform:translateY(-1px)}
+.note-env{font-size:13.5px;color:var(--ve);flex:1 1 200px}
+
+.sit{background:linear-gradient(120deg,#efe8fd,#f7f3fe);border-radius:12px;padding:15px 18px;margin:0 0 16px}
+.sit .lb{display:block;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.15em;
+  text-transform:uppercase;color:#5b32ab;margin:0 0 5px}
+.sit p{margin:0 0 10px;font-size:15.5px}
+.sit p:last-child{margin:0}
+p.pb{margin:14px 0 0;background:var(--cy-l);border-left:4px solid var(--cy);
+  border-radius:10px;padding:10px 14px;font-size:15.5px}
+p.en{margin:0 0 12px}
+.serie{font-family:"IBM Plex Mono",monospace;font-size:14.5px;background:#f5f8fa;border-radius:12px;
+  padding:13px 17px;color:var(--ink2);line-height:1.85;margin:0 0 14px}
+.cmp{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  background:#efe8fd;color:#5b32ab;border-radius:20px;padding:2px 9px;margin-right:7px;display:inline-block}
+.crit,.ccf{background:#fff8ea;border:1px solid #f0dcb0;border-radius:12px;padding:14px 18px;margin:0 0 14px}
+.crit>b,.ccf>b{display:block;color:#8a5c05;font-weight:700;margin-bottom:8px}
+.crit ol,.crit ul,.ccf ul{margin:0;padding-left:20px}
+.crit li,.ccf li{margin:0 0 5px;font-size:15px}
+.dbl{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:0 0 14px}
+.dlb{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.15em;
+  text-transform:uppercase;background:#8FBE1F;color:#2c3d05;border-radius:20px;padding:3px 11px;
+  margin-bottom:8px;font-weight:600}
+pre.code{font-family:"IBM Plex Mono",monospace;font-size:13.5px;line-height:1.75;background:#132734;
+  color:#e6f1f5;border-radius:12px;padding:15px 18px;overflow-x:auto;margin:12px 0;white-space:pre}
+.alerte{display:none}
+
+.q{margin:0 0 20px;padding:0 0 18px;border-bottom:1px dashed var(--line2)}
+.q:last-child{border-bottom:0}
+.q-h{display:flex;align-items:flex-start;gap:12px;margin:0 0 10px;flex-wrap:wrap}
+.q-n{flex:1 1 300px;font-weight:600;font-size:16px;line-height:1.4}
+.q-n .qn{color:var(--cy-d);font-weight:700}
+.coef{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;
+  background:#eef3f6;color:var(--ink2);border-radius:20px;padding:3px 10px;white-space:nowrap}
+textarea{width:100%;font:inherit;font-size:16px;padding:12px 15px;border:2px solid var(--line2);
+  border-radius:12px;background:#fbfdfe;resize:vertical;color:var(--ink);line-height:1.6}
+textarea:focus{outline:none;border-color:var(--cy);background:#fff;box-shadow:0 0 0 4px var(--cy-l)}
+textarea.plein{border-color:var(--cy)}
+
+.tw{overflow-x:auto;overflow-y:hidden;margin:0 0 14px;border:1.5px solid #bcdbe7;border-radius:18px;
+  background:#fff;box-shadow:0 3px 14px -8px rgba(13,26,34,.35)}
+table{border-collapse:separate;border-spacing:0;width:100%;background:#fff;font-size:15px}
+th,td{border-bottom:1px solid #cfe2ea;border-right:1px solid #dceaf1;padding:10px 13px;text-align:left}
+th:last-child,td:last-child{border-right:0}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+thead th{background:linear-gradient(180deg,#e3f4fa,#d2ecf5);font-family:"IBM Plex Mono",monospace;
+  font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#0c4a58;font-weight:700;
+  border-bottom:2px solid #9ed2e3;border-right-color:#b6d9e6}
+tbody tr:nth-child(even){background:#f5fbfd}
+tbody th{background:#eef6fa;color:#123a46;font-weight:700;border-right-color:#cbe3ec}
+tbody tr:nth-child(even) th{background:#e8f2f7}
+table.num td,table.num th:not(:first-child){text-align:center}
+td.v{background:#fff8e6;padding:0}
+input.tc{width:100%;min-width:74px;font:inherit;font-size:16px;text-align:center;padding:12px 6px;
+  border:1px dashed #c79320;border-radius:8px;background:transparent;color:var(--ink)}
+input.tc:focus{outline:2px solid var(--cy);outline-offset:-2px;background:var(--cy-l);border-color:transparent}
+input.tc.plein{background:#f2fbfd;font-weight:600;border-style:solid;border-color:#9ed2e3}
+
+.zone{border:2.5px dashed var(--line2);border-radius:12px;background:#fbfdfe;padding:26px 20px;
+  text-align:center;cursor:pointer;transition:.18s;min-height:110px;display:grid;
+  place-content:center;gap:6px}
+.zone:hover,.zone:focus{border-color:var(--cy);background:var(--cy-l);outline:none}
+.zone p{margin:0;font-size:15px;color:var(--ink2)}
+.zone .rappel{font-size:13px;color:var(--mut)}
+.zone.pleine{padding:10px;border-style:solid;border-color:var(--cy);background:#fff;display:block}
+.zone img{max-width:100%;border-radius:8px;display:block;margin:0 auto;cursor:zoom-in}
+
+/* coup de pouce : le rappel technique, sous la question qui le demande */
+.cdp{background:linear-gradient(140deg,#eafaf0,#f5fdf8);border:1px solid #7fbf9b;
+  border-left:5px solid #1f7a4d;border-radius:12px;padding:11px 16px;margin:10px 0 8px}
+.cdp .lb{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:9.5px;
+  letter-spacing:.15em;text-transform:uppercase;background:#1f7a4d;color:#fff;
+  border-radius:20px;padding:3px 11px;margin-bottom:7px}
+.cdp p{margin:0;font-size:15.5px;color:var(--ink)}
+
+.aide{background:linear-gradient(140deg,#eafaf0,#f5fdf8);border:1px solid #c8e9d6;
+  border-radius:var(--r);padding:18px 22px;margin:0 0 20px}
+.aide .lb{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:9.5px;
+  letter-spacing:.15em;text-transform:uppercase;background:#1f7a4d;color:#fff;
+  border-radius:20px;padding:3px 11px;margin-bottom:9px}
+.aide h3{font-size:17px;margin:0 0 10px}
+.aide ul{margin:0;padding-left:20px}
+.aide .fx,.aide code{font-family:"IBM Plex Mono",monospace;font-size:14px;background:#1f7a4d;
+  color:#fff;border-radius:6px;padding:2px 9px;display:inline-block}
+.rsg{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:9px}
+.rs{background:#fff;border:1px solid #d5ecdf;border-radius:11px;padding:11px 13px}
+.rs b{display:block;font-size:14.5px}
+.rs span{font-size:13px;color:var(--mut)}
+
+svg.gr{width:100%;height:auto;display:block;max-width:460px;margin:0 auto 14px}
+.q4{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 14px}
+.q4 .it{background:#fbfdfe;border:1px solid var(--line2);border-radius:12px;padding:12px}
+.q4 .hd{display:flex;align-items:center;gap:9px;margin-bottom:6px}
+.q4 .l{font-weight:700;color:var(--cy-d)}
+.q4 .z{flex:1 1 auto;height:26px;border-bottom:1.5px solid var(--line2)}
+
+.auto{position:fixed;right:16px;bottom:16px;background:rgba(13,26,34,.86);color:#fff;
+  border-radius:12px;padding:8px 14px;font-size:12.5px;z-index:60}
+.loupe{position:fixed;inset:0;background:rgba(13,26,34,.9);z-index:200;display:none;
+  place-items:center;padding:30px;cursor:zoom-out}
+.loupe.on{display:grid}
+.loupe img{max-width:100%;max-height:100%;border-radius:10px}
+@media(max-width:760px){.q4,.dbl{grid-template-columns:1fr}}
+.avf{display:none!important}
+.outn{margin:14px 0 0;background:#fbfdfe;border:1px solid #5f9fb4;border-radius:14px;padding:12px 18px 14px}
+.outn>.et{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.11em;
+  text-transform:uppercase;font-weight:700;color:#00778a;margin-bottom:6px}
+.outn ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.outn li{margin:0}
+.outn a{display:inline-block;text-decoration:none;font-size:14.5px;font-weight:600;color:#00778a;
+  background:#e2f6fa;border:1px solid #7fc9d9;border-radius:20px;padding:6px 14px}
+.outn a:hover{background:#00778a;color:#fff;border-color:#00778a}
+.prop{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.prop li{background:#f4f8fa;border:1px solid #cfdae1;border-radius:10px;padding:8px 12px;font-size:15px}
+.prop li b{color:#00778a;margin-right:6px}
+@media(max-width:640px){.prop{grid-template-columns:1fr}}
+/* Un QCM sans encadre de reponse : l'eleve clique sa proposition. Le fichier
+   n'est pas une feuille de papier ; la reponse se choisit, elle ne se recopie pas. */
+.chx{list-style:none;margin:12px 0 2px;padding:0;display:grid;
+  grid-template-columns:1fr 1fr;gap:8px}
+.chx li{margin:0}
+.ch-e{display:flex;align-items:center;gap:10px;width:100%;text-align:left;font:inherit;
+  font-size:15px;cursor:pointer;background:#f4f8fa;border:1.6px solid #cfdae1;
+  border-radius:10px;padding:8px 12px}
+.ch-e:hover{border-color:#00A5BF;background:#eaf7fb}
+.ch-e b{display:inline-grid;place-items:center;width:26px;height:26px;flex:none;
+  border-radius:8px;background:#e2eaef;color:#00778a;font-size:14.5px}
+.ch-e.on{border-color:#00A5BF;background:#e2f6fa;box-shadow:inset 0 0 0 1.4px #00A5BF}
+.ch-e.on b{background:#00778a;color:#fff}
+@media(max-width:640px){.chx{grid-template-columns:1fr}}
+.exo.verrou .exo-f{display:none}
+.vbx{padding:22px 4px 8px;text-align:center}
+.vbx .vt{margin:0 0 14px;font-size:16px;color:#0d1a22}
+.vin{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.vin input{width:150px;font:inherit;font-size:22px;letter-spacing:.22em;text-align:center;
+  text-transform:uppercase;padding:10px 12px;border:2px solid #cfdae1;border-radius:12px;background:#fbfdfe}
+.vin input:focus{outline:none;border-color:#00A5BF;background:#fff}
+.vin button{font:inherit;font-weight:700;font-size:16px;padding:10px 22px;border:0;border-radius:12px;
+  background:#00778a;color:#fff;cursor:pointer}
+.vin button:hover{filter:brightness(1.1)}
+.vbx .vm{margin:12px 0 0;color:#a5281b;font-weight:600;min-height:20px}
+.exo.verrou .exo-h .exo-t:before{content:"\1F512  ";font-size:15px}
+.cslg{margin:14px 0 0;background:#f2f8fb;border:1px solid #5f9fb4;border-left:5px solid #00A5BF;border-radius:12px;padding:12px 18px;font-size:15.5px;color:#0d1a22}
+.cslg b{color:#00778a}
+.cslg ul{margin:6px 0 0;padding-left:20px}
+.cslg li{margin:3px 0}
+.prop-pied{max-width:1000px;margin:30px auto 0;padding:16px 22px 34px;border-top:1px solid #b9c8d1}
+.prop-pied .crs{margin:0 0 4px;font-size:15px;color:#2E5266;font-weight:700}
+.barre-b .col-b{display:flex;flex-direction:column;gap:2px;min-width:0}
+.barre-b .msg-s{font-size:13px;color:#2f7d32;font-weight:700;max-width:340px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.barre-b .dos{display:flex;align-items:baseline;gap:8px;font-size:12px;color:#0d1a22;white-space:nowrap}
+#nomDossier{max-width:230px;overflow:hidden;text-overflow:ellipsis}
+#bDossier{border:0;background:none;padding:0;font:inherit;font-size:12px;color:#00778a;text-decoration:underline;cursor:pointer}
+.barre-b .auto{position:static;background:none;color:#0d1a22;padding:0;z-index:auto;white-space:nowrap}
+.barre-b{position:fixed;right:16px;bottom:14px;z-index:70;display:flex;align-items:center;gap:12px;
+  background:rgba(255,255,255,.95);border:1px solid #b9c8d1;border-radius:12px;padding:8px 12px;
+  box-shadow:0 6px 22px -10px rgba(13,26,34,.45)}
+#bSauver{font:inherit;font-size:15px;font-weight:700;border:0;border-radius:9px;padding:9px 16px;
+  background:#2E5266;color:#fff;cursor:pointer}
+#bSauver:hover{background:#1e3a49}
+#bSauver:disabled{opacity:.5;cursor:default}
+body:not(.identifie) .barre-b{display:none}
+body.copie .barre-b{display:none}
+@media print{.barre-b{display:none}}
+.note-env.encours{color:#8a5c05;font-weight:600}
+.note-env.ok{color:#2f7d32;font-weight:700}
+.note-env.att{color:#0d1a22;line-height:1.5}
+.note-env .lien-depot{display:inline-block;margin-top:6px;padding:8px 16px;border-radius:9px;background:#00778a;color:#fff;font-weight:700;text-decoration:none}
+.note-env .lien-depot:hover{background:#005d6c}
+.prop-pied .src{margin:0;font-size:13px;color:#0d1a22;font-weight:600}
+.prop-pied .adp{display:block;margin:3px 0 0;font-size:12px;color:#0d1a22}
+@media print{.env,.auto,.exo-f{display:none}}
+
+/* ---------- écran d'identification ---------- */
+body:not(.identifie) .tete,body:not(.identifie) .wrap,body:not(.identifie) .auto,
+body:not(.identifie) .prop-pied{display:none}
+body.identifie #idw{display:none}
+#idw{position:fixed;inset:0;background:linear-gradient(150deg,#dcf1f7,#f3eefd 55%,#fde3de);
+  display:flex;align-items:center;justify-content:center;padding:22px;z-index:50}
+#idw .bx{background:#fff;border:1px solid #b9c8d1;border-radius:20px;max-width:620px;width:100%;
+  padding:30px 34px;box-shadow:0 24px 60px -28px rgba(13,26,34,.5)}
+#idw h2{margin:0 0 4px;font-family:"Bricolage Grotesque",sans-serif;font-size:25px;color:#0d1a22}
+#idw .sst{margin:0 0 20px;color:#0d1a22;font-size:16px}
+#idw label{display:block;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:#00778a;font-weight:600;margin:0 0 6px}
+#idw .duo{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+#idw input{width:100%;font:inherit;font-size:18px;padding:11px 14px;border:2px solid #cfdae1;
+  border-radius:12px;background:#fbfdfe;color:#0d1a22}
+#idw input:focus{outline:none;border-color:#00A5BF;background:#fff}
+#idw button.pr{margin-top:18px;font:inherit;font-weight:700;font-size:16px;padding:12px 24px;
+  border:0;border-radius:12px;background:#00778a;color:#fff;cursor:pointer}
+#idw button.pr:hover{filter:brightness(1.1)}
+#idw .ch{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+#idw .ch button{font:inherit;font-weight:600;font-size:15px;padding:10px 18px;border:2px solid #00A5BF;
+  border-radius:12px;background:#fff;color:#00778a;cursor:pointer}
+#idw .ch button:hover{background:#e2f6fa}
+#idw .ch button.no{border-color:#cfdae1;color:#0d1a22}
+#idw .msg{margin-top:16px;font-size:16px;color:#0d1a22;background:#fff6e6;border-left:4px solid #FFB627;
+  border-radius:12px;padding:12px 16px}
+#idw .msg.err{background:#fdecea;border-left-color:#FF6B5B}
+#idw .et{display:none}
+#idw .et.on{display:block}
+.nom-fixe input,#nom[readonly],#prenom[readonly]{background:#eef3f6;font-weight:700}
+
+/* Le titre d'un relevé et son décompte : sans ces règles, « … ont été
+   ramassées » et « 20 valeurs » se collaient l'un à l'autre. Elles
+   n'existaient que dans la feuille de style du manuel. */
+.rlv-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0 0 6px}
+.rlv-h b{font-size:14.5px;color:#3c5410}
+.rlv-h span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:#5d707b}
+
+/* l'exercice d'association : les quatre figures, chacune avec sa ligne */
+.asg{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+.asi{border:1px solid var(--line2);border-radius:14px;padding:12px 14px;background:#fff;
+  position:relative}
+.asi .asl{position:absolute;top:10px;left:12px;font-family:"IBM Plex Mono",monospace;
+  font-weight:700;font-size:13px;color:var(--cy-d)}
+.asi svg,.asi .gr{width:100%;height:auto;max-height:150px;display:block;margin:6px auto 8px}
+@media(max-width:760px){.asg{grid-template-columns:1fr}}
+
+/* ══════ présentation commune à la fiche de l'élève et à celle du professeur ══════
+   Ces règles ont d'abord été écrites pour le corrigé, puis validées, puis
+   ramenées ici : les deux fiches doivent se ressembler. Le 14/09/2026. */
+
+/* Objectif, Situation, Document : chacun son cadre, son onglet, sa couleur.
+   Empilés sous deux étiquettes de 9,5 px dans un seul bloc, on ne voyait plus
+   où l'un finissait ni que c'était un titre. */
+.ong{position:relative;border-radius:0 14px 14px 14px;padding:15px 20px 14px;
+  margin:34px 0 16px;border:1px solid}
+.ong>.lb{position:absolute;top:-25px;left:-1px;display:inline-block;
+  font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:700;
+  font-size:14px;letter-spacing:.02em;color:#fff;background:none;
+  border-radius:10px 10px 0 0;padding:5px 18px 4px;margin:0}
+.ong p{margin:0 0 9px;font-size:16px}
+.ong p:last-child{margin:0}
+.ong.obj{background:#f4f0fe;border-color:#7c4bd8}
+.ong.obj>.lb{background:#7c4bd8}
+.ong.situ{background:#eaf7fb;border-color:#00778a}
+.ong.situ>.lb{background:#00778a}
+.ong.docu{background:#f4f7f9;border-color:#2E5266}
+.ong.docu>.lb{background:#2E5266}
+.ong.docu .dtit{font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:700;
+  font-size:16px;color:#2E5266;margin:0 0 10px}
+.ong.docu .tw{margin:0}
+.exo-c>.ong:first-child{margin-top:28px}
+
+/* Le mode d'emploi de l'envoi se lit JUSTE AU-DESSUS du bouton qu'il décrit,
+   sur toute la largeur : en tête du fichier, loin de lui, personne ne le
+   lisait, et à côté de lui il était à l'étroit. */
+.exo-f{display:block;padding-top:26px}
+.note-env{display:block;margin:10px 0 0}
+.env{display:block;margin:14px 0 0}
+.aenv{position:relative;margin:0;
+  background:#f4f7f9;border:1px solid #2E5266;border-radius:0 14px 14px 14px;
+  padding:14px 18px 12px}
+.aenv>.lb{position:absolute;top:-25px;left:-1px;display:inline-block;
+  font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:700;font-size:13px;
+  color:#fff;background:#2E5266;border-radius:10px 10px 0 0;padding:5px 15px 4px}
+.aenv ol{margin:0;padding-left:20px}
+.aenv li{margin:0 0 7px;font-size:14.5px;line-height:1.5}
+.aenv li:last-child{margin-bottom:0}
+
+/* ══════ la calculatrice ══════
+   Pour les petits calculs d'une fiche : quatre opérations, le pourcentage, et
+   rien d'autre. Elle s'ouvre par un bouton en bas à gauche et se range d'un
+   clic. Elle n'écrit dans aucune réponse : l'élève recopie son calcul. */
+.calc-b{position:fixed;left:16px;bottom:16px;z-index:55;font:inherit;font-size:14.5px;
+  font-weight:700;cursor:pointer;background:#fff;color:#2E5266;border:1px solid #b9c8d1;
+  border-radius:24px;padding:10px 20px;box-shadow:0 4px 16px -6px rgba(13,26,34,.4)}
+.calc-b:hover{background:#eef3f6}
+.calc-b.on{background:#2E5266;color:#fff;border-color:#2E5266}
+.calc{position:fixed;left:16px;bottom:64px;z-index:56;width:264px;background:#fff;
+  border:1px solid #b9c8d1;border-radius:18px;padding:12px;
+  box-shadow:0 14px 40px -12px rgba(13,26,34,.5)}
+.calc-h{display:flex;align-items:center;justify-content:space-between;
+  font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:700;font-size:14px;
+  color:#2E5266;margin:0 2px 8px}
+.calc-h button{border:0;background:none;font-size:20px;line-height:1;cursor:pointer;
+  color:#55666f;padding:0 4px}
+.calc-e{display:block;background:#f4f7f9;border:1px solid #cfd9df;border-radius:12px;
+  padding:12px 14px;text-align:right;font-family:"IBM Plex Mono",monospace;
+  font-size:24px;font-weight:600;color:#0d1a22;margin:0 0 10px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.calc-t{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.calc-t button{font:inherit;font-size:17px;font-weight:600;cursor:pointer;
+  background:#f4f7f9;color:#0d1a22;border:1px solid #dbe4e9;border-radius:12px;
+  padding:11px 0;transition:.12s}
+.calc-t button:hover{background:#e6edf1}
+.calc-t button.frappe{background:#bfe3ec;transform:scale(.94)}
+.calc-t button.o.frappe{background:#9fd6e3}
+.calc-t button.e.frappe{background:#005d6c}
+.calc-a{margin:9px 2px 0;font-size:11.5px;color:#6b7d88;text-align:center}
+/* Le titre d'un tableau : un tableau sans titre ne dit pas ce qu'il montre. */
+p.ttab{font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:700;
+  font-size:16px;color:#2E5266;margin:0 0 8px}
+p.ttab + .tw{margin-top:0}
+
+/* La zone de réponse grandit avec la réponse : pas de barre de défilement
+   dans un petit cadre, l'élève relit tout ce qu'il a écrit. */
+textarea[data-r]{overflow-y:hidden;resize:vertical}
+.calc-t button.o{background:#e6f5f9;color:#00778a;border-color:#a9d7e3}
+.calc-t button.g{background:#f0f2f4;color:#55666f;font-size:15px}
+.calc-t button.e{background:#00778a;color:#fff;border-color:#00778a}
+.calc-t button.l{grid-column:span 2}
+@media print{.calc,.calc-b{display:none!important}}
+
+/* La consigne de travail, en tête du fichier : même onglet, même bordure que
+   Objectif, Situation et Document. Son cadre à filet orange ne ressemblait à
+   rien d'autre dans la page. */
+.ong.cons{background:#fffaf0;border-color:#c98a10;box-shadow:none;padding:15px 20px 14px}
+.ong.cons>.lb{background:#c98a10}
+.cons-t{font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:700;
+  font-size:16px;color:#7a5205;margin:0 0 8px}
+.ong.cons ul{margin:0;padding-left:20px}
+.ong.cons li{margin:0 0 7px;font-size:16px;color:var(--ink)}
+.ong.cons li:last-child{margin-bottom:0}
+
+/* La compétence s'écrit en bleu, gras, italique, devant la question - règle
+   absolue 2, celle du document papier. Elle était une pastille en petites
+   capitales monospace : deux écritures pour la même chose. */
+.cmp{font-family:inherit;font-size:inherit;font-style:italic;font-weight:700;
+  color:#1B6CA8;background:none;text-transform:none;letter-spacing:0;
+  border-radius:0;padding:0;margin-right:4px;display:inline}
+.cmp::after{content:"."}
+
+/* Les titres de bloc se lisent : ils s'écrivaient en 9,5 px alors qu'ils
+   annoncent ce qui suit. */
+.aide .lb{font-size:12.5px;font-weight:700;letter-spacing:.09em;padding:4px 13px;
+  margin-bottom:10px}
+.aide h3{font-size:19px}
+p.pb{font-size:16.5px;margin:22px 0 4px}
+p.pb b{font-size:16.5px}
+
+/* De l'air entre les encadrés : tout se touchait, la question collait à ce qui
+   la précédait et on ne voyait plus où l'un finissait. */
+/* Le trait pointillé entre deux questions ressemblait à une ligne d'écriture
+   alors qu'on écrit dans l'encadré : il ne servait à rien et trompait. C'est
+   l'espace qui sépare les questions. */
+.q{margin:0 0 4px;padding:16px 0 10px;border-bottom:0}
+.q:first-child{padding-top:6px}
+.q>.q-h{margin:0 0 11px}
+.exo-c>.tw,.exo-c>figure{margin:20px 0}
+
+/* ================= constructeur de diagramme ================= */
+.cgr{background:#fff;border:2px solid #5d9db6;border-radius:18px;padding:16px 18px 18px;margin:12px 0}
+.cgr-hd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0 0 10px}
+.cgr-hd .et{background:#0c4a58;color:#fff;border-radius:20px;padding:4px 13px;
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  font-weight:700}
+.cgr-ai{font-size:13.5px;color:var(--mut)}
+.cgr .tw{margin:0 0 12px}
+.cgr-c0{background:#eef6fa;text-align:left!important;white-space:nowrap}
+/* Les titres que l'élève écrit : celui du graphique, et le nom de chaque axe. */
+.cgr-ti{display:grid;gap:10px;margin:12px 0 0}
+.cgr-ax{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+/* display:grid l'emporte sur l'attribut hidden : il faut le dire. */
+.cgr-ax[hidden]{display:none}
+.cgr-ti label{display:block}
+.cgr-ti label span{display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:.11em;text-transform:uppercase;color:#55666f;margin:0 0 4px}
+input.gti{width:100%;border:1px dashed #c79320;border-radius:10px;background:#fff8e6;
+  padding:9px 12px;font:inherit;font-size:15px;color:#0d1a22}
+/* Dans le tableau, le nom de la ligne reprend ce qui est écrit dans le champ
+   de l'axe des ordonnées, à la place de l'ancien « Valeur ». */
+.ylabm{display:block;font-weight:700;text-align:left;min-width:170px}
+.ylabm.vide{font-weight:400;font-style:italic;color:#8a99a3}
+input.gti:focus{outline:2px solid var(--cy);outline-offset:-2px;background:#fff}
+input.gti.plein{background:#f2fbfd;border-style:solid;border-color:#9ed2e3}
+.cgr.fige input.gti{pointer-events:none;background:#f2fbfd;border-style:solid;border-color:#9ed2e3}
+@media(max-width:620px){.cgr-ax{grid-template-columns:1fr}}
+
+input.gv{width:100%;min-width:64px;border:1px dashed #c79320;border-radius:8px;background:#fff8e6;
+  font:inherit;font-size:16px;font-weight:600;text-align:center;padding:9px 4px;color:var(--ink)}
+input.gv:focus{outline:2px solid var(--cy);outline-offset:-2px;background:#fff}
+input.gv.plein{background:#f2fbfd;border-style:solid;border-color:#9ed2e3}
+.cgr-tb td{padding:6px}
+.cgr-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 12px}
+.gt{border:1.5px solid var(--line2);background:#fff;color:var(--ink2);border-radius:11px;
+  padding:8px 15px;font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;transition:.16s}
+.gt:hover{border-color:var(--cy);color:var(--cy-d);background:var(--cy-l)}
+.gt.on{background:var(--cy);border-color:var(--cy);color:#fff}
+.cgr-msg{font-size:13px;color:var(--mut);margin-left:auto}
+.cgr-vue{min-height:120px;display:grid;place-items:center;background:#f7fbfd;border-radius:14px;
+  padding:10px}
+.cgr-vide{margin:0;font-size:13.5px;color:var(--mut);text-align:center;max-width:38ch}
+.cgr-vide.pb{color:#a4370f;font-weight:600}
+.cgr-vue svg{max-width:100%;height:auto}
+.cgr.fige input.gv{pointer-events:none;background:#f2fbfd;border-style:solid;border-color:#9ed2e3}
+.cgr.fige .gt{pointer-events:none}
+.cgr.fige .cgr-ai{display:none}
+@media(max-width:620px){.cgr-bar{gap:6px}.gt{padding:7px 11px;font-size:12.5px}}
+
+/* fichier d'une seule seance : aucune pagination a afficher */
+.pgnav{display:none}
+/* le bandeau fixe d'enregistrement ne doit jamais couvrir une reponse */
+body{padding-bottom:96px}
+@media print{body{padding-bottom:0}}
+
+/* Un QCM : la bonne proposition s'allume en meme temps que la reponse, a sa
+   place dans la liste. */
+.prop li.bon{transition:background .25s,border-color .25s,color .25s}
+.q.rvl .prop li.bon{background:#e8f6ea;border:1px solid #5da65d;color:#1c5c2a;
+  font-weight:700;box-shadow:inset 0 0 0 1.2px #5da65d}
+.q.rvl .prop li.bon b{color:#2f7f3d}
+@media print{.prop li.bon{background:#e8f6ea;border:1px solid #5da65d}}
+
+/* ══════ la réponse prend la place de la zone de réponse ══════ */
+.rep{margin:10px 0 4px;padding:12px 16px 10px;border-radius:14px;
+  background:#f4fbf4;border:1px solid #9ec89e;border-left:4px solid #5da65d}
+.rep>.lb{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+  font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:#2f6b2f;background:#dcefdc;
+  border:1px solid #a9d3a9;border-radius:20px;padding:3px 12px;margin:0;
+  font-weight:600;transition:.15s}
+.rep>.lb:hover{background:#c9e6c9}
+.rep>.lb::before{content:"▸";font-size:12px;line-height:1}
+
+/* ══════ la réponse arrive au clic ══════
+   Le professeur projette la question, la classe cherche, il clique, la réponse
+   tombe. Tant qu'elle n'est pas appelée, le cadre n'est qu'une pastille : rien
+   ne se lit par-dessus l'épaule, et la place ne bouge pas sous les yeux. */
+.rep{transition:background .2s,border-color .2s}
+.rep:not(.on){background:#fbfcfb;border-color:#d5e2d5;border-left-color:#b6d2b6;
+  padding:8px 16px}
+.rep:not(.on) .rc{display:none}
+.rep.on>.lb::before{content:"▾"}
+.rep.on>.lb{margin:0 0 7px}
+.rep .rc{animation:rvl .25s ease-out}
+@keyframes rvl{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+/* La question qu'on vient d'ouvrir s'éclaire, le temps d'un regard. Un trait
+   posé à sa gauche se lisait comme un signe moins devant le numéro. */
+.q>.q-h{border-radius:9px;transition:background .25s}
+.q.viser>.q-h{background:#e4f4e4}
+.rep p{margin:4px 0}
+.rep p:last-child{margin-bottom:0}
+.rep .tw{margin:8px 0 4px}
+.rep svg,.rep .gr{max-width:100%;height:auto;display:block;margin:8px auto 2px}
+.rep.vide{background:#f7f9fa;border-color:#c3cfd6;border-left-color:#8fa4b0}
+.rep.vide>.lb{color:#55666f;background:#e6ecef}
+.rep.vide p{color:#55666f;font-style:italic}
+.asr{margin:4px 0 0;text-align:center;font-weight:700;color:#2f6b2f}
+.etat.cor{background:#dcefdc;color:#2f6b2f;border-color:#9ec89e}
+
+/* ══════ les titres de bloc se lisent ══════
+   « Objectif », « Situation », « À retenir », « Réponse » sont les titres de
+   ce qu'ils annoncent, et ils s'écrivaient en 9,5 px : à la projection, au
+   fond de la classe, ils disparaissaient. Ils sont en gras et plus gros. */
+/* Objectif, Situation, Document, la compétence, la taille des titres et
+   l'air entre les encadrés sont désormais dans la feuille commune (eleve.py) :
+   les deux fiches se ressemblent. Ne rien redéfinir ici. */
+
+/* ══════ le tableau à compléter se remplit sous les yeux ══════
+   « On voit le tableau, mais sans les réponses. » Le tableau vide reste en
+   place dès la question ; au clic, ses cases se remplissent - il ne se
+   remplace pas par un autre. */
+.rep.tab:not(.on){background:#fbfcfb;padding:12px 16px 10px}
+.rep.tab:not(.on) .tz{display:block}
+.rep.tab .vr{font-style:normal;opacity:0;transition:opacity .3s ease}
+.rep.tab.on .vr{opacity:1}
+.rep.tab .tw{margin:8px 0 2px}
+.rep.tab .tw td.v{background:#fff8e6;border:1px dashed #c79320;border-radius:8px;
+  box-shadow:inset 0 0 0 3px #fff;text-align:center;transition:background .3s,border-color .3s}
+.rep.tab .tw td.v.tot{font-weight:700}
+.rep.tab.on .tw td.v{background:#eaf6ea;border:1px solid #9ec89e}
+
+/* ══════ compter dans le relevé ══════
+   Au clic, toutes les valeurs égales à celle qu'on cherche s'allument dans le
+   relevé : la classe compte avec le professeur au lieu de recevoir le compte. */
+.vv{display:inline-block;min-width:22px;padding:2px 4px;border-radius:7px;
+  transition:background .25s ease,color .25s ease,transform .25s ease}
+.vv.on{background:#ffb627;color:#0d1a22;font-weight:700;transform:scale(1.12)}
+
+/* Le tableau posé sous la question se remplit case par case, à sa place. */
+.tprog{margin:16px 0 4px}
+.tprog .tw{margin:0}
+.tprog .tw td.v{background:#fff8e6;border:1px dashed #c79320;border-radius:8px;
+  box-shadow:inset 0 0 0 3px #fff;text-align:center;
+  transition:background .3s,border-color .3s}
+.tprog .tw td.v:has(.vr.on){background:#eaf6ea;border:1px solid #9ec89e}
+.vr{font-style:normal;opacity:0;transition:opacity .3s ease}
+.vr.on{opacity:1}
+.rep.tab.on .vr{opacity:1}
+
+/* Compter en cliquant la colonne : le tableau EST la commande. */
+.tprog .tw th.cpt{cursor:pointer;background:linear-gradient(180deg,#fff2d6,#ffe6b8);
+  color:#7a4e06;transition:.15s}
+.tprog .tw th.cpt:hover{background:linear-gradient(180deg,#ffe6b8,#ffd78e)}
+.tprog .tw th.cpt.on{background:linear-gradient(180deg,#ffb627,#f0a30d);color:#0d1a22}
+.aidec{margin:10px 0 0;font-size:14px;color:#55666f;font-style:italic}
+.rlv{margin:12px 0 0;border:1px solid #b9c8d1;border-radius:0 14px 14px 14px;
+  padding:14px 16px 12px;background:#f4f7f9;position:relative}
+.rlv>.lb{position:absolute;top:-25px;left:-1px;display:inline-block;
+  font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:700;font-size:13px;
+  color:#fff;background:#2E5266;border-radius:10px 10px 0 0;padding:5px 15px 4px}
+.rlv{margin-top:36px}
+.rlv .tw{margin:0}
+
+/* ══════ les calculs et la phrase réponse ══════
+   Les élèves doivent écrire TOUS leurs calculs et une phrase réponse : le
+   corrigé montre donc les deux, sous le tableau, pas seulement le résultat. */
+/* Le comptage : le nombre en grand, ce qu'il compte dessous. Écrit au fil du
+   texte en chasse fixe, il revenait à la ligne n'importe où - « 4 / articles :
+   9 » - et ne se lisait pas à trois mètres. */
+.cnt{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:10px;
+  margin:12px 0 0}
+.cnt>div{background:#fff;border:1px solid #cfe0d0;border-radius:14px;
+  padding:12px 10px 10px;text-align:center}
+.cnt b{display:block;font-family:"Bricolage Grotesque","Segoe UI",sans-serif;
+  font-size:27px;line-height:1;color:#2f6b2f}
+.cnt span{display:block;margin-top:5px;font-size:13px;color:#55666f}
+
+/* Les calculs : une ligne par calcul, toutes alignées sur les signes égal. */
+.ops{display:grid;grid-template-columns:repeat(5,max-content);justify-content:start;
+  gap:9px 12px;
+  align-items:baseline;background:#fff;border:1px solid #cfe0d0;border-radius:14px;
+  padding:15px 20px;margin:12px 0 0;font-size:17px}
+.ops .g{font-weight:700;color:#2f6b2f;white-space:nowrap}
+/* Une fraction s'écrit l'une sur l'autre, séparées d'un trait : « 12 / 50 »
+   n'est pas ce que l'élève doit poser sur sa copie. */
+.fr2{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;
+  line-height:1.2;margin:0 2px}
+.fr2 .h{padding:0 7px 2px;border-bottom:1.8px solid #28323a}
+.fr2 .b{padding:2px 7px 0}
+.flit{background:#fff;border:2px solid #5da65d;border-radius:12px;
+  padding:13px 20px;margin:12px 0 0;display:flex;align-items:center;
+  justify-content:center;gap:12px;font-size:19px}
+.flit .g{font-weight:700;color:#2f6b2f}
+.ops .eq{color:#9ab39a}
+.ops .c{color:#28323a;font-variant-numeric:tabular-nums}
+.ops b{color:#1f5f1f;white-space:nowrap;font-variant-numeric:tabular-nums}
+@media(max-width:620px){.ops{grid-template-columns:repeat(3,max-content);font-size:15.5px}}
+
+/* La vérification : ce qui dit que le travail est juste. */
+p.verif{display:flex;align-items:flex-start;gap:11px;background:#fff;
+  border:1px solid #9ec89e;border-left:4px solid #5da65d;border-radius:12px;
+  padding:12px 16px;margin:12px 0 0;font-size:16px}
+p.verif .ok{flex:0 0 auto;width:23px;height:23px;border-radius:50%;background:#5da65d;
+  color:#fff;font-size:14px;line-height:23px;text-align:center;font-weight:700}
+
+p.phr{background:#fff;border:1px solid #9ec89e;border-left:4px solid #5da65d;
+  border-radius:12px;padding:15px 19px;margin:12px 0 2px;font-size:16.5px;
+  line-height:1.65}
+
+/* ══════ d'où vient la réponse ══════
+   Le morceau de la situation qui porte la réponse s'allume au moment où la
+   réponse arrive : la classe voit d'où ça sort, au lieu de croire sur parole. */
+mark.sur{background:none;color:inherit;padding:1px 2px;border-radius:4px;
+  transition:background .35s ease,box-shadow .35s ease}
+mark.sur.on{background:#ffe9a8;box-shadow:0 0 0 2px #ffe9a8}
+.aide .lb{font-size:12.5px;font-weight:700;letter-spacing:.09em;padding:4px 13px;
+  margin-bottom:10px}
+.aide h3{font-size:19px}
+.rep>.lb{font-size:12.5px;letter-spacing:.09em;padding:4px 14px}
+
+/* dans la feuille commune */
+.rep{margin:16px 0}
+.rep + .rep{margin-top:18px}
+.rep:last-child{margin-bottom:2px}
+
+/* ══════ le bandeau du document du professeur ══════ */
+.mrq{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:#0c4a58;background:#d8eef5;
+  border:1px solid #7fb8c8;border-radius:20px;padding:3px 13px;margin:0 0 10px}
+
+/* Un corrigé se lit et s'imprime : ni saisie, ni envoi, ni enregistrement. */
+.ident,.barre-b,.pgnav,.exo-f,.env,.note-env{display:none!important}
+
+/* ══════ la barre de pilotage ══════ */
+.pilote{position:fixed;left:50%;transform:translateX(-50%);bottom:16px;z-index:60;
+  display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.96);
+  border:1px solid #b9c8d1;border-radius:30px;padding:7px 9px 7px 16px;
+  box-shadow:0 6px 24px -10px rgba(13,26,34,.45);backdrop-filter:blur(8px)}
+.pilote .cpt{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;
+  color:#2E5266;white-space:nowrap}
+.pilote button{font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;
+  border:1px solid #9ec89e;background:#eaf6ea;color:#2f6b2f;
+  border-radius:20px;padding:6px 15px;transition:.15s}
+.pilote button:hover{background:#d7eed7}
+.pilote button.g{border-color:#b9c8d1;background:#f1f5f7;color:#2E5266}
+.pilote .ast{font-size:12px;color:#6b7d88;white-space:nowrap}
+@media(max-width:700px){.pilote .ast{display:none}}
+
+@media print{
+  body{padding-bottom:0;background:#fff}
+  .tete{background:#fff}
+  .exo,.rep,.aide{break-inside:avoid}
+  .q{break-inside:avoid}
+  /* Sur le papier, tout est ouvert : un corrigé imprimé ne se clique pas. */
+  .rep:not(.on){background:#f4fbf4;border-color:#9ec89e;border-left-color:#5da65d;
+    padding:12px 16px 10px}
+  .rep:not(.on) .rc{display:block}
+  .rep>.lb::before{content:""}
+  .pilote{display:none}
+}
+
+.cdp-t{margin:10px 0 12px;border:1.6px solid #FFB627;border-left:7px solid #FFB627;
+  border-radius:14px;background:#fff8e6;padding:0 18px}
+.cdp-t>summary{cursor:pointer;list-style:none;font-weight:700;color:#8a5c05;
+  padding:12px 0;font-size:15.5px}
+.cdp-t>summary::-webkit-details-marker{display:none}
+.cdp-t>summary:before{content:"?";display:inline-grid;place-items:center;width:24px;height:24px;
+  border-radius:8px;background:#FFB627;color:#fff;margin-right:9px;vertical-align:-5px}
+.cdp-t[open]>summary:before{content:"✕"}
+.cdp-t .pt{margin:0 0 10px;font-size:14.5px;color:#8a5c05}
+.cdp-l{margin:0 0 14px;padding-left:22px}
+.cdp-l li{margin:0 0 14px;font-size:15px}
+.cdp-l img{display:block;width:100%;max-width:340px;height:auto;margin:8px 0 0;
+  border:2px solid #2E5266;border-radius:10px}
+.cdp-l .tp{font-family:"IBM Plex Mono",Consolas,monospace;background:#0d1a22;color:#ffd98a;
+  border-radius:7px;padding:2px 8px}
+@media print{.cdp-t{display:none}}
+
+.ch span{padding:3px 10px;border-radius:9px}
+.ch span.pose{background:#eaf6ea;border:1px solid #9ec89e;animation:pose .3s ease-out}
+.case.large{min-width:150px}
+input.ec.grand{width:168px;text-align:center}
+.mots{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0 0;
+  padding:12px 18px;background:#f2eefb;border:1px solid #b9a7e0;border-radius:12px}
+.mots .et{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;font-weight:700;color:#5b32ab;margin-right:4px}
+.mots span:not(.et){font-weight:700;font-size:15.5px;color:#4a2a8f;background:#fff;
+  border:1px solid #b9a7e0;border-radius:20px;padding:5px 14px}
+.qcm{margin:11px 0 0;padding:12px 18px;background:#f5f8fa;border:1px dashed #8fa4b0;
+  border-radius:12px;font-size:16px}
+.qcm p{margin:0;font-weight:700}
+.qcm .ch{margin:9px 0 0;display:flex;gap:26px;flex-wrap:wrap;font-weight:700}
+.sq{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;
+  margin:11px 0 0;padding:13px 18px;background:#f5f8fa;border:1px dashed #8fa4b0;
+  border-radius:12px;font-size:16px}
+.sq .sql{font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:700;
+  font-size:15px;color:#fff;background:#2E5266;border-radius:20px;padding:3px 12px;
+  line-height:1.5}
+.calcs{display:grid;grid-template-columns:auto 84px 22px 84px 22px 84px;gap:9px 10px;
+  align-items:center;justify-items:center;width:max-content;max-width:100%;
+  margin:12px 0 0;padding:14px 20px;background:#f5f8fa;border:1px dashed #8fa4b0;
+  border-radius:12px}
+.calcs .cl{justify-self:start;font-weight:700;font-size:15px;color:#2E5266;
+  white-space:nowrap;padding-right:6px}
+.calcs .n{font-weight:700;font-size:17px;width:84px;text-align:center}
+.calcs .s{font-weight:700;font-size:17px;color:#55666f}
+.donne{display:inline-block;width:84px;padding:4px 6px;text-align:center;font-weight:700;
+  background:#eaeff3;border:1px solid #9fb0bb;border-radius:9px}
+@media (max-width:620px){.calcs{padding:12px 10px;gap:8px 5px;
+    grid-template-columns:70px 18px 70px 18px 70px}
+  .calcs .cl{grid-column:1 / -1;justify-self:start;padding:4px 0 0}
+  .calcs .n,.donne,.calcs input.ec{width:70px;font-size:16px}}
+.saisie{margin:11px 0 0;font-size:16px;background:#f5f8fa;border:1px dashed #8fa4b0;
+  border-radius:12px;padding:12px 16px;line-height:2.4}
+.lst{margin:2px 0 0;padding:0;display:grid;gap:9px}
+.lst>div{display:grid;grid-template-columns:148px 1fr;gap:15px;align-items:start;
+  background:#fff;border:1px solid var(--chl);border-radius:12px;padding:11px 15px}
+.lst dt{font-family:"Source Sans 3","Segoe UI",sans-serif;font-weight:600;font-size:12.5px;
+  color:#fff;background:var(--ch);border-radius:20px;padding:3px 11px;text-align:center;
+  line-height:1.45}
+.lst dd{margin:0;font-size:16px}
+.cle{font-weight:700}
+.lst .fx{font-family:"IBM Plex Mono",monospace;font-size:14.5px;background:#e7edf1;
+  color:#2E5266;border:1px solid #c6d3db;border-radius:7px;padding:2px 9px;display:inline-block}
+.lit{position:relative;display:inline-block}
+.lit .lu{position:absolute;top:calc(100% + 2px);left:10px;white-space:nowrap;
+  font-style:italic;color:#55666f}
+.lst dd.sous{padding-bottom:25px}
+@media (max-width:620px){.lit .lu{position:static;display:block;margin-left:10px;
+  white-space:normal} .lst dd.sous{padding-bottom:0}
+  .lst>div{grid-template-columns:1fr;gap:8px} .lst dt{justify-self:start}}
+.ong.obj{--ch:#6f57a6;--chl:#ece7f6}
+.ong.voc{--ch:#8a5a72;--chl:#f3e7ec;background:#faf4f7;border-color:#c9a3b4}
+.ong.voc>.lb{background:#8a5a72}
+.ong.ens{--ch:#3f7f5f;--chl:#e3f1e9;background:#f0f9f4;border-color:#3f7f5f}
+.ong.ens>.lb{background:#3f7f5f}
+.ong.meth{--ch:#0d7a74;--chl:#e0f3f1;background:#eff9f8;border-color:#0d7a74}
+.ong.meth>.lb{background:#0d7a74}
+.ong h3{font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:700;
+  font-size:17px;margin:0 0 10px}
+.lien-meth{display:flex;align-items:center;gap:14px;flex-wrap:wrap;text-decoration:none;
+  background:#e0f3f1;border:1px solid #7fc3be;border-radius:14px;padding:14px 18px;
+  color:#0a5f5a;transition:.15s}
+.lien-meth:hover{background:#d0ebe8;border-color:#0d7a74}
+.lien-meth b{font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-size:17px;flex:1 1 300px}
+.lien-meth .gestes{font-size:15.5px;color:#3f7f79}
+.lien-meth .fleche{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;
+  letter-spacing:.06em;color:#fff;background:#0d7a74;border-radius:20px;padding:5px 14px;
+  white-space:nowrap}
+
+/* Les champs ou l'eleve ecrit. */
+input.ec{font:inherit;font-size:16px;font-weight:600;color:#0d1a22;text-align:center;
+  background:#fffdf9;border:1px solid #c6d3db;border-radius:9px;padding:4px 8px;
+  width:84px;max-width:100%}
+input.ec:focus{outline:none;border-color:var(--cy);background:#fff;
+  box-shadow:0 0 0 3px rgba(0,165,191,.18)}
+.tw td input.ec{width:84px;border:1px dashed #8fa4b0;background:#f5f8fa}
+.coche{display:inline-flex;align-items:center;gap:6px;margin-right:18px;cursor:pointer;
+  font-weight:700}
+.coche input{width:19px;height:19px;accent-color:var(--cy);cursor:pointer}
+input.ec.large{min-width:100%;text-align:left}
+.rep-lib{width:100%;font:inherit;font-size:16px;padding:10px 13px;border:1px solid #c6d3db;
+  border-radius:11px;background:#fffdf9;resize:vertical}
+.rep-lib:focus{outline:none;border-color:var(--cy);background:#fff}
+.cdp-btn{font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:#7a5205;
+  background:#fdf3e0;border:1px solid #dcae57;border-radius:20px;padding:5px 14px;margin:10px 0 0}
+.cdp-btn:hover{background:#f8e8cc}
+.cdp{margin:9px 0 0;padding:12px 16px;background:#fffaf0;border:1px solid #dcae57;
+  border-left:4px solid #c98a10;border-radius:13px;font-size:15.5px}
+.cdp.cache{display:none}
+.cdp .lab{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:.13em;text-transform:uppercase;color:#7a5205;margin-bottom:5px}
+
+
+.lst dd ul.idees{margin:0;padding:0;list-style:none;display:grid;gap:5px}
+.lst dd ul.idees li{position:relative;padding-left:15px}
+.lst dd ul.idees li::before{content:"";position:absolute;left:2px;top:.62em;
+  width:5px;height:5px;border-radius:50%;background:var(--ch)}
+.lst dd.prog{font-size:16px;color:#55666f;line-height:1.5}
+
+.q-n{font-weight:400}
+.q-n .qn,.q-n .cmp{font-weight:700}
+.q-n b{font-weight:800;font-size:1.07em}
+.pb .suite{display:block;margin-top:2px}
+.lst dd .bo{font-size:13px}
+
+/* Regles reportees de la fiche methode : pas de gris, les donnees fournies
+   en gras et en vert, l'exemple en italique sans puce. */
+.lit .lu{color:#0d1a22}
+.calcs .s{color:#0d1a22}
+.lien-meth .gestes{color:#0a5f5a}
+.lst dd.prog{color:#0d1a22}
+.donne,.tw td.don{font-weight:700;color:#245c42}
+.tw td.don{background:#eef6f1}
+.lst dd ul.idees li.ex::before{display:none}
+.lst dd ul.idees li.ex{font-style:italic}
+.lst dd .bo{display:block;margin-top:3px}
+
+.lst dd .lit{display:block;margin-top:5px}
+.lst dd .lit .lu{position:static;display:block;margin:2px 0 0;white-space:normal}
+.lst dd.sous{padding-bottom:0}
+
+.ong.prob{background:#fdf1ea;border-color:#a4370f}
+.ong.prob>.lb{background:#a4370f}
+.ong.prob p{margin:0 0 4px}
+.ong.prob p:last-child{margin-bottom:0}
+
+.ong.situ p{margin:0 0 4px}
+.ong.situ p:last-child{margin-bottom:0}
+
+/* La Situation et la Problematique posent leur texte dans un cadre blanc,
+   comme l'Objectif, le Vocabulaire et la Fiche methode. */
+.ong.situ,.ong.prob{--chl:#cfe3ea}
+.ong.prob{--chl:#efd6c9}
+.ong.situ .txt,.ong.prob .txt{background:#fff;border:1px solid var(--chl);
+  border-radius:12px;padding:12px 16px}
+.ong.situ .txt p,.ong.prob .txt p{margin:0 0 6px;font-size:16px}
+.ong.situ .txt p:last-child,.ong.prob .txt p:last-child{margin:0}
+/* Les cartes ne sont plus blanches : chacune prend une teinte tres legere de
+   la couleur de son bloc, plus claire que le bloc pour s'en detacher. */
+.ong.obj .lst>div{background:#fcfaff}
+.ong.voc .lst>div{background:#fefcfe}
+.ong.ens .lst>div{background:#fafdfc}
+.ong.situ .txt{background:#f8fdfe}
+.ong.prob .txt{background:#fffcfa}
+.lien-meth{background:#fafdfd}
+
+/* Consignes, QCM et divisions : trait plein de couleur, comme le reste du
+   document. Le trait tirete gris etait le seul endroit qui sortait de la
+   regle. */
+.sq,.qcm,.calcs{background:#f9fcfd;border:1px solid #6f97a8}
+
+/* Ce que contient chaque colonne de division. */
+.calcs .ct{font-size:13.5px;font-weight:600;color:#2E5266;text-align:center;
+  line-height:1.2;align-self:end}
+.calcs .ct.vide{visibility:hidden}
+/* Chaque division dit de quelle colonne du tableau viennent ses nombres. */
+.calcs.avecnotes{grid-template-columns:auto 84px 22px 84px 22px 84px auto}
+/* Apres le tableau : ce que l'eleve remarque, et ou la correction conclut. */
+.remarque{margin:12px 0 0;padding:13px 18px;background:#f4f9fb;
+  border:1px solid #6f97a8;border-radius:12px;break-inside:avoid}
+.remarque .lab{display:inline-block;
+  font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:700;
+  font-size:14px;color:#fff;background:#2E5266;border-radius:20px;
+  padding:4px 15px;margin:0 0 4px}
+.remarque .lignes{display:grid;gap:22px;margin:16px 0 4px}
+.remarque .lignes i{display:block;height:0;border-bottom:1px dashed #8fa4b0}
+.remarque .expl.bloc{margin:8px 0 0;padding:0;background:none;border-left:0;
+  border-radius:0}
+@media print{ .remarque{margin:8px 0 0;padding:9px 14px} 
+  .remarque .lignes{gap:18px;margin:12px 0 2px} }
+
+/* L'explication qui se pose sous un tableau de calcul. */
+.expl.bloc{display:block;margin:9px 0 0;padding:10px 16px;
+  background:#eef7f0;border-left:4px solid #3f7f5f;border-radius:0 12px 12px 0;
+  font-style:italic;font-size:16px;color:#1c5c39;line-height:1.5}
+@media print{ .expl.bloc{font-size:14px;padding:7px 12px;margin:6px 0 0} }
+.calcs .nt .n0{display:block;white-space:nowrap}
+.calcs .nt .expl.ligne{display:block;margin-top:5px;white-space:normal;
+  font-style:italic;font-weight:600;color:#1c5c39;font-size:14px;
+  line-height:1.35;max-width:250px}
+@media print{ .calcs .nt .expl.ligne{font-size:12.5px;max-width:200px} }
+.calcs .nt{justify-self:start;font-size:14.5px;font-style:italic;
+  color:#2E5266;padding-left:12px;white-space:normal}
+@media screen and (max-width:620px){.calcs.avecnotes{grid-template-columns:70px 18px 70px 18px 70px}
+  .calcs .nt{grid-column:1 / -1;padding:0 0 6px;white-space:normal}}
+@media print{.calcs.avecnotes{grid-template-columns:auto 74px 20px 74px 20px 74px auto}
+  .calcs .nt{font-size:13px;padding-left:9px}}
+
+/* La phrase qui dit dans quel ordre se lit un tableau. */
+.lect{margin:11px 0 0;padding:10px 16px;background:#f9fcfd;
+  border-left:4px solid #2E5266;border-radius:0 12px 12px 0;font-size:15.5px}
+.lect p{margin:0 0 3px}
+.lect p:last-child{margin:0}
+
+/* Le tableau d'une question ne colle pas la consigne. */
+.q .tw{margin-top:11px}
+
+/* Le badge qui ouvre la serie des questions. */
+/* Regle : la colonne de titre prend la largeur de son intitule, pas plus.
+   Les colonnes de valeurs se partagent le reste. */
+.tw table.num th:first-child{width:1%;white-space:nowrap}
+
+/* Les phrases qui lisent le tableau se posent a sa droite, chacune en face
+   de sa ligne. */
+/* Oui / Non, Vrai / Faux : la case est dessinee, pas une case de systeme.
+   Assez grosse pour se voir au fond de la classe. */
+.coche{font-size:16px;padding:7px 16px;gap:10px;font-weight:400}
+.coche input{appearance:none;-webkit-appearance:none;flex:0 0 auto;
+  width:21px;height:21px;margin:0;border:2.2px solid #2E5266;border-radius:6px;
+  background:#fff;position:relative;cursor:pointer;transition:.12s}
+.coche input:checked{border-color:#00778a;background:#00778a
+  url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4 12.5l5.5 5.5L20 6.5' fill='none' stroke='white' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round'/></svg>")
+  center / 14px 14px no-repeat}
+.coche input:focus-visible{outline:3px solid rgba(0,165,191,.35);outline-offset:2px}
+
+/* Le corrige garde ses caracteres ☐ / ☒ : on agrandit la pastille. */
+.ch span{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;
+  border:1.5px solid #9fc0ce;border-radius:22px;background:#fff;
+  font-weight:700;font-size:18px}
+.ch span.pose{background:#e6f7ea;border-color:#3f7f5f;color:#1c5c39}
+
+/* L'onglet s'arrete sur le trait du cadre : il debordait de huit pixels
+   a l'interieur du bloc, et sa couleur mordait sur le fond. */
+.ong>.lb{top:auto;bottom:calc(100% + 1px)}
+.ong{margin-top:52px}
+
+/* Deux cases placees sur deux lignes se touchaient : on donne de l'air
+   a la ligne, et un peu de marge a la case. */
+.qcm p{line-height:2}
+
+/* Deux colonnes, comme sur le papier : quatre encadres, deux cote a cote. */
+@media screen and (min-width:800px){
+  .ong.obj .lst,.ong.voc .lst,.ong.ens .lst{grid-template-columns:1fr 1fr;
+    gap:10px 14px}
+  .ong.obj .lst>div,.ong.voc .lst>div,.ong.ens .lst>div{
+    grid-template-columns:1fr;gap:8px;align-content:start}
+  .ong.obj .lst dt,.ong.voc .lst dt,.ong.ens .lst dt{justify-self:start}
+}
+/* La calculatrice de l'ecran. */
+#calc-b{position:fixed;right:18px;bottom:18px;z-index:40;
+  font:inherit;font-size:14px;font-weight:700;cursor:pointer;color:#fff;
+  background:#2E5266;border:0;border-radius:24px;padding:11px 20px;
+  box-shadow:0 6px 18px -6px rgba(13,26,34,.5)}
+#calc-b:hover{background:#00778a}
+/* La calculatrice vit dans une barre fixee en bas, sur toute la largeur,
+   comme dans les fiches AP : elle ne flotte plus sur le texte. */
+.barre-bas{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;
+  justify-content:flex-end;align-items:center;gap:10px;padding:8px 16px;
+  background:#fff;border-top:2px solid #2E5266;
+  box-shadow:0 -6px 18px -10px rgba(13,26,34,.35)}
+.barre-bas #calc-b{position:static;box-shadow:none}
+#calc{bottom:74px}
+body{padding-bottom:78px}
+@media print{.barre-bas{display:none!important}body{padding-bottom:0}}
+#calc{position:fixed;right:18px;bottom:70px;z-index:40;width:266px;
+  background:#fff;border:1px solid #9fb0bb;border-radius:18px;padding:14px;
+  box-shadow:0 14px 40px -12px rgba(13,26,34,.45)}
+#calc.ferme{display:none}
+#calc-e{font-family:"IBM Plex Mono",monospace;font-size:26px;font-weight:600;
+  text-align:right;background:#f2f6f8;border:1px solid #c6d3db;border-radius:11px;
+  padding:12px 14px;margin:0 0 12px;overflow-x:auto;white-space:nowrap}
+#calc-t{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+#calc-t button{font:inherit;font-size:18px;font-weight:600;cursor:pointer;
+  color:#0d1a22;background:#f5f8fa;border:1px solid #c6d3db;border-radius:11px;
+  padding:11px 0}
+#calc-t button:hover{background:#e2f6fa;border-color:#00A5BF}
+#calc-t button.g{background:#eaeff3;font-size:16px}
+#calc-t button.o{background:#e2f6fa;color:#00778a}
+#calc-t button.eg{background:#00778a;color:#fff;border-color:#00778a}
+#calc-t button.l0{grid-column:span 2}
+@media print{ #calc-b,#calc{display:none} }
+
+/* Les reperes d'explication ne servent qu'au corrige. */
+.expl,.expl.bloc{display:none}
+.case,input.ec{margin-top:4px;margin-bottom:4px}
+@media print{ .qcm p{line-height:1.5} .case,input.ec{margin-top:2px;margin-bottom:2px} }
+
+/* La case du corrige garde sa hauteur meme vide. */
+.case{min-width:84px;min-height:1.6em;line-height:1.6;padding:3px 9px;
+  vertical-align:middle}
+@media print{ .case{min-width:74px;min-height:1.5em;padding:2px 7px} }
+@media print{ .ong{margin-top:12px} }
+
+/* Le dessin de la situation, a droite du texte. */
+.situ-corps{display:flex;gap:20px;align-items:center}
+.situ-corps .txt{flex:1 1 300px;min-width:0}
+.situ-corps .dessin{flex:0 1 290px;min-width:0}
+.situ-corps .dessin svg{width:100%;height:auto;display:block;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+@media screen and (max-width:760px){
+  .situ-corps{flex-direction:column;align-items:stretch}.situ-corps .txt{flex-basis:auto}
+  .situ-corps .dessin{flex-basis:auto;max-width:360px;margin:0 auto}
+}
+@media print{ .situ-corps{gap:14px} .situ-corps .dessin{flex-basis:250px} }
+
+/* La ligne d'exemple, sous la consigne. */
+.exemple{margin:6px 0 0;font-style:italic;font-size:15.5px;color:#2E5266}
+.ong p.ttab{margin:15px 0 0;font-family:"Bricolage Grotesque","Segoe UI",sans-serif;
+  font-weight:700;font-size:16.5px;color:#2E5266;text-align:center}
+.ttab+.tw{margin-top:6px}
+
+/* Deux colonnes : les consignes a gauche, le tableau a droite. */
+.deux{display:flex;gap:18px;align-items:flex-start;margin:11px 0 0}
+.deux .cg{flex:1 1 280px;display:grid;gap:11px;align-content:start}
+.deux .cd{flex:0 0 auto;max-width:100%}
+.deux .sq,.deux .calcs{margin:0}
+/* Le tableau se resserre un peu pour laisser de la place aux consignes. */
+.deux .calcs{padding:12px 15px;gap:8px 7px;
+  grid-template-columns:auto 74px 20px 74px 20px 74px}
+.deux .calcs .n{width:74px}
+.deux .calcs .ct{font-size:12.5px}
+.deux .cg{flex:1 1 360px}
+@media screen and (max-width:820px){.deux{flex-direction:column} .deux .cd{align-self:stretch}}
+@media print{.deux{gap:12px;break-inside:avoid}}
+
+.twn{display:flex;gap:18px;align-items:stretch;margin:11px 0 14px}
+.twn .tw{flex:1 1 auto;margin:0}
+.twn .notes{flex:0 1 270px;display:grid;grid-template-rows:1fr 1fr;
+  align-items:center;padding:2px 0}
+.twn .notes p{margin:0;font-size:15px;font-style:italic;color:#2E5266;
+  line-height:1.35}
+@media screen and (max-width:760px){
+  .twn{flex-direction:column;gap:8px}
+  .twn .notes{grid-template-rows:auto auto;gap:4px;flex-basis:auto}
+}
+@media print{
+  .twn{gap:12px;margin:8px 0;break-inside:avoid}
+  .twn .notes{flex-basis:220px}
+  .twn .notes p{font-size:13.5px}
+}
+
+.badge-q{display:block;width:max-content;
+  font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:700;
+  font-size:14px;letter-spacing:.02em;color:#fff;background:#2E5266;
+  border-radius:10px;padding:5px 18px 4px;margin:30px 0 12px}
+@media print{ .badge-q{margin:16px 0 8px;padding:4px 14px} }
+
+/* La question est un bloc comme les autres : cadre de couleur, onglet pose
+   sur le bord. C'etait le seul endroit de la seance ou le titre etait du
+   texte libre sur du blanc. */
+.ong.quest{--ch:#2E5266;--chl:#cfdde5;background:#f4f8fa;border-color:#2E5266;
+  border-radius:14px;margin:18px 0;padding:15px 20px 14px;border-bottom:0}
+.ong.quest .q-h{margin:0}
+.ong.quest .q-n>*:first-child{margin-top:0}
+.ong.quest .grp>*:first-child{margin-top:0}
+/* Une consigne et ce qu'elle commande : un seul encadre, porte par le groupe. */
+.grp.fus{margin:11px 0 0;padding:12px 18px;background:#f9fcfd;
+  border:1px solid #6f97a8;border-radius:12px}
+.grp.fus>.sq,.grp.fus>.qcm,.grp.fus>.calcs{margin:0;padding:0;
+  background:none;border:0;border-radius:0}
+.grp.fus>.sq+*{margin-top:10px}
+.grp.fus>.tw{margin:10px 0 0}
+.grp.fus>.mots{margin-top:10px}
+@media print{
+  .ong.quest{margin:11px 0 7px;padding:9px 14px 8px}
+  .q-h{display:contents}
+  .q-n{display:contents}
+}
+
+/* L'encadre reponse : la phrase s'ecrit normalement, comme ailleurs. */
+.qcm p{font-weight:400}
+.qcm .ch{gap:14px;font-weight:400}
+
+/* Oui / Non, Vrai / Faux : une pastille qu'on coche, pas un carre nu. */
+.coche{display:inline-flex;align-items:center;gap:10px;margin:0;padding:7px 18px;
+  background:#fff;border:1.5px solid #9fc0ce;border-radius:22px;
+  font-weight:700;font-size:16px;cursor:pointer;transition:.15s}
+.coche:hover{border-color:#2E5266;background:#f0f8fb}
+.coche input{width:20px;height:20px;border-radius:5px;accent-color:#00778a}
+.coche:has(input:checked){background:#e2f6fa;border-color:#00778a;color:#00566b}
+@media print{
+  .coche{padding:4px 14px;gap:9px;border:1px solid #6f97a8;background:#fff;
+    font-size:15px}
+  .coche input{width:19px;height:19px;border-width:2px;border-radius:5px}
+  .ch span{padding:4px 12px;font-size:15px}
+  .exemple{font-size:14px;margin:4px 0 0}
+  .qcm .ch{gap:10px}
+}
+
+.print-id{display:none}
+.ident{display:flex;gap:14px;flex-wrap:wrap;margin:22px 0 0}
+.ident>div{flex:0 1 260px}
+.ident label{display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--mut);margin:0 0 5px 10px}
+.ident input{width:100%;font:inherit;font-size:17px;padding:11px 14px;border:2px solid #fff;
+  border-radius:12px;background:rgba(255,255,255,.75);color:var(--ink)}
+.ident input:focus{outline:none;border-color:var(--cy);background:#fff}
+/* --- les deux ardoises du marché --- */
+  .ardoises{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;margin:16px 0}
+.ardoise{flex:1 1 320px;max-width:410px;margin:0;
+    display:flex;flex-direction:column}
+.ardoise .craie{flex:1}
+.ardoise .craie{background:#2C3A33;border:11px solid #8D6A3A;border-radius:8px;
+    padding:14px 18px 16px;color:#F7F7F2;font-family:'Segoe Print','Bradley Hand',
+    'Comic Sans MS','Comic Neue',cursive;box-shadow:inset 0 0 34px rgba(0,0,0,.55);
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.ardoise .tt{text-align:center;font-size:19px;font-weight:bold;letter-spacing:.04em;
+    border-bottom:2px solid rgba(255,255,255,.45);padding-bottom:6px;margin-bottom:9px}
+.ardoise .tt small{display:block;font-size:15.5px;font-weight:normal;letter-spacing:0}
+.ardoise .li{display:flex;justify-content:space-between;align-items:baseline;
+    font-size:18px;margin:5px 0;gap:8px}
+.ardoise .li b{color:#FFD87A;font-size:20px;white-space:nowrap}
+.ardoise .li i{flex:1;border-bottom:2px dotted rgba(255,255,255,.35);margin:0 4px}
+.ardoise figcaption{font-size:15.5px;font-style:italic;color:#555;text-align:center;
+    margin-top:5px}
+.ardoise.a2 .craie{border-color:#5D6D7E}
+.ardoise.a2 .tt{color:#FFCDD2}
+@media print{
+  body{background:#fff}
+  .exo,.exo-c,.wrap,section{break-inside:auto!important}
+  .print-id{display:flex!important;gap:34px;flex-wrap:wrap;margin:14px 0 0;
+    font-weight:700;font-size:15px}
+  .print-id span{border-bottom:1px solid #2E5266;min-width:150px;padding-bottom:2px}
+  .lit .lu{position:static;display:block;margin-left:10px;white-space:normal}
+  .lst dd.sous{padding-bottom:0}
+  .ong{margin:28px 0 12px;padding:13px 16px 12px}
+  .tete{padding:22px 34px 18px}
+  .tete{border-radius:0;margin-bottom:14px}
+  .wrap{padding-bottom:0;max-width:none}
+  .exo{box-shadow:none;border:0}
+  .qcm,.sq,.calcs,.tw,.mots,.cdp,.lst>div{break-inside:avoid}
+  .q{break-inside:auto}
+  .grp{break-inside:avoid}
+  .q-h{break-after:avoid}
+  .prop-pied{break-before:avoid}
+  .ong{break-inside:auto}
+  .ong.meth,.ong.situ,.ong.prob,.ong.docu{break-inside:avoid}
+  .ardoises,.ardoise{break-inside:avoid}
+  .cdp{display:block!important;break-inside:avoid}
+  .cdp-btn{display:none}
+  .lien-meth .fleche{display:none}
+  .lien-meth{background:#fff}
+  input.ec{background:#fff;border:1px solid #8fa4b0}
+  a{color:inherit;text-decoration:none}
+
+  /* L'onglet rentre dans le cadre : il ne peut plus rester seul en bas de page. */
+  .ong>.lb{position:static;display:inline-block;border-radius:9px;
+    margin:0 0 9px;padding:4px 14px}
+  .ong{margin:12px 0 8px;border-radius:12px;padding:10px 14px 9px}
+
+  /* Les deux ardoises tiennent côte à côte, en plus petit. */
+  .ardoises{gap:14px;margin:10px 0;flex-wrap:nowrap}
+  .ardoise{flex:1 1 0;max-width:none}
+  .ardoise .craie{border-width:7px;padding:9px 12px 11px}
+  .ardoise .tt{font-size:15px;padding-bottom:4px;margin-bottom:6px}
+  .ardoise .tt small{font-size:13px}
+  .ardoise .li{font-size:14px;margin:3px 0}
+  .ardoise .li b{font-size:15px}
+  .ardoise figcaption{font-size:13px;margin-top:3px}
+
+  /* Serrage général pour tenir l'activité sur quatre pages. */
+  body{font-size:15px}
+  .tete{padding:11px 24px 10px}
+  .tete .kick{font-size:10px;margin:0 0 2px}
+  .tete .sub{font-size:15px;margin:2px 0 0}
+  .ardoise .craie{border-width:6px;padding:7px 11px 9px}
+  .ardoise .tt{font-size:14px;padding-bottom:3px;margin-bottom:5px}
+  .ardoise .li{font-size:13px;margin:2px 0}
+  .ardoise .li b{font-size:14px}
+  .ardoise figcaption{font-size:12.5px;margin-top:2px}
+  .ong.docu .dtit{font-size:14.5px;margin:0 0 6px}
+  .ong.ens .lst dd{font-size:14px}
+  .sq{gap:10px;padding:7px 13px}
+  .sq .sql{font-size:13.5px;padding:2px 10px}
+  .calcs{gap:5px 9px;padding:8px 14px}
+  .calcs .n,.calcs .s{font-size:16px}
+  input.ec{padding:3px 6px}
+  .tete h1{font-size:25px}
+  .exo-c{padding:8px 0 0}
+  .lst{gap:5px}
+  .ong.obj .lst,.ong.voc .lst,.ong.ens .lst{grid-template-columns:1fr 1fr;gap:6px 10px}
+  .ong.obj .lst>div,.ong.voc .lst>div,.ong.ens .lst>div{grid-template-columns:1fr;gap:5px}
+  .ong.obj .lst dt,.ong.voc .lst dt,.ong.ens .lst dt{justify-self:start}
+  .ong.ens h3{font-size:15px;margin:0 0 7px}
+
+  .lst dd{font-size:14.5px}
+  .lst dt{font-size:11.5px;padding:3px 10px}
+  .lst>div{padding:8px 13px;gap:12px}
+  .q{margin:0 0 2px;padding:4px 0 2px}
+  .sq{margin:3px 0 0;padding:4px 12px;gap:9px}
+  .lst dd ul.idees{gap:3px}
+  .lst>div{padding:6px 12px}
+  .ong{margin:9px 0 6px;padding:9px 13px 8px}
+  .prop-pied,.prop-pied .adp{break-before:avoid;break-inside:avoid}
+  .wrap>*:last-child{margin-bottom:0}
+  .q-h{margin:0 0 5px}
+  .qcm,.sq,.calcs,.mots,.saisie{margin:4px 0 0;padding:5px 14px}
+  .sq{gap:10px}
+  .calcs{gap:5px 9px;padding:7px 16px}
+  .qcm .ch{margin:4px 0 0}
+  .qcm p,.sq{line-height:1.45}
+  .cdp{margin:4px 0 0;padding:6px 12px;font-size:13px;line-height:1.34}
+  .ong.ens{margin:8px 0 6px;padding:8px 14px 7px}
+  .ong.ens .lst>div{padding:6px 12px}
+  .tw{margin:8px 0}
+  .tw th,.tw td{padding-top:6px;padding-bottom:6px}
+  .pb{margin:12px 0 0;padding:8px 13px}
+  .lien-meth{padding:9px 15px}
+  .print-id{margin:9px 0 0}
+  .prop-pied{margin-top:2px;padding-top:3px;
+    page-break-inside:avoid;break-inside:avoid;display:block}
+  .prop-pied p{page-break-inside:avoid;break-inside:avoid}
+  .prop-pied p{margin:0}
+  /* Le pied tient sur UNE ligne : des qu'il en prenait deux, la seconde
+     partait seule sur une page de plus. */
+  .prop-pied,.prop-pied p,.prop-pied .adp{orphans:2;widows:2}
+  .prop-pied p{white-space:nowrap}
+  .ong.ens{margin:7px 0 2px}
+  .ong.ens .lst>div{padding:5px 11px}
+  .prop-pied .src{font-size:12.5px}
+  .prop-pied .adp{font-size:9.5px;display:inline;margin-left:8px}
+  .prop-pied .src{font-size:9.5px}
+}
+@media print{
+.grp.fus{margin:4px 0 0;padding:6px 14px}
+.grp.fus>.sq+*,.grp.fus>.tw,.grp.fus>.mots{margin-top:6px}
+}
+@media print{
+.ong p.ttab{margin:7px 0 0;font-size:14px}
+.ttab+.tw{margin-top:3px}
+}
+
+/* Le tableau qui se regle sur son contenu. */
+.tw.ajuste{width:max-content;max-width:100%}
+.tw.ajuste table{width:auto}
+.tw.ajuste table.num td{padding-left:30px;padding-right:30px}
+/* Le tableau de calcul reprend son cadre, comme a la question 2 : le cadre ne
+   couvre que les colonnes de calcul, les notes de droite restent dehors. */
+.calcs.cadree,.grp.fus>.calcs.cadree{--nw:250px;--gx:10px;--px:14px;--py:10px;
+  position:relative;background:none;border:0;padding:var(--py) var(--px);
+  grid-template-columns:auto 84px 22px 84px 22px 84px var(--nw)}
+.calcs.cadree>.cadre{position:absolute;top:0;bottom:0;left:0;z-index:0;
+  right:calc(var(--nw) + var(--gx) + var(--px) - 9px);
+  background:#f9fcfd;border:1px solid #6f97a8;border-radius:12px}
+.calcs.cadree>*:not(.cadre){position:relative;z-index:1}
+@media screen and (max-width:620px){
+  .calcs.cadree,.grp.fus>.calcs.cadree{background:#f9fcfd;border:1px solid #6f97a8;
+    grid-template-columns:70px 18px 70px 18px 70px}
+  .calcs.cadree>.cadre{display:none}
+}
+@media print{
+  .calcs.cadree,.grp.fus>.calcs.cadree{--nw:210px;--gx:9px;--px:13px;--py:8px;
+    grid-template-columns:auto 74px 20px 74px 20px 74px var(--nw)}
+}
+
+/* La case du coefficient de proportionnalite : le mot est long. */
+.case.xl{min-width:300px}
+input.ec.xl{width:300px;text-align:center}
+@media screen and (max-width:620px){.case.xl{min-width:0;width:100%}
+  input.ec.xl{width:100%}}
+@media print{.case.xl{min-width:265px}input.ec.xl{width:265px}}
+
+/* Le rappel sous un tableau de calcul : une fois, pas a chaque ligne. */
+.calcs .nt .rappel{display:block;margin-top:7px;white-space:normal;max-width:250px}
+@media print{.calcs .nt .rappel{margin-top:4px;max-width:210px}}
+
+/* La remarque du prof : posee, pas revelee. */
+.remarque.rq-prof p{margin:8px 0 0;font-style:italic;font-size:16px;
+  color:#1c5c39;line-height:1.5}
+.remarque.rq-prof p b{font-style:normal}
+@media print{.remarque.rq-prof p{font-size:14px;margin:6px 0 0}}
+/* Un tableau regle sur son contenu se centre dans son bloc. */
+.tw.ajuste{margin-left:auto;margin-right:auto}
+
+/* Les lignes ou l'eleve ecrit sa reponse. */
+.ecrire{display:grid;gap:26px;margin:14px 0 4px;padding:10px 6px 0}
+/* Question a rediger : a l'ecran une zone encadree ou l'eleve tape,
+   sur le papier les lignes pour ecrire au stylo. */
+.ecrire textarea.redac{display:block;width:100%;box-sizing:border-box;min-height:96px;
+  resize:vertical;font:inherit;font-size:16px;line-height:1.5;padding:10px 12px;
+  border:2px solid #2E5266;border-radius:10px;background:#fff;color:#1b2a33}
+.ecrire textarea.redac:focus{outline:3px solid #9ec5d8;outline-offset:1px}
+.ecrire i{display:block;border-bottom:1.5px solid #2E5266}
+@media screen{.ecrire{display:block;padding:6px 0 0}.ecrire i{display:none}}
+@media print{.ecrire{gap:22px;margin:9px 0 2px;padding:6px 4px 0}
+  .ecrire textarea.redac{display:none}}
+
+/* Sur un telephone, le corps d'un exercice doit pouvoir se retrecir. Sans
+   cela, chaque bloc garde sa largeur naturelle : la fiche sort de l'ecran a
+   droite et rien ne defile - la derniere colonne des tableaux et la colonne
+   « quotient » des divisions sont perdues pour l'eleve.
+   (A l'impression, la mise en page ne change pas.) */
+@media screen{
+  .q-n{min-width:0}
+  .calcs{overflow-x:auto}
+}
+/* Un tableau large se lit quand meme sur un telephone : le titre de la
+   premiere colonne passe a la ligne et les colonnes se resserrent. */
+@media screen and (max-width:620px){
+  .tw table.num th:first-child{white-space:normal}
+  .tw.ajuste table.num td{padding-left:12px;padding-right:12px}
+}
+@media screen and (max-width:430px){
+  .tw.ajuste table.num td{padding-left:6px;padding-right:6px}
+}
+
+/* Les divisions s'ajustent a la place : les cases ou l'eleve ecrit prennent
+   la largeur disponible au lieu de garder une taille fixe qui sort du cadre.
+   Sans cela, sur un telephone, la colonne « quotient » etait hors de l'ecran.
+   (A l'impression, rien ne change.) */
+@media screen and (max-width:620px){
+  .calcs,.deux .calcs,.calcs.cadree,.calcs.avecnotes,.calcs.nuls,
+  .grp.fus>.calcs.cadree{
+    grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr) 16px minmax(0,1fr);
+    justify-content:stretch;width:auto;gap:7px 5px;padding-left:10px;padding-right:10px}
+  .calcs .cl,.calcs .nt{grid-column:1 / -1}
+  .calcs .n,.calcs .donne,.calcs .ct{width:auto;min-width:0}
+  .calcs .n input.ec,.calcs input.ec,.calcs .case{width:100%;min-width:0}
+}
+/* Sur tablette, la grille des divisions vit dans une colonne etroite : elle
+   prend la meme forme que sur telephone - l'etiquette et la remarque sur
+   leur propre ligne, les cases a la largeur disponible. */
+@media screen and (min-width:621px) and (max-width:1000px){
+  .deux .calcs,.grp.fus>.calcs,.deux .calcs.cadree,.deux .calcs.avecnotes,
+  .grp.fus>.calcs.cadree,.grp.fus>.calcs.avecnotes{
+    grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr) 16px minmax(0,1fr);
+    justify-content:stretch;width:auto;gap:7px 6px}
+  .deux .calcs>.cadre,.grp.fus>.calcs>.cadre{display:none}
+  .deux .calcs .cl,.deux .calcs .nt,
+  .grp.fus>.calcs .cl,.grp.fus>.calcs .nt{grid-column:1 / -1;white-space:normal}
+  .deux .calcs .n,.deux .calcs .donne,.deux .calcs .ct,
+  .grp.fus>.calcs .n,.grp.fus>.calcs .donne,.grp.fus>.calcs .ct{width:auto;min-width:0}
+  .deux .calcs input.ec,.deux .calcs .case,
+  .grp.fus>.calcs input.ec,.grp.fus>.calcs .case{width:100%;min-width:0}
+}
+/* Exception (09/10/2026) : sur une largeur moyenne (le cadre du site fait
+   moins de 1000 px), une grille de divisions d'une question reste en ligne -
+   l'etiquette, le calcul, puis la remarque a droite s'il y en a une. Empilee,
+   elle s'etalait sur toute la largeur, « Pour 1 kg » seul sur sa ligne. */
+@media screen and (min-width:761px) and (max-width:1000px){
+  .grp.fus>.calcs{grid-template-columns:auto 84px 22px 84px 22px 84px;
+    justify-content:start;gap:8px 8px}
+  .grp.fus>.calcs.avecnotes{
+    grid-template-columns:auto 64px 16px 64px 16px 64px minmax(0,1fr)}
+  .grp.fus>.calcs .cl{grid-column:auto;white-space:nowrap}
+  .grp.fus>.calcs .nt{grid-column:auto;white-space:normal;min-width:0}
+  .deux .calcs:not(.avecnotes){grid-template-columns:auto 56px 14px 56px 14px 56px;
+    justify-content:start;gap:8px 6px}
+  .deux .calcs:not(.avecnotes) .cl{grid-column:auto;white-space:nowrap}
+}
+/* Dans une grille, une case remplit sa colonne : sans la petite marge qu'elle
+   a dans une phrase, sinon elle depasse de 3 px et son bord droit est coupe. */
+.calcs .n>.case{margin-left:0;margin-right:0}
+
+
+/* Un document mis en deux colonnes garde ses dessins et ses tableaux a sa
+   largeur : sur telephone, ils prennent celle de l'ecran. */
+@media screen{
+  .dbl>*,.q4>*{min-width:0}
+  .dbl svg,.q4 svg,.docu svg{max-width:100%;height:auto}
+}
+
+/* Les badges qui annoncent : Situation, Tableau, Graphique, Méthode.
+   Meme couleur pour tous, differente de celle des etapes. */
+.bdg{display:inline-block;margin:0 0 9px;
+  font-family:"Source Sans 3","Segoe UI",sans-serif;font-weight:700;
+  font-size:13.5px;line-height:1.35;color:#fff;background:#2E5266;
+  border-radius:20px;padding:6px 15px}
+
+/* Chaque bloc porte un vrai cadre : on voit ou il commence et ou il finit. */
+.situ-b,.tabl-b,.graf-b,.meth-b{margin:14px 0 0;padding:13px 17px 15px;
+  background:#fff;border:1.8px solid #2E5266;border-radius:14px}
+.situ-b p{margin:0;font-size:16px;line-height:1.55}
+/* La phrase qui relie la situation a la donnee : entre les deux blocs,
+   sans cadre, elle fait le pont. */
+p.pont{margin:12px 4px 0;font-size:16px;line-height:1.55;color:#0d1a22}
+.graf-b,.tabl-b{text-align:center}
+.graf-b .bdg,.tabl-b .bdg{text-align:left}
+/* Le tableau reste au milieu de son bloc, ajuste a son contenu. */
+.tabl-b .tbw{margin:2px 0 0}
+.tabl-b .tw{margin-left:auto;margin-right:auto}
+.tabl-b .tw.ajuste{margin-top:0}
+.meth-b{padding-bottom:13px}
+.meth-b .pass{margin:0}
+
+@media screen and (max-width:620px){
+  .situ-b,.tabl-b{padding:11px 13px 12px}
+  .situ-b p{font-size:14.5px}
+}
+/* Sur le papier, les cadres restent aussi visibles, mais la feuille est
+   comptee : un ecran tient sur une page. Le texte garde sa taille ; c'est
+   le blanc autour qui se resserre. */
+@media print{
+  .situ-b,.tabl-b,.graf-b{margin:6px 0 0;break-inside:avoid}
+  .situ-b,.tabl-b,.graf-b,.meth-b{margin-top:6px;padding:6px 7px 7px}
+  .situ-b p,p.pont{font-size:14.5px}
+  .bdg{font-size:11.5px;margin-bottom:3px;padding:2px 10px}
+  p.pont{margin:7px 4px 0}
+  .meth-b>*+*{margin-top:4px}
+  .meth-b .sq,.meth-b .qcm{padding-top:5px;padding-bottom:5px}
+  .meth-b .calcs{padding-top:3px;padding-bottom:3px;gap:5px 12px;margin:6px 0 0}
+}
+
+/* Les fleches courbes : a gauche on descend de la ligne du haut a la ligne
+   du bas (x coef), a droite on remonte (/ coef). */
+.flx{position:relative;display:inline-block;vertical-align:top;max-width:100%}
+.flx.fg{margin-left:94px}.flx.fd{margin-right:94px}
+.flx.fg.fd{max-width:calc(100% - 188px)}
+.flx.fg:not(.fd){max-width:calc(100% - 94px)}
+.flx.fg.fk{margin-left:150px;max-width:calc(100% - 150px)}
+.flx .tw{overflow-x:visible;margin:0}
+.arc{position:absolute;top:25%;bottom:25%;width:26px;border:2.6px solid #2E5266}
+.arc.g{right:100%;margin-right:5px;border-right:0;border-radius:26px 0 0 26px}
+.arc.d{left:100%;margin-left:5px;border-left:0;border-radius:0 26px 26px 0}
+.arc::after{content:"";position:absolute;border-top:6px solid transparent;
+  border-bottom:6px solid transparent}
+.arc.g::after{right:-11px;bottom:-7.3px;border-left:11px solid #2E5266}
+.arc.d::after{left:-11px;top:-7.3px;border-right:11px solid #2E5266}
+.cfp{position:absolute;top:50%;transform:translateY(-50%);
+  font-family:"Source Sans 3","Segoe UI",sans-serif;font-weight:700;
+  font-size:16px;color:#2E5266;background:#fff;border:1.8px solid #2E5266;
+  border-radius:20px;padding:6px 11px;white-space:nowrap}
+.cfp.g{right:100%;margin-right:37px}
+.cfp.d{left:100%;margin-left:37px}
+.cfp .case{min-width:54px}
+.cfp input.ec{width:56px}
+.flx .tw.ajuste table.num td{padding-left:12px;padding-right:12px}
+td.vcal{line-height:1.3;white-space:nowrap}
+.formules{margin:12px 0 0;padding:10px 14px;border:2px solid #1D7A33;border-radius:10px;background:#fff}
+.formules p{margin:3px 0;font-size:16px;line-height:1.5}
+.q5{display:inline-block;margin-top:4px;font-weight:700;color:#8a4b08}
+.tabl-b p.apres{margin:10px 0 0;font-size:16px;line-height:1.5}
+.pass{grid-template-columns:minmax(0,1fr)}
+@media screen and (max-width:900px){
+  .flx .tw.ajuste table.num td{padding-left:9px;padding-right:9px}
+  .flx .tw table.num th:first-child{white-space:normal;min-width:130px}
+}
+@media screen and (max-width:620px){
+  .flx{display:block}
+  .flx .tw{overflow-x:auto}
+  .flx .tw table.num th:first-child{min-width:84px;font-size:14px}
+  .flx .tw table.num td{font-size:15px}
+  .flx .tw.ajuste table.num td{padding-left:5px;padding-right:5px}
+  .flx.fg,.flx.fg.fk{margin-left:30px}.flx.fd{margin-right:30px}
+  .flx.fg.fd{max-width:calc(100% - 60px)}
+  .flx.fg:not(.fd),.flx.fg.fk{max-width:calc(100% - 30px)}
+  .arc{width:16px}
+  .cfp.g{left:-30px}.cfp.d{right:-30px}
+  /* Sur le telephone, l'etiquette monte au-dessus de sa fleche. */
+  .flx.fg{margin-left:36px}.flx.fd{margin-right:36px}
+  .flx.fg.fd{max-width:calc(100% - 72px)}
+  .flx.fg:not(.fd),.flx.fg.fk{margin-left:36px;max-width:calc(100% - 36px)}
+  .flx.fg,.flx.fd{margin-top:46px}
+  .cfp{top:-44px;transform:none;font-size:14.5px;padding:4px 9px}
+  .cfp.g{right:auto;left:-36px;margin:0}
+  .cfp.d{left:auto;right:-36px;margin:0}
+  .arc{width:20px}
+  .flx .tw.ajuste table.num td{padding-left:6px;padding-right:6px}
+  .flx .tw table.num th:first-child{white-space:normal}
+}
+@media print{
+  .cfp{font-size:14.5px;padding:4px 9px}
+  .flx.fg{margin-left:86px}.flx.fd{margin-right:86px}
+  .flx.fg.fk{margin-left:140px}
+  .flx .tw.ajuste table.num td{padding-left:9px;padding-right:9px}
+  .flx .tw table.num th:first-child{white-space:normal}
+}
+
+/* Exercices d'application : la reponse de l'exemple, le rappel. */
+p.phr{margin:12px 0 0;font-size:16px;line-height:1.5}
+.ong.meth dl.lst{margin:12px 0 0}
+.ong.meth dl.lst>div{display:grid;grid-template-columns:200px 1fr;gap:12px;
+  padding:9px 0;border-top:1.4px solid #2E5266}
+.ong.meth dl.lst dt{font-weight:700;color:#2E5266}
+.ong.meth dl.lst dd{margin:0;font-size:16px;line-height:1.5}
+@media screen and (max-width:620px){
+  .ong.meth dl.lst>div{grid-template-columns:1fr;gap:4px}}
+/* Le titre du bloc d'un tableau d'exercice. */
+.cmp:empty{display:none}
+p.just{margin:10px 0 0}
+.ong.voc .lst.une{grid-template-columns:1fr}
+.flcoef{margin:11px 0 2px;min-width:0}
+.flcoef svg{display:block;width:100%;max-width:600px;height:auto;margin:0 auto}
+.tw.nu table.num td{min-width:0;text-align:center}
+/* Des tableaux resserres autour des nombres. */
+.ong .tabl-b .tw table.num,.tabl-b .tw table.num{width:auto!important;margin-left:auto;margin-right:auto}
+.tabl-b .tw.ajuste{width:max-content!important;max-width:100%;margin-left:auto!important;margin-right:auto!important}
+.tabl-b .tw.ajuste table.num td,.tabl-b .tw.ajuste table.num th{padding:7px 12px}
+.tabl-b .tw.ajuste table.num td{min-width:46px}
+.tabl-b .tw table.num th:first-child{width:auto!important}
+.tabl-b td .case,.tabl-b td input.ec{min-width:68px;width:68px}
+.tabl-b td .case{width:auto;white-space:nowrap}
+/* Les zones libres : les calculs, la phrase et la justification. */
+p.zonep{margin:6px 0 0}
+/* Le tableau a gauche, ce qui s'y rapporte a droite. */
+.duo{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;
+  align-items:center;margin-top:14px}
+.duo>.tabl-b{margin-top:0}
+.duo>.meth-b,.duo>.grp.fus{margin-top:0}
+.duo>p.phr{margin:0}
+.duo .pas p.cas{white-space:normal}
+.duo>.droite{display:grid;gap:10px;min-width:0}
+.duo>.droite>.grp.fus{margin:0}
+.duo>.droite.ex-d>.pas{margin:0;background:#fff;border:1.4px solid #2E5266;border-radius:12px;padding:10px 12px}
+.ong.meth>p.phr{margin-top:14px}
+/* Exercice : la question au-dessus du tableau, la phrase reponse en dessous. */
+.q p.enonce.qst{margin:2px 0 10px;font-size:17px}
+.q div.phr.phrz{margin:14px 0 0;font-size:16px;line-height:1.5;background:#fff;border:1.4px solid #5DA65D;border-left:4px solid #5DA65D;border-radius:12px;padding:12px 16px}
+.q div.phr.phrz p.zonep{margin:6px 0 0}
+.q div.phr.phrz .case.zone.zf .zl{display:block}
+.q div.phr.phrz .case.zone.zf b{font-weight:800}
+.q div.phr.phrz .case.zone.pose{background:#EAF5EC!important;border-color:#1C5C39!important;color:#1C5C39;font-weight:500}
+textarea.ec.zone.z1,.case.zone.z1{min-height:2.6em}
+textarea.ec.zone.z2,.case.zone.z2{min-height:4.2em}
+.ex-d .pas p.zonep{margin:0}
+/* Les lignes de calcul : une puce ronde. */
+.ex-d .pas p.cas{border-left:0!important;padding-left:18px!important;position:relative}
+.ex-d .pas p.cas::before{content:"";position:absolute;left:4px;top:.62em;width:7px;height:7px;border-radius:50%;background:#1C5C39}
+.rouge,td.rouge,.pas p.cas b.rouge{color:#C0141C!important}
+/* Un seul bloc : le tableau a gauche, le texte a droite. */
+.duo.bloc{background:#fff;border:1.6px solid #2E5266;border-radius:14px;padding:14px 16px;align-items:center}
+.q .duo.bloc{background:none;border:0;padding:0}
+.duo.bloc{grid-template-columns:auto minmax(200px,1fr)}
+@media screen and (max-width:560px){.duo.bloc{grid-template-columns:minmax(0,1fr)}
+  .duo.bloc>.droite.ex-d{border-left:0;padding-left:0;border-top:1.6px solid #2E5266;padding-top:12px}}
+@media screen and (max-width:900px){.duo.bloc .tabl-b .tw.ajuste table.num td,.duo.bloc .tabl-b .tw.ajuste table.num th{padding:6px 8px}
+  .duo.bloc .tabl-b .tw.ajuste table.num td{min-width:34px}
+  .duo.bloc .tabl-b td .case,.duo.bloc .tabl-b td input.ec{min-width:0;width:52px}}
+.duo.bloc>.tabl-b{border:0!important;box-shadow:none!important;background:none!important;padding:0!important;margin:0!important}
+.duo.bloc>.droite.ex-d{border-left:1.6px solid #2E5266;padding-left:16px;gap:12px}
+.duo.bloc>.droite.ex-d>.pas{border:0!important;background:none!important;padding:0!important;border-radius:0}
+.duo.bloc>.droite.ex-d>.pas+.pas{border-top:1.2px dashed #2E5266!important;padding-top:10px!important}
+@media screen and (max-width:560px){.duo.bloc>.droite.ex-d{border-left:0;padding-left:0;border-top:1.6px solid #2E5266;padding-top:12px}}
+.duo>.droite.ex-d>.pas{box-sizing:border-box;min-width:0;max-width:100%}
+.duo>.droite.ex-d>.pas>div{min-width:0}
+.ex-d .pas .calcs.nuls{overflow:visible!important;padding-right:3px!important;border:0!important;padding-left:0!important;padding-top:0!important;padding-bottom:0!important;background:none!important;margin:4px 0 0!important;box-shadow:none!important}
+.ex-d .pas .qcm{padding:0!important;margin:0!important;border:0!important;background:none!important;min-height:0!important}
+.duo>.droite.ex-d>.pas{display:block!important}
+.duo>.droite.ex-d>.pas>.et{display:inline-block;margin:0 0 8px;white-space:nowrap}
+.duo>.droite.ex-d>.pas>div{border-left:0!important;padding-left:4px!important;margin:0!important}
+.duo>.droite.ex-d>.pas p.cas{white-space:normal!important}
+.duo>.droite .calcs.nuls{grid-template-columns:minmax(0,74px) 16px minmax(0,74px) 16px minmax(0,74px);gap:6px 4px}
+.duo>.droite .calcs.nuls .n{min-width:0;overflow:visible;padding:0 1px}
+.duo>.droite .calcs.nuls .case,.duo>.droite .calcs.nuls input.ec{min-width:0;width:100%;box-sizing:border-box}
+p.calcl{margin:0 0 2px}
+p.consigne2{margin:4px 2px 12px;font-size:17px;line-height:1.5}
+p.consigne2 .cmp{color:#00778a;font-style:italic;font-weight:700;margin-right:6px}
+@media print{p.consigne2{margin:2px 2px 6px;font-size:14.5px}}
+@media screen and (max-width:560px){.duo{grid-template-columns:minmax(0,1fr)}}
+@media screen and (max-width:620px){.tabl-b .tw.ajuste{width:auto!important;overflow-x:auto}
+  .tabl-b .tw.ajuste table.num td,.tabl-b .tw.ajuste table.num th{padding:6px 7px}
+  .tabl-b td .case,.tabl-b td input.ec{width:56px}}
+.case.zone,textarea.ec.zone{display:block;width:100%;box-sizing:border-box;
+  font:inherit;font-size:16px;line-height:1.6;padding:8px 10px;
+  border:1.4px solid #2E5266;border-radius:9px;background:#fff;resize:vertical;
+  white-space:pre-line;text-align:left}
+textarea.ec.zone.z4,.case.zone.z4{min-height:7.2em}
+textarea.ec.zone.z3,.case.zone.z3{min-height:5.6em}
+@media print{.flcoef{margin:7px 0 0}.flcoef svg{max-width:450px}}
+p.just .case.large,p.just input.ec.grand{display:block;width:100%;margin-top:6px}
+.tabl-b p.apres{text-align:left}
+.ong.meth dl.lst dt{color:#fff}
+/* Les exercices d'application ne sont pas notes. */
+.notation{display:none!important}
+/* Les cases a remplir dans le tableau : un bord qui se voit. */
+.tabl-b td input.ec,.tabl-b td .case{border:1.4px solid #2E5266!important;
+  border-style:solid!important;background:#fff}
+.q.ong.quest + .q.ong.quest{margin-top:22px}
+/* Corrige : les reponses des zones a. et b. */
+.ex-d .case.zone.pose{background:#EAF5EC!important;border-color:#1C5C39!important;color:#1C5C39;font-style:italic;white-space:normal}
+.ex-d .case.zone.zf .zl{display:block;position:relative;padding-left:18px}
+.ex-d .case.zone.zf .zl+.zl{margin-top:3px}
+.ex-d .case.zone.zf .zl::before{content:"";position:absolute;left:4px;top:.62em;width:7px;height:7px;border-radius:50%;background:#1C5C39}
+.ex-d .case.zone.zf b{font-weight:800}
+/* La methode deroulee sur un exemple : la regle, puis ce qu'elle donne ici. */
+.ong p.enonce{margin:10px 0 0;font-size:16px}
+.sq p{margin:0}
+.sq p + p{margin-top:6px}
+/* Les exercices de fin se passent des reperes : la colonne de gauche
+   disparait, la grille n'a plus que les colonnes de calcul. */
+.calcs.nuls{grid-template-columns:84px 22px 84px 22px 84px;justify-content:center}
+@media screen and (max-width:620px){
+  .calcs.nuls{grid-template-columns:70px 18px 70px 18px 70px}}
+.pass{margin:15px 0 0;display:grid;gap:11px}
+.pas{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;
+  background:#fff;border:1.6px solid var(--ch);border-radius:12px;padding:12px 16px}
+.pas .et{min-width:132px;font-family:"Source Sans 3","Segoe UI",sans-serif;
+  font-weight:600;font-size:12.5px;color:#fff;background:var(--ch);
+  border-radius:20px;padding:4px 11px;text-align:center;line-height:1.45}
+.pas p{margin:0;font-size:16px;line-height:1.5}
+.pas p.regle + p.regle{margin-top:4px}
+.pas p.cas{padding-left:12px;border-left:3px solid #9ec89e;
+  font-style:italic;color:#1c5c39}
+.pas p.regle + p.cas{margin-top:9px}
+.pas p.cas + p.cas{margin-top:4px}
+/* Dans l'exercice, le bloc Méthode commence apres la question. */
+.grp.fus>.meth-b{margin-top:13px}
+
+/* Le bandeau qui ouvre les exercices. */
+.bandeau{margin:28px 0 12px;padding:11px 20px;border-radius:12px;
+  background:#2E5266;color:#fff;text-align:center;
+  font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:700;
+  font-size:17px;letter-spacing:.2px;text-transform:uppercase;line-height:1.35}
+
+/* La question de l'exercice : celle a laquelle les quatre etapes repondent. */
+.prob{margin:13px 0 0;padding:10px 16px;border-radius:10px;
+  background:#fdf1e4;border:1.6px solid #b5793a;
+  font-weight:700;font-size:16.5px;color:#8a4b12}
+
+@media screen and (max-width:620px){
+  .pas{grid-template-columns:1fr;gap:8px}
+  .pas .et{justify-self:start}
+  .bandeau{font-size:15px;padding:10px 14px}
+}
+@media print{
+  .pass{gap:7px;margin:10px 0 0}
+  .pas{padding:8px 13px;gap:11px;break-inside:avoid}
+  .pas p,.ong p.enonce{font-size:14px}
+  .pas p.cas{margin-top:5px}
+  .pas .et{font-size:11px;min-width:118px;padding:3px 9px}
+  .bandeau{margin:16px 0 9px;padding:7px 15px;font-size:14.5px}
+  .prob{margin:9px 0 0;padding:7px 13px;font-size:14.5px;break-inside:avoid}
+  .print-id{display:flex!important}
+  /* Sur le papier, les deux mots restent noirs : l'eleve entoure le bon. */
+  .mo{font-size:14.5px;padding:3px 13px;border-color:#6f97a8;color:#0d1a22}
+  .mo.fane{opacity:1}
+}
+
+
+/* Un document mis en deux colonnes garde ses dessins et ses tableaux a sa
+   largeur : sur telephone, ils prennent celle de l'ecran. */
+@media screen{
+  .dbl>*,.q4>*{min-width:0}
+  .dbl svg,.q4 svg,.docu svg{max-width:100%;height:auto}
+}
+
+/* Le corps d'un exercice doit pouvoir se retrecir. Sans cela, sur un
+   telephone, chaque bloc gardait sa largeur naturelle : la fiche sortait de
+   l'ecran a droite, et rien ne defilait - la derniere colonne des tableaux et
+   la colonne « quotient » etaient perdues pour l'eleve.
+   (A l'impression, la mise en page ne change pas.) */
+@media screen{
+  .q-n{min-width:0}
+  .calcs{overflow-x:auto}
+}
+/* Un tableau large se lit quand meme sur un telephone : le titre de la
+   premiere colonne passe a la ligne, les colonnes se resserrent, et s'il
+   reste trop large il se fait glisser du doigt. */
+@media screen and (max-width:620px){
+  .tw table.num th:first-child{white-space:normal}
+  .tw.ajuste table.num td{padding-left:12px;padding-right:12px}
+}
+/* Sur un telephone tenu a la main, un tableau de trois colonnes tient en
+   entier : il n'y a plus que les tableaux tres larges a faire glisser. */
+@media screen and (max-width:430px){
+  .tw.ajuste table.num td{padding-left:6px;padding-right:6px}
+}
+
+/* Les bords des cases ou l'eleve ecrit se voient : jamais de gris pale.
+   Le calculatrice suit la meme regle que le reste de la fiche. */
+input.ec,textarea.ec,.rep-lib{border:1.4px solid #2E5266}
+input.ec:focus,textarea.ec:focus,.rep-lib:focus{outline:2px solid #00778a}
+#calc{border-color:#2E5266}
+#calc-e,#calc-t button{border:1.4px solid #2E5266}
+.lst .fx{border:1.4px solid #2E5266}
+.zoom-b{border:1.4px solid #2E5266}
+/* L'identite, une seule fois, en haut de la fiche. */
+/* Les deux mots sont ecrits dans la phrase : a l'ecran on clique sur le bon,
+   sur le papier on l'entoure. */
+.ouou{display:inline-flex;gap:8px;vertical-align:middle;margin:0 2px}
+.mo{font-family:"Source Sans 3","Segoe UI",sans-serif;font-weight:700;
+  font-size:15.5px;color:#2E5266;background:#fff;border:1.8px solid #2E5266;
+  border-radius:20px;padding:4px 15px;cursor:pointer;
+  transition:background .12s,color .12s,opacity .12s}
+.mo:hover{background:#eef4f7}
+.mo.pris,.mo.pose{color:#fff;background:#3f7f5f;border-color:#3f7f5f}
+.mo.fane{opacity:.3}
+
+/* Le pied de page : la ligne d'identification, puis la mention. Il degage
+   la barre flottante du bas. */
+.prop-pied{margin-bottom:88px}
+.prop-pied .src{margin:0;font-weight:400}
+.prop-pied .src b{font-weight:700}
+.prop-pied .adp{display:block;margin:4px 0 0}
+.prop-pied .pm{color:#00A5BF;font-weight:700}
+
+.ap-moi{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;
+  margin:0 0 16px;padding:12px 18px;background:#f4f8fa;
+  border:1.6px solid #2E5266;border-radius:12px}
+.ap-moi .et{font-family:"IBM Plex Mono",monospace;font-size:9.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:#fff;background:#2E5266;
+  border-radius:8px;padding:4px 10px}
+.ap-moi label{font-weight:700;font-size:14.5px;color:#2E5266}
+.ap-moi input,.ap-moi select{margin-left:7px;font:inherit;font-weight:400;
+  padding:6px 10px;border:1.6px solid #2E5266;border-radius:9px;background:#fff}
+/* Le nom verifie s'ecrit en entier : UN NOM LONG ne doit pas
+   s'afficher coupe. */
+.ap-moi input{width:150px}
+.ap-moi label:first-of-type input{width:210px}
+@media screen and (max-width:900px){
+  .ap-moi label:first-of-type input{width:170px}
+}
+
+/* Une page a l'ecran, tout a la suite a l'impression. */
+.ap-ecr{display:none}
+.ap-ecr.on{display:block}
+.ap-fil{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 16px}
+.ap-fil .ap-ft{font-family:"Source Sans 3","Segoe UI",sans-serif;font-weight:600;
+  font-size:13px;color:#2E5266;background:#fff;border:1.6px solid #2E5266;
+  border-radius:20px;padding:6px 14px;cursor:pointer}
+.ap-fil .ap-ft:hover{background:#eef4f7}
+.ap-fil .ap-ft.on{color:#fff;background:#2E5266;border-color:#2E5266}
+.ap-fil .ap-ft.fait{border-color:#3f7f5f;color:#1c5c39;background:#e8f5ee}
+.ap-fil .ap-ft.on.fait{color:#fff;background:#3f7f5f}
+.ap-nav{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  margin:18px 0 0;padding:12px 16px;background:#f4f8fa;
+  border:1.6px solid #2E5266;border-radius:12px}
+.ap-nav .ap-nb{font-family:"Source Sans 3","Segoe UI",sans-serif;font-weight:600;
+  font-size:15px;color:#fff;background:#2E5266;border:0;border-radius:20px;
+  padding:9px 20px;cursor:pointer}
+.ap-nav .ap-nb[disabled]{background:#c3d0d7;cursor:default}
+.ap-nav .ap-nbi{font-family:"IBM Plex Mono",monospace;font-size:13px;color:#2E5266}
+
+/* Le bouton d'envoi, au bas de chaque exercice. */
+.ap-env{margin:18px 0 0;padding:14px 18px;background:#f0f9f4;
+  border:1.6px solid #3f7f5f;border-radius:12px}
+.ap-env p{margin:0 0 10px;font-size:15.5px;color:#1c5c39}
+.ap-env .ap-benv{font-family:"Source Sans 3","Segoe UI",sans-serif;font-weight:600;
+  font-size:15px;color:#fff;background:#3f7f5f;border:0;border-radius:20px;
+  padding:10px 22px;cursor:pointer}
+.ap-env .ap-benv:hover{background:#34694f}
+.ap-env .ap-etat{margin-left:14px;font-size:14.5px;font-weight:700;color:#1c5c39}
+.ap-env .ap-etat.ko{color:#9a3412}
+@media screen and (max-width:620px){
+  .ap-moi input{width:100%}
+  .ap-moi label{display:block;width:100%}
+  .ap-nav{flex-direction:column}
+  .ap-nav .ap-nb{width:100%}
+}
+@media print{
+  .ap-ecr{display:block!important;break-after:page}
+  .ap-ecr:last-child{break-after:auto}
+  .ap-off{display:none!important}
+  .print-id{display:flex!important}
+  /* Sur le papier, les deux mots restent noirs : l'eleve entoure le bon. */
+  .mo{font-size:14.5px;padding:3px 13px;border-color:#6f97a8;color:#0d1a22}
+  .mo.fane{opacity:1}
+  /* A l'impression, c'est Chromium qui ecrit le pied et la pagination :
+     celui du HTML se retire pour ne pas doubler. */
+  .prop-pied{display:none!important}
+
+  /* Lisibilite avant tout : un seul bloc par feuille, un corps genereux,
+     des interlignes larges et des blocs bien detaches les uns des autres.
+     Les eleves lisent mal ; la fiche est faite comme pour des dys. */
+  header.tete{padding:0}
+  header.tete{margin-bottom:6px}
+  header.tete .wrap{padding:2px 0 1px}
+  header.tete h1{font-size:19px;margin:1px 0}
+  /* Le sur-titre redit ce que le pied de page ecrit deja. */
+  header.tete .kick{display:none}
+  header.tete .sub{font-size:13.5px;margin:2px 0 0}
+  .print-id{margin-top:3px;font-size:12.5px}
+
+  .ong.meth{margin:3px 0 6px;padding:8px 12px 7px}
+  .ong.meth .lb{font-size:14px;padding:4px 12px}
+  .ong p.enonce{margin:10px 0 0;font-size:14.5px}
+  .pass{gap:5px;margin:8px 0 0}
+  .pas{padding:6px 11px;gap:10px}
+  .pas p{font-size:14.5px;line-height:1.45}
+  .pas p.regle + p.regle{margin-top:3px}
+  .pas p.regle + p.cas{margin-top:6px}
+  .pas p.cas + p.cas{margin-top:3px}
+  .pas .et{font-size:12px;min-width:112px;padding:3px 8px}
+
+  .ong.quest{margin:5px 0 5px;padding:8px 12px 6px}
+  .qn,.cmp{font-size:18px}
+  .bandeau{margin:0 0 8px;padding:5px 12px;font-size:13.5px}
+  .prob{margin:7px 0 0;padding:6px 12px;font-size:16px}
+  .grp.fus{margin:7px 0 0;padding:7px 8px}
+  .grp.fus>.sq+*{margin-top:10px}
+  .sq{gap:12px}
+  .sq .sql{font-size:15px;padding:3px 11px}
+  .sq p{font-size:15px;line-height:1.45}
+  .sq p + p{margin-top:7px}
+  .qcm p{font-size:15px;line-height:1.55}
+  .tw table.num th,.tw table.num td{font-size:14.5px;padding-top:6px;
+    padding-bottom:6px}
+  .tw.ajuste table.num td{padding-left:16px;padding-right:16px}
+  .calcs{gap:5px 12px;margin:8px 0 0}
+  .calcs .ct{font-size:14px}
+  .calcs .cl{font-size:15px}
+  .coche{padding:6px 14px;font-size:14.5px}
+  input.ec{font-size:15px;padding:5px 7px}
+  .case.xl{min-width:238px}
+  input.ec.xl{width:238px}
+}
+
+
+/* La barre du bas de la fiche eleve : toujours la, jamais sur le texte. */
+.ap-bas{position:fixed;left:0;right:0;bottom:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:9px 18px;background:#fff;border-top:2px solid #2E5266;
+  box-shadow:0 -6px 20px -14px rgba(13,26,34,.5)}
+.ap-bas .ap-bi{font-family:"IBM Plex Mono",monospace;font-size:13px;
+  color:#2E5266}
+.ap-bas .ap-bd{display:flex;gap:10px}
+.ap-bas .ap-nb{font-family:"Source Sans 3","Segoe UI",sans-serif;
+  font-weight:600;font-size:15px;color:#fff;background:#2E5266;border:0;
+  border-radius:20px;padding:8px 18px;cursor:pointer}
+.ap-bas .ap-nb[disabled]{background:#8fa3ae;cursor:default}
+/* La navigation de l'ecran a fait son temps : la barre la remplace. */
+@media screen{ .ap-ecr>.ap-nav{display:none} body{padding-bottom:76px} }
+@media screen and (max-width:620px){
+  .ap-bas{padding:8px 10px;gap:8px}
+  .ap-bas .ap-nb{font-size:14px;padding:8px 13px}
+  .ap-bas .ap-bi{display:none}
+  body{padding-bottom:70px}
+}
+
+/* ------------------------------------------------- l'ecran d'identification */
+/* Tant que l'eleve n'est pas reconnu, la fiche ne montre rien. */
+body:not(.identifie) .ap-fil,
+body:not(.identifie) .ap-ecr,
+body:not(.identifie) .ap-bas,
+body:not(.identifie) .pilote,
+body:not(.identifie) .ap-moi{display:none!important}
+
+#idw{position:fixed;inset:0;z-index:200;display:flex;align-items:center;
+  justify-content:center;padding:18px;
+  background:linear-gradient(160deg,#eef4f7,#e6eef3 55%,#f4eef2)}
+#idw .bx{width:100%;max-width:520px;background:#fff;border:1.8px solid #2E5266;
+  border-radius:20px;padding:26px 28px 24px;
+  box-shadow:0 24px 60px -24px rgba(13,26,34,.45)}
+#idw h2{margin:0;font-family:"Bricolage Grotesque","Segoe UI",sans-serif;
+  font-size:23px;color:#0d1a22}
+#idw .sst{margin:8px 0 0;font-size:15.5px;line-height:1.5;color:#2E5266}
+#idw .et{display:none;margin:20px 0 0}
+#idw .et.on{display:block}
+#idw .duo{display:flex;gap:14px;flex-wrap:wrap}
+#idw .duo>div{flex:1 1 190px}
+#idw label{display:block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+  letter-spacing:.15em;text-transform:uppercase;color:#2E5266;margin:0 0 5px 10px}
+#idw input{width:100%;box-sizing:border-box;font:inherit;font-size:17px;
+  padding:11px 14px;border:2px solid #2E5266;border-radius:12px;background:#f8fbfc;
+  color:#0d1a22}
+#idw input:focus{outline:none;border-color:#00A5BF;background:#fff}
+#idw button{font-family:"Source Sans 3","Segoe UI",sans-serif;font-weight:600;
+  font-size:15.5px;cursor:pointer;color:#2E5266;background:#fff;
+  border:1.6px solid #2E5266;border-radius:22px;padding:10px 20px}
+#idw button:hover{background:#eef4f7}
+#idw button.pr{margin:16px 0 0;color:#fff;background:#2E5266;border-color:#2E5266}
+#idw button.pr:hover{background:#00778a;border-color:#00778a}
+#idw button.no{color:#8a5a2b;border-color:#c9a07a}
+#idw .ch{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 0}
+#idw .msg{font-size:16px;line-height:1.5;color:#0d1a22}
+#idw .msg.err{margin:14px 0 0;padding:10px 14px;border-radius:10px;
+  background:#fdecea;border:1.6px solid #c0604e;color:#8a2d1c;font-size:15px}
+#idw .qui{margin:0 0 6px;font-size:16px}
+#idw .qui button{margin-left:10px;font-size:13.5px;padding:5px 13px}
+@media print{ #idw{display:none!important} }
+
+/* Le bouton qui rend la main, dans le bandeau d'identite. */
+.ap-moi .ap-pasmoi{margin-left:auto;align-self:center;
+  font-family:"Source Sans 3","Segoe UI",sans-serif;font-size:13.5px;
+  font-weight:600;cursor:pointer;color:#8a5a2b;background:#fff;
+  border:1.4px solid #c9a07a;border-radius:20px;padding:6px 14px}
+.ap-moi .ap-pasmoi:hover{background:#fdf3ea}
+/* Un champ verrouille reste noir : le navigateur le grise, pas nous. */
+.ap-moi input[readonly],.ap-moi select[disabled]{background:#eef4f7;
+  color:#0d1a22;-webkit-text-fill-color:#0d1a22;opacity:1;font-weight:700}
+.ap-moi select[disabled] option{color:#0d1a22}
+.ap-moi input[readonly]{width:auto!important;min-width:0}
+</style>
+</head>
+<!-- « identifie » : la fiche de l'eleve se cache tant qu'il n'a pas ecrit son
+     nom. Un corrige n'a personne a identifier - il s'ouvre deja ouvert. -->
+<body>
+<header class="tete">
+  <div class="wrap" style="padding-bottom:0">
+    <p class="kick">1CAP EPC · Mathématiques · M<sup>me</sup> Talbaut</p>
+    <h1>Exercices - Passer par l’unité</h1>
+    <p class="sub">Chapitre 1 · Proportionnalité - Séquence 1</p>
+    <div class="print-id"><span>Nom :</span><span>Prénom :</span><span>Date :</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+<section class="exo"><div class="exo-c"><div class="ap-moi ap-off">
+  <span class="et">Avant de commencer</span>
+  <label>Nom <input type="text" id="id-nom" autocomplete="off"></label>
+  <label>Prénom <input type="text" id="id-pre" autocomplete="off"></label>
+  <label>Classe <select id="id-cla"><option value="">choisir…</option>
+    <option>1CAP EPC1</option><option>1CAP EPC2</option></select></label>
+</div><nav class="ap-fil ap-off"><button type="button" class="ap-ft on" data-n="0">Vocabulaire et exemple</button><button type="button" class="ap-ft" data-n="1">Exercice</button></nav><section class="ap-ecr on" data-t="Vocabulaire et exemple"><div class="ong voc"><span class="lb">Le vocabulaire de la séance</span><dl class="lst une"><div class="pleine"><dt>Le prix unitaire</dt><dd><ul class="idees"><li>C’est le prix d’<b>un seul article</b> : le prix pour <b>1 unité</b>.</li><li>Le <b>coefficient de proportionnalité</b> est le <b>prix à l’unité</b>.</li><li>Il se calcule avec le <b>quotient</b> : <b>nombre du bas / nombre du haut</b>.</li></ul></dd></div><div class="pleine"><dt>Passer par l’unité</dt><dd><ul class="idees"><li><b>Calculer</b> d’abord la valeur pour <b>1 unité</b>.</li><li>Pour <b>descendre</b> dans le tableau, <b>multiplier</b> par cette valeur.</li><li>Pour <b>remonter</b> dans le tableau, <b>diviser</b> par cette valeur.</li></ul><div class="flcoef"><svg viewBox="-50 0 700 140" role="img"
+  aria-label="Un tableau de deux lignes. Une flèche descend de la première ligne vers la deuxième : multiplier par le coefficient de proportionnalité. Une flèche remonte de la deuxième vers la première : diviser par le coefficient de proportionnalité.">
+<defs>
+  <marker id="pte" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7"
+    markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,1 L9,5 L0,9 z" fill="#2E5266"/>
+  </marker>
+</defs>
+<rect x="190" y="25" width="220" height="90" fill="#fff" stroke="#2E5266"
+  stroke-width="2" rx="6"/>
+<line x1="190" y1="70" x2="410" y2="70" stroke="#2E5266" stroke-width="2"/>
+<line x1="263.3" y1="25" x2="263.3" y2="115" stroke="#2E5266" stroke-width="2"/>
+<line x1="336.7" y1="25" x2="336.7" y2="115" stroke="#2E5266" stroke-width="2"/>
+<path d="M190,47 C150,47 150,93 188,93" fill="none" stroke="#2E5266"
+  stroke-width="2.6" marker-end="url(#pte)"/>
+<path d="M410,93 C450,93 450,47 412,47" fill="none" stroke="#2E5266"
+  stroke-width="2.6" marker-end="url(#pte)"/>
+<text x="144" y="79" text-anchor="end" font-family="Source Sans 3, Segoe UI, Arial, sans-serif"
+  font-size="26" font-weight="700" fill="#B5470B">× Coef. Prop.</text>
+<text x="456" y="79" text-anchor="start" font-family="Source Sans 3, Segoe UI, Arial, sans-serif"
+  font-size="26" font-weight="700" fill="#B5470B">/ Coef. Prop.</text>
+</svg></div></dd></div></dl></div><div class="ong meth"><span class="lb">Exercice corrigé : exemple - le prix des crayons</span><p class="enonce">5 crayons coûtent 2,50 €. <b>Calculer</b> combien coûtent 19 puis 30 crayons ?</p><p class="enonce"><b>Compléter</b> le tableau en passant par l’unité.</p><div class="duo bloc"><div class="tabl-b"><span class="bdg">Tableau : Prix en fonction du nombre de crayons</span><div class="tbw"><div class="tw ajuste"><table class="num"><tbody><tr><th>Crayons</th><td>1</td><td>5</td><td>19</td><td>30</td></tr><tr><th>Prix (€)</th><td class="don">?</td><td class="don">2,50</td><td class="don">?</td><td class="don">?</td></tr></tbody></table></div></div></div><div class="droite ex-d"><div class="pas"><span class="et">a. Calculer le prix unitaire</span><div><div class="cass"><p class="cas">chiffre du bas / chiffre du haut = 2,50 / 5 = <b>0,50</b></p><p class="cas">1 crayon coûte 0,50 € : c’est le coefficient de proportionnalité.</p></div></div></div></div></div><div class="duo bloc"><div class="tabl-b"><span class="bdg">Tableau : Prix en fonction du nombre de crayons</span><div class="tbw"><div class="flx fg fd"><span class="arc g"></span><span class="cfp g">× <b>0,50</b></span><div class="tw ajuste"><table class="num"><tbody><tr><th>Crayons</th><td>1</td><td>5</td><td>19</td><td>30</td></tr><tr><th>Prix (€)</th><td class="don vcal">0,50</td><td class="don">2,50</td><td class="don vcal rouge">9,50</td><td class="don vcal rouge">15,00</td></tr></tbody></table></div><span class="arc d"></span><span class="cfp d">/ <b>0,50</b></span></div></div></div><div class="droite ex-d"><div class="pas"><span class="et">b. Compléter les 2 prix manquants</span><div><div class="cass"><p class="cas">19 × 0,50 = <b class="rouge">9,50</b></p><p class="cas">30 × 0,50 = <b class="rouge">15,00</b></p></div></div></div></div></div><p class="phr"><b>Réponse :</b><br><b>1</b> crayon coûte <b>0,50 €</b>.<br><b>19</b> crayons coûtent <b>9,50 €</b>.<br><b>30</b> crayons coûtent <b>15,00 €</b>.</p></div><div class="ap-nav ap-off"><button type="button" class="ap-nb ap-prec" disabled>← Précédent</button><span class="ap-nbi">1 / 2</span><button type="button" class="ap-nb ap-suiv">Suivant →</button></div></section><section class="ap-ecr" data-t="Exercice"><p class="bandeau">Exercice : compléter les tableaux en passant par l’unité</p><p class="consigne2"><span class="cmp">Réaliser</span> <b>Compléter</b> les tableaux suivants en passant par l’unité (le coefficient de proportionnalité).</p><div class="q ong quest"><div class="q-h"><span class="q-n"><span class="qn">Tableau 1</span> <span class="cmp"></span> <p class="enonce qst">5 L d’essence coûtent 6,50 €. <b>Calculer</b> combien coûtent 12 L puis 20 L d’essence ?</p><div class="duo bloc"><div class="tabl-b"><span class="bdg">Tableau : Prix en fonction de la quantité d’essence</span><div class="tbw"><div class="tw ajuste"><table class="num"><tbody><tr><th>Essence (L)</th><td>1</td><td>5</td><td>12</td><td>20</td></tr><tr><th>Prix (€)</th><td class="don"><input class="ec" type="text" id="u1-t0"></td><td class="don">6,50</td><td class="don"><input class="ec" type="text" id="u1-t2"></td><td class="don"><input class="ec" type="text" id="u1-t3"></td></tr></tbody></table></div></div></div><div class="droite ex-d"><div class="pas"><span class="et">a. Calculer le prix unitaire</span><div><div class="calcs nuls"><div class="n"><input class="ec" type="text" id="u1-da"></div><div class="s">/</div><div class="n"><input class="ec" type="text" id="u1-db"></div><div class="s">=</div><div class="n"><input class="ec" type="text" id="u1-dr"></div></div></div></div><div class="pas"><span class="et">b. Compléter les 2 prix manquants</span><div><div class="calcs nuls"><div class="n"><input class="ec" type="text" id="u1-ma"></div><div class="s">×</div><div class="n"><input class="ec" type="text" id="u1-mb"></div><div class="s">=</div><div class="n"><input class="ec" type="text" id="u1-mr"></div></div><div class="calcs nuls"><div class="n"><input class="ec" type="text" id="u1-na"></div><div class="s">×</div><div class="n"><input class="ec" type="text" id="u1-nb"></div><div class="s">=</div><div class="n"><input class="ec" type="text" id="u1-nr"></div></div></div></div></div></div><div class="phr phrz"><b>Réponse :</b><p class="zonep"><textarea class="ec zone z3" id="u1-r"></textarea></p></div></span></div></div><div class="q ong quest"><div class="q-h"><span class="q-n"><span class="qn">Tableau 2</span> <span class="cmp"></span> <p class="enonce qst">6 m de tissu coûtent 2,40 €. <b>Calculer</b> combien coûtent 10 m puis 18 m de tissu ?</p><div class="duo bloc"><div class="tabl-b"><span class="bdg">Tableau : Prix en fonction de la longueur de tissu</span><div class="tbw"><div class="tw ajuste"><table class="num"><tbody><tr><th>Tissu (m)</th><td>1</td><td>6</td><td>10</td><td>18</td></tr><tr><th>Prix (€)</th><td class="don"><input class="ec" type="text" id="u2-t0"></td><td class="don">2,40</td><td class="don"><input class="ec" type="text" id="u2-t2"></td><td class="don"><input class="ec" type="text" id="u2-t3"></td></tr></tbody></table></div></div></div><div class="droite ex-d"><div class="pas"><span class="et">a. Calculer le prix unitaire</span><div><div class="qcm"><p class="zonep"><textarea class="ec zone z1" id="u2-a"></textarea></p></div></div></div><div class="pas"><span class="et">b. Compléter les 2 prix manquants</span><div><div class="qcm"><p class="zonep"><textarea class="ec zone z2" id="u2-b"></textarea></p></div></div></div></div></div><div class="phr phrz"><b>Réponse :</b><p class="zonep"><textarea class="ec zone z3" id="u2-r"></textarea></p></div></span></div></div><div class="q ong quest"><div class="q-h"><span class="q-n"><span class="qn">Tableau 3</span> <span class="cmp"></span> <p class="enonce qst">5 L d’huile coûtent 17,50 €. <b>Calculer</b> combien coûtent 9 L puis 20 L d’huile ?</p><div class="duo bloc"><div class="tabl-b"><span class="bdg">Tableau : Prix en fonction de la quantité d’huile</span><div class="tbw"><div class="tw ajuste"><table class="num"><tbody><tr><th>Huile (L)</th><td>1</td><td>5</td><td>9</td><td>20</td></tr><tr><th>Prix (€)</th><td class="don"><input class="ec" type="text" id="u3-t0"></td><td class="don"><input class="ec" type="text" id="u3-t1"></td><td class="don"><input class="ec" type="text" id="u3-t2"></td><td class="don"><input class="ec" type="text" id="u3-t3"></td></tr></tbody></table></div></div></div><div class="droite ex-d"><div class="pas"><span class="et">a. Calculer le prix unitaire</span><div><div class="qcm"><p class="zonep"><textarea class="ec zone z1" id="u3-a"></textarea></p></div></div></div><div class="pas"><span class="et">b. Compléter les 2 prix manquants</span><div><div class="qcm"><p class="zonep"><textarea class="ec zone z2" id="u3-b"></textarea></p></div></div></div></div></div><div class="phr phrz"><b>Réponse :</b><p class="zonep"><textarea class="ec zone z3" id="u3-r"></textarea></p></div></span></div></div><div class="q ong quest"><div class="q-h"><span class="q-n"><span class="qn">Tableau 4</span> <span class="cmp"></span> <p class="enonce qst">200 baguettes coûtent 240,00 €. <b>Calculer</b> combien coûtent 50 puis 800 baguettes ?</p><div class="duo bloc"><div class="tabl-b"><span class="bdg">Tableau : Prix en fonction du nombre de baguettes</span><div class="tbw"><div class="tw ajuste"><table class="num"><tbody><tr><th>Baguettes</th><td>1</td><td>200</td><td>50</td><td>800</td></tr><tr><th>Prix (€)</th><td class="don"><input class="ec" type="text" id="u4-t0"></td><td class="don"><input class="ec" type="text" id="u4-t1"></td><td class="don"><input class="ec" type="text" id="u4-t2"></td><td class="don"><input class="ec" type="text" id="u4-t3"></td></tr></tbody></table></div></div></div><div class="droite ex-d"><div class="pas"><span class="et">a. Calculer le prix unitaire</span><div><div class="qcm"><p class="zonep"><textarea class="ec zone z1" id="u4-a"></textarea></p></div></div></div><div class="pas"><span class="et">b. Compléter les 2 prix manquants</span><div><div class="qcm"><p class="zonep"><textarea class="ec zone z2" id="u4-b"></textarea></p></div></div></div></div></div><div class="phr phrz"><b>Réponse :</b><p class="zonep"><textarea class="ec zone z3" id="u4-r"></textarea></p></div></span></div></div><div class="ong ens"><span class="lb">Je fais le point</span><p class="enonce">Le prix pour 1 (le <b>prix unitaire</b>) est le <b>coefficient de proportionnalité</b>.</p><p class="enonce"><b>Multiplier</b> n’importe quelle quantité par ce nombre donne son prix.</p></div><div class="ap-env ap-off"><p>Quand la page 2 est terminée, <b>envoyer</b> les réponses à M<sup>me</sup> Talbaut.</p><button type="button" class="ap-benv" data-x="1">Envoyer mes réponses</button><span class="ap-etat" id="ap-etat1"></span></div><div class="ap-nav ap-off"><button type="button" class="ap-nb ap-prec">← Précédent</button><span class="ap-nbi">2 / 2</span><button type="button" class="ap-nb ap-suiv" disabled>Suivant →</button></div></section></div></section>
+</div>
+
+<footer class="prop-pied">
+  <p class="src">Maths 1CAP EPC <span class="pm">·</span> <b>M<sup>me</sup> Talbaut</b> <span class="pm">·</span> Exercices : Passer par l’unité</p>
+  <p class="adp">D’après maitrelucas.fr · Adaptation numérique Sylvaine Talbaut · LP Max Joséphine · Usage interne - reproduction et diffusion interdites</p>
+</footer>
+
+<!-- La calculatrice n'existe qu'a l'ecran : elle ne s'imprime pas. -->
+<div class="barre-bas"><button type="button" id="calc-b" title="Ouvrir la calculatrice">Calculatrice</button></div>
+<div id="calc" class="ferme" role="dialog" aria-label="Calculatrice">
+  <div id="calc-e">0</div>
+  <div id="calc-t">
+    <button type="button" data-k="C" class="g">C</button>
+    <button type="button" data-k="<" class="g">&#9003;</button>
+    <button type="button" data-k="%" class="g">%</button>
+    <button type="button" data-k="/" class="o">/</button>
+    <button type="button" data-k="7">7</button><button type="button" data-k="8">8</button>
+    <button type="button" data-k="9">9</button><button type="button" data-k="*" class="o">&#215;</button>
+    <button type="button" data-k="4">4</button><button type="button" data-k="5">5</button>
+    <button type="button" data-k="6">6</button><button type="button" data-k="-" class="o">&#8722;</button>
+    <button type="button" data-k="1">1</button><button type="button" data-k="2">2</button>
+    <button type="button" data-k="3">3</button><button type="button" data-k="+" class="o">+</button>
+    <button type="button" data-k="0" class="l0">0</button>
+    <button type="button" data-k=",">,</button>
+    <button type="button" data-k="=" class="eg">=</button>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll(".cdp-btn").forEach(function(b){
+  b.onclick = function(){
+    var d = document.getElementById(b.dataset.cdp);
+    d.classList.toggle("cache");
+    b.textContent = d.classList.contains("cache")
+      ? "\uD83D\uDCAA Coup de pouce" : "\uD83D\uDCAA Masquer le coup de pouce";
+  };
+});
+</script>
+
+<script>
+(function(){
+"use strict";
+// Une calculatrice a quatre operations, la meme que celle de leur poche :
+// on tape un nombre, une operation, un nombre, puis =.
+var ecran = document.getElementById("calc-e");
+var boite = document.getElementById("calc");
+var bouton = document.getElementById("calc-b");
+var courant = "0", garde = null, op = null, neuf = true;
+
+function fr(x){
+  if(!isFinite(x)) return "Erreur";
+  return (Math.round(x * 1e10) / 1e10).toString().replace(".", ",");
+}
+function montre(){ ecran.textContent = courant; }
+function nombre(t){ return parseFloat(t.replace(",", ".")) || 0; }
+
+function calcule(){
+  if(op === null || garde === null) return nombre(courant);
+  var a = garde, b = nombre(courant);
+  if(op === "+") return a + b;
+  if(op === "-") return a - b;
+  if(op === "*") return a * b;
+  if(op === "/") return b === 0 ? NaN : a / b;
+  return b;
+}
+function touche(k){
+  if(k >= "0" && k <= "9"){
+    courant = (neuf || courant === "0") ? k : courant + k;
+    neuf = false;
+  } else if(k === ","){
+    if(neuf){ courant = "0,"; neuf = false; }
+    else if(courant.indexOf(",") < 0) courant += ",";
+  } else if(k === "C"){
+    courant = "0"; garde = null; op = null; neuf = true;
+  } else if(k === "<"){
+    courant = (courant.length > 1) ? courant.slice(0, -1) : "0";
+    if(courant === "0") neuf = true;
+  } else if(k === "%"){
+    courant = fr(nombre(courant) / 100); neuf = true;
+  } else if(k === "+" || k === "-" || k === "*" || k === "/"){
+    var r = calcule();
+    courant = fr(r); garde = nombre(courant); op = k; neuf = true;
+  } else if(k === "="){
+    courant = fr(calcule()); garde = null; op = null; neuf = true;
+  }
+  montre();
+}
+document.getElementById("calc-t").addEventListener("click", function(e){
+  var b = e.target.closest("button"); if(!b) return;
+  touche(b.getAttribute("data-k"));
+});
+function ouvre(v){
+  boite.classList.toggle("ferme", !v);
+  bouton.textContent = v ? "Fermer la calculatrice" : "Calculatrice";
+}
+bouton.addEventListener("click", function(){ ouvre(boite.classList.contains("ferme")); });
+document.addEventListener("keydown", function(e){
+  if(boite.classList.contains("ferme")) return;
+  if(e.target.matches("input, textarea")) return;
+  var k = e.key;
+  if(k === "Escape"){ ouvre(false); return; }
+  if(k === "Enter") k = "=";
+  if(k === "Backspace") k = "<";
+  if(k === "Delete" || k === "Escape") k = "C";
+  if(k === ".") k = ",";
+  if("0123456789,+-*/=%C<".indexOf(k) >= 0){ touche(k); e.preventDefault(); }
+});
+montre();
+})();
+</script>
+
+<script>
+(function(){
+  var REPS = {"1": {"titre": "Exercice", "items": [{"lab": "Tableau 1 - Prix en fonction de la quantité d’essence", "cases": [["u1-da", "6,50", "a. prix de la colonne remplie", 0], ["u1-db", "5", "a. quantité de la colonne remplie", 0], ["u1-dr", "1,30", "a. prix unitaire", 0], ["u1-ma", "12", "b. quantité", 0], ["u1-mb", "1,30", "b. prix unitaire", 0], ["u1-mr", "15,60", "b. prix", 0], ["u1-na", "20", "b. quantité", 0], ["u1-nb", "1,30", "b. prix unitaire", 0], ["u1-nr", "26,00", "b. prix", 0], ["u1-t0", "1,30", "tableau, prix unitaire sous le 1", 0], ["u1-t2", "15,60", "tableau, prix pour 12", 0], ["u1-t3", "26,00", "tableau, prix pour 20", 0]], "libs": [["u1-r", "Réponse"]]}, {"lab": "Tableau 2 - Prix en fonction de la longueur de tissu", "cases": [["u2-t0", "0,40", "tableau, prix unitaire sous le 1", 0], ["u2-t2", "4,00", "tableau, prix pour 10", 0], ["u2-t3", "7,20", "tableau, prix pour 18", 0]], "libs": [["u2-a", "a."], ["u2-b", "b."], ["u2-r", "Réponse"]]}, {"lab": "Tableau 3 - Prix en fonction de la quantité d’huile", "cases": [["u3-t0", "3,50", "tableau, prix unitaire sous le 1", 0], ["u3-t1", "17,50", "tableau, prix donné pour 5", 0], ["u3-t2", "31,50", "tableau, prix pour 9", 0], ["u3-t3", "70,00", "tableau, prix pour 20", 0]], "libs": [["u3-a", "a."], ["u3-b", "b."], ["u3-r", "Réponse"]]}, {"lab": "Tableau 4 - Prix en fonction du nombre de baguettes", "cases": [["u4-t0", "1,20", "tableau, prix unitaire sous le 1", 0], ["u4-t1", "240,00", "tableau, prix donné pour 200", 0], ["u4-t2", "60,00", "tableau, prix pour 50", 0], ["u4-t3", "960,00", "tableau, prix pour 800", 0]], "libs": [["u4-a", "a."], ["u4-b", "b."], ["u4-r", "Réponse"]]}]}};
+  var NUAGE = {};
+
+  /* --- les pages ---------------------------------------------------- */
+  var ecrans = [].slice.call(document.querySelectorAll('.ap-ecr'));
+  var onglets = [].slice.call(document.querySelectorAll('.ap-fil .ap-ft'));
+  function montre(n){
+    if(n < 0 || n >= ecrans.length) return;
+    ecrans.forEach(function(e,i){ e.classList.toggle('on', i === n); });
+    onglets.forEach(function(b,i){ b.classList.toggle('on', i === n); });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  onglets.forEach(function(b){
+    b.addEventListener('click', function(){ montre(+b.dataset.n); });
+  });
+  ecrans.forEach(function(e,i){
+    var p = e.querySelector('.ap-prec'), s = e.querySelector('.ap-suiv');
+    if(p) p.addEventListener('click', function(){ montre(i-1); });
+    if(s) s.addEventListener('click', function(){ montre(i+1); });
+  });
+
+  /* --- choisir un mot dans la phrase --------------------------------- */
+  document.querySelectorAll('.ouou').forEach(function(g){
+    var mots = [].slice.call(g.querySelectorAll('.mo'));
+    mots.forEach(function(m){
+      m.addEventListener('click', function(){
+        var deja = m.classList.contains('pris');
+        mots.forEach(function(x){ x.classList.remove('pris','fane'); });
+        if(!deja){
+          m.classList.add('pris');
+          mots.forEach(function(x){ if(x !== m) x.classList.add('fane'); });
+        }
+      });
+    });
+  });
+
+  /* --- comparer ce qui est ecrit et ce qui est attendu --------------- */
+  function net(t){
+    t = (t || '').toString().trim().toLowerCase();
+    t = t.replace(/\s+/g,' ').replace(/[.;]+$/,'');
+    t = t.replace(/^(le |la |les |l')/,'');
+    if(/^[0-9 ,.]+$/.test(t)){
+      t = t.replace(/\s/g,'').replace(',','.');
+      if(t.indexOf('.') >= 0) t = t.replace(/0+$/,'').replace(/\.$/,'');
+    }
+    return t;
+  }
+  function val(id){
+    var e = document.getElementById(id);
+    return e ? e.value : '';
+  }
+  function coche(id){
+    var e = document.getElementById(id);
+    var c = e ? e.querySelector('input[type=checkbox]') : null;
+    return !!(c && c.checked);
+  }
+  function marque(ok){ return ok ? '[juste]' : '[à revoir]'; }
+
+  /* --- fabriquer le compte rendu ------------------------------------ */
+  function nombre(t){
+    t = (t || '').toString().replace(/[\s  ]/g,'').replace(',','.');
+    return /^-?[0-9]*\.?[0-9]+$/.test(t) ? parseFloat(t) : null;
+  }
+  function egal(v, att, tol){
+    var a = nombre(v), b = nombre(att);
+    if(a !== null && b !== null) return Math.abs(a - b) <= (tol || 1e-9);
+    return net(v) === net(att);
+  }
+  function rendu(num, nom, pre, cla){
+    var r = REPS[num], L = [], just = 0, tot = 0;
+    L.push("Exercices - Passer par l'unité");
+    L.push(r.titre);
+    L.push((document.body.dataset.qui || (nom.toUpperCase() + " " + pre)) + "  -  " + cla);
+    L.push("Envoyé le " + new Date().toLocaleString('fr-FR'));
+    r.items.forEach(function(it){
+      L.push("");
+      L.push(it.lab);
+      it.cases.forEach(function(c){
+        var v = val(c[0]), ok = egal(v, c[1], c[3]);
+        tot++; if(ok) just++;
+        L.push("   " + c[2] + " : " + (v || "(vide)") + "  " + marque(ok));
+      });
+      if(it.chk){
+        var oc = coche(it.chk.ok) && !coche(it.chk.no);
+        tot++; if(oc) just++;
+        L.push("   Les quotients sont-ils tous égaux ? "
+               + (coche(it.chk.ok) ? (it.chk.val) : (coche(it.chk.no) ? (it.chk.val === "Oui" ? "Non" : "Oui") : "(vide)"))
+               + "  " + marque(oc));
+      }
+      (it.libs || []).forEach(function(z){
+        L.push("   " + z[1] + " : " + (val(z[0]) || "(vide)").replace(/\\n/g, " / "));
+      });
+      if(it.mot){
+        var g = document.getElementById(it.mot.grp),
+            p = g ? g.querySelector('.mo.pris') : null,
+            om = !!(p && p.id === it.mot.ok);
+        tot++; if(om) just++;
+        L.push("   Phrase : " + (p ? p.textContent : "(vide)") + "  " + marque(om));
+      }
+    });
+    L.push("");
+    L.push("RÉSULTAT : " + just + " bonnes réponses sur " + tot);
+    return {texte: L.join("\n"), just: just, tot: tot};
+  }
+
+  /* --- envoyer ------------------------------------------------------ */
+  document.querySelectorAll('.ap-benv').forEach(function(b){
+    b.addEventListener('click', function(){
+      var num = +b.dataset.x, e = document.getElementById('ap-etat' + num);
+      var nom = document.getElementById('id-nom').value.trim();
+      var pre = document.getElementById('id-pre').value.trim();
+      var cla = document.getElementById('id-cla').value;
+      if(!nom || !pre || !cla){
+        e.className = 'ap-etat ko';
+        e.textContent = 'Ecrire son nom, son prenom et sa classe en haut de la fiche.';
+        montre(0);
+        return;
+      }
+      var res = rendu(num, nom, pre, cla);
+      var f = "Passer par l'unite - " + REPS[num].titre.replace(/[·]/g,"-") + " - " + (document.body.dataset.qui || (nom.toUpperCase() + " " + pre)) + ".txt";
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([res.texte], {type:'text/plain;charset=utf-8'}));
+      a.download = f;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      if(window.DEPOT_ELEVE) window.open(window.DEPOT_ELEVE, '_blank', 'noopener');
+      e.className = 'ap-etat';
+      e.textContent = 'Fichier "' + f + '" enregistre. Le deposer dans la page Nuage qui vient de s\'ouvrir.';
+      onglets.forEach(function(o){
+        if(+o.dataset.n === num) o.classList.add('fait');
+      });
+    });
+  });
+})();
+</script>
+
+<div class="ap-bas ap-off">
+  <span class="ap-bg"></span>
+  <span class="ap-bi"></span>
+  <span class="ap-bd">
+    <button type="button" class="ap-nb ap-bp">← Précédent</button>
+    <button type="button" class="ap-nb ap-bs">Suivant →</button>
+  </span>
+</div>
+<script>
+(function(){
+"use strict";
+var barre = document.querySelector(".ap-bas");
+if(!barre) return;
+var bi = barre.querySelector(".ap-bi"),
+    bp = barre.querySelector(".ap-bp"),
+    bs = barre.querySelector(".ap-bs");
+
+function actif(sel){ return document.querySelector(".ap-ecr.on " + sel); }
+
+function maj(){
+  var n = actif(".ap-nbi");
+  bi.textContent = n ? n.textContent : "";
+  var p = actif(".ap-prec"), s = actif(".ap-suiv");
+  bp.disabled = !p || p.disabled;
+  bs.disabled = !s || s.disabled;
+}
+function pousse(sel){
+  var e = actif(sel);
+  if(e && !e.disabled){ e.click(); setTimeout(maj, 60); }
+}
+bp.addEventListener("click", function(){ pousse(".ap-prec"); });
+bs.addEventListener("click", function(){ pousse(".ap-suiv"); });
+
+// L'eleve peut aussi changer d'exercice par le fil du haut : on suit.
+document.querySelectorAll(".ap-ecr").forEach(function(e){
+  new MutationObserver(maj).observe(e, {attributes: true,
+                                        attributeFilter: ["class"]});
+});
+maj();
+})();
+</script>
+
+<style>
+/* Rangee dans la barre, la calculatrice n'est plus un bouton flottant. */
+.pilote #calc-b,.ap-bas #calc-b{position:static;right:auto;bottom:auto;
+  z-index:auto;box-shadow:none;font-size:14px;padding:8px 16px;
+  border-radius:20px}
+.ap-bas #calc-b{background:#00778a}
+.ap-bas #calc-b:hover{background:#2E5266}
+</style>
+<script>
+(function(){
+"use strict";
+var b = document.getElementById("calc-b"), c = document.getElementById("calc");
+if(!b) return;
+var barre = document.querySelector(".pilote") || document.querySelector(".ap-bas");
+if(!barre) return;
+
+// Le bouton quitte le coin de l'ecran pour la barre : a gauche du pilotage
+// du corrige, a gauche aussi dans la barre de l'eleve.
+var creux = barre.querySelector(".ap-bg");
+if(creux) creux.appendChild(b);
+else {
+  var ast = barre.querySelector(".ast");
+  if(ast) barre.insertBefore(b, ast); else barre.appendChild(b);
+}
+
+// Le clavier se pose juste au-dessus du bouton, jamais hors de l'ecran.
+function pose(){
+  if(!c) return;
+  var r = barre.getBoundingClientRect(), t = b.getBoundingClientRect();
+  c.style.bottom = Math.round(window.innerHeight - r.top + 10) + "px";
+  c.style.right = "auto";
+  var x = Math.max(10, Math.min(t.left, window.innerWidth - c.offsetWidth - 10));
+  c.style.left = Math.round(x) + "px";
+}
+pose();
+b.addEventListener("click", function(){ setTimeout(pose, 0); });
+addEventListener("resize", pose);
+})();
+</script>
+
+<script>
+(function(){
+"use strict";
+var ELEVES_H = {"02b4027ffda69c31f24d5dd1":{"s":"Q6RA4lsGnevDB9jMxbcUsw==","i":"CaUJhOE2V00v5/6i","d":"k4S7wk2BXW/+8PbGZQ/8oBe2vBw4rKYrLgas63rZlWfS6SCSAfY7igus6vKABHzwtayK3E2REFVw8fhcwlQcOyGFj/xfvO3Ky2LfS92I01emrQHnn/yrAUJnrza0flNHlWRA/AElo28PPOOJMTXsxMg1D92kZqR6BiM=","n":20000},"06114c0199f1e62257441c2c":{"s":"HdduIjvTz7sWEVRlK0IMbQ==","i":"iB77DTxDEqeSoYxw","d":"gX/YQEXCfB7YvW8hAD5NjbR4HqXFbcN3JePwlvvRHixeF12yW1AdSoJl7GC8DlH6Im9s87PZymJdAdU9F8it2Yrnlzjdv6uTYBoLQwuvYndYWSwwrj7peM8EnZdWmcaSoBtuE4fhEqygrhIbzSVJryz7fA==","n":20000},"09ef30089ea9a15c1cef5078":{"s":"T7b1PujDQcmSYysxURiw6A==","i":"4V8dH1eEpBN7kknZ","d":"V0XZ3Gli6O7o0N2p4d+W5JykwlVhSoIyOk2JFfaRLqWGJjeuZ3x2MLLC8JFSslRA8gv1JrWjkD7r2xIWLuN7r8HML2+U0mjdi+QUzsJwbYjm3uJo2abP5MYP1daj+ElSEq5eAxck/tvhM8/Q2tFAYGw=","n":20000},"0bd0e021fc89955686184c74":{"s":"/+NPbyQ4D9Q3qaWIwB1pcA==","i":"B4Ra1bWDXnoUC+k7","d":"zlqgZujYIH4NrH94vvb/zCCy/3kFyIo7W3IbNeDl2WWNaEjKGn5dYdPPjS9sIdFLy6TEmboC8Rw+DwTZcveDmYFLeiu+KiiMm5cUZvfFo7+KMmzuvSyArmR/iNcIGJhZIMLqdzfflJNNYpyfaj0KsM0=","n":20000},"0c28e5a9e45e8ecdd532b976":{"s":"c+85c4IxmwlQcaaWXrf24Q==","i":"IThI65FGgOvyS9ww","d":"JX6knIROA83TkXs2p3yzxhxB4UumJ1R80bKPwLlx9rp5+LQJeLPQKCyGKQ1vhQ9KlnwBCtuXuexVM5iHS3FnOkvym9cGzRJmle+5Nn8CwN7bvn8klznHeB7wZtAhZXmkoLYwpjneGGUYL5vvlpKiFOeEGnayeg==","n":20000},"0c6b7a9db75d3770825fdebb":{"s":"6WTORB9ISteeVWHdhR3awg==","i":"taCQ+GbfWT9guM6i","d":"ERrItdLiKWw5TtxTogXk7NXvh4VQ2jALjDJaJ5ysujC2kvdLnWyKHXLRLi88zl+kfE64s0eYiZh/JnsWqs9efDxtxFfWsxmzH6o83XpgRe/pnmeEOvref98vK3Cqq61A2UtIlMIPnR2ndbKRMoD1vjY=","n":20000},"12bd036a7d8e187cced5a2b5":{"s":"69BZvowsivggAzGGj/QiDw==","i":"vLnE1bTskZ6oAYhT","d":"RFKaOo3LOzH8wmjVcx0elLon8UO9IxQGrkciGFOo6qVMQM/Dq3YZX78fnV2qYkiY5gDyvaINg5YbFRep4PN2973Q8vOYJAJgBK4wbz7N/hY+aDosotngktD204vEb3V4zfIqSBHDeS2K7uzGGwoTIpsmo+8=","n":20000},"16cccada6f029ada5d07479d":{"s":"YcuAS6DcXe5lNkUR891Oig==","i":"l/idOQm1yWu1sYx7","d":"J5OUlonZKk+2bvkRsYyhsurA/+hUeQvjECurvlHNePQXNrvoLrmExCcJ2yR8MfhtK7diErlFQX9+/0+shZfakXyymgggzNDA8xwIoFvNqy/TdBkt4YlbIkRcLN4pGPFcgXF7lR5hO1rXqy4ckHrSmK9ol7D3","n":20000},"17d5831b04602bbbfdb0729e":{"s":"M19Jb7tLhfK+5eCUrbT8Ww==","i":"QtMDv1EQmS/4EWsI","d":"7YYS2JXRwm0dQFV4HkWx8YGRCNojWBPw6488NBziIk7R/dVaPPKsm+rWQUbIQ7MJtlB99tHfoDrcqpMkjENb2zXxk5G3LWkdpQsup6lDWvS2fEL4CwmxQJnBMmICnlScaYw2uPJHm/vjgcPPXJlaNRNcqtQ=","n":20000},"1cda4b5c823c5fc9927b088a":{"s":"bgGhqTWmFmwCCxRWc76AZw==","i":"7gwaWWqSPcucf351","d":"ArmRHA0SPLjZP9UeBBxb3DLI7a+pU07rJoeSG6+y9DiWRqX84/nc3dtwP+RrDpgqD0fhSCNzGg/xUMogxseBPogF2nGDcaKyH/3RTvw2b8WWz2hsYRX6Dn5Fb+e/iLM0sSyCQ82w7UFHN3y8N6hXoMgq7SPd","n":20000},"1d644c60b8236dc8dce0baa7":{"s":"jsLEuRM35AWtF9AQ3V5r4w==","i":"2D79AsJFTW3felza","d":"LZhveHuX2nSnC8oKv4RzqItOQTGiW8mAHOBPvo3MbPLRC5Le6Xm9iqi3RUbNTGVz4dw3JaZyBbarJpdlBU+r6aDkVrCtPdgqXpI8W60cuFWU/AxmIEzS9m2sst2gnKB8AHQR++TZdy7Kzd97cfD5XHa7","n":20000},"1f1ceca80a7ac3c71f6a6b00":{"s":"GSzUtNMnsE/kHwnZtLOWiw==","i":"1rCmC5eXEM6IBKb4","d":"qEnm2OtE/T0Toxb+ne2E8L8dZJtaGtqZhwklyeZlZCZAY2ZpgmruRdAf1xHdrfvaBo1ubdooWiTmEOdwW5QDKKzBToxoyS58g/NscXRTfjyJzzHdJ3D48fiZYPw7js5qoqcSriNCDMO7m8yEHdmz54wBN9PTdp3S","n":20000},"206c95d1d5bbe0ef96e99727":{"s":"IcUSBCSHLmH4UfqfsYImwA==","i":"mZW861LNwYfp12cx","d":"3gV0JxwhP8aC5jW6pl9yVUh4SMdW9807xAPOBdiTkrSusLCMzOnYJAMk6QvkPp8Dj2lSDDGlZFZk92JtR39no6dBUUO5V8a/yIqnScXjQQ3lCzZajoFxK2LP5foeP/0O8tOBtX5NnwrwzNMU0z1P29JGPWQ=","n":20000},"23948be55bb2a9df57ee3fb9":{"s":"1KClbpGLankkIxqBfV7Z3A==","i":"duuxpkVcOxOHBEZm","d":"c5NcM/3TTiWMdt0ngaWnNZbk/3B4i+LhCLnQL/W1hjIMi8HyswWLze7ut9VtvmYzIYhAw3DudFhciP1iwXl0g8j/BzMuwkNDmko96Pn/lZ+UFvZBkXSWtgjdiwrjUhgVvTLNqgpScmp5HhmAVMOjFtBxew==","n":20000},"24d48ce12659f9103843db1d":{"s":"5Gl9dUXTdbRwlYS8PGq7mg==","i":"pgqkaTFD0ty33tiM","d":"BPrs+yegHTFNLrPx4DvZDg/1ASFiP8eupYif0k9ZrH9Y9j08GDeYIuSBaIQM3CE8Zs8yaVydJwcHmY2mHK0DJ4u7JI9c0NbsI+C2cO7f1xrrsCiCB26rQ6Q0HesDffPFVvrNbQWlwxtWCa7JirvK5mlf","n":20000},"253a780954fc5e63a7c744a1":{"s":"WFYcrkLbrQYQDj8z8p0TXA==","i":"PcjTz5dmwf+YHVof","d":"RMo7eyjDjy/Hc5N/xh1Du3rFpgzx5oI7z/mFFfUQSJXN3BHvp5AwDKFtPs8UV6zJ0qxucaLlYqKuyYa2x4vTHAiYIPhMHQ2wfOCjxgzj4BS9NMbbQu2G5l37VpwMPE9lLO3d4p1nQcsdAhdLR3Os2V6NFYU=","n":20000},"27db3826404bd87e1f6c8b1b":{"s":"oGTWIiCV7iNz0NBIl08EUQ==","i":"8cNjWYdB61QBuOEk","d":"3lLj16tM2BxUzyaOvKmATEttFmYst865ffL4oaeE3Htw3R6OourGSUMacmOkakNfDzlNXif3YWXYVA7mFCA81dVtSgjGo+3L8x90hZIjh0Os2f1wyoHRTsbyW/m4QWd2UQq4Bcq+skFhoRTQOwly5nQ4","n":20000},"28cc27ea99ef53266b5f9629":{"s":"pCELtI0UI3GFvQiIgKbbMw==","i":"M+oWmrGSIwAL/D7I","d":"Ay0/4s8j7/CRVxWhnXZH+LrqI26cfkjH4d1+5lTUKSiopGXvSvqUSBCqE2uD6jEgyUoQ4ESYrmtYT/HceZ7fq12+DLprL/El9LsTkmVaob3sWMyEKG7yluErwquo8uy7LxE6M+fAh71LIax6A7QPMTXG","n":20000},"2c96c2d6898b6de1ccf67f42":{"s":"j2GvzB6DQeGuJMODO3sxvw==","i":"pd9Rckx7F4czKIqL","d":"4gbxa0nKbCFbS4ekvPX6yvRsrTcYHXUh++dZzcqoVbOwVzrI/B01Y/pYs95eG3pvl8ffMn11dfM2ex5M917GvX6f4ZfBCrEedHtGa1aZ7rgFY/PCfigNHEVnoqVWZOVSJSJr1kmFaH1F5XZmPuz8i72Y27j94q4ZXzwX4g==","n":20000},"30434c0087bfba6939496462":{"s":"isPGH/d/kQMTG/fkDHwgGw==","i":"4w8bIYn4jQCUWMiI","d":"47/m7QOMNLEd1hVTndZHAIoBrU0pzC7Ik25A2pDs7WZWKwaczvsd2pyEXiWoM5wYde7lyjAuNcB7q3PCO0zuIeXlJfLbYfc+hayENkrOlrYcvj3xZoRtVtJrUtJg82ZodxU9XbMUobPWU1OIS7Fj","n":20000},"32257c7d177d602d8cb2dce6":{"s":"Ybg5yTigvsMZPZfMZY7pJA==","i":"4xeGeEK+3tBztunu","d":"c5Bm6UDfsgkuGprsFhJQmPbgRVVp7p3SWwxa07AkG+WbYgLIVGftLyEQCjqCwa5cJwWKLHB8/x+KoKvC+cB9jQLiBi1KG9z7FUKD2VDlnzyI4wC41aeQ+AcQy1G41T8034R29+oz34AqZY14ITs+aF6zqjCgDg==","n":20000},"326021db81ab5251ce064c1d":{"s":"xZ75B0+JFAaWQyYGAS920w==","i":"Esq7vy001efuh6TB","d":"MB1JfhO7bxK9CrKOSLAK/A6fcUPAWFM8DmAbttCpqjn7YpjJNnAaSBQANhwYLf8nfZLwHN/J+8UZufjhNXHXubfQ65Eb2j1+V6qLmsJzkmbt9oMk9fbIFffSPcnfT85MTPKsOcAkW2kO3dgORhb/IqVjY1B/U74j0mI=","n":20000},"3412de307800a3bace154ab3":{"s":"+pEHhBOwsCzOePQORNej7w==","i":"hycvJIPDknvXwrMZ","d":"pzPWdYNPwZWYXpu+bUAssP7IpJJYAX0s//4m0JlD+dtxQKB08l5FCGtmfkbAqeIgrDZdL2UbCEPsDtuEBhtsm4T+ut4z+hS9fUF8LvuUFCjuOtMENTx1HoTWx0btL4cEiRo9mzTthEvPuHjJXxCgpiGR3R+hyenx","n":20000},"34cb042ead67b24ef2f6e58c":{"s":"4TFWX3do6VQTUN9hkpvJ0Q==","i":"j+mLEYoVyvtWyz8g","d":"6AEh/n7LZiIRpp+wHhpRRX+AFYv1WqEtHaDf1WutmuYGaZ58II/UNT/QP3usIzNeDZ5LZIRKgfnEAlncZwMW5r/7iKd+TEr96ivYLsT2gNJw7US/KXCvPMdyCFr4ASS53c2gtwUMS0PsAReEeyTyl52ysbHJVg==","n":20000},"3513764245bebe2b67450113":{"s":"S9wJerulKnYFTWkfPqFJEg==","i":"iH5+yODMHsunV+IE","d":"huRntMZTN0JEIgE84YJy9z+gnGllNsvEk1gbi3evE3WHzkiA31txtuG32lr750ejuP5kEheFT40MhtWJyz2fs1F9PaQKTfDcYKOM6x/aJy7W/TN8qxRzpJL41I9HVJ0ltzQY8G/6IU1+pwrDXidsOBn1Pvw=","n":20000},"3635de77073ccd689ac49025":{"s":"nW1WMvIqT0NOryBwXQhGvA==","i":"E/F+Ou93YFXI0wmr","d":"o/tznxCNUa+KS4+6NEa5lOj6ANppahUbp6G1ZCyyPnRBDSVTsyH03ehRONbg1GB/JKu67hPZVGrvGj0YHWLYTJ2Zyf6fdrg8ofnwuEeU6qac9tbajZ0vdnUbFybpooKvXGzn9ZccbGNPanlC4W8C21GK0P9A","n":20000},"3d35b10e6233e4ca1a9cbbbc":{"s":"M0OJRRmAxnTnzSfVqkUYJg==","i":"9j742bF16sVdnYai","d":"cOuDADNE28HINKZbzJxZ+Z/CeM/mpbnTyzgrSIWSksPnM3ItYRKg/r1BqR2rfO8NVuNIROAA9MwyTYxlCmIHfDYm4XdWS9F/WBWbf08/JkJaUzZYh4DUEGHZ/ZQUCZfNm6uC+VQ/0K2ahaQ8BI6nryVd4Q+fNVxbosE/8bVBcZ4=","n":20000},"3f7c1d6d1208f0f5ff445b4e":{"s":"xF9VuZ64gAXhJFda2UB42g==","i":"oIP9kJoQj0+5cunA","d":"8PC/ojFl8c0FFw4ezYNjrg22dOU91VVKUjkyfG/oEp7FDEdOywQsJx8ayAQFkSehtlm8PKaN7FIhKzzxts1F4HV+PrCCdfdA/8+0SRTZCfq40iNcIkTMZZLeHEbM8rDVfB/l20O7jSwjh9JZprqdEM9XXjGgICA4qmWAplvFT3E=","n":20000},"3fc97b10bc8ceb104c55f528":{"s":"UJljjnARVGKMsSEkBDjqvg==","i":"b3gpl2BvIuInXgud","d":"pHsNUDtnl7HtBRcZXpmNjdhBThtAhCRoVbPa5lwi8/ntZUmw5d2ko6uIkmIeJKUVKb19GO9CVXmSTu6kOjBBxvWn/4ZOVkMKHcy0NMItgBU5SVB9pMBAf1U8m+p575/n6QKJAHq1uHeLciACcV/Bxjz6zaF2SG9uPgm90w==","n":20000},"415b4a022090f57c87cb7dde":{"s":"Y0GAELxQ2IgFiZOrYEHFog==","i":"fyOEwfD0EUcVp2t9","d":"CuysfOAxHxJsZQiWLrlTXLxVgzE9DNaRbeziHnsYoMWScpmqz6vTBK0lOve3kUnl/szrRLSxC9/SFnWITyG2oFHvk4vwP8NY7TIQim8XPg0TaFXI3mBqWJ8TPVai9gnr3pSf6mBUNet6S4awJ7QPPFdQVkyyGw==","n":20000},"42a3dbb772d885d519181ce8":{"s":"aQOlcHf+W/a79il6h49CVg==","i":"RwRkaKsQSrkBk85L","d":"LKAE9n++GmGNsy+doa5Oe0BhIjfwznSV3MBK6mafdqnXYZfZP0Y0gIBxPEP/WmdW6dFrIGAfaD70uh8KDbV9zIH6Wie9eJY1g7oPRmo65NhgYt1PF//k2vZNG4Qqj8S6+1Oe0L9qGOSSofBuRJb667vbaegmWTKN+Y4fSg==","n":20000},"449ba6c67b5b48f880c40d2f":{"s":"PPerUsLrP6Ga/xuwd7dyhw==","i":"n/SC4xBt1EX/XgZj","d":"lrlxj0Qa0KYOjMxpVvh3x5NXz4ceEnXDkl8LFhflSFFlF+fU8jax1tSLD5SQOP2HxfT03vy7mMx06I4/p9gMy4S7/QvSSxcCBBsapuCbQfX3cDMYQ4HLA0Enn6sqRhu9Fcx3dh6BEyTsJquIGUED6F4=","n":20000},"478719efb52e8d69c811a77e":{"s":"IVgaqnKJNTDdIMst5Qwz0w==","i":"EgbTriMqdqYVHJ+q","d":"o7GbfTkXrQxZSspr6ABpt+gkW2v0TKVab0YkwtyRlMLlvCSW2rPXI/NND1L3iWCNR+57dXax0mOhRUJdUjnaM6FBd263VHxaXIys7Tw0EPbEUDT32ym66LH3GSJ3kjXxzv6TRyDHDvE3HujutSe/","n":20000},"4842865f3a2b7cb666aa0592":{"s":"hmDjfmSc01Lb3yLemtQ+dA==","i":"PsqOzQvUVyC9KIsk","d":"yeHnV20onIQUCiIZC6EK6vNQidc+gUMZ/oS0RrqwQdbdeEz2sYJNJqPU3k8X7N+dTbHvsAMmY6fi1XT6fEW7VEs+AJk7PYJ7XE1BkAy/fV/9jfOzGxYwLspENJkdwA74Laqbbf/wlUWEM6MjrI3Ojrkbdmw=","n":20000},"487718ed9bc8d961277de8f3":{"s":"ws5pU2jdMaAvWoKdyrb26Q==","i":"HjrC2YQuZkLNlo9m","d":"7JNd5Nkj+fe4RCto7YQ+MxkS1YL/+9H9E/kH7AAwpEdd+8ntDi/h2ozysJdr3UfqkWQ+LXSkV0fCIu3Ec68UacEITLx9Wa+QIqG5BffIUCBIb2moc+He3oPFupBXWh0e/1f7YWqm2INA5Yl0L61864R3TNmW8wn2HIqaSA==","n":20000},"50a014790df9f91e2ad680b0":{"s":"AGu0s+RrUdXlcu006cUi1w==","i":"qbQgLEXVclYcSPVL","d":"K3bKXL98uVVaTjmbGFXrdd13yBLwX1RDb8so9QHuq0FBdwZqx4UPctv/pV5uGjeN6eiNX2d/WTLw3UqrpxdW0GKnFsukVqC+sEp4qABEGyKZmANtOaMlyCEB/bGOA+e5jjLIJxovVy9B5qXDm6textWj","n":20000},"5196f2c4a05d9f54b27d60da":{"s":"GKvbZg4qyvnMR4y+w/U0xg==","i":"kaODyRReC7415/YT","d":"tJMcYrwWgSmTiFg0dj4z1M+vWTEilwME8ZLGMvungu6YO6jg5L67D/P1jeg473+KOd57o06GP70BynVKxm0hiEuXkRqgJ/2zkAGnaUyOeIqdzdud5fRy5aPOAmgV0t+3E+b6HmYwMmfFRQcnSBEYI+3ECmA=","n":20000},"52ecd07c62f092cf408c756e":{"s":"tTSOnosdTrRxndvhX7tyjg==","i":"j4hvbKm+pYYjNpjq","d":"Re2QeOT7fG0pbo710L9A5VYZHAbeHBjde0OX1KjtygwpWVseRhqrwRwSN182DoK+PFGpJ15tO/tThQTIIei9EgRb+9CsZE5IOgZDYxcWGtBWwTg1UzCpo+Q4a2nfs9Io6dayfBqv+wf9vgRza7OKA9EZA6E2Uw==","n":20000},"53214bd944e07ceee283c237":{"s":"L8lXNHe5+kgn9QzOyLNzNw==","i":"N2FcRH+dMenOf5XQ","d":"dIHXEIHO40DwmyoHLs6KmcLnZJPFnNRede906d7KAHahAAZO2V8aLjxInc9cdKBn7Dnxx4190AkLIfcm07QvMY6CfDNeAnjrlYdektJD5gr4m18ztLXrkaMDhQamzaRW1lgL87EeCVVKn/FmoMt1gMrTahJQm65HOa31/Q==","n":20000},"574b5af2a828e849d66a356c":{"s":"dHI+T+j7uGmRLxCXW+2EFA==","i":"lUcXpecb1fw3O+4N","d":"1JoqH4kKtitTlJVJ6O6xc8M6We4nDK+v3hwtwqI36pRJ9KOZdb0tNwoYnIy+iK6Q8eDz5+j+a9XkwAtZTyf7Welu3FQJS5f29k3h3ettYthl6c/CpqzCXFmX0v7ScOgZzYVmBo5cXBiuBvMoRphxwpISZIJbxZyuGu4=","n":20000},"576834f050ecf29cc149aebf":{"s":"M4CyOXbeL8DSgQRA2Dd/xw==","i":"dsDLdhHkgVTNp3cF","d":"Nu2koyS147ME0sr5YQzW4WjfzsEPkVlBFJPCzUKiQEV5WBzV4SoxT+KKEfCbHgnnDTszRp7I3eFjNYG+spvAhcG3Ve/RRgVdRJG2Xafix+mAAbutrJyFSs48EKWzwBrfkT3oF+O/de3o/uWLKisPPkeJb+w1Fb+zULHKniNmIYc=","n":20000},"5930de0fac5b8788bdf3774d":{"s":"CUM+OehBkj5Zl36oFv0KFQ==","i":"QQ3qvRfgeej33D62","d":"CSv9MqcwnzytimmHERMBkgXWXThgeBo2t36u9s4XOhXVjXg8jcI8qJMh4vIlI472sZwRQ0KnBchNd33ayvsh8JLXqRaSmWLdENubeUKexqASpV4bOWT+pZtcmC82MJU0o41kY1YmBWS2GEG7ypwi0g==","n":20000},"5ad2118933ea469677a6471c":{"s":"CH2W4vlbuUCbPghA7/Mx0w==","i":"y7A04K6e/aaa1A7+","d":"iKi3+trWBg/0JKwlkJdXk68XMrHqZpdA8gyhMVBFHLmKsofQoHI+v35KwkGxV385py4bwdXU/yJDelUkBaYU0ktBtCOj+z096VwVnh6yA5KY1fzJF23GCi+rkeDJhqQY61rVcw1wHvw0CBJPocWPFg==","n":20000},"5c1e1252f3ab1dbdc3e37e30":{"s":"S8Yhhn9MKxCv6JZXil5o4g==","i":"yD8CKuy37qvlKlg/","d":"PT1T/tQ7OQEf+CEowYBKvtxCPoNWuWJgRHv1f3PVdN0ymgiEaPNL4AXA15IRYZNo9XLQp74dpqqU549HaT+m9hESc1WE4CT8CoQ01FrE36x+N5vBq+fByhsACfaG5QnUIPY+mRbG6UfkNT/XFXxGLQYAvTAis4Y=","n":20000},"5d1234cbb76376d30480c76c":{"s":"TsYdV3TPvFWB7CQschYCEA==","i":"WWe2GA1n1tdF5Fi7","d":"5pUZwEV+isSuQ6hgCjaDVmrpA4SWcfYTeTOBUuSF00z+3YR9Bby5TeZTKjkhjUxtSIGwNDmODiLzYeNXvY1wsFG75UJmhtPpYnXvU2JtiropGmuWks4/eNvsz3AHktYhwO/iGavifPyOzHmZe2z8SswBVFk=","n":20000},"606994628cc018cc5465a57e":{"s":"Eqiakx5AEJAN6qNMme8XEg==","i":"vc92IrwpzrJVtmKr","d":"uqUUYUpuHk266RTJ8vOCpfyP4d7//FCa07i1EsH2IwGOAftHxSAAxdsZNqZbxlTi78xEN0+oQuVk4Dk4+z5X3485G3QEjGYlf8ZdxaRR1UtbLBKPU08eQhaxmV8ZZ4ZURb3hhH7YcWdpuDF1xNmSDQRQhbZD+XjR0FdkF2SlSQ==","n":20000},"627248e584fc00629d4f949c":{"s":"uHGl0QRebOAqemVq5I9EBA==","i":"X1edVMu2VduExjIp","d":"3Ic99DzhsmCGaCJ/UShrsk4Ar3mmrZqb9J5kT/m8rUk/CjbjiXJJzF5XYreu9lI47TmMuHFlbTB8eEAiSqWCdw+eJmrmziZF19bzX24FakRkde7oixhKiZfsUzhf0j+gfH7XWJ7xBdO8HwOmVzqt8lIW5WhY1APmBTxqbA==","n":20000},"696b5df52a9d036cbdf4ea99":{"s":"/0xsOH6LCXarEal3TF69Rw==","i":"eQT/K5pWQd1Pmuml","d":"mhEHB8hxo5NtjAGhyMKG4fo6q/4RMEx9kytFzIDgqs7bz52e4/pwpryNPYBZRa694yMD7YkYxXRrZNX/FqV3DAVFsj+ERfZGxomZViHOy0UO9u+JOdj1dpqRPBfqJAVNPEhiny78Bcu/m41htCs5i9RA/IdqxjAysuk=","n":20000},"6f33b916dbe81c2ddceb12ea":{"s":"YzBgS6Kul1OjIiTpL17d3g==","i":"g3GI0EpTpcqXyeCg","d":"kckM6uA+sQNrkXbWM8t0/xsthocdnwZQUKv1gVXIEcuFSpe7LXDbDFeF+yG6ussRxrNQts7BJ1kQufX8cm0ccoKAyjCXktabeg5pd7vnKzhkOsOJcMUXC5MdVuk2LGXGq/ljSlEt8pUmDcLUvC6Kk9oF37+PieupuKPdQtObig==","n":20000},"78a3725d1ba132ed99f73c29":{"s":"IrmWOS+gmmeB8B372FVl3A==","i":"72JUy3gagTpx1/Ef","d":"C+MzpDg/Jj4nSM01eLa8h1vv3Lkq+sQ6RrYx0UPiy2qzVpWJJoZE9pL70M+MH9AndfyayIFnIdjBEhQqsxu9UTj/pGQHzPLyoYDDTp5+qkjnmM7tVsZ9r8lb5Edi4MMPU0i5OaKYr6eBQBsXJBmUtr//JBGkf1PsAQM=","n":20000},"7d253bf8a29e7567a478ad98":{"s":"QYq6v+CjIj6iVH3ItjHgQA==","i":"HIHdOLSCreJSv2Gw","d":"SIe5U2Z1uOEZmGyaJ/b8WIy7xvQHGwRB/BT2h8c3RYzcxaepXMLzCmLfC+RJJfwe5OrecieBhcHe3jFQ2Fgoj/9vJEjSJ3MvVrDIw9QGDtSyCuvhQS3LN38OSkw22PAJXnCgJKZ7GIB2dSmSJTwQJ+Htng==","n":20000},"7df716f2694f543697290392":{"s":"xslWlHpcNq6x4ARurlo4Yw==","i":"Kghpl/ZV04YbdNnz","d":"P1YcHvg39cwPGL9SLGQF2UwRX32mhFn+bEMyBQyjelKo1cikwcg5mddlKsg9bFJuUZXFa9AC5xx7LfA/MDAYxsghkXh8JkgDu2HWvsQpFj8Ji3o1P2uwIc/IrwHzMxX19pVxJCAXJQjCNSnN7J37cLGW0y/1yg==","n":20000},"7f7feb1ce541af578d2800a2":{"s":"PxVIyYHfgZfSflTSDwqKEg==","i":"/jbv0rf1Gp66WcEV","d":"nLdk2/PhxS/cssCalUM89oyL/X1vKn1P5WKFMNowUNGYeVdrLHJ3LiYGXGFw6CGOARFF/mj4tACJtmlVQ65VftG5NPGzO1/nnSL7ZpafAELufpCEtpjwGy1zcNczRa9w+tYMwkkzPAyONbSDBcbmxRc=","n":20000},"7feb73ab354aa490e10036fc":{"s":"Z1ppub8bcksWLbTbSO85pA==","i":"XzpcbhW5oJZTjTbA","d":"fcD+MZg15RQJcq4o/aFpRzZ1TPBWPrMJxTpv6QmNnXPk1txofErIxyA3QjRC4+D6DaUZqbgL4Olst5YZccpMMGnHHvc/PWyDjhBs8FKbWwcr7gKRZ9WthO77YSlqjwkXZeYiO+V4BPeBgZyWfUzzm8F+J4VOFg==","n":20000},"8774c41dfa6d61e94e053719":{"s":"7lNk7pJVEaui10ps5hZ9mg==","i":"5M2k9tqLNS9oGsoI","d":"zqixJGdlwCXKGh0MFUivdMgfjeGEvC1whIt5dm1ZH9Py7zdzB9HQBTJa5OcwDqlb7qEXDx3PneHpNtcgn2av2iQ6Q2VDY6SGd7UgDOlCzWUIAcO7KNaJF/cwyLW8K7Wzj8wtv3pIJMLjdJ/uEbYXez5ebA==","n":20000},"8aba3bbae43de0a4941ecfa7":{"s":"AHjkAy44H3WTo+c/Ph8feQ==","i":"0pQIfxvr5WMXRU3V","d":"XzKb66cxV5wO078LjQP2tbDSgoi0eTDRVKWPGulTVfB43AHgOISVxR7Ap7XDoS44YpiHlD7SlQLM32NzsNS8WV46wBWAt/5cZmu9N0XQ/uD7xer/d9V1pcEthtPWPZxp3gyDfyt0fH5kYsuHfODmIg==","n":20000},"91e1e7897dfbf260813120c1":{"s":"z0pYGoX2810XG5ruBCgbbw==","i":"ya7seLmempy3+q85","d":"mqhraCBlRoDKL13TVusuVBfzPlx5ulFQm/dJyN5lqKW8KjITvgNCsFQS9FWZ0S0tQ1MISp710W3rJ661kOqHEtn77G47y0VrCawDE42oWrcydYMlkw8DSYAjyaGD034VbZrMps6JIY8zumYo2OvkdKY=","n":20000},"933e822f199aeac1ee6495c1":{"s":"gCwS6adBQha5K/H/2/Ch2g==","i":"sOs9qKhqmXFY4VuZ","d":"anbrzV5PpWfmjw4zYhT0toP81s5xVo9cvMbSbykHblX2339fC5GmXnqsdNXy1ditOBFk0zhzRQgRCljs+2C9BqHwinL1smP5QKQT2/zPIYIyVoeagdw+tGoaBEJYhB7ZBUEkMNOtJ3G944Laacaan+XOnQ==","n":20000},"93f08cb27a5d218811a8f9c0":{"s":"tdScdQQgOOkuJidYtJBh5g==","i":"EWOoCdli2P7OAZit","d":"jzFSRn+QIlfIhCqcDvniGK8g2noNhRV0ldlENiXHD1RgIlCtr4YqLgvSKCFjRWU9eqb6Ni2S1ynRzzMqZaKuywyi9Smdy8AZp1NPEXoW8JJkOCK63tB4KRfU2rSlBhHGKpP9GylMk/+zon846Z6lOww=","n":20000},"94af32ea32cad72b0b42004b":{"s":"0t21WvaZ+97J3U29aaU3Uw==","i":"eZeHSS4X5PaDTkHF","d":"sqf5NPQNS5L7A9vT5UwbtLY/epMQu7atg+K74vUFU7IIhgRBDQsDNvTpHZ5bj/iXq/uslqGXeMTIpsQwDArtOc5v4tk3YASqKcpFGg9fUnT9i1Bwp5tUmd2CjEtVW5JCsQCloNCPu3gkcDwvmbeBUxKfqf2urOwqwmpTtw==","n":20000},"94c037ccea80c18e6a7c13a5":{"s":"IoU3v7w5iKKFKzkfzgMumA==","i":"2xNT3bRc1gjBgWZl","d":"SKvhZLNM++F/pdlWHXtYCssI9YERpX/U3cj1n8LOnrLYsAaKr2q5CARxFx1geazQXpKBCMBLwYtakzT862FrYHnZFpp+N7FwnWeasHMwisxlQxi68GrMmvuHYnoupO6T5sOTD4vr/q82Lle7xlfmShtPvik=","n":20000},"9551814c425fb40dbf9c7851":{"s":"XTO7P70cTGed8tCW+ILXfA==","i":"g3/ZJtFyHWYs9a8f","d":"nbYIH8X4FzAeTFLpHauaXKD6Hz7MGNXpcBgoAvRx4hcNCdfqAHg2xX3GyP7Om+p/S02HuRMEx5FTRqySUg255AGPNTA52JwbX7pjcwKJINE4Q0MIrqiAILD+w9kNgABvPWILNwDNA0g7Ro1Y69gUbL9OLBIPudr+JNSq7G6e5yw=","n":20000},"9be9c6fba797064849a6e13f":{"s":"KX41hhRoJjw+p8JWrGv9bA==","i":"Y04HCv5D2cckGuFV","d":"NpOHLCn8+PI25i70vEwyjWT7en+6/mCOKBBCmWE/NDPYib++ULLdmq2qAZwfxXE/olganJTwrsVuqKsFsFa/qHbJovrB/gJGI3z92KX7wsamDlG1XK0Xn+AA3X9MyC7x+omqRLB3Ul9r60VoM6DrcokU","n":20000},"9d3c1b153c793961b9a57475":{"s":"5srDOqVYJsMglKC03gMlyQ==","i":"s9PGVUWjqAOD55Eu","d":"BGKfXTN4z1798jj2c3R+ILhflVjRw25j/RzxmI/Um987QKPv920B4SLvZeYm5gCy410P8T+U1C3MAajBWnMyYwyJM1kcbbCuSSZOQvtFil+IiZWxP3nOYf43kgk5pNX1K2E9r+nTRggEeuV3AWfeToqmBES4aPfUWmzG13TVqZhV","n":20000},"9ff47f3d5777f3f73c88fc4b":{"s":"20y3rIxW8XbuJBUmm/piLw==","i":"1hy+5z27r7XO3gPv","d":"1kZb2NFg9C+eia8gFSet8xodcKIHYChsPwsXAvYN56CtZL7EGln1QcR9grHKQ1v/xDNENfmHfosb40ZJl/eGSfGFQ+cYTzHyQzjuMwzPQiD4bSQiISvQPnNbmlLlcYAPJNYqvgZ4Tqrcez4wf+rH","n":20000},"a5c8459f07d91379f43fe5db":{"s":"hPkO1nM9EQ9TE0PIPmQdQw==","i":"Y/ypWevIK3DvQKIQ","d":"xsw5JFRo7IM9KKFb9/SCquu3scjIr/3t+SqeUj492PhZcD8UcnEn+ss+al8AMpzNrNES5TnhvK6nlsIyUedFXIhKfy2wRF2XHz9Nw3Z0YiMtF6nL0aiD4FUIBaaaTrSgI4GtXNt5mSqtgIVDra4AOg==","n":20000},"a7bf70d699959c4e3a5c5119":{"s":"Ov2R+KX3weu5fqyLtYU1Dw==","i":"BH+IL3YjfnA37BXi","d":"X1WQZJ+xFRLgsQHxCi/Fsw8HK6NCEqfO0CigrvgjLRqw6axAnBKkWa8j50PfTZhWc3ZkDZsOl9j7k7YfdKCCGNUIV4UY/niEAy8sTdcZAZqrx1ty2eqGNenYXuISd8oRIthrek7QorUqWSHkws0sPVE2iA==","n":20000},"a8be8ce6e13526d1115bc258":{"s":"lxUWPK2hpDNLSoBYip3uKQ==","i":"/re5/qRZ8HdX8RVz","d":"I6LmZRzdpXSPi9OCIEjOwfDifjMybaL/f8Ql04g9ycR8/pdWGpRmiTHkM9KCj9mksGbrc0vgj9zBOfJtZONS74mWFoeg/2lixsXIPpBPKjqtPoXuc0YpJGEdeURFanBliW3I5wgu9QdcMqNOWCtBljo=","n":20000},"a940b1770ea642ef39538b09":{"s":"VXmLZJySLNsD+l1pOpyqNw==","i":"I71+qI5TKIxohmlx","d":"xOKvGClYY3B9GH+Hxorb+bF7vxu8p4nlnSbmdu3iq7k7PsaLmnD+gBsDb9Cu6e6thoSqRF8OR0Lx9kOSSIgu7ZAC9u5DP6FzHL+z1taFL/G2gG8dhzzFNSuKxvp7CNeQN/767BHUkKBXxARPhFhm","n":20000},"afb660ed1d2530ad34f53dad":{"s":"0gPCiXCgluWOEiJ5vU4fTg==","i":"kofmPPNRBUfCOMXG","d":"KnBEGgN9RUKF5FcmATTo+AjexkF2hrzXLlWwf32OvgNvOjv2cJYL9G8i4IsIEzTvFMqg5g+sYtM6uQMzObxK7ErAHYf0K1IfwZpRvNB8YgkKUqFRmvaQA+uvYfpU5kVnBlRMy9p31hIeXKDUJQeFcg==","n":20000},"b2b4cb5e2a1733201074dae9":{"s":"EYJRlAaBmyTF7w0rMEvjdw==","i":"N8URM6rLmMSLjOcS","d":"Q1zwVWzJ5+56cPjZXo3CzjevHIVASazBHWrc4ntiDG8WftGIRxgIUVrdU3boDDa+fcZ1MwlZpjtU/J0FoxgsygqoeT/Ctb0YKLHLevKDSBe12IRKHvozhqdjxyW1F5w1A3rvjBU7a4PXzfRlm2TBSnNrJxid9AQi","n":20000},"b68cfc6b89dfe4cea17d8e47":{"s":"/6GYWfBQxZXulWHpfj9y8g==","i":"Po0NIYmBMnbWPfF0","d":"ZOLQEQuv1AcylaHIOFAZYA2OkDCC3nrYK64991hbSMluhpzVDtGDMh7p5o9rXk42JAF+c4n9d8U2n+rRlNGhHskzpZZQ2qEmUTNM598UqbEJPP5/qNbUEh/ocjQOSNcWSOEL4E2pvkyBqEru4R7CnLzc4A==","n":20000},"b889509036b54c1cc000a68e":{"s":"6tPUhGr4Xthn6Jz2/ePxXA==","i":"mR3Tbuw6KNqTjV/D","d":"Yfs/lFY5GMOFzqNSLz/zKn52nfivkxNoKtrj85bCQuvGK1rFOZygNQMPf87MwEZdSiLN2TVqFCJY0GNA6aenr4TsliuYt+EpRnDxIzWBBxYOW/aaVxeK0feWE/+NpqaiX/qLkHjnDg+ke/rxdgNMjACBa6Y=","n":20000},"bafba4b4f2dd079f97ddb3cd":{"s":"tDty/BqGW22mZhUr+dl1Cg==","i":"DQutNSS/m8sSb7SJ","d":"+tW3G7aXC+G86tu9yvsmG9Qzd3tDLm6/6TFvWHziRsRY2p7tLm1TBFBEVR0dq2oUFIkysZneFeRZ3wf3linrI2X+l3ig+UaBDl5wGRCY+EMsDlGTTUURLmsKtkOiCnn397eZy1f5oGSWNpeFO9G3","n":20000},"bbefb40df3d3e30db090fe6b":{"s":"6A8vVZ3+0H9UdBGnzXyTPQ==","i":"xNc8+IWuAU6arMAf","d":"GuuuUjHdZGo+TegZUQVg5QFMH6y3SH17VNgytfnteCJKiqfqo6McdTZYN1pUXywbp3etnJh4eNZpRqCegYtwVoeYpxBost9opQerOQrsxJh4V4RQjGLWdZZ0YxdVdhgewCu2D4YmIYAK2LfwYQimc3Rd","n":20000},"bbf071dd28936fe986388fb6":{"s":"3GPTT88HoSlAUBqjZmzfmw==","i":"ZieNa3XxbRWMErfZ","d":"x49B3EcK1y48FG1ukoz0OhpsKca0an3OHNp5oxyeDEdy4FCzbohvYEzkinjeLK+P/YuPX8uExzXpognEszZnH52+X4pJD2hT9tYULroU/WifVUpWBSrAdkuznLizSum329EOmu4Sq6ajnF8nxGGU","n":20000},"bc710bfbb8fe170d14857876":{"s":"6vCpqHDbTa1eDZNYPmHlxw==","i":"hK5Bf+8aYrBvUJme","d":"dnjC+EapaMmf19RXY3kjyHYNIzeFYQ+AVcPvRKLHueEUTb/HCrEOcxGpilY/VL2C8cRSVln3gggOme0M0J9gZA44PK+uaNuhTbihMjRs69zCGS9bUKWqDRTOuN7aVEQml2VJJZEBexJKNlISst6UOsaG9xir1cEDjs8=","n":20000},"bf44729e297649532f3873b9":{"s":"50OHO2y9JPmh4x9SDIBe6w==","i":"USvfDhqZ1Fp5MM6B","d":"KOcnvDkGGz4Gl8Nd0Tp6yQ8JVlvK1/t6d/4Z4+/JPGpIDDGjyhqT64pODzGsbdivQnBMU8t2XRQRNxEq3NKNOrESHzhsm+7E+exH1d3ji6wEDfz5LWjdGqx+xP+wu5/x38upO30xGSBmfm7nLPIEHVkH7m51pbaDyE2X","n":20000},"c47f7da3148c4da4246ffccd":{"s":"EoEyOWGE2wTVJkRnWWDg2w==","i":"LxIjlkOm+4nkxTbT","d":"VidHwkLYXkq9VaUFzANF7vWaDDWbDrZkWOfm0D6OglTCYsGqlM3I4Wu6l3KFgqBBRO8xWJ3CeTart4WzLi3oEpTkP3LM+klsgmu5QIHdbYzDaQM8AI7S3aVoH4ECg5EjFu+tyu3d+ahLmsGeIgIKtj8t0ibiDeKsR83GiErkmpQ=","n":20000},"cbec1cb28d30350f8bc40880":{"s":"9GAdqqxW+kGm4lrVyHxm2g==","i":"DCjeWfMQpWlnElDP","d":"UxED2dSvuyrGrIdrSVkkiJfdpqEG+qbYTIrABH7wqkSzP5USqU1WE7UjbqzjQODLR17uNCctDCc10beLxr3CawtikVGbWFQy1PQ0kZrqFYlhICLDEBKAZ+FS/vI5ioQzryP8wemxIYdJdpyGfa/3puohiQ==","n":20000},"cecf07224072cad247f8e113":{"s":"SnRL1JYC8VoksJHggcdZEg==","i":"uu72Degr/OJ7CWk4","d":"KCU/jYB8l3hn/UVa8H5nW2gLlwK8WcnJBYnEBbjdX5Ag0tt9lVdfY4X5GaRRnTWUUTsk4guDZdLf2SLMqGCcuHpsPNeGpSku0ZiTxfyX2kPUy5YPFkVbwJoP4jG+Z4Dk4FSAWEmd2kmNE/wgkKRBlA0IMQdNK5s=","n":20000},"cf5d74192de3ffe1f6070d4c":{"s":"YVa3EjSDQ7RyOrMn+rqyPQ==","i":"GTp6bA5/AlsROqBn","d":"OabjNbXAsghhw1PCdHGEwyxEPe11Gmho9UNS26PQFZVdVitnlpvLnx/zyedLsQY2iXJemrlOzA97UQSswULDNkm0wW6qzFbsnUn//M/hEdcVp29wSCQU7bXFz4RHMfE6TMEwn06hpct8uHKYku6ygvMSHNoeSQ==","n":20000},"d6ad56f0951124cdcea46295":{"s":"X2RNbZoryugUq78PHvUFjQ==","i":"W0aqEi6Utek6L1jW","d":"+rdUmC/qEK5+cRrre13DOuq70zbpUkKeYLPXC3xLLE35hzOoVMW8QRiDG9MAmT/H5q1IVbjdVVYKCCswvw+Cnm6QWsalqj62hjUaH1zYROmWeWR5hOItj+ajUZMOvO94BxcLu1aqMg017CdgBx5DiybF","n":20000},"d77c440ec889f06949681c0c":{"s":"OfR7wbCvQ0kbGWc0QdGilw==","i":"Kj1dX3BZJf0CLvNl","d":"z6qsNTm5ngFWssHFryzF2Xo4zjOR4gvWDm7/rnUwTtLIunwTwXKIEDohYXyk2uYJKcCsIxDAbldqHGAfIhhU0zB9RxqKi1+RBElDQ/MqFqJd7nag0Cs8jCgiucQN7HqzH/+bmGBfoWeZ3KbmKan4iLJ4","n":20000},"d8af2b180ba5404517bd1eff":{"s":"aC7u4NxEFvL9SwRHdGd27A==","i":"mpb3n7Y/XvZy8kU4","d":"6/3aO3K9jVIMaCIJbrsFp7zpqD3NxTP5ZlUFa22YOQ5xD6BEb3zEn/+QuTwdhbvqbiDS31kzy4yJ/DWkMmZQkXAGUB/2NG9OtCmSXhvs4NnpBHhz+0L/Ug7waKn2mJKha5aD8ihk8bDNj+HCgStKkMY=","n":20000},"dd90fce64a029f66b8ec1608":{"s":"Wbt05d+01JIsYDX7aQ1Fgw==","i":"j/ypfl1MzE5bAr8x","d":"stelOV7IILvFjTzUe47eD00vPeTERrR+kQeakPUxB6iV1XFUvYOw2/3WDdUO3dFKIyfkyUp1ugKytiipvzneMoMvy2YrXrFE/Gxb8d+aNVfQgxJHXD1XTXWee9/B+PtFnGWDocX8qrmWdoXZrgkGyT09MEOQsIMT3ms=","n":20000},"de909cdd7cbaca13098215fa":{"s":"fa/f4A2i/sandQJ0wUtFlw==","i":"I8En1vawbbr2WePB","d":"LJdvj3wL4eo2nXEZqVuO2ia8XwyjQsc5Tppd+1M9QRDsxe9PCTXxbaEE0WRprZpEuSQisLg15kM5cvNffYD7lXdzHkLjN8kKh6V/0e6FIJ2mnSVeFeKQpXf3lQeR8H+S9b0PZWE/yQJ08eIxsjevLTDa","n":20000},"e030b5e562853f1297c1cec7":{"s":"zGZmKDWfQEGkM1ep8oRBog==","i":"/VUW92hcNafiEgQX","d":"9tgJF/RTPokdA+ORCMfItgISSNfjxObIXHZwCy290FZs6f7MeJqH73vbmK23tzoJgowVYcLp0HJulvJBxV2nwZM2tz5Nc+s/T64sED4VobIq36jIJ0w8ny7kV/Qwa23paSE9SBUI1833MfEYreF1vce1kGQ78nB60d0=","n":20000},"e1b763430f1a2c5631142aed":{"s":"yc9MiP9M7GpUPntjXWnXaA==","i":"zCKHZF+0+PTCp9km","d":"H5hgNebzmLjgXRjQ/CDYfGYPjyaN9gSf47OBWNr0JjYamvARNXUdlcru5h9tbiP8954GpAkOaSuUo0qm8v6M1Fqr11mGLPcV1op9MyxrNkZZFJxJxV4lnD5EIAO2cetbZ0vKTkj+Cfm1soL+KIqjlp85jI8XoQ==","n":20000},"e2af7c89eae43878aa15d9e1":{"s":"fS4Ms5EvMtUkKpJ9rUw3Mg==","i":"I/nDxtAbEpYiwY/i","d":"1xNkG1BvI5hh7dvcL2wdvtIUE+H7ikuLvvJxFW4aOOtfZdKGLpz5UvHLAuPCLiRzeyzTByYnOFpxJ2VRHG2W6R5igfxBzDPCX12k3d5S9r3XPDn8QGkI4ynunR9+WzCaMEqkWTD67ZaCkC/L6MaTdvo=","n":20000},"e7f49d350d1c71bd743457b2":{"s":"vbDooxPm8YEsZMEUG5BOvw==","i":"ZsOFjtgzPj81vgGz","d":"C11yJ58gcVLB2zPnnpxYEbY2XyC3UkHDit529ClfJxftdAtSyO+ZZkd+9Eepim7D6XhOYMzV6IyUCAovzAlpcFg58HwGFoxppUfw+gYZScmCgwtI+9CHqLamTKYemj5SAkRrLTu/5ItMHUS5oxLhsVwbXcfJQrao","n":20000},"ecdbb9c4b0d61018b6e9883f":{"s":"dPgsYfVSRb/9LZESKdkxzQ==","i":"QD9NCiTuT+keDDo1","d":"cG7rvhDulvIz0H5cUUzB9FcHbuqmOGnTjKnKfIGGLmqKoDXt3H96KNdnGJ+V0o1Z7MXRed28qY3uN+aFbBtvasTBN14Smx/Cv8fve165XY17JsSsHJ/NB6Pj+Nij1CIXMJOljDJLsaN7ul6dhXkjYAkZu3BrlkSIoAyjcsHaW88=","n":20000},"eea7b955fb418467bfbd6e7c":{"s":"UjWyHaykBovTsDVq2mWJEg==","i":"4Ciu+jsHN8MsIli/","d":"ElF00cRupsrd3JP+iOpnW2Fb1b3MVANF0ABplb6eWgRrK1Ihhs2rcW6/dtJx47+MwVQqewms+3UvF4qGc3izI3JVeButIYgyUzhlXL0anb9SN5APqIn5pJu8xZ+hMDC3wfsE2eWgl2jlUWr1wf5Cu7OxzLFaGoMOyDPlvA==","n":20000},"efc027b9986cac8b004b6886":{"s":"eXWoQXOV4fvTg728zi87dA==","i":"ipwcpf/wWwv2ojoi","d":"aPvxtzOqGo2Be8Hc9mJBY7XsUpK06E+MtRp6p29Rn5Q9QTGTU70cpNMyTZfvJaL/hTgAttp+RH6jb3Zgy3uHEStSasFl6oYY0JcExyywxybRY5T5MYDIThnIFoNP8d2Z18XJH9nzzX2UPbZjOX/8DvHW3MU6","n":20000},"f15d72b6e1e983289339ff38":{"s":"tLxnXjTLBJ1X+nfu1+/IQw==","i":"eTECLVAoWlYuE9pj","d":"vIT9Euz4mbAgxhRUgiyqriPGHYHh8f2cwgDfNCnUe/QctUo73dVfh20TXfN+mzYlsUaeCNIV0REEpBzJAn63jpIhgVSPvG3zYa99o3MJuy8qvUdufYC/x5c9w5SH/seH39wBdWHdptAFM2Ce1PdeYw==","n":20000},"f3d4bab5187128975bade0c8":{"s":"b7UttSWQa8qGQ+kLZpoiYA==","i":"dWgmlmW16UDRnCaJ","d":"5qzJknur8i+GkPIllNTAJQCHpgPYvjsXIOq7W+JxEIRR2B3DVsZ5of8Q/53mboititiitGJAJKoGR86eOUpeoGUYyeb9BxGpOA1mDYglnFT1r6fHSst2OldpBW6eby047Ct8wtzqCGgBUnvCD7vMXKXwNnk=","n":20000},"f681fa396ce539a17585fb6e":{"s":"L484TB+uGFudvX8qj8lJhw==","i":"xFLURjjP00OeFscj","d":"Mrkv3mlzpSe0Zh909MZkWo7sKBfuv8ESndlmH+nRBRXmaZwW5MWQFRXmz7GVkPZGR7w0HgsX9GRxBaJLKw/vS6s5gsKyVtBVBMNbXpQOwUUcObRMzUNxorYNfC3UG4EzAwKK5hkPJ3u7GxMEvtXp9o/VM2LK7w==","n":20000},"f7590d11927301cfbe17548f":{"s":"nQJTQd/da3/Ss02WYMqqQA==","i":"Mh5nvJqiEkYLXSTz","d":"sTpBGE8F4r+nN6x2l3dHvNJbIm219YFNC+Wiyclmr4WawU56iOLwLZOUCPhNHL87sAEzKRBJJQMQm3fR2XMbR0UdfKYf0zLiQY2R+f7Px2WkvtzBn82+EqN/CAGDiEWQeER2fB58HX4iwn1Wjk5Es2chjKDyfP4yram84q0Sp3aE","n":20000},"fa9abbb98d8befc786b05f1f":{"s":"vyp5CEJ4oydeo+9ES5kiNg==","i":"ZjVXfDp61MTqaNVN","d":"cKSYXDD8drqOGc3O2exty9pvk8wKdDfgFDbPXq6hckcBIQ2/4cJ7BtlWiJED8lhRTB9UuVLNFlYyE/RQWDKRxolI1kNnEt7KDIREoZhu+HMm5oezvsWfJxJFgLwUnHkPvskvsEpNLnyt6Bv51xXzemLRN7c=","n":20000},"fb2492eeee3a78b46bc2dcc5":{"s":"W3gSdiEkfbU0cY9jg583Wg==","i":"K6hycV5OrH9GUC3v","d":"pvSzZyT7Oy614osqc7spxA32zXRWIseb5xQ4RtHn7/jUtKAsrSbfxWIp6MxYcAjqbtZ6uib3SuNaWAnu1QffruOMp0CPjDHMG9x/O3szDtM0LQgkhBWwEI9lwmTG5nyemEBO9o6D0znTkFKaGNOGCwLIJ6X4WaBd1Pyv","n":20000}}, ELEVES = [0],
+    SEL = "TALBAUT-MANUELS-2026",
+    EMP = "50ae79d44fffb15ab04af58620f9d71071959e55b0509687b12dfe0180ae68ca",
+    CLE = "ident_" + "exu",
+    BIN = true, DEUX = false, UN = null, DEUXIEME = null;
+/* Version site : la liste est vidée, l'écran d'identification s'efface. */
+if(!ELEVES.length){ document.body.classList.add("identifie"); return; }
+
+function pli(t){
+  return (t||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/[\u2019'`\-.]/g," ").replace(/\s+/g," ").trim().toUpperCase();
+}
+function dist(a,b){
+  /* Damerau-Levenshtein : une lettre en trop, en moins, fausse ou deux lettres
+     interverties comptent chacune pour 1. */
+  var m=a.length,n=b.length,i,j;
+  if(Math.abs(m-n)>4) return 9;
+  var d=[]; for(i=0;i<=m;i++){ d[i]=[]; d[i][0]=i; }
+  for(j=0;j<=n;j++) d[0][j]=j;
+  for(i=1;i<=m;i++) for(j=1;j<=n;j++){
+    var co = (a[i-1]===b[j-1]) ? 0 : 1;
+    d[i][j] = Math.min(d[i-1][j]+1, d[i][j-1]+1, d[i-1][j-1]+co);
+    if(i>1 && j>1 && a[i-1]===b[j-2] && a[i-2]===b[j-1])
+      d[i][j] = Math.min(d[i][j], d[i-2][j-2]+1);
+  }
+  return d[m][n];
+}
+async function empreinte(code){
+  var d=new TextEncoder().encode(SEL+"|"+code.trim());
+  var h=await crypto.subtle.digest("SHA-256",d);
+  return Array.prototype.map.call(new Uint8Array(h),function(b){
+    return ("0"+b.toString(16)).slice(-2);}).join("");
+}
+
+async function dechiffre(o, cle){
+  var b = function(s){ return Uint8Array.from(atob(s), function(c){ return c.charCodeAt(0); }); };
+  var m = await crypto.subtle.importKey("raw", new TextEncoder().encode(cle), "PBKDF2", false, ["deriveKey"]);
+  var k = await crypto.subtle.deriveKey({name: "PBKDF2", salt: b(o.s), iterations: o.n, hash: "SHA-256"},
+                                        m, {name: "AES-GCM", length: 256}, false, ["decrypt"]);
+  return new TextDecoder().decode(await crypto.subtle.decrypt({name: "AES-GCM", iv: b(o.i)}, k, b(o.d)));
+}
+function squelette(t){
+  t = pli(t).replace(/PH/g, "F").replace(/[^A-Z]/g, "");
+  t = t.replace(/[CQ]/g, "K").replace(/Z/g, "S").replace(/W/g, "V").replace(/[AEIOUYH]/g, "");
+  var r = ""; for(var i = 0; i < t.length; i++) if(t[i] !== r.slice(-1)) r += t[i];
+  return r;
+}
+async function trouveNom(nom, prenom){
+  var essais = [pli(nom) + "|" + pli(prenom), pli(prenom) + "|" + pli(nom),
+                "~" + squelette(nom) + "|" + squelette(prenom), "~" + squelette(prenom) + "|" + squelette(nom)];
+  for(var i = 0; i < essais.length; i++){
+    var h = (await shaNom(essais[i])).slice(0, 24);
+    if(ELEVES_H[h]) return JSON.parse(await dechiffre(ELEVES_H[h], essais[i]));
+  }
+  return null;
+}
+async function depotDe(code, classe){
+  try{ return DEPOT_C[classe] ? await dechiffre(DEPOT_C[classe], code) : ""; }catch(e){ return ""; }
+}
+
+async function shaNom(t){
+  var h = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("CAP-NOMS-2026|" + t));
+  return Array.prototype.map.call(new Uint8Array(h), function(b){ return ("0"+b.toString(16)).slice(-2); }).join("");
+}
+function titre(t){
+  return t.split(" ").map(function(m){
+    return m.split("-").map(function(x){
+      return x ? x[0].toUpperCase()+x.slice(1).toLowerCase() : x; }).join("-");
+  }).join(" ");
+}
+
+function finir(nom, prenom, classe){
+  if(!BIN || !DEUX){ poser(nom, prenom, classe); return; }
+  if(!UN){
+    UN = [nom, prenom, classe];
+    binome(); return;
+  }
+  DEUXIEME = null;
+  if(pli(nom)===pli(UN[0]) && pli(prenom)===pli(UN[1])){
+    document.getElementById("idm").innerHTML =
+      '<div class="msg err">C’est le même nom. <b>Écrire</b> le nom de votre binôme.</div>';
+    etape("e1"); return;
+  }
+  if(classe!==UN[2]){
+    document.getElementById("idm").innerHTML =
+      '<div class="msg err">Votre binôme n’est pas dans votre classe.</div>';
+    document.getElementById("idn").value=""; document.getElementById("idp").value="";
+    etape("e1"); return;
+  }
+  document.body.dataset.qui = UN[0] + " " + UN[1] + " et " + nom + " " + prenom;
+  poser(UN[0] + " / " + nom, UN[1] + " / " + prenom, classe);
+}
+function binome(){
+  /* Le second nom a ete ecrit sur la deuxieme ligne : il passe par la meme verification. */
+  var r2 = document.getElementById("idr2"); if(r2) r2.style.display = "none";
+  document.querySelector("#idw .sst").innerHTML =
+    "<b>Vérifier</b> le nom de l’élève 2.";
+  document.getElementById("idn").value = DEUXIEME ? DEUXIEME[0] : "";
+  document.getElementById("idp").value = DEUXIEME ? DEUXIEME[1] : "";
+  document.getElementById("idm").innerHTML=""; etape("e1");
+  if(DEUXIEME) setTimeout(function(){ document.getElementById("idgo").click(); }, 0);
+}
+
+function poser(nom, prenom, classe){
+  var n=document.getElementById("id-nom"), p=document.getElementById("id-pre"),
+      c=document.getElementById("id-cla");
+  /* Le champ se regle sur le nom : UN NOM LONG s'ecrit en entier. */
+  if(n){ n.value=nom;    n.setAttribute("readonly","readonly");
+         n.size=Math.max(10, nom.length+1); }
+  if(p){ p.value=prenom; p.setAttribute("readonly","readonly");
+         p.size=Math.max(10, prenom.length+1); }
+  if(c){ c.value=classe; c.setAttribute("disabled","disabled"); }
+  try{ localStorage.setItem(CLE, JSON.stringify({n:nom,p:prenom,c:classe})); }catch(e){}
+  document.body.classList.add("identifie");
+  var w=document.getElementById("idw"); if(w) w.remove();
+  /* Le poste est partagé : ce bouton rend la main sans vider le navigateur. */
+  var z=document.querySelector(".ap-moi");
+  if(z && !document.getElementById("pasmoi")){
+    var a=document.createElement("button");
+    a.type="button"; a.id="pasmoi"; a.className="ap-pasmoi";
+    a.textContent="Ce n\u2019est pas moi";
+    a.onclick=function(){ try{ localStorage.removeItem(CLE); }catch(e){}
+                          location.reload(); };
+    z.appendChild(a);
+  }
+}
+
+function etape(id){
+  ["e1","e2","e3","e4","e5","e6"].forEach(function(k){
+    var n=document.getElementById(k); if(n) n.classList.toggle("on", k===id); });
+}
+
+function ecran(){
+  if(document.getElementById("idw")) return;
+  var w=document.createElement("div"); w.id="idw";
+  w.innerHTML =
+   '<div class="bx">'
+   + '<h2>Avant de commencer</h2>'
+   + '<p class="sst"><b>\u00c9crire</b> son nom et son pr\u00e9nom. '
+   +   'Ils sont v\u00e9rifi\u00e9s dans la liste de la classe.</p>'
+   + '<div class="et on" id="e1">'
+   +   '<div class="duo">'
+   +     '<div><label for="idn">Nom</label>'
+   +       '<input id="idn" type="text" autocomplete="off" spellcheck="false"></div>'
+   +     '<div><label for="idp">Pr\u00e9nom</label>'
+   +       '<input id="idp" type="text" autocomplete="off" spellcheck="false"></div>'
+   +   '</div>'
+   +   '<div class="duo" id="idr2" style="display:none">'
+   +     '<div><label for="idn2">Nom (élève 2)</label>'
+   +       '<input id="idn2" type="text" autocomplete="off" spellcheck="false"></div>'
+   +     '<div><label for="idp2">Prénom (élève 2)</label>'
+   +       '<input id="idp2" type="text" autocomplete="off" spellcheck="false"></div>'
+   +   '</div>'
+   +   '<button class="pr" id="idgo" type="button">Continuer</button>'
+   +   '<div id="idm"></div>'
+   + '</div>'
+   + '<div class="et" id="e2"><div class="msg" id="e2t"></div>'
+   +   '<div class="ch" id="e2c"></div></div>'
+   + '<div class="et" id="e3">'
+   +   '<div class="msg">Votre nom ne figure pas dans la liste de la classe.<br>'
+   +     '\u00cates-vous un nouvel \u00e9l\u00e8ve ?</div>'
+   +   '<div class="ch"><button type="button" id="nvo">Oui, je viens d\u2019arriver</button>'
+   +   '<button type="button" class="no" id="nvn">Non, je recommence</button></div>'
+   + '</div>'
+   + '<div class="et" id="e4">'
+   +   '<div class="msg">Le professeur va saisir le code d\u2019inscription.</div>'
+   +   '<label for="idc" style="margin-top:14px">Code d\u2019inscription</label>'
+   +   '<input id="idc" type="password" autocomplete="off">'
+   +   '<button class="pr" id="idcgo" type="button">Valider</button>'
+   +   '<div id="idcm"></div>'
+   + '</div>'
+   + '<div class="et" id="e5">'
+   +   '<div class="msg">Dans quelle classe \u00eates-vous ?</div>'
+   +   '<div class="ch">' + '<button type="button" data-c="1CAP EPC1">1CAP EPC1</button>'
+   + '<button type="button" data-c="1CAP EPC2">1CAP EPC2</button>'
+   +  ''
+   +   '</div>'
+   + '</div>'
+   + '<div class="et" id="e6"><div class="msg"><b>Indiquer</b> combien vous êtes.</div>'
+   +   '<div class="ch"><button type="button" id="seul">1</button>'
+   +   '<button type="button" id="abin">2</button></div></div>'
+   + '</div>';
+  document.body.appendChild(w);
+  document.getElementById("seul").addEventListener("click", function(){
+    DEUX = false; etape("e1"); document.getElementById("idn").focus(); });
+  document.getElementById("abin").addEventListener("click", function(){
+    DEUX = true;
+    document.getElementById("idr2").style.display = "";
+    document.querySelector('label[for="idn"]').textContent = "Nom (élève 1)";
+    document.querySelector('label[for="idp"]').textContent = "Prénom (élève 1)";
+    document.querySelector("#idw .sst").innerHTML =
+      "<b>Écrire</b> le nom et le prénom de chaque élève.";
+    etape("e1"); document.getElementById("idn").focus(); });
+  var saisi = {n:"", p:""};
+
+  document.getElementById("idgo").addEventListener("click", function(){
+    var n=document.getElementById("idn").value, p=document.getElementById("idp").value;
+    document.getElementById("idm").innerHTML="";
+    if(!n.trim() || !p.trim()){
+      document.getElementById("idm").innerHTML=
+        '<div class="msg err"><b>\u00c9crire</b> son nom et son pr\u00e9nom.</div>';
+      return; }
+    if(DEUX && !UN){
+      var n2=document.getElementById("idn2").value, p2=document.getElementById("idp2").value;
+      if(!n2.trim() || !p2.trim()){
+        document.getElementById("idm").innerHTML=
+          '<div class="msg err"><b>Écrire</b> le nom et le prénom de chaque élève.</div>';
+        return; }
+      DEUXIEME = [n2, p2];
+    }
+    saisi = {n:n, p:p};
+    /* le nom est verifie sans liste ; un nom proche est corrige (05/11/2026) */
+    trouveNom(n, p).then(function(e){
+      if(e){ if(e[3] && !window.DEPOT_ELEVE) window.DEPOT_ELEVE = e[3]; finir(e[0], e[1], e[2]); return; }
+      etape("e3");
+    });
+  });
+  document.getElementById("idn").addEventListener("keydown", function(e){
+    if(e.key==="Enter") document.getElementById("idp").focus(); });
+  document.getElementById("idp").addEventListener("keydown", function(e){
+    if(e.key==="Enter") document.getElementById("idgo").click(); });
+  document.getElementById("nvo").addEventListener("click", function(){ etape("e4"); });
+  document.getElementById("nvn").addEventListener("click", function(){ etape("e1"); });
+  document.getElementById("idcgo").addEventListener("click", async function(){
+    var v=document.getElementById("idc").value;
+    if(await empreinte(v) === EMP){ etape("e5"); }
+    else { document.getElementById("idcm").innerHTML=
+             '<div class="msg err">Code refus\u00e9.</div>';
+           document.getElementById("idc").value=""; }
+  });
+  document.getElementById("idc").addEventListener("keydown", function(e){
+    if(e.key==="Enter") document.getElementById("idcgo").click(); });
+  Array.prototype.forEach.call(document.querySelectorAll('#e5 button'), function(b){
+    b.addEventListener("click", function(){
+      finir(pli(saisi.n), titre(saisi.p.trim()), b.dataset.c); }); });
+  if(BIN){ var s0=document.querySelector("#idw .sst"), t0=s0.innerHTML;
+    s0.innerHTML="Les noms sont vérifiés dans la liste de la classe.";
+    document.getElementById("seul").addEventListener("click", function(){ s0.innerHTML=t0; }); }
+  etape(BIN ? "e6" : "e1");
+}
+
+/* Le nom se retape a chaque ouverture de la fiche : c'est la verification la
+   plus simple qu'un poste a change de main. */
+ecran();
+})();
+</script>
+</body>
+</html>
